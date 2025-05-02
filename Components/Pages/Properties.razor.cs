@@ -82,6 +82,7 @@ public partial class Properties
           isRates = true;
         }
 
+      showTabs = false;
       ContextMenuService.Close();
       StateHasChanged();
     }
@@ -93,6 +94,7 @@ public partial class Properties
         propertyRate = null; // Reset to trigger loading on tab change
         isLoading = false;
         loadError = false;
+        isRates = false;
       //  propertyRate = await destinationTestService.GetPropertyRateById(selectedPropid);
         StateHasChanged();
     }

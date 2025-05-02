@@ -3,9 +3,6 @@
 
  <PageTitle>Properties</PageTitle> 
 
-
-
-
  <RadzenStack>
     <RadzenRow AlignItems="AlignItems.Center">
         <RadzenColumn Size="12" SizeMD="6">
@@ -19,12 +16,12 @@
     </RadzenRow>
     <RadzenRow>
       <RadzenColumn SizeMD=12>
-        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@(properties)" TItem="Destination.Models.destinationTest.Property">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Propid" Title="Propid">
                     <Template Context="item">
-                        <span Text="Click here" @oncontextmenu=@(e => ShowContextMenuWithItems(e, item)) @oncontextmenu:preventDefault="true"
+                        <span Text="Click here" @onclick="() => ShowTabs(item.Propid)" @oncontextmenu=@(e => ShowContextMenuWithItems(e, item)) @oncontextmenu:preventDefault="true"
                          style="cursor: pointer; color: green; text-decoration: none;">@item.Propid</span>
                     </Template>
                 </RadzenDataGridColumn>
@@ -62,6 +59,32 @@
     {
         <RadzenCard style="margin-top: 1rem;">
           <RatesTest></RatesTest>
+        </RadzenCard>
+    }
+
+    @if (showTabs)
+    {
+        <RadzenCard style="margin-top: 1rem;">
+            <RadzenTabs>
+                <Tabs>
+                    <RadzenTabsItem Text="Property Description">
+                    <RadzenRow>
+                     <RadzenColumn SizeMD=12>
+                     </RadzenColumn>
+                    </RadzenRow>
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="Home Info" style="margin-left: 5px;">
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="Rates" style="margin-left: 5px;">
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="All Bookings" style="margin-left: 5px;">
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="Property Channel" style="margin-left: 5px;">
+                     <RatesTest></RatesTest>
+                    </RadzenTabsItem>
+                </Tabs>
+            </RadzenTabs>
+            <RadzenButton Icon="close" Text="Close Tabs" ButtonStyle="ButtonStyle.Secondary" Click="@(() => showTabs = false)" style="margin-top: 1rem;" />
         </RadzenCard>
     }
 
