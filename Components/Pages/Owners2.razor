@@ -1,0 +1,774 @@
+@page "/owners2"
+
+<PageTitle>Agents</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Agents" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"  Render=Grid0Render AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(agents)" TItem="Destination.Models.destinationTest.Agent" RowDoubleClick="@EditRow" RowSelect="@GetChildData">
+            <Columns>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="AgId" Title="Ag Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="FirstName" Title="First Name">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="LastName" Title="Last Name">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="OfficeNumber" Title="Office Number">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Cell" Title="Cell">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="TollFree" Title="Toll Free">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Email" Title="Email">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Website" Title="Website">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Message" Title="Message">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Brokerid" Title="Brokerid">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Password" Title="Password">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Bio" Title="Bio">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Photo" Title="Photo">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Role" Title="Role">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Address" Title="Address">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="City" Title="City">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="State" Title="State">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Zip" Title="Zip">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Status" Title="Status">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Source" Title="Source">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="PropertyAddress" Title="Property Address">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Lasttouched" Title="Lasttouched">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Touched" Title="Touched">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Homerate" Title="Homerate">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Rate" Title="Rate">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Familyphoto" Title="Familyphoto">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="EnteredBy" Title="Entered By">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="EnteredOn" Title="Entered On">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="AgentBedrooms" Title="Agent Bedrooms">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="AgentBathrooms" Title="Agent Bathrooms">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Newstatus" Title="Newstatus">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Actionrequired" Title="Actionrequired">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="DateCreated" Title="Date Created">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="agent">
+
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                            Click=@(args => GridDeleteButtonClick(args, agent)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+                <RadzenStack Class="rz-my-8">
+                    <RadzenRow Gap="0" AlignItems="AlignItems.Center">
+                        <RadzenColumn Size="12" SizeMD="6">
+                            <RadzenText Visible="@(agentChild != null)" Text="OwnerCommunications" TextStyle="TextStyle.H4" TagName="TagName.H2" style="margin: 0" />
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeMD="6">
+                            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                                <RadzenButton Visible="@(agentChild != null)" Icon="add_circle_outline" Text="Add" Click=@(args => OwnerCommunicationsAddButtonClick(args,agentChild)) />
+                            </RadzenStack>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <RadzenDataGrid ColumnWidth="200px" Visible="@(agentChild != null)" @ref=OwnerCommunicationsDataGrid AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+                      Data="@agentChild?.OwnerCommunications" TItem="Destination.Models.destinationTest.OwnerCommunication"  RowSelect="@(args => OwnerCommunicationsRowSelect(args, agentChild))">
+                      <Columns>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Id" Title="Id">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Ownercomm" Title="Ownercomm">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Agent1.AgentBathrooms" Title="Agent1">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Type" Title="Type">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Cdate" Title="Cdate">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Agent" Title="Agent">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Emailtemplate" Title="Emailtemplate">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="ActionReq" Title="Action Req">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="AssignedTo" Title="Assigned To">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Department" Title="Department">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="PropId" Title="Prop Id">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="ShowOnRates" Title="Show On Rates">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="OwnerFlag" Title="Owner Flag">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                            <Template Context="ownerCommunicationChild">
+
+                                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium" Shade="Shade.Lighter" Variant="Variant.Flat"
+                                    Click=@(args => OwnerCommunicationsDeleteButtonClick(args, ownerCommunicationChild)) @onclick:stopPropagation="true" />
+                            </Template>
+                        </RadzenDataGridColumn>
+                      </Columns>
+                    </RadzenDataGrid>
+                </RadzenStack>
+                <RadzenStack Class="rz-my-8">
+                    <RadzenRow Gap="0" AlignItems="AlignItems.Center">
+                        <RadzenColumn Size="12" SizeMD="6">
+                            <RadzenText Visible="@(agentChild != null)" Text="Properties" TextStyle="TextStyle.H4" TagName="TagName.H2" style="margin: 0" />
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeMD="6">
+                            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                                <RadzenButton Visible="@(agentChild != null)" Icon="add_circle_outline" Text="Add" Click=@(args => PropertiesAddButtonClick(args,agentChild)) />
+                            </RadzenStack>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <RadzenDataGrid ColumnWidth="200px" Visible="@(agentChild != null)" @ref=PropertiesDataGrid AllowFiltering="true" FilterMode="Radzen.FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+                      Data="@agentChild?.Properties" TItem="Destination.Models.destinationTest.Property"  RowSelect="@(args => PropertiesRowSelect(args, agentChild))">
+                      <Columns>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Propid" Title="Propid">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Address" Title="Address">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="City" Title="City">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Zip" Title="Zip">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Agent.AgentBathrooms" Title="Agent">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="PropertyType" Title="Property Type">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="SquareFootage" Title="Square Footage">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="YearBuilt" Title="Year Built">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Bedrooms" Title="Bedrooms">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Baths" Title="Baths">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Floors" Title="Floors">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="GarageSize" Title="Garage Size">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="LotSize" Title="Lot Size">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Alarm" Title="Alarm">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AssistedLiving" Title="Assisted Living">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CarpetedFloors" Title="Carpeted Floors">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CentralAc" Title="Central Ac">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="ClubHouse" Title="Club House">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="ControlledAccess" Title="Controlled Access">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Courtyard" Title="Courtyard">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Fireplace" Title="Fireplace">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="FitnessCenter" Title="Fitness Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="GasRange" Title="Gas Range">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="NatureBikePaths" Title="Nature Bike Paths">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Patio" Title="Patio">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="PlaygroundPark" Title="Playground Park">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Pool" Title="Pool">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="PublicTransportation" Title="Public Transportation">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="RetirementCommunity" Title="Retirement Community">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="SpaJucuzzi" Title="Spa Jucuzzi">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="SportsComplex" Title="Sports Complex">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="TennisCourts" Title="Tennis Courts">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="WaterFront" Title="Water Front">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="WheelChairAccessible" Title="Wheel Chair Accessible">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="WoodFloors" Title="Wood Floors">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AdditionalFeatures" Title="Additional Features">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Price" Title="Price">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CurrentLoanType" Title="Current Loan Type">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="SellersFlexibility" Title="Sellers Flexibility">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="DateCreated" Title="Date Created">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="DateLastUpdated" Title="Date Last Updated">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Createdby" Title="Createdby">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Updatedby" Title="Updatedby">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="ContactFirstName" Title="Contact First Name">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="ContactLastName" Title="Contact Last Name">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="ContactInfo" Title="Contact Info">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Views" Title="Views">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Description" Title="Description">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Furnished" Title="Furnished">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="VacationRental" Title="Vacation Rental">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="TopProperty" Title="Top Property">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="MainImage" Title="Main Image">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Name" Title="Name">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Neighborhood" Title="Neighborhood">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Deposit" Title="Deposit">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Rent" Title="Rent">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Sleeps" Title="Sleeps">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="LeaseTerm" Title="Lease Term">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Available" Title="Available">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Increment" Title="Increment">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Status1.Status1" Title="Status1">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="UnFurnished" Title="Un Furnished">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="ResComm" Title="Res Comm">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CShoppingCenter" Title="C Shopping Center">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="COfficeBuilding" Title="C Office Building">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CNeighborhood" Title="C Neighborhood">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CStandAlone" Title="C Stand Alone">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CNnnLease" Title="C Nnn Lease">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CModifiedGross" Title="C Modified Gross">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CFullService" Title="C Full Service">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CElevator" Title="C Elevator">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CConferenceRoom" Title="C Conference Room">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CAirConditioning" Title="C Air Conditioning">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CCarpeted" Title="C Carpeted">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CStorage" Title="C Storage">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CSecurity" Title="C Security">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CParking" Title="C Parking">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CConcreteFloors" Title="C Concrete Floors">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CPrivateRestroom" Title="C Private Restroom">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CCommunityRestroom" Title="C Community Restroom">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CPayUtilities" Title="C Pay Utilities">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CUtiliesIncluded" Title="C Utilies Included">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CPropertyManagement" Title="C Property Management">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CSubLease" Title="C Sub Lease">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CPerSq" Title="C Per Sq">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CType" Title="C Type">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CSuitenum" Title="C Suitenum">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="DescriptionBack" Title="Description Back">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Lakeview" Title="Lakeview">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="MountainView" Title="Mountain View">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Rates" Title="Rates">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Videopath" Title="Videopath">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="NearHikingTrail" Title="Near Hiking Trail">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="PoolTable" Title="Pool Table">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Spa" Title="Spa">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="FoosBall" Title="Foos Ball">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="ParkingSpaces" Title="Parking Spaces">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="PetsOk" Title="Pets Ok">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="SleddingHill" Title="Sledding Hill">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Bbcity" Title="Bbcity">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="SleepNum" Title="Sleep Num">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Cleaningfee" Title="Cleaningfee">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Code" Title="Code">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Instructions" Title="Instructions">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="InternalNotes" Title="Internal Notes">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Wedding" Title="Wedding">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Nearlake" Title="Nearlake">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Nearsnowsummit" Title="Nearsnowsummit">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Nearbearmtn" Title="Nearbearmtn">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Nearvillage" Title="Nearvillage">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Gametable" Title="Gametable">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="InternalNotes1" Title="Internal Notes1">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Internet" Title="Internet">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="HomeGuide" Title="Home Guide">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Inspectedby" Title="Inspectedby">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Alarmcode" Title="Alarmcode">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Luxury" Title="Luxury">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Boatparking" Title="Boatparking">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Cleaner" Title="Cleaner">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Revenue" Title="Revenue">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Defaultcleaner" Title="Defaultcleaner">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="PropertyCleaner.BusLic" Title="Property Cleaner">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Sleeping" Title="Sleeping">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Closinginstructions" Title="Closinginstructions">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="SupplyCost" Title="Supply Cost">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Mgtrate" Title="Mgtrate">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Owner" Title="Owner">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Mpartner" Title="Mpartner">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Muser" Title="Muser">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Mtype" Title="Mtype">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="BitIsBookingOnline" Title="Bit Is Booking Online">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Inspection" Title="Inspection">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Castle" Title="Castle">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Metadesc" Title="Metadesc">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Metakeyword" Title="Metakeyword">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Mdesc" Title="Mdesc">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Private" Title="Private">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Snowremoval" Title="Snowremoval">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Shovel" Title="Shovel">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Keypos" Title="Keypos">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Spaservice" Title="Spaservice">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="PropertyHeadlines" Title="Property Headlines">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="PropHeadlines" Title="Prop Headlines">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Lat" Title="Lat">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Long" Title="Long">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Inspectiondate" Title="Inspectiondate">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Cityinspectdate" Title="Cityinspectdate">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Showonvrbo" Title="Showonvrbo">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Showonairbnb" Title="Showonairbnb">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Showonflipkey" Title="Showonflipkey">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Showonbblp" Title="Showonbblp">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Inspectiondatemgt" Title="Inspectiondatemgt">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="IsRently" Title="Is Rently">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Cleaningfeebid" Title="Cleaningfeebid">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Cleaningfeespring" Title="Cleaningfeespring">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CleanerPaidDate" Title="Cleaner Paid Date">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="ShowOnDbb" Title="Show On Dbb">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="OwnerCleaningFee" Title="Owner Cleaning Fee">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CheckInAgreementExpress" Title="Check In Agreement Express">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="IsCleaned" Title="Is Cleaned">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Snownotes" Title="Snownotes">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Oven" Title="Oven">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Microwave" Title="Microwave">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Toaster" Title="Toaster">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CoffeeMaker" Title="Coffee Maker">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="DishesAndUtensils" Title="Dishes And Utensils">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Dishwasher" Title="Dishwasher">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Grill" Title="Grill">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Kitchen" Title="Kitchen">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Refrigerator" Title="Refrigerator">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Television" Title="Television">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="VideoLibrary" Title="Video Library">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="MusicLibrary" Title="Music Library">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="PingPongTable" Title="Ping Pong Table">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Books" Title="Books">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Dvdplayer" Title="Dvdplayer">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Football" Title="Football">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Games" Title="Games">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="SatelliteCable" Title="Satellite Cable">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Stereo" Title="Stereo">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Toys" Title="Toys">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="VideoGames" Title="Video Games">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Sauna" Title="Sauna">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CommunalPool" Title="Communal Pool">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Bicycles" Title="Bicycles">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Boat" Title="Boat">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Golf" Title="Golf">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Rural" Title="Rural">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Town" Title="Town">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="DiningArea" Title="Dining Area">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="DiningHighChair" Title="Dining High Chair">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="DiningRoom" Title="Dining Room">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="PoolTable1" Title="Pool Table1">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Garden" Title="Garden">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="SkiInSkiOut" Title="Ski In Ski Out">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Snowremovalpy" Title="Snowremovalpy">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="ShowOnBb" Title="Show On Bb">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="DateClosed" Title="Date Closed">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="IsExpressCheckInApp" Title="Is Express Check In App">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="DescNew" Title="Desc New">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="DedicatedWorkspace" Title="Dedicated Workspace">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Evcharger" Title="Evcharger">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Crib" Title="Crib">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Gym" Title="Gym">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Fire" Title="Fire">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="CookingBasics" Title="Cooking Basics">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AirbnbDesc" Title="Airbnb Desc">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AirbnbTitle" Title="Airbnb Title">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntHairDryer" Title="Amnt Hair Dryer">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntHeating" Title="Amnt Heating">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBathTub" Title="Amnt Bath Tub">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBidet" Title="Amnt Bidet">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBodySoap" Title="Amnt Body Soap">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntCleaningProducts" Title="Amnt Cleaning Products">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntHotWater" Title="Amnt Hot Water">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntOutdoorShower" Title="Amnt Outdoor Shower">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntShampoo" Title="Amnt Shampoo">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntShowerGel" Title="Amnt Shower Gel">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBedLinens" Title="Amnt Bed Linens">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntClothingStorage" Title="Amnt Clothing Storage">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntClotheDryingRack" Title="Amnt Clothe Drying Rack">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntExtraPillowsBlankets" Title="Amnt Extra Pillows Blankets">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntHangers" Title="Amnt Hangers">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntIron" Title="Amnt Iron">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntMosquitoNet" Title="Amnt Mosquito Net">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntRoomDarkeningShades" Title="Amnt Room Darkening Shades">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntSafe" Title="Amnt Safe">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntArcadeGames" Title="Amnt Arcade Games">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBowlingAlley" Title="Amnt Bowling Alley">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntClimbingWall" Title="Amnt Climbing Wall">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntEthernet" Title="Amnt Ethernet">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntExerciseEquipment" Title="Amnt Exercise Equipment">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntLazerTag" Title="Amnt Lazer Tag">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntLifeSizeGames" Title="Amnt Life Size Games">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntMiniGolf" Title="Amnt Mini Golf">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntMovieTheater" Title="Amnt Movie Theater">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntPiano" Title="Amnt Piano">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntRecordPlayer" Title="Amnt Record Player">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntSkateRamp" Title="Amnt Skate Ramp">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBabyBath" Title="Amnt Baby Bath">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBabyMonitor" Title="Amnt Baby Monitor">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntChildrenBike" Title="Amnt Children Bike">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntChildrenPlayroom" Title="Amnt Children Playroom">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBabySafetyGates" Title="Amnt Baby Safety Gates">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBabysitterRecommendations" Title="Amnt Babysitter Recommendations">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntChangingTable" Title="Amnt Changing Table">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntChildrenDinnerware" Title="Amnt Children Dinnerware">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntFireplaceGuards" Title="Amnt Fireplace Guards">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntOutdoorPlayground" Title="Amnt Outdoor Playground">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntOutletCovers" Title="Amnt Outlet Covers">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntTravelCrib" Title="Amnt Travel Crib">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntTableCornerGuards" Title="Amnt Table Corner Guards">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntWindowGuards" Title="Amnt Window Guards">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntCeilingFan" Title="Amnt Ceiling Fan">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntPortableFans" Title="Amnt Portable Fans">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntCarbonMonoxideAlram" Title="Amnt Carbon Monoxide Alram">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntFireExtinguisher" Title="Amnt Fire Extinguisher">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntFirstAidKit" Title="Amnt First Aid Kit">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntSmokeAlarm" Title="Amnt Smoke Alarm">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntPocketWifi" Title="Amnt Pocket Wifi">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBakingSheet" Title="Amnt Baking Sheet">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBarbecueUtensils" Title="Amnt Barbecue Utensils">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBreadMaker" Title="Amnt Bread Maker">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBelnder" Title="Amnt Belnder">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntCoffee" Title="Amnt Coffee">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntCookingBasics" Title="Amnt Cooking Basics">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntFreezer" Title="Amnt Freezer">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntHotWaterKettle" Title="Amnt Hot Water Kettle">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntKitchenette" Title="Amnt Kitchenette">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntMiniFridge" Title="Amnt Mini Fridge">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntRiceMaker" Title="Amnt Rice Maker">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntStove" Title="Amnt Stove">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntTrashCompactor" Title="Amnt Trash Compactor">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntWineGlass" Title="Amnt Wine Glass">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBeachAccess" Title="Amnt Beach Access">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntLakeAccess" Title="Amnt Lake Access">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntLaundromatNearby" Title="Amnt Laundromat Nearby">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntPrivateEntrance" Title="Amnt Private Entrance">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntResortAccess" Title="Amnt Resort Access">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntWaterfront" Title="Amnt Waterfront">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBackyard" Title="Amnt Backyard">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBeachEssentials" Title="Amnt Beach Essentials">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntFirePit" Title="Amnt Fire Pit">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntHammock" Title="Amnt Hammock">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntKayak" Title="Amnt Kayak">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntOutdoorDiningArea" Title="Amnt Outdoor Dining Area">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntOutdoorFurniture" Title="Amnt Outdoor Furniture">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntOutdoorKitchen" Title="Amnt Outdoor Kitchen">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntSunLoungers" Title="Amnt Sun Loungers">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntElevator" Title="Amnt Elevator">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntFreeParking" Title="Amnt Free Parking">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntHockeyRink" Title="Amnt Hockey Rink">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntSingleLevelHome" Title="Amnt Single Level Home">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntBattingCage" Title="Amnt Batting Cage">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntEssentials" Title="Amnt Essentials">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="GarageParking" Title="Garage Parking">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Dock" Title="Dock">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AlwaysAudit" Title="Always Audit">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AmntTheater" Title="Amnt Theater">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="AngelsCamp" Title="Angels Camp">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                            <Template Context="propertyChild">
+
+                                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium" Shade="Shade.Lighter" Variant="Variant.Flat"
+                                    Click=@(args => PropertiesDeleteButtonClick(args, propertyChild)) @onclick:stopPropagation="true" />
+                            </Template>
+                        </RadzenDataGridColumn>
+                      </Columns>
+                    </RadzenDataGrid>
+                </RadzenStack>
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

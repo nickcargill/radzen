@@ -1,0 +1,110 @@
+@page "/property-rates-vrbos"
+
+<PageTitle>PropertyRatesVrbos</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="PropertyRatesVrbos" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(propertyRatesVrbos)" TItem="Destination.Models.destinationTest.PropertyRatesVrbo" RowSelect="@EditRow">
+            <Columns>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="Property.AirbnbTitle" Title="Property">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="PreThank" Title="Pre Thank">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="Thanks" Title="Thanks">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="WinterWeekend" Title="Winter Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="WinterWeekday" Title="Winter Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="Christmas" Title="Christmas">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="NewYears" Title="New Years">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="PostNewYears" Title="Post New Years">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="Mlk114" Title="Mlk114">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="PresidentsDay" Title="Presidents Day">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="MemorialDay" Title="Memorial Day">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="July4th" Title="July4th">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="LaborDay" Title="Labor Day">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="SpringWeekend" Title="Spring Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="SpringWeekday" Title="Spring Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="SummerWeekend" Title="Summer Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="SummerWeekday" Title="Summer Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="FallWeekend" Title="Fall Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="FallWeekday" Title="Fall Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="MarchWeekend" Title="March Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="MarchWeekday" Title="March Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="UserId" Title="User Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="DecEarlyWeekend" Title="Dec Early Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="DecEarlyWeekday" Title="Dec Early Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="MayWeekend" Title="May Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="MayWeekday" Title="May Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="JuneWeekend" Title="June Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="JuneWeekday" Title="June Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="AprilWeekend" Title="April Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="AprilWeekday" Title="April Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="Christmasday" Title="Christmasday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="NewYearsday" Title="New Yearsday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="Jan2" Title="Jan2">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="Jan3" Title="Jan3">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="NewYearsEve" Title="New Years Eve">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="_1223" Title="1223">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="_1224" Title="1224">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Property="_1222" Title="1222">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRatesVrbo" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="propertyRatesVrbo">
+
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                            Click=@(args => GridDeleteButtonClick(args, propertyRatesVrbo)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

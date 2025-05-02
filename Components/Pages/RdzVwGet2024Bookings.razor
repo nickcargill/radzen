@@ -1,0 +1,75 @@
+@page "/rdz-vw-get2024-bookings"
+
+<PageTitle>RdzVwGet2024Bookings</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="RdzVwGet2024Bookings" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(rdzVwGet2024Bookings)" TItem="Destination.Models.destinationTest.RdzVwGet2024Booking">
+            <Columns>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="Id" Title="Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="PropId" Title="Prop Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="Name" Title="Name">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="TenantId" Title="Tenant Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="LastName" Title="Last Name">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="DateFrom" Title="Date From">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="DateTo" Title="Date To">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="Nights" Title="Nights">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="Guests" Title="Guests">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="StatusId" Title="Status Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="Status" Title="Status">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="RentalAmount" Title="Rental Amount">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="ProcessingFee" Title="Processing Fee">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="CleaningFee" Title="Cleaning Fee">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="AmountDue" Title="Amount Due">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="Tax" Title="Tax">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="MgtFee" Title="Mgt Fee">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="CleanerAmount" Title="Cleaner Amount">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="Collected" Title="Collected">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="Deposit" Title="Deposit">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="GrossAmount" Title="Gross Amount">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="SourceId" Title="Source Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="Source" Title="Source">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="CompFee" Title="Comp Fee">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.RdzVwGet2024Booking" Property="ResortFee" Title="Resort Fee">
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

@@ -1,0 +1,150 @@
+@page "/property-rates"
+
+<PageTitle>PropertyRates</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="PropertyRates" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="100px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(propertyRates)" TItem="Destination.Models.destinationTest.PropertyRate" RowSelect="@EditRow" Density="Radzen.Density.Compact" AllowColumnPicking="true">
+            <Columns>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Id" Title="Id" Width="50px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Property.Name" Title="Property">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="PreThank" Title="Pre Thank">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Thanks" Title="Thanks">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="WinterWeekend" Title="Winter Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="WinterWeekday" Title="Winter Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="SkiWeek" Title="Ski Week">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Christmas" Title="Christmas">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NewYears" Title="New Years">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="PostNewYears" Title="Post New Years">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Mlk114" Title="Mlk114">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="PresidentsDay" Title="Presidents Day">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Patricks" Title="Patricks">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Easter" Title="Easter">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="MemorialDay" Title="Memorial Day">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="July4th" Title="July4th">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NextJuly4th" Title="Next July4th">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="LaborDay" Title="Labor Day">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Jan23" Title="Jan23">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="SpringWeekend" Title="Spring Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="SpringWeekday" Title="Spring Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="SummerWeekend" Title="Summer Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="SummerWeekday" Title="Summer Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="FallWeekend" Title="Fall Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="FallWeekday" Title="Fall Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Prechristmas" Title="Prechristmas">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="MarchWeekend" Title="March Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="MarchWeekday" Title="March Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="UserId" Title="User Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="DecThird" Title="Dec Third">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NovWeekend" Title="Nov Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NovWeekday" Title="Nov Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="DecEarlyWeekend" Title="Dec Early Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="DecEarlyWeekday" Title="Dec Early Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="MayWeekend" Title="May Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="MayWeekday" Title="May Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NextSummerWeekday" Title="Next Summer Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NextSummerWeekend" Title="Next Summer Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NextFallWeekday" Title="Next Fall Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NextFallWeekend" Title="Next Fall Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="JuneWeekend" Title="June Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="JuneWeekday" Title="June Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="AprilWeekend" Title="April Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="AprilWeekday" Title="April Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NextThanks" Title="Next Thanks">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NextLaborDay" Title="Next Labor Day">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NextDecEarlyWeekday" Title="Next Dec Early Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NextDecEarlyWeekend" Title="Next Dec Early Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NextWinterWeekday" Title="Next Winter Weekday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NextWinterWeekend" Title="Next Winter Weekend">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Christmasday" Title="Christmasday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NewYearsday" Title="New Yearsday">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Jan2" Title="Jan2">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="Jan3" Title="Jan3">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="NewYearsEve" Title="New Years Eve">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="_1223" Title="1223">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="_1224" Title="1224">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Property="_1222" Title="1222">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyRate" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="propertyRate">
+
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                            Click=@(args => GridDeleteButtonClick(args, propertyRate)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

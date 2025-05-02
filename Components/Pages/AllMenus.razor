@@ -1,0 +1,28 @@
+@page "/all--menus"
+
+<PageTitle>All Menus</PageTitle>
+
+
+
+  <RadzenCard Style="margin: 5px;">
+    
+    @if (menuItems == null)
+    {
+        <RadzenProgressBar Mode="ProgressBarMode.Indeterminate" />
+    }
+    else
+    {
+        <RadzenRow class="rz-p-0 rz-p-lg-12">
+            <RadzenColumn Size="12" SizeLG="4">
+                <RadzenCard>
+                    <RadzenText TextStyle="TextStyle.Body2" class="rz-mb-2"><b>Application Menus</b></RadzenText>
+                    <RadzenTree Data=@menuItems Style="overflow: hidden !important;">
+                        <RadzenTreeLevel TextProperty="@nameof(menuItem.MenuText)" ChildrenProperty="@nameof(menuItem.Children)" 
+                        Expanded=@ShouldExpandPropertyMenu
+                        HasChildren="@(item => (item as Destination.Models.destinationTest.MenuMasterDTO)?.Children?.Any() ?? false)" />
+                    </RadzenTree>
+                </RadzenCard>
+            </RadzenColumn>
+        </RadzenRow>
+    }
+</RadzenCard>
