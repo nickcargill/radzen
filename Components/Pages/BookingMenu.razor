@@ -109,7 +109,7 @@
     else
     {
         <RadzenRow class="rz-p-0 rz-p-lg-12">
-            <RadzenColumn Size="12" SizeLG="4">
+            <RadzenColumn Size="12" SizeLG="4" Style="min-width: 100% !important">
                 <RadzenText TextStyle="TextStyle.Body2" class="rz-mb-2">
                     <b>Booking Menus</b>
                 </RadzenText>
@@ -124,7 +124,11 @@
     }
 </RadzenPanel>
     @if (loadedComponent.HasValue){
+        <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" 
+             Expand=@(() => Change("Panel expanded")) 
+             Collapse=@(() => Change("Panel collapsed")) >
         <DynamicComponent Type="loadedComponent?.Type" Parameters="loadedComponent?.Parameters" />
+        </RadzenPanel>
     }
 
 

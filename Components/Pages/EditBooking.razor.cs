@@ -39,15 +39,15 @@ namespace Destination.Components.Pages
         {
             booking = await destinationTestService.GetBookingById(Id);
 
-            propertiesForPropertyid = await destinationTestService.GetProperties();
+        //    propertiesForPropertyid = await destinationTestService.GetProperties();
 
-            bookingStatusesForStatusid = await destinationTestService.GetBookingStatuses();
+         //   bookingStatusesForStatusid = await destinationTestService.GetBookingStatuses();
 
-            tenantsForTenantid = await destinationTestService.GetTenants();
+         //   tenantsForTenantid = await destinationTestService.GetTenants();
 
-            propertySourcesForSourceid = await destinationTestService.GetPropertySources();
+         //   propertySourcesForSourceid = await destinationTestService.GetPropertySources();
 
-            tblServicesForServiceId = await destinationTestService.GetTblServices();
+         //   tblServicesForServiceId = await destinationTestService.GetTblServices();
         }
         protected bool errorVisible;
         protected Destination.Models.destinationTest.Booking booking;

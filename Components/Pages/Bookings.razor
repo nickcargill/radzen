@@ -2,7 +2,30 @@
 
 <PageTitle>Bookings</PageTitle>
 <RadzenStack>
-    <RadzenRow AlignItems="AlignItems.Center">
+    <RadzenRow>
+    @if (showPanels && selectedBookingId != 0)
+    {
+        <RadzenColumn SizeMD="4">
+         <RadzenCard>
+          <RadzenTabs>
+                <Tabs>
+                    <RadzenTabsItem Text="Booking Info">
+                        <EditBooking Id="@selectedBookingId"></EditBooking>
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="Tenant" style="margin-left: 3px;">
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="Notes" style="margin-left: 3px;">
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="Reviews" style="margin-left: 3px;">
+                    </RadzenTabsItem>
+                </Tabs>
+            </RadzenTabs>
+          </RadzenCard>
+        </RadzenColumn>
+    }
+      <RadzenColumn SizeMD="@(showPanels == false ? 12 : 8)">
+        <RadzenCard>
+        <RadzenRow AlignItems="AlignItems.Center">
         <RadzenColumn Size="12" SizeMD="6">
             <RadzenText Text="Bookings" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
         </RadzenColumn>
@@ -11,13 +34,14 @@
                 <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
             </RadzenStack>
         </RadzenColumn>
-    </RadzenRow>
-    <RadzenRow>
-      <RadzenColumn SizeMD=12>
-        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@(bookings)" TItem="Destination.Models.destinationTest.Booking" RowSelect="@EditRow">
+        </RadzenRow>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(bookings)" TItem="Destination.Models.destinationTest.Booking">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Id" Title="Id">
+                    <Template Context="item">
+                        <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: green; text-decoration: none;">@item.Id</span>
+                    </Template>
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.AirbnbTitle" Title="Property">
                 </RadzenDataGridColumn>
@@ -50,7 +74,26 @@
             </Columns>
 
         </RadzenDataGrid>
-
+          </RadzenCard>
     </RadzenColumn>
   </RadzenRow>
 </RadzenStack>
+
+    @if (showPanels)
+    {
+        <RadzenCard style="margin-top: 1rem;">
+            <RadzenTabs>
+                <Tabs>
+                    <RadzenTabsItem Text="Payments">
+                        <EditBooking Id="@selectedBookingId"></EditBooking>
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="Booking History" style="margin-left: 2px;">
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="Add/Edit Credit Requests" style="margin-left: 2px;">
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="Checking in" style="margin-left: 2px;">
+                    </RadzenTabsItem>
+                </Tabs>
+            </RadzenTabs>
+        </RadzenCard>
+    }

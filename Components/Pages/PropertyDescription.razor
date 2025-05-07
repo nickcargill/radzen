@@ -1,0 +1,95 @@
+@page "/property-description"
+
+<RadzenCard>
+    <RadzenTemplateForm TItem="Property" Data=@property Submit=@UpdateDescriptions>
+
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="6" Style="padding-right: 10px;">
+                <RadzenLabel Text="Description on website" />
+                <RadzenTextArea @bind-Value="@property.Description" 
+                               Style="width: 100%; height: 200px;"
+                               Rows="10"
+                               Name="Description" />
+            </RadzenColumn>
+            <RadzenColumn Size="6">
+                <RadzenLabel Text="Airbnb Space (Copy of Description)" />
+                <RadzenTextArea @bind-Value="@property.AirbnbDesc" 
+                               Style="width: 100%; height: 200px;"
+                               Rows="10"
+                               Name="AirbnbFullDescription" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="6" Style="padding-right: 10px;">
+                <RadzenLabel Text="Sleeping" />
+                <RadzenTextArea @bind-Value="@property.Sleeping" 
+                               Style="width: 100%; height: 100px;"
+                               Rows="5"
+                               Name="Sleeping" />
+            </RadzenColumn>
+            <RadzenColumn Size="6">
+                <RadzenLabel Text="Airbnb Summary (max 500 chars)" />
+                <RadzenTextArea @bind-Value="@property.AirbnbDesc" 
+                               Style="width: 100%; height: 100px;"
+                               Rows="5"
+                               MaxLength="500"
+                               Placeholder="Maximum limit: 500 characters"
+                               Name="AirbnbDesc" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="6" Style="padding-right: 10px;">
+                <RadzenLabel Text="Airbnb Title (max 50 chars)" />
+                <RadzenTextArea @bind-Value="@property.AirbnbTitle" 
+                               Style="width: 100%; height: 70px;"
+                               Rows="3"
+                               MaxLength="50"
+                               Placeholder="Maximum limit: 50 characters"
+                               Name="AirbnbTitle" />
+            </RadzenColumn>
+            <RadzenColumn Size="6">
+                <RadzenLabel Text="Video" />
+                <RadzenTextArea @bind-Value="@property.Videopath" 
+                               Style="width: 100%; height: 70px;"
+                               Rows="3"
+                               Name="VideoPath" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="6" Style="padding-right: 10px;">
+                <RadzenLabel Text="PropHeadline" />
+                <RadzenTextArea @bind-Value="@property.PropHeadlines" 
+                               Style="width: 100%; height: 50px;"
+                               Rows="2"
+                               Name="PropHeadlines" />
+            </RadzenColumn>
+            <RadzenColumn Size="6" Style="display: flex; align-items: flex-end;">
+                <RadzenLabel Text="Airbnb Link" />
+                <RadzenButton Icon="launch" 
+                            Click="@(_ => OpenAirbnbLink())"
+                            Style="margin-left: 10px;"
+                            Text="View on Airbnb" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Action Buttons -->
+        <RadzenRow>
+            <RadzenColumn Size="12" Class="text-right">
+                <RadzenButton ButtonType="ButtonType.Submit" 
+                            Text="Update"
+                            Icon="save" 
+                            Variant="Variant.Flat"
+                            ButtonStyle="ButtonStyle.Primary"
+                            Style="margin-right: 10px;" />
+                <RadzenButton Text="Sync To Airbnb" 
+                            ButtonStyle="ButtonStyle.Primary"
+                            Variant="Variant.Flat"
+                            Icon="launch"
+                            Click="@SyncToAirbnb" />
+            </RadzenColumn>
+        </RadzenRow>
+    </RadzenTemplateForm>
+</RadzenCard>

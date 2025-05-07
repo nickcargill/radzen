@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using Destination.Models.destinationTest;
-using Destination.Models.destinationTest;
 
 namespace Destination.Components.Pages
 {
@@ -34,27 +33,43 @@ public partial class Properties
     protected IEnumerable<Property> properties;
     protected RadzenDataGrid<Property> grid0;
     protected bool showTabs = false;
-    protected int selectedPropid = 0;
-    protected bool errorVisible;
-    protected PropertyRate propertyRate;
-    protected IEnumerable<Property> propertiesForPropid;
-    protected bool isLoading = false;
-    protected bool loadError = false;
-    protected int selectedPropertyId = 3;
-
     protected bool isRates = false;
-    protected bool shouldExpand = false;
-    
-    bool ShouldExpandPropertyMenu(object data)
-    {
-        return false;
-    }
+    protected int selectedPropId = 0;
 
+
+    protected bool isPropCostTab = false;
+    protected bool isPropDescTab = false;
+    protected bool isPropRatesTab = false;
+    protected bool isPropHomeInfoTab = false;
+    protected bool isPropBookingsTab = false;
+
+
+
+    private void OnTabChange(int index)
+    {
+        switch(index)
+        {
+            case 1:
+                isPropCostTab = true;
+                break;
+            case 2:
+                isPropDescTab = true;
+                break;
+            case 3:
+                isPropHomeInfoTab = true;
+                break;
+            case 4:
+                isPropRatesTab = true;
+                break;
+            case 5:
+                isPropBookingsTab = true;
+                break;
+        }
+    }
 
     protected override async Task OnInitializedAsync()
     {
         properties = await destinationTestService.GetProperties(new Query { Expand = "Agent,Status1,PropertyCleaner" });
-       // propertiesForPropid = await destinationTestService.GetProperties();
     }
 
 
@@ -62,17 +77,14 @@ public partial class Properties
     {
         ContextMenuService.Open(args,
             new List<ContextMenuItem> {
-                new ContextMenuItem(){ Text = "Edit Info", Value = 1},
-                new ContextMenuItem(){ Text = "Home Info", Value = 2},
-                new ContextMenuItem(){ Text = "Rates", Value = 3},
-                new ContextMenuItem(){ Text = "Bookings", Value = 4},
-                new ContextMenuItem(){ Text = "Desc", Value = 5}
+                new ContextMenuItem(){ Text = "Property Details", Value = 1},
+                new ContextMenuItem(){ Text = "Property Cost", Value = 2},
+                new ContextMenuItem(){ Text = "Property Description", Value = 3},
+                new ContextMenuItem(){ Text = "Home Info", Value = 4},
+                new ContextMenuItem(){ Text = "Rates", Value = 5},
+                new ContextMenuItem(){ Text = "All Bookings", Value = 6}
 
          }, OnMenuItemClick);
-    }
-
-    void Change(string text)
-    {
     }
 
     void OnMenuItemClick(MenuItemEventArgs args)
@@ -89,23 +101,9 @@ public partial class Properties
 
     protected async Task ShowTabs(int propId)
     {
-        selectedPropid = propId;
+        selectedPropId = propId;
         showTabs = true;
-        propertyRate = null; // Reset to trigger loading on tab change
-        isLoading = false;
-        loadError = false;
         isRates = false;
-      //  propertyRate = await destinationTestService.GetPropertyRateById(selectedPropid);
-        StateHasChanged();
-    }
-
-    protected async Task CancelButtonClick()
-    {
-        propertyRate = null;
-        showTabs = false;
-        errorVisible = false;
-        isLoading = false;
-        loadError = false;
         StateHasChanged();
     }
 
@@ -118,6 +116,10 @@ public partial class Properties
     protected async Task EditRow(Destination.Models.destinationTest.Property args)
     {
         await DialogService.OpenAsync<EditProperty>("Edit Property", new Dictionary<string, object> { { "Propid", args.Propid } });
+    }
+
+    void Change(string text)
+    {
     }
 
     protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.Property property)

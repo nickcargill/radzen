@@ -6,6 +6,7 @@ public class ComponentLoaderService
     private readonly Dictionary<string, Type> _componentMap = new()
     {
         ["properties"] = typeof(Properties),
+        ["bookings"] = typeof(Bookings)
     };
 
     public Type GetComponentType(string componentName)

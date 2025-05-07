@@ -36,6 +36,10 @@ namespace Destination.Components.Pages
         protected IEnumerable<Destination.Models.destinationTest.Booking> bookings;
 
         protected RadzenDataGrid<Destination.Models.destinationTest.Booking> grid0;
+
+        protected bool showPanels = false;
+        protected int selectedBookingId = 0;
+
         protected override async Task OnInitializedAsync()
         {
             bookings = await destinationTestService.GetBookings(new Query { Expand = "Property,BookingStatus,Tenant,PropertySource,TblService" });
@@ -49,7 +53,13 @@ namespace Destination.Components.Pages
 
         protected async Task EditRow(Destination.Models.destinationTest.Booking args)
         {
-            await DialogService.OpenAsync<EditBooking>("Edit Booking", new Dictionary<string, object> { {"Id", args.Id} });
+          //  await DialogService.OpenAsync<EditBooking>("Edit Booking", new Dictionary<string, object> { {"Id", args.Id} });
+        }
+
+        protected async Task ShowPanels(int bookingId)
+        {
+            selectedBookingId = bookingId;
+            showPanels = true;
         }
 
         protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.Booking booking)

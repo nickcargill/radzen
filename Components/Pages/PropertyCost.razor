@@ -1,0 +1,111 @@
+@page "/property-cost"
+
+<RadzenCard>
+    <RadzenTemplateForm TItem="PropertyCostModel" Data=@propertyCostModel Submit=@UpdatePropertyCost>
+        <!-- Error Message -->
+        <RadzenAlert Visible="@(!string.IsNullOrEmpty(errorMessage))" 
+                     Text="@errorMessage" 
+                     Style="color: red; font-weight: bold; font-size: large; margin-bottom: 20px;" />
+
+        <!-- Row 1: Cleaning Fee, Owner Text, Supply Cost, Bid -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Cleaning Fee" Component="CleaningFeeId" />
+                <RadzenNumeric @bind-Value="@propertyCostModel.CleaningFeeId" 
+                              Id="CleaningFeeId"
+                              Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Owner" Component="OwnerTextId" />
+                <RadzenTextBox @bind-Value="@propertyCostModel.OwnerTextId" 
+                              Id="OwnerTextId"
+                              Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Supply Cost" Component="SupplyCostId" />
+                <RadzenNumeric @bind-Value="@propertyCostModel.SupplyCostId" 
+                              Id="SupplyCostId"
+                              Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Bid" Component="BidId" />
+                <RadzenNumeric @bind-Value="@propertyCostModel.BidId" 
+                              Id="BidId"
+                              Style="width: 100%" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 2: Cleaner, Owner Login, Deposit, Last Update -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Cleaner" Component="CleanerId" />
+                <RadzenDropDown @bind-Value="@propertyCostModel.CleanerId" 
+                              Data="@cleanerOptions" 
+                              TextProperty="Text" 
+                              ValueProperty="Value"
+                              Id="CleanerId"
+                              Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Owner Login" Component="OwnerLoginId" />
+                <RadzenDropDown @bind-Value="@propertyCostModel.OwnerLoginId" 
+                              Data="@ownerLoginOptions" 
+                              TextProperty="Text" 
+                              ValueProperty="Value"
+                              Id="OwnerLoginId"
+                              Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Deposit" Component="DepositId" />
+                <RadzenNumeric @bind-Value="@propertyCostModel.DepositId" 
+                              Id="DepositId"
+                              Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Last Update" Component="LastUpdateId" />
+                <RadzenDatePicker @bind-Value="@propertyCostModel.LastUpdateId" 
+                                Id="LastUpdateId"
+                                Style="width: 100%" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 3: MGT Rate, Lat, Long, (Empty for spacing) -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="MGT Rate" Component="MgtRateId" />
+                <RadzenNumeric @bind-Value="@propertyCostModel.MgtRateId" 
+                              Id="MgtRateId"
+                              Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Lat" Component="LatId" />
+                <RadzenNumeric @bind-Value="@propertyCostModel.LatId" 
+                              Id="LatId"
+                              Style="width: 100%" 
+                              Step="0.000001" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Long" Component="LongId" />
+                <RadzenNumeric @bind-Value="@propertyCostModel.LongId" 
+                              Id="LongId"
+                              Style="width: 100%" 
+                              Step="0.000001" />
+            </RadzenColumn>
+            <RadzenColumn Size="3"></RadzenColumn>
+        </RadzenRow>
+
+        <!-- Submit Button Row -->
+        <RadzenRow>
+            <RadzenColumn Size="3"></RadzenColumn>
+            <RadzenColumn Size="3"></RadzenColumn>
+            <RadzenColumn Size="3"></RadzenColumn>
+            <RadzenColumn Size="3" Class="text-right">
+                <RadzenButton ButtonType="ButtonType.Submit" 
+                             Text="Update" 
+                             ButtonStyle="ButtonStyle.Success"
+                             Style="width: 100%; margin-top: 10px;" />
+            </RadzenColumn>
+        </RadzenRow>
+    </RadzenTemplateForm>
+</RadzenCard>
+

@@ -3,6 +3,9 @@
 
  <PageTitle>Properties</PageTitle> 
 
+<RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" 
+        Expand=@(() => Change("Panel expanded")) 
+        Collapse=@(() => Change("Panel collapsed")) >
  <RadzenStack>
     <RadzenRow AlignItems="AlignItems.Center">
         <RadzenColumn Size="12" SizeMD="6">
@@ -53,38 +56,64 @@
     </RadzenColumn>
   </RadzenRow>
   </RadzenStack>
+</RadzenPanel>
 
 
     @if (isRates)
     {
+    <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" 
+        Expand=@(() => Change("Panel expanded")) 
+        Collapse=@(() => Change("Panel collapsed")) >
         <RadzenCard style="margin-top: 1rem;">
           <RatesTest></RatesTest>
         </RadzenCard>
+    </RadzenPanel>
     }
 
     @if (showTabs)
     {
+    <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" 
+        Expand=@(() => Change("Panel expanded")) 
+        Collapse=@(() => Change("Panel collapsed")) >
         <RadzenCard style="margin-top: 1rem;">
-            <RadzenTabs>
+            <RadzenTabs Change=@OnTabChange>
                 <Tabs>
-                    <RadzenTabsItem Text="Property Description">
-                    <RadzenRow>
-                     <RadzenColumn SizeMD=12>
-                     </RadzenColumn>
-                    </RadzenRow>
+                    <RadzenTabsItem Text="Property Details">
+                      <PropertyDetails Id="@selectedPropId"></PropertyDetails>
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Home Info" style="margin-left: 5px;">
+                    <RadzenTabsItem Text="Property Cost" style="margin-left: 3px;">
+                        @if (isPropCostTab)
+                        {
+                            <PropertyCost></PropertyCost>
+                        }
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Rates" style="margin-left: 5px;">
+                    <RadzenTabsItem Text="Property Description" style="margin-left: 3px;">
+                        @if (isPropDescTab)
+                        {
+                            <PropertyDescription></PropertyDescription>
+                        }
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="All Bookings" style="margin-left: 5px;">
+                    <RadzenTabsItem Text="Home Info" style="margin-left: 3px;">
+                        @if (isPropHomeInfoTab)
+                        {
+                            <PropertyHomeInfo></PropertyHomeInfo>
+                        }
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Property Channel" style="margin-left: 5px;">
-                     <RatesTest></RatesTest>
+                    <RadzenTabsItem Text="Rates" style="margin-left: 3px;">
+                        @if (isPropRatesTab)
+                        {
+                            <RatesTest></RatesTest>
+                        }
+                    </RadzenTabsItem>
+                    <RadzenTabsItem Text="All Bookings" style="margin-left: 3px;">
+                        @if (isPropBookingsTab)
+                        {
+                            <Bookings></Bookings>
+                        }
                     </RadzenTabsItem>
                 </Tabs>
             </RadzenTabs>
-            <RadzenButton Icon="close" Text="Close Tabs" ButtonStyle="ButtonStyle.Secondary" Click="@(() => showTabs = false)" style="margin-top: 1rem;" />
         </RadzenCard>
+    </RadzenPanel>
     }
 
