@@ -12,4 +12,16 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.*-*" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.*-*" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\Pages\Booking\" />
+    <Folder Include="Components\Pages\Agent\" />
+    <Folder Include="Components\Pages\Events\" />
+    <Folder Include="Components\Pages\ParentMenus\" />
+    <Folder Include="Components\Pages\Properties\" />
+    <Folder Include="Migrations\" />
+    <Folder Include="Shared\IndependantComponents\" />
+    <Folder Include="Shared\DTO\" />
+    <Folder Include="Shared\ExternalServices\" />
+    <Folder Include="Shared\Enums\" />
+  </ItemGroup>
 </Project>
