@@ -35,6 +35,14 @@ namespace Destination.Components.Pages
 
         protected IEnumerable<Destination.Models.destinationTest.Booking> bookings;
 
+        [Inject]
+        public SharedEvents sharedEvents { get; set; }
+
+        [Parameter]
+        public int Id { get; set; } = 0;
+
+        public int PropParameterId = 0;
+
         protected RadzenDataGrid<Destination.Models.destinationTest.Booking> grid0;
 
         protected bool showPanels = false;
@@ -42,6 +50,7 @@ namespace Destination.Components.Pages
 
         protected override async Task OnInitializedAsync()
         {
+            PropParameterId = Id;
             bookings = await destinationTestService.GetBookings(new Query { Expand = "Property,BookingStatus,Tenant,PropertySource,TblService" });
         }
 
@@ -60,6 +69,11 @@ namespace Destination.Components.Pages
         {
             selectedBookingId = bookingId;
             showPanels = true;
+            sharedEvents.NotifyBookingIdClicked(bookingId);
+        }
+
+        void Change(string text)
+        {
         }
 
         protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.Booking booking)

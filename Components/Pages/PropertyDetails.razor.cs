@@ -44,8 +44,8 @@ namespace Destination.Components.Pages
         protected override async Task OnInitializedAsync()
         {
             property = await destinationTestService.GetPropertyByPropid(Id);
-              agentsForAgentid = await destinationTestService.GetAgents();
-              statusesForStatus = await destinationTestService.GetStatuses();
+            //  agentsForAgentid = await destinationTestService.GetAgents();
+            //  statusesForStatus = await destinationTestService.GetStatuses();
          //   propertyTypes = await destinationTestService.GetPropertyTypes();
         }
 

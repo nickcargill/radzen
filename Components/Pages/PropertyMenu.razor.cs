@@ -61,7 +61,7 @@ namespace Destination.Components.Pages
             }
         }
 
-        private RenderFragment RenderMenuItem(MenuMasterDTO item, int level) => builder =>
+            private RenderFragment RenderMenuItem(MenuMasterDTO item, int level) => builder =>
         {
             builder.OpenElement(0, "li");
             builder.AddAttribute(1, "class", "list-group-item");
@@ -111,7 +111,6 @@ namespace Destination.Components.Pages
 
             builder.CloseElement(); // li
         };
-
 
         private bool IsExpanded(MenuMasterDTO item) => expandedItems.Contains(item.Id);
 

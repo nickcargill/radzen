@@ -30,18 +30,22 @@ public partial class Properties
     [Inject]
     public destinationTestService destinationTestService { get; set; }
 
+    [Inject]
+    public SharedEvents sharedEvents { get; set; }
+
     protected IEnumerable<Property> properties;
     protected RadzenDataGrid<Property> grid0;
     protected bool showTabs = false;
     protected bool isRates = false;
     protected int selectedPropId = 0;
-
+    protected int selectedBookingId = 0;
 
     protected bool isPropCostTab = false;
     protected bool isPropDescTab = false;
     protected bool isPropRatesTab = false;
     protected bool isPropHomeInfoTab = false;
     protected bool isPropBookingsTab = false;
+    protected bool showleftPanel = false;
 
 
 
@@ -67,9 +71,18 @@ public partial class Properties
         }
     }
 
+    private void HandleBookingEdit(int bookingId)
+    {
+        showleftPanel = true;
+        selectedBookingId = bookingId;
+        StateHasChanged(); 
+    }
+
+
     protected override async Task OnInitializedAsync()
     {
         properties = await destinationTestService.GetProperties(new Query { Expand = "Agent,Status1,PropertyCleaner" });
+        sharedEvents.OnBookingIdClicked += HandleBookingEdit;
     }
 
 

@@ -124,11 +124,7 @@
     }
 </RadzenPanel>
     @if (loadedComponent.HasValue){
-        <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" 
-             Expand=@(() => Change("Panel expanded")) 
-             Collapse=@(() => Change("Panel collapsed")) >
         <DynamicComponent Type="loadedComponent?.Type" Parameters="loadedComponent?.Parameters" />
-        </RadzenPanel>
     }
 
 

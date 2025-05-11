@@ -1,99 +1,198 @@
 @page "/bookings"
 
+
 <PageTitle>Bookings</PageTitle>
+
 <RadzenStack>
     <RadzenRow>
-    @if (showPanels && selectedBookingId != 0)
-    {
-        <RadzenColumn SizeMD="4">
-         <RadzenCard>
-          <RadzenTabs>
-                <Tabs>
-                    <RadzenTabsItem Text="Booking Info">
-                        <EditBooking Id="@selectedBookingId"></EditBooking>
-                    </RadzenTabsItem>
-                    <RadzenTabsItem Text="Tenant" style="margin-left: 3px;">
-                    </RadzenTabsItem>
-                    <RadzenTabsItem Text="Notes" style="margin-left: 3px;">
-                    </RadzenTabsItem>
-                    <RadzenTabsItem Text="Reviews" style="margin-left: 3px;">
-                    </RadzenTabsItem>
-                </Tabs>
-            </RadzenTabs>
-          </RadzenCard>
-        </RadzenColumn>
-    }
-      <RadzenColumn SizeMD="@(showPanels == false ? 12 : 8)">
-        <RadzenCard>
-        <RadzenRow AlignItems="AlignItems.Center">
-        <RadzenColumn Size="12" SizeMD="6">
-            <RadzenText Text="Bookings" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
-        </RadzenColumn>
-        <RadzenColumn Size="12" SizeMD="6">
-            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
-                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
-            </RadzenStack>
-        </RadzenColumn>
-        </RadzenRow>
-        <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@(bookings)" TItem="Destination.Models.destinationTest.Booking">
-            <Columns>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Id" Title="Id">
-                    <Template Context="item">
-                        <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: green; text-decoration: none;">@item.Id</span>
-                    </Template>
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.AirbnbTitle" Title="Property">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Datefrom" Title="Datefrom">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Dateto" Title="Dateto">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="BookingStatus.Color" Title="Booking Status">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Notes" Title="Notes">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Nights" Title="Nights">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Tax" Title="Tax">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Tenant.LastPageVisited" Title="Tenant">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="PropertySource.Notes" Title="Property Source">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="TblService.ServiceName" Title="Tbl Service">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
-                    <Template Context="booking">
-
-                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
-                            Shade="Shade.Lighter" Variant="Variant.Flat"
-                            Click=@(args => GridDeleteButtonClick(args, booking)) @onclick:stopPropagation="true" />
-                    </Template>
-                </RadzenDataGridColumn>
-            </Columns>
-
-        </RadzenDataGrid>
-          </RadzenCard>
-    </RadzenColumn>
-  </RadzenRow>
+        @if (showPanels && selectedBookingId != 0 && PropParameterId == 0)
+        {
+            <RadzenColumn SizeMD="4">
+                <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important"
+                    Expand=@(() => Change("Panel expanded")) 
+                    Collapse=@(() => Change("Panel collapsed")) >
+                    <RadzenCard Style="margin-top: 6px;">
+                        <RadzenTabs>
+                            <Tabs>
+                                <RadzenTabsItem Text="Edit Info" style="align-self:end;">
+                                    <EditBooking Id="@selectedBookingId"></EditBooking>
+                                </RadzenTabsItem>
+                                <RadzenTabsItem Text="Tenant" style="margin-left: 3px; align-self:end;">
+                                </RadzenTabsItem>
+                                <RadzenTabsItem Text="Notes" style="margin-left: 3px; align-self:end;">
+                                </RadzenTabsItem>
+                                <RadzenTabsItem Text="Review" style="margin-left: 3px; align-self:end;">
+                                </RadzenTabsItem>
+                            </Tabs>
+                        </RadzenTabs>
+                    </RadzenCard>
+                </RadzenPanel>
+            </RadzenColumn>
+        }
+        @if (PropParameterId == 0)
+        {
+            <RadzenColumn SizeMD="@(showPanels == false ? 12 : 8)">
+                <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important"
+                    Expand=@(() => Change("Panel expanded")) 
+                    Collapse=@(() => Change("Panel collapsed")) >
+                    <RadzenCard>
+                        <RadzenRow AlignItems="AlignItems.Center" Style="margin-top: 5px; margin-bottom: 7px">
+                            <RadzenColumn Size="12" SizeMD="6">
+                                <RadzenText Text="Bookings" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+                            </RadzenColumn>
+                            <RadzenColumn Size="12" SizeMD="6">
+                                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                                    <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+                                </RadzenStack>
+                            </RadzenColumn>
+                        </RadzenRow>
+                        <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+                            Data="@(bookings)" TItem="Destination.Models.destinationTest.Booking">
+                            <Columns>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Id" Title="Id">
+                                    <Template Context="item">
+                                        <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: green; text-decoration: none;">@item.Id</span>
+                                    </Template>
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.AirbnbTitle" Title="Property">
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Datefrom" Title="Datefrom">
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Dateto" Title="Dateto">
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="BookingStatus.Color" Title="Booking Status">
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Notes" Title="Notes">
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Nights" Title="Nights">
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Tax" Title="Tax">
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Tenant.LastPageVisited" Title="Tenant">
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="PropertySource.Notes" Title="Property Source">
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="TblService.ServiceName" Title="Tbl Service">
+                                </RadzenDataGridColumn>
+                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                                    <Template Context="booking">
+                                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                                            Click=@(args => GridDeleteButtonClick(args, booking)) @onclick:stopPropagation="true" />
+                                    </Template>
+                                </RadzenDataGridColumn>
+                            </Columns>
+                        </RadzenDataGrid>
+                    </RadzenCard>
+                </RadzenPanel>
+            </RadzenColumn>
+        }
+        else
+        {
+            <RadzenColumn SizeMD="12">
+                <RadzenCard>
+                    <RadzenRow AlignItems="AlignItems.Center">
+                        <RadzenColumn Size="12" SizeMD="6">
+                            <RadzenText Text="Bookings" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeMD="6">
+                            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+                            </RadzenStack>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+                        Data="@(bookings)" TItem="Destination.Models.destinationTest.Booking">
+                        <Columns>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Id" Title="Id">
+                                <Template Context="item">
+                                    <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: green; text-decoration: none;">@item.Id</span>
+                                </Template>
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.AirbnbTitle" Title="Property">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Datefrom" Title="Datefrom">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Dateto" Title="Dateto">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="BookingStatus.Color" Title="Booking Status">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Notes" Title="Notes">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Nights" Title="Nights">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Tax" Title="Tax">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Tenant.LastPageVisited" Title="Tenant">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="PropertySource.Notes" Title="Property Source">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="TblService.ServiceName" Title="Tbl Service">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                                <Template Context="booking">
+                                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                                        Shade="Shade.Lighter" Variant="Variant.Flat"
+                                        Click=@(args => GridDeleteButtonClick(args, booking)) @onclick:stopPropagation="true" />
+                                </Template>
+                            </RadzenDataGridColumn>
+                        </Columns>
+                    </RadzenDataGrid>
+                </RadzenCard>
+            </RadzenColumn>
+        }
+    </RadzenRow>
 </RadzenStack>
 
-    @if (showPanels)
+
+<RadzenRow>
+    @if (PropParameterId == 0)
     {
-        <RadzenCard style="margin-top: 1rem;">
-            <RadzenTabs>
-                <Tabs>
-                    <RadzenTabsItem Text="Payments">
-                        <EditBooking Id="@selectedBookingId"></EditBooking>
-                    </RadzenTabsItem>
-                    <RadzenTabsItem Text="Booking History" style="margin-left: 2px;">
-                    </RadzenTabsItem>
-                    <RadzenTabsItem Text="Add/Edit Credit Requests" style="margin-left: 2px;">
-                    </RadzenTabsItem>
-                    <RadzenTabsItem Text="Checking in" style="margin-left: 2px;">
-                    </RadzenTabsItem>
-                </Tabs>
-            </RadzenTabs>
-        </RadzenCard>
+        @if(showPanels)
+        {
+        <RadzenColumn SizeMD="4">
+        </RadzenColumn>
+        <RadzenColumn SizeMD="8">
+            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 17px !important;margin-bottom: 5px !important"
+                Expand=@(() => Change("Panel expanded")) 
+                Collapse=@(() => Change("Panel collapsed")) >
+                <RadzenCard style="margin-top: 1rem;">
+                    <RadzenTabs>
+                        <Tabs>
+                            <RadzenTabsItem Text="Payments">
+                                <EditBooking Id="@selectedBookingId"></EditBooking>
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Text="Booking History" style="margin-left: 2px;">
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Text="Add/Edit Credit Requests" style="margin-left: 2px;">
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Text="Checking in" style="margin-left: 2px;">
+                            </RadzenTabsItem>
+                        </Tabs>
+                    </RadzenTabs>
+                </RadzenCard>
+            </RadzenPanel>
+        </RadzenColumn>
+        }
     }
+    else
+    {
+        <RadzenColumn SizeMD="12">
+            <RadzenCard style="margin-top: 1rem;">
+                <RadzenTabs>
+                    <Tabs>
+                        <RadzenTabsItem Text="Payments">
+                            <EditBooking Id="@selectedBookingId"></EditBooking>
+                        </RadzenTabsItem>
+                        <RadzenTabsItem Text="Booking History" style="margin-left: 2px;">
+                        </RadzenTabsItem>
+                        <RadzenTabsItem Text="Add/Edit Credit Requests" style="margin-left: 2px;">
+                        </RadzenTabsItem>
+                        <RadzenTabsItem Text="Checking in" style="margin-left: 2px;">
+                        </RadzenTabsItem>
+                    </Tabs>
+                </RadzenTabs>
+            </RadzenCard>
+        </RadzenColumn>
+    }
+</RadzenRow>

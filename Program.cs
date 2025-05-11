@@ -15,6 +15,8 @@ builder.Services.AddRadzenCookieThemeService(options =>
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<Destination.destinationTestService>();
 builder.Services.AddSingleton<ComponentLoaderService>();
+builder.Services.AddScoped<SharedEvents>();
+
 builder.Services.AddDbContext<Destination.Data.destinationTestContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("destinationTestConnection"));
