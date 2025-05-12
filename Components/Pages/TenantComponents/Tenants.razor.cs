@@ -7,11 +7,10 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
-using Destination.Components.Pages.AccountingComponents;
 
-namespace Destination.Components.Pages
+namespace Destination.Components.Pages.TenantComponents
 {
-    public partial class Discounts
+    public partial class Tenants
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -34,32 +33,32 @@ namespace Destination.Components.Pages
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
-        protected IEnumerable<Destination.Models.destinationTest.Discount> discounts;
+        protected IEnumerable<Destination.Models.destinationTest.Tenant> tenants;
 
-        protected RadzenDataGrid<Destination.Models.destinationTest.Discount> grid0;
+        protected RadzenDataGrid<Destination.Models.destinationTest.Tenant> grid0;
         protected override async Task OnInitializedAsync()
         {
-            discounts = await destinationTestService.GetDiscounts();
+            tenants = await destinationTestService.GetTenants();
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
         {
-            await DialogService.OpenAsync<AddDiscount>("Add Discount", null);
+            await DialogService.OpenAsync<AddTenant>("Add Tenant", null);
             await grid0.Reload();
         }
 
-        protected async Task EditRow(Destination.Models.destinationTest.Discount args)
+        protected async Task EditRow(Destination.Models.destinationTest.Tenant args)
         {
-            await DialogService.OpenAsync<EditDiscount>("Edit Discount", new Dictionary<string, object> { {"Discountid", args.Discountid} });
+            await DialogService.OpenAsync<EditTenant>("Edit Tenant", new Dictionary<string, object> { {"Tenantid", args.Tenantid} });
         }
 
-        protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.Discount discount)
+        protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.Tenant tenant)
         {
             try
             {
                 if (await DialogService.Confirm("Are you sure you want to delete this record?") == true)
                 {
-                    var deleteResult = await destinationTestService.DeleteDiscount(discount.Discountid);
+                    var deleteResult = await destinationTestService.DeleteTenant(tenant.Tenantid);
 
                     if (deleteResult != null)
                     {
@@ -73,7 +72,7 @@ namespace Destination.Components.Pages
                 {
                     Severity = NotificationSeverity.Error,
                     Summary = $"Error",
-                    Detail = $"Unable to delete Discount"
+                    Detail = $"Unable to delete Tenant"
                 });
             }
         }
@@ -82,24 +81,24 @@ namespace Destination.Components.Pages
         {
             if (args?.Value == "csv")
             {
-                await destinationTestService.ExportDiscountsToCSV(new Query
+                await destinationTestService.ExportTenantsToCSV(new Query
                 {
                     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
                     OrderBy = $"{grid0.Query.OrderBy}",
                     Expand = "",
                     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-                }, "Discounts");
+                }, "Tenants");
             }
 
             if (args == null || args.Value == "xlsx")
             {
-                await destinationTestService.ExportDiscountsToExcel(new Query
+                await destinationTestService.ExportTenantsToExcel(new Query
                 {
                     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
                     OrderBy = $"{grid0.Query.OrderBy}",
                     Expand = "",
                     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-                }, "Discounts");
+                }, "Tenants");
             }
         }
     }

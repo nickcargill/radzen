@@ -13,11 +13,11 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.*-*" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Components\Pages\Booking\" />
-    <Folder Include="Components\Pages\Agent\" />
-    <Folder Include="Components\Pages\Events\" />
-    <Folder Include="Components\Pages\ParentMenus\" />
-    <Folder Include="Components\Pages\Properties\" />
+    <Folder Include="Components\Pages\BookingComponents\" />
+    <Folder Include="Components\Pages\AgentComponents\" />
+    <Folder Include="Components\Pages\ChannelComponents\" />
+    <Folder Include="Components\Pages\ParentMenusComponents\" />
+    <Folder Include="Components\Pages\PropertyComponents\" />
     <Folder Include="Migrations\" />
     <Folder Include="Shared\IndependantComponents\" />
     <Folder Include="Shared\DTO\" />
