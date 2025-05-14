@@ -48,9 +48,25 @@ public partial class Properties
     protected bool isPropBookingsTab = false;
     protected bool showleftPanel = false;
 
+    private bool isCollapsed = false;
+
+    private bool showCollapse = true;
+
+    private void ShowCollapse()
+    {
+        showCollapse = true;
+        showleftPanel = true;
+    }
+
+    private void HidePanel()
+    {
+        showCollapse = false;
+        showleftPanel = false;
+    }
 
 
-    private void OnTabChange(int index)
+
+        private void OnTabChange(int index)
     {
         switch(index)
         {
@@ -74,8 +90,10 @@ public partial class Properties
 
     private void HandleBookingEdit(int bookingId)
     {
-        showleftPanel = true;
+        showleftPanel = false;
         selectedBookingId = bookingId;
+        Task.Delay(1);
+        showleftPanel = true;
         StateHasChanged(); 
     }
 
@@ -115,9 +133,11 @@ public partial class Properties
 
     protected async Task ShowTabs(int propId)
     {
+        showTabs = false;
         selectedPropId = propId;
-        showTabs = true;
         isRates = false;
+        await Task.Delay(1);
+        showTabs = true;
         StateHasChanged();
     }
 

@@ -10,11 +10,8 @@
     z-index: 1000;
 }
 
-#blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
+.rz-layout .rz-body {
+   padding: 0px;
 }
 
 :root {

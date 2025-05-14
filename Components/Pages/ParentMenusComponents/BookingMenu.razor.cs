@@ -48,6 +48,7 @@ namespace Destination.Components.Pages.ParentMenusComponents
         protected MenuMasterDTO menuItem;
 
         protected string selectedUrl;
+        private bool isPanelCollapsed = false;
 
 
         protected override async Task OnInitializedAsync()
@@ -128,6 +129,7 @@ namespace Destination.Components.Pages.ParentMenusComponents
         
             if (componentType != null)
             {
+                isPanelCollapsed = true;
                 loadedComponent = (
                     componentType,
                     new Dictionary<string, object>

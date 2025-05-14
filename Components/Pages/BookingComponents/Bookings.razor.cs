@@ -44,6 +44,22 @@ namespace Destination.Components.Pages.BookingComponents
         protected bool showPanels = false;
         protected int selectedBookingId = 0;
 
+        private bool isCollapsed = false;
+
+        private bool showCollapse = true;
+
+        private void ShowCollapse()
+        {
+            showCollapse = true;
+            showPanels = true;
+        }
+
+        private void HidePanel()
+        {
+            showCollapse = false;
+            showPanels = false;
+        }
+
         protected override async Task OnInitializedAsync()
         {
             PropParameterId = Id;
@@ -63,9 +79,12 @@ namespace Destination.Components.Pages.BookingComponents
 
         protected async Task ShowPanels(int bookingId)
         {
+            showPanels = false;
             selectedBookingId = bookingId;
-            showPanels = true;
             sharedEvents.NotifyBookingIdClicked(bookingId);
+            await Task.Delay(1);
+            showPanels = true;
+            StateHasChanged();
         }
 
         void Change(string text)

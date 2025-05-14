@@ -3,30 +3,35 @@
 <RadzenNotification />
 <RadzenTooltip />
 <RadzenContextMenu />
-<RadzenLayout style="grid-template-areas: 'rz-sidebar rz-header' 'rz-sidebar rz-body'">
-    <RadzenHeader>
-        <RadzenRow JustifyContent="JustifyContent.Start" AlignItems="AlignItems.Center" Gap="0">
-            <RadzenColumn Size="5">
-                <RadzenSidebarToggle Click="@SidebarToggleClick"></RadzenSidebarToggle>
+
+<RadzenLayout style="grid-template-areas: 'rz-header rz-header' 'rz-sidebar rz-body'; height: 100vh;">
+    <!-- Header - now separate from sidebar -->
+    <RadzenHeader style="grid-area: rz-header; position: sticky; top: 0; z-index: 3;">
+        <RadzenRow JustifyContent="JustifyContent.SpaceBetween" AlignItems="AlignItems.Center">
+            <!-- Left side of header -->
+            <RadzenColumn Size="6">
+                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1rem">
+                    <RadzenSidebarToggle Click="@SidebarToggleClick" Style="margin-left: 1rem;"></RadzenSidebarToggle>
+                    <!-- You can add other header elements here -->
+                </RadzenStack>
             </RadzenColumn>
-            <RadzenColumn Size="7">
-                <RadzenStack AlignItems="AlignItems.Center" Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End"></RadzenStack>
+
+            <!-- Right side of header -->
+            <RadzenColumn Size="6">
+                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="1rem">
+                    <!-- Add your header right-side content here -->
+                </RadzenStack>
             </RadzenColumn>
         </RadzenRow>
     </RadzenHeader>
-    <RadzenBody Expanded="@sidebarExpanded">
-        <RadzenRow class="rz-mx-auto rz-px-4 rz-pt-2 rz-pt-md-4 rz-pt-lg-6 rz-pt-xl-12 rz-pb-2 rz-pb-lg-12" Style="max-width: 1440px;">
-            <RadzenColumn Size="12">
-            @Body
-            </RadzenColumn>
-        </RadzenRow>
-    </RadzenBody>
-    <RadzenSidebar @bind-Expanded="@sidebarExpanded" style="z-index: 2">
+
+    <!-- Sidebar - now below header -->
+    <RadzenSidebar @bind-Expanded="@sidebarExpanded" style="grid-area: rz-sidebar; z-index: 2;">
         <RadzenStack AlignItems="Radzen.AlignItems.Center" class="rz-py-4 rz-py-lg-6" Style="padding: var(--rz-panel-menu-item-padding); border-bottom: var(--rz-panel-menu-item-border);">
-            <RadzenImage Path="images/logo.png"  style="width: 48px; height: 48px;" AlternateText="Application logo"></RadzenImage>
+            <RadzenImage Path="images/logo.png" style="width: 38px; height: 38px;" AlternateText="Application logo"></RadzenImage>
             <RadzenText Text="Destination" TextStyle="Radzen.Blazor.TextStyle.Subtitle1" class="rz-mb-0" style="color: var(--rz-sidebar-color);" />
         </RadzenStack>
-            <RadzenPanelMenu>
+        <RadzenPanelMenu>
             <RadzenPanelMenuItem Text="Home" Path="" />
             <RadzenPanelMenuItem Text="Bookings" Path="booking-menu" />
             <RadzenPanelMenuItem Text="Accounting" Path="accounting-menu" />
@@ -55,4 +60,13 @@
             <RadzenText Text="Copyright Ⓒ 2025" TextStyle="Radzen.Blazor.TextStyle.Caption" class="rz-mb-0" TagName="Radzen.Blazor.TagName.P" TextAlign="Radzen.TextAlign.Center" />
         </RadzenStack>
     </RadzenSidebar>
+
+    <!-- Body content -->
+    <RadzenBody Expanded="@sidebarExpanded" style="grid-area: rz-body;">
+        <RadzenRow class="rz-mx-auto rz-px-4 rz-pt-2 rz-pt-md-4 rz-pt-lg-6 rz-pt-xl-12 rz-pb-2 rz-pb-lg-12" Style="max-width: 1440px;">
+            <RadzenColumn Size="12">
+                @Body
+            </RadzenColumn>
+        </RadzenRow>
+    </RadzenBody>
 </RadzenLayout>

@@ -43,6 +43,9 @@ namespace Destination.Components.Pages.ParentMenusComponents
 
         protected string selectedUrl;
 
+        private bool isPanelCollapsed = false;
+
+
 
         protected override async Task OnInitializedAsync()
         {
@@ -121,7 +124,8 @@ namespace Destination.Components.Pages.ParentMenusComponents
         
             if (componentType != null)
             {
-                loadedComponent = (
+                isPanelCollapsed = true;
+                  loadedComponent = (
                     componentType,
                     new Dictionary<string, object>
                     {

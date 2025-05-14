@@ -39,6 +39,22 @@ namespace Destination.Components.Pages.ChannelComponents
         protected int selectedChannelId = 0;
 
         protected RadzenDataGrid<Destination.Models.destinationTest.Channel> grid0;
+
+        private bool isCollapsed = false;
+
+        private bool showCollapse = true;
+
+        private void ShowCollapse()
+        {
+            showCollapse = true;
+            showPanels = true;
+        }
+
+        private void HidePanel()
+        {
+            showCollapse = false;
+            showPanels = false;
+        }
         protected override async Task OnInitializedAsync()
         {
             channels = await destinationTestService.GetChannels(new Query { Expand = "Property" });
@@ -52,7 +68,9 @@ namespace Destination.Components.Pages.ChannelComponents
 
         protected async Task ShowPanels(int channelId)
         {
+            showPanels = false;
             selectedChannelId = channelId;
+            await Task.Delay(1);
             showPanels = true;
             StateHasChanged();
         }

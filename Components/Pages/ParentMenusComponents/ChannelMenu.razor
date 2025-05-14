@@ -98,9 +98,8 @@
 
 </style>
 
-<RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" 
-             Expand=@(() => Change("Panel expanded")) 
-             Collapse=@(() => Change("Panel collapsed")) >
+<RadzenPanel AllowCollapse="true" Collapsed="isPanelCollapsed" class="rz-my-10 rz-mx-auto" Style="margin-top:0px !important;margin-bottom:7px !important"
+            Expand=@(() => Change("Panel expanded"))>
 
     @if (menuItems == null)
     {
