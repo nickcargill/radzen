@@ -64,9 +64,11 @@ public partial class Properties
         showleftPanel = false;
     }
 
+    void PickedColumnsChanged(DataGridPickedColumnsChangedEventArgs<Destination.Models.destinationTest.Property> args)
+    {
+    }
 
-
-        private void OnTabChange(int index)
+    private void OnTabChange(int index)
     {
         switch(index)
         {

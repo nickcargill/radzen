@@ -54,6 +54,9 @@ namespace Destination.Components.Pages.BookingComponents
             showPanels = true;
         }
 
+        void PickedColumnsChanged(DataGridPickedColumnsChangedEventArgs<Destination.Models.destinationTest.Booking> args)
+        {
+        }
         private void HidePanel()
         {
             showCollapse = false;

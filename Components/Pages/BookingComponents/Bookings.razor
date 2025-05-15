@@ -8,7 +8,7 @@
         @if (!showCollapse)
         {
             <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Light"
-                          Click="@ShowCollapse" Style="height:24px;" />
+                          Click="@ShowCollapse" Style="height:24px;padding:0px !important; min-height:18px;min-width:25px" />
         }
         @if (showPanels && selectedBookingId != 0 && PropParameterId == 0)
         {
@@ -19,8 +19,8 @@
                         <!-- Remove/Hide Button inside the panel -->
                         <RadzenButton Icon="remove"
                                       Click="@HidePanel"
-                                      ButtonStyle="ButtonStyle.Light" 
-                                      Style="position: absolute; top: 10px; right: 10px; z-index: 1000; padding:0px !important" />
+                                      ButtonStyle="ButtonStyle.Light"
+                                      Style="position: absolute; top: 0px; right: 0px; padding:0px !important; min-height:18px;min-width:25px" />
 
                         <RadzenTabs>
                             <Tabs>
@@ -41,7 +41,6 @@
                 <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important"
                     Expand=@(() => Change("Panel expanded")) 
                     Collapse=@(() => Change("Panel collapsed")) >
-                    <RadzenCard>
 @*                         <RadzenRow AlignItems="AlignItems.Center" Style="margin-top: 5px; margin-bottom: 7px">
                             <RadzenColumn Size="12" SizeMD="6">
                                 <RadzenText Text="Bookings" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
@@ -53,7 +52,9 @@
                             </RadzenColumn>
                         </RadzenRow> *@
                         <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-                            Data="@(bookings)" TItem="Destination.Models.destinationTest.Booking">
+                                    Data="@(bookings)" AllowColumnPicking="true"
+                                    PickedColumnsChanged="@PickedColumnsChanged"
+                                    ColumnsPickerAllowFiltering="true" TItem="Destination.Models.destinationTest.Booking">
                             <Columns>
                                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Id" Title="Id" Width="50px">
                                     <Template Context="item">
@@ -89,14 +90,12 @@
                                 </RadzenDataGridColumn>
                             </Columns>
                         </RadzenDataGrid>
-                    </RadzenCard>
                 </RadzenPanel>
             </RadzenColumn>
         }
         else
         {
             <RadzenColumn SizeMD="12">
-                <RadzenCard>
 @*                     <RadzenRow AlignItems="AlignItems.Center">
                         <RadzenColumn Size="12" SizeMD="6">
                             <RadzenText Text="Bookings" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
@@ -108,7 +107,9 @@
                         </RadzenColumn>
                     </RadzenRow> *@
                     <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-                        Data="@(bookings)" TItem="Destination.Models.destinationTest.Booking">
+                                Data="@(bookings)" AllowColumnPicking="true"
+                                PickedColumnsChanged="@PickedColumnsChanged"
+                                ColumnsPickerAllowFiltering="true" TItem="Destination.Models.destinationTest.Booking">
                         <Columns>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Id" Title="Id" Width="50px">
                                 <Template Context="item">
@@ -144,7 +145,6 @@
                             </RadzenDataGridColumn>
                         </Columns>
                     </RadzenDataGrid>
-                </RadzenCard>
             </RadzenColumn>
         }
     </RadzenRow>
