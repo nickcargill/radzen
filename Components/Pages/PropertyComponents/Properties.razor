@@ -54,9 +54,9 @@
                 <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
                                 Data="@(properties)" AllowColumnPicking="true"
                                 PickedColumnsChanged="@PickedColumnsChanged"
-                                ColumnsPickerAllowFiltering="true" TItem="Destination.Models.destinationTest.Property">
+                                ColumnsPickerAllowFiltering="true" TItem="Destination.Models.destinationTest.Property" Density="Radzen.Density.Compact">
                     <Columns>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Propid" Title="Propid" Width="50px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Propid" Title="Propid" Width="70px">
                             <Template Context="item">
                                 <span Text="Click here" @onclick="() => ShowTabs(item.Propid)" @oncontextmenu=@(e => ShowContextMenuWithItems(e, item)) @oncontextmenu:preventDefault="true"
                                     style="cursor: pointer; color: green; text-decoration: none;">@item.Propid</span>
@@ -66,17 +66,17 @@
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="City" Title="City" Width="150px">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Zip" Title="Zip" Width="150px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Zip" Title="Zip" Width="150px">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Agent.AgentBathrooms" Title="Agent" Width="150px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Agent.FirstName" Title="Agent" Width="150px">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Bedrooms" Title="Bedrooms" Width="150px">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Baths" Title="Baths" Width="150px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Baths" Title="Baths" Width="150px">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Status1.Status1" Title="Status1" Width="150px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Status1.Status1" Title="Status1" Width="150px">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="PropertyCleaner.BusLic" Title="Property Cleaner" Width="150px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="PropertyCleaner.BusLic" Title="Property Cleaner" Width="150px">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
                             <Template Context="property">

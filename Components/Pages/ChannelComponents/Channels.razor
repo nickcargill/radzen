@@ -68,7 +68,7 @@
             Expand=@(() => Change("Panel expanded")) 
             Collapse=@(() => Change("Panel collapsed")) >
         <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@(channels)" TItem="Destination.Models.destinationTest.Channel">
+            Data="@(channels)" TItem="Destination.Models.destinationTest.Channel" Density="Radzen.Density.Compact">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Id" Title="Id" Width="50px">
                     <Template Context="item">

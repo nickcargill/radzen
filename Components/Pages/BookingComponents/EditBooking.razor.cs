@@ -12,8 +12,6 @@ namespace Destination.Components.Pages.BookingComponents
 {
     public partial class EditBooking
     {
-        [Inject]
-        protected IJSRuntime JSRuntime { get; set; }
 
         [Inject]
         protected NavigationManager NavigationManager { get; set; }
@@ -38,17 +36,14 @@ namespace Destination.Components.Pages.BookingComponents
         protected override async Task OnInitializedAsync()
         {
             booking = await destinationTestService.GetBookingById(Id);
-
-        //    propertiesForPropertyid = await destinationTestService.GetProperties();
-
-         //   bookingStatusesForStatusid = await destinationTestService.GetBookingStatuses();
-
-         //   tenantsForTenantid = await destinationTestService.GetTenants();
-
-         //   propertySourcesForSourceid = await destinationTestService.GetPropertySources();
-
-         //   tblServicesForServiceId = await destinationTestService.GetTblServices();
+            bookingStatusesForStatusid = await destinationTestService.GetBookingStatuses();
+            tenantsForTenantid = await destinationTestService.GetTenants();
+            propertiesForPropertyid = await destinationTestService.GetPropertiesForDropDown();
         }
+
+
+
+
         protected bool errorVisible;
         protected Destination.Models.destinationTest.Booking booking;
 
@@ -67,7 +62,7 @@ namespace Destination.Components.Pages.BookingComponents
             try
             {
                 await destinationTestService.UpdateBooking(Id, booking);
-                DialogService.Close(booking);
+                StateHasChanged();
             }
             catch (Exception ex)
             {

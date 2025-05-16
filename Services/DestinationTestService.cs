@@ -3447,7 +3447,6 @@ namespace Destination
         {
             var items = Context.BookingStatuses.AsQueryable();
 
-
             if (query != null)
             {
                 if (!string.IsNullOrEmpty(query.Expand))
@@ -4341,7 +4340,7 @@ namespace Destination
                     var propertiesToExpand = query.Expand.Split(',');
                     foreach(var p in propertiesToExpand)
                     {
-                        items = items.Take(10).Include(p.Trim());
+                        items = items.Where(x=>x.Datefrom >= DateTime.Parse("05-05-2024")).Include(p.Trim());
                     }
                 }
 
@@ -4362,12 +4361,6 @@ namespace Destination
             var items = Context.Bookings
                               .AsNoTracking()
                               .Where(i => i.Id == id);
-
-            items = items.Include(i => i.Property);
-            items = items.Include(i => i.TblService);
-            items = items.Include(i => i.PropertySource);
-            items = items.Include(i => i.BookingStatus);
-            items = items.Include(i => i.Tenant);
  
             OnGetBookingById(ref items);
 
@@ -16194,6 +16187,30 @@ namespace Destination
 
         partial void OnPropertiesRead(ref IQueryable<Destination.Models.destinationTest.Property> items);
 
+
+        public async Task<IQueryable<Destination.Models.destinationTest.Property>> GetPropertiesForDropDown(Query query = null)
+        {
+            var items = Context.Properties.Take(60).AsQueryable();
+
+            if (query != null)
+            {
+                if (!string.IsNullOrEmpty(query.Expand))
+                {
+                    var propertiesToExpand = query.Expand.Split(',');
+                    foreach (var p in propertiesToExpand)
+                    {
+                        items = items.Where(x=>x.Name != null).Include(p.Trim());
+                    }
+                }
+
+                ApplyQuery(ref items, query);
+            }
+
+            OnPropertiesRead(ref items);
+
+            return await Task.FromResult(items);
+        }
+
         public async Task<IQueryable<Destination.Models.destinationTest.Property>> GetProperties(Query query = null)
         {
             var items = Context.Properties.AsQueryable();
@@ -27986,7 +28003,7 @@ namespace Destination
 
         public async Task<IQueryable<Destination.Models.destinationTest.Tenant>> GetTenants(Query query = null)
         {
-            var items = Context.Tenants.AsQueryable();
+            var items = Context.Tenants.Where(x=>x.Role >= 25).AsQueryable();
 
 
             if (query != null)

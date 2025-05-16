@@ -17,6 +17,14 @@ builder.Services.AddScoped<Destination.destinationTestService>();
 builder.Services.AddSingleton<ComponentLoaderService>();
 builder.Services.AddScoped<SharedEvents>();
 
+builder.Services.AddServerSideBlazor()
+    .AddHubOptions(options =>
+    {
+        options.ClientTimeoutInterval = TimeSpan.FromMinutes(2);
+        options.HandshakeTimeout = TimeSpan.FromMinutes(1);
+        options.KeepAliveInterval = TimeSpan.FromSeconds(30);
+    });
+
 builder.Services.AddDbContext<Destination.Data.destinationTestContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("destinationTestConnection"));
