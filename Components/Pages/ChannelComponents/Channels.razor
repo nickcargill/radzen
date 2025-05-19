@@ -1,36 +1,15 @@
 @page "/channels"
 
-<PageTitle>Channels</PageTitle>
-
 <style>
-    .custom-sidebar {
-        transition: width 0.3s ease-in-out;
-        overflow: hidden;
-        white-space: nowrap;
+    .rz-panel-titlebar {
+        flex-direction: row-reverse;
+        justify-content: right;
     }
-
-    .custom-sidebar.expanded {
-        width: 300px;
-    }
-
-    .custom-sidebar.collapsed {
-        width: 0;
-        padding: 0;
-        margin: 0;
-    }
-
 </style>
 
+<PageTitle>Channels</PageTitle>
+
         <RadzenStack>
-@*             <RadzenRow AlignItems="AlignItems.Center">
-                <RadzenColumn Size="12" SizeMD="4">
-                </RadzenColumn>
-                <RadzenColumn Size="12" SizeMD="8">
-                    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
-                        <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
-                    </RadzenStack>
-                </RadzenColumn>
-            </RadzenRow> *@
         <RadzenRow>
         <!-- Always visible Toggle Button (when panel is hidden) -->
         @if (!showCollapse)
@@ -67,7 +46,7 @@
         <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important"
             Expand=@(() => Change("Panel expanded")) 
             Collapse=@(() => Change("Panel collapsed")) >
-        <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+        <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@(channels)" TItem="Destination.Models.destinationTest.Channel" Density="Radzen.Density.Compact">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Id" Title="Id" Width="50px">
@@ -77,17 +56,17 @@
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Property.Name" Title="Property" SortOrder="Radzen.SortOrder.Descending" SortProperty="Property" Sortable="true" Width="150px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Airbnb" Title="Airbnb" Width="150px">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Airbnb" Title="Airbnb" Width="140px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Vrbo" Title="Vrbo" Width="150px">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Vrbo" Title="Vrbo" Width="140px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Flipkey" Title="Flipkey" Width="150px">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Flipkey" Title="Flipkey" Width="140px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Checkin" Title="Checkin" Width="150px">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Checkin" Title="Checkin" Width="140px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="CheckOut" Title="Check Out" Width="150px">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="CheckOut" Title="Check Out" Width="140px">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="IsSynced" Title="Is Synced" Width="150px">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="IsSynced" Title="Is Synced" Width="140px">
                 </RadzenDataGridColumn>
             </Columns>
         </RadzenDataGrid>

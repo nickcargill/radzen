@@ -1,4 +1,5 @@
 using System.Net.Http;
+using Destination.Models.destinationTest;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -34,9 +35,43 @@ namespace Destination.Components.Layout
 
         private bool sidebarExpanded = true;
 
+        [Inject]
+        public destinationTestService destinationTestService { get; set; }
+
+        protected List<MenuMaster> menuItems;
+        protected List<MenuMaster> menuItemss;
+
+        protected override async Task OnInitializedAsync()
+        {
+           // menuItems = await destinationTestService.GetParentMenus();
+            menuItems = await destinationTestService.GetAllMenus();
+        }
+
         void SidebarToggleClick()
         {
             sidebarExpanded = !sidebarExpanded;
         }
+
+        private RenderFragment BuildMenuItem(MenuMaster item) => builder =>
+        {
+            var children = menuItems.Where(c => c.ParentId == item.Id).OrderBy(c => c.MenuText).ToList();
+
+            builder.OpenComponent<RadzenPanelMenuItem>(0);
+            builder.AddAttribute(1, "Text", item.MenuText);
+            builder.AddAttribute(2, "Path", item.MenuUrl);
+
+            if (children.Any())
+            {
+                builder.AddAttribute(3, "ChildContent", (RenderFragment)(childBuilder =>
+                {
+                    foreach (var child in children)
+                    {
+                        childBuilder.AddContent(4, BuildMenuItem(child));
+                    }
+                }));
+            }
+
+            builder.CloseComponent();
+        };
     }
 }

@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 
-namespace Destination.Components.Pages.ChannelComponents
+namespace Destination.Components.Pages.CleaningComponents
 {
-    public partial class Channels
+    public partial class CleanerMgt
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,61 +33,32 @@ namespace Destination.Components.Pages.ChannelComponents
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
-        protected IEnumerable<Destination.Models.destinationTest.Channel> channels;
+        protected IEnumerable<Destination.Models.destinationTest.Property> properties;
 
-        protected bool showPanels = false;
-        protected int selectedChannelId = 0;
-
-        protected RadzenDataGrid<Destination.Models.destinationTest.Channel> grid0;
-
-        private bool isCollapsed = false;
-
-        private bool showCollapse = true;
-
-        private void ShowCollapse()
-        {
-            showCollapse = true;
-            showPanels = true;
-        }
-
-        protected async Task ShowPanels(int channelId)
-        {
-            showPanels = false;
-            selectedChannelId = channelId;
-            await Task.Delay(1);
-            showPanels = true;
-            showCollapse = true;
-            StateHasChanged();
-        }
-
-        private void HidePanel()
-        {
-            showCollapse = false;
-            showPanels = false;
-        }
-
+        protected RadzenDataGrid<Destination.Models.destinationTest.Property> grid0;
         protected override async Task OnInitializedAsync()
         {
-            channels = await destinationTestService.GetChannels(new Query { Expand = "Property" });
+            properties = await destinationTestService.GetProperties(new Query { Expand = "Agent,Status1,PropertyCleaner" });
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
         {
-            await DialogService.OpenAsync<AddChannel>("Add Channel", null);
+            await DialogService.OpenAsync<AddCleanerMgt>("Add Property", null);
             await grid0.Reload();
         }
 
-        void Change(string text)
+        protected async Task EditRow(Destination.Models.destinationTest.Property args)
         {
+            await DialogService.OpenAsync<EditCleanerMgt>("Edit Property", new Dictionary<string, object> { {"Propid", args.Propid} });
         }
 
-        protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.Channel channel)
+        protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.Property property)
         {
             try
             {
                 if (await DialogService.Confirm("Are you sure you want to delete this record?") == true)
                 {
-                    var deleteResult = await destinationTestService.DeleteChannel(channel.Id);
+                    var deleteResult = await destinationTestService.DeleteProperty(property.Propid);
 
                     if (deleteResult != null)
                     {
@@ -101,7 +72,7 @@ namespace Destination.Components.Pages.ChannelComponents
                 {
                     Severity = NotificationSeverity.Error,
                     Summary = $"Error",
-                    Detail = $"Unable to delete Channel"
+                    Detail = $"Unable to delete Property"
                 });
             }
         }

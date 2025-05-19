@@ -7,11 +7,10 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
-using static Destination.Shared.DTO.AllDropDownValues;
 
-namespace Destination.Components.Pages.ChannelComponents
+namespace Destination.Components.Pages.CleaningComponents
 {
-    public partial class EditChannel
+    public partial class AddCleanerMgt
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,26 +32,31 @@ namespace Destination.Components.Pages.ChannelComponents
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
-        [Parameter]
-        public int Id { get; set; }
-
         protected override async Task OnInitializedAsync()
         {
-            channel = await destinationTestService.GetChannelById(Id);
+            property = new Destination.Models.destinationTest.Property();
 
-            propertiesForPropid = await destinationTestService.GetPropertiesForDropDown();
+            agentsForAgentid = await destinationTestService.GetAgents();
+
+            statusesForStatus = await destinationTestService.GetStatuses();
+
+            propertyCleanersForCleanerassigned = await destinationTestService.GetPropertyCleaners();
         }
         protected bool errorVisible;
-        protected Destination.Models.destinationTest.Channel channel;
+        protected Destination.Models.destinationTest.Property property;
 
-        protected IEnumerable<PropertyDropDownData> propertiesForPropid;
+        protected IEnumerable<Destination.Models.destinationTest.Agent> agentsForAgentid;
+
+        protected IEnumerable<Destination.Models.destinationTest.Status> statusesForStatus;
+
+        protected IEnumerable<Destination.Models.destinationTest.PropertyCleaner> propertyCleanersForCleanerassigned;
 
         protected async Task FormSubmit()
         {
             try
             {
-                await destinationTestService.UpdateChannel(Id, channel);
-                DialogService.Close(channel);
+                await destinationTestService.CreateProperty(property);
+                DialogService.Close(property);
             }
             catch (Exception ex)
             {

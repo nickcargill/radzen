@@ -65,8 +65,15 @@ namespace Destination.Components.Pages.BookingComponents
 
         protected override async Task OnInitializedAsync()
         {
-            PropParameterId = Id;
-            bookings = await destinationTestService.GetBookings(new Query { Expand = "Property,BookingStatus,Tenant,PropertySource,TblService" });
+            if(Id != 0)
+            {
+                PropParameterId = Id;
+                bookings = await destinationTestService.GetBookingsByPropId(Id);
+            }
+            else
+            {
+                bookings = await destinationTestService.GetBookings(new Query { Expand = "Property,BookingStatus,Tenant,PropertySource,TblService" });
+            }
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
@@ -87,6 +94,7 @@ namespace Destination.Components.Pages.BookingComponents
             sharedEvents.NotifyBookingIdClicked(bookingId);
             await Task.Delay(1);
             showPanels = true;
+            showCollapse = true;
             StateHasChanged();
         }
 

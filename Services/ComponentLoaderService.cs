@@ -1,6 +1,7 @@
 
 using Destination.Components.Pages.BookingComponents;
 using Destination.Components.Pages.ChannelComponents;
+using Destination.Components.Pages.CleaningComponents;
 using Destination.Components.Pages.PropertyComponents;
 
 public class ComponentLoaderService
@@ -10,6 +11,7 @@ public class ComponentLoaderService
         ["properties"] = typeof(Properties),
         ["bookings"] = typeof(Bookings),
         ["channels"] = typeof(Channels),
+        ["cleaner-mgt"] = typeof(CleanerMgt)
     };
 
     public Type GetComponentType(string componentName)

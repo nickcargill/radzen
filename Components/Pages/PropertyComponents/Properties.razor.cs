@@ -96,6 +96,7 @@ public partial class Properties
         selectedBookingId = bookingId;
         Task.Delay(1);
         showleftPanel = true;
+        showCollapse = true;
         StateHasChanged(); 
     }
 

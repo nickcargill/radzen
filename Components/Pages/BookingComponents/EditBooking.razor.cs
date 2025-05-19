@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
+using Destination.Shared.DTO;
+using static Destination.Shared.DTO.AllDropDownValues;
 
 namespace Destination.Components.Pages.BookingComponents
 {
@@ -36,22 +33,20 @@ namespace Destination.Components.Pages.BookingComponents
         protected override async Task OnInitializedAsync()
         {
             booking = await destinationTestService.GetBookingById(Id);
-            bookingStatusesForStatusid = await destinationTestService.GetBookingStatuses();
-            tenantsForTenantid = await destinationTestService.GetTenants();
+            bookingStatusesForStatusid = await destinationTestService.GetBookingStatusesForDropDown();
+            tenantsForTenantid = await destinationTestService.GetTenantsForDropDown();
             propertiesForPropertyid = await destinationTestService.GetPropertiesForDropDown();
         }
-
-
 
 
         protected bool errorVisible;
         protected Destination.Models.destinationTest.Booking booking;
 
-        protected IEnumerable<Destination.Models.destinationTest.Property> propertiesForPropertyid;
+        protected IEnumerable<PropertyDropDownData> propertiesForPropertyid;
 
-        protected IEnumerable<Destination.Models.destinationTest.BookingStatus> bookingStatusesForStatusid;
+        protected IEnumerable<BookingStatusDropDownData> bookingStatusesForStatusid;
 
-        protected IEnumerable<Destination.Models.destinationTest.Tenant> tenantsForTenantid;
+        protected IEnumerable<TenantDropDownData> tenantsForTenantid;
 
         protected IEnumerable<Destination.Models.destinationTest.PropertySource> propertySourcesForSourceid;
 

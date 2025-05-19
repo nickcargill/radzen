@@ -11,6 +11,9 @@ using Microsoft.EntityFrameworkCore;
 using Radzen;
 
 using Destination.Data;
+using Destination.Shared.DTO;
+using static Destination.Shared.DTO.AllDropDownValues;
+using DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace Destination
 {
@@ -3466,6 +3469,17 @@ namespace Destination
             return await Task.FromResult(items);
         }
 
+        public async Task<IQueryable<BookingStatusDropDownData>> GetBookingStatusesForDropDown()
+        {
+            var items = Context.BookingStatuses.Select(x=> new BookingStatusDropDownData
+            {
+                Id = x.Id,
+                Status = x.Status
+            }).AsQueryable();
+
+            return await Task.FromResult(items);
+        }
+
         partial void OnBookingStatusGet(Destination.Models.destinationTest.BookingStatus item);
         partial void OnGetBookingStatusById(ref IQueryable<Destination.Models.destinationTest.BookingStatus> items);
 
@@ -4349,6 +4363,19 @@ namespace Destination
 
             OnBookingsRead(ref items);
 
+            return await Task.FromResult(items);
+        }
+
+        public async Task<IQueryable<Destination.Models.destinationTest.Booking>> GetBookingsByPropId(int Id)
+        {
+            var items = Context.Bookings
+                .Where(x => x.Datefrom >= DateTime.Parse("05-05-2024") && x.Propertyid == Id)
+                .Include(i => i.Property)
+                .Include(i => i.TblService)
+                .Include(i => i.PropertySource)
+                .Include(i => i.BookingStatus)
+                .Include(i => i.Tenant)
+                .AsQueryable();
             return await Task.FromResult(items);
         }
 
@@ -13730,6 +13757,20 @@ namespace Destination
             return await Task.FromResult(items);
         }
 
+
+        public async Task<List<Destination.Models.destinationTest.MenuMaster>> GetAllMenus()
+        {
+            var items = await Context.MenuMasters.Where(x=>x.ParentId != 0 && x.ParentId != null).OrderBy(x=>x.MenuText).ToListAsync();
+
+            return items;
+        }
+
+        public async Task<List<Destination.Models.destinationTest.MenuMaster>> GetParentMenus()
+        {
+            var items = await Context.MenuMasters.Where(x=>x.ParentId == 1).OrderBy(x=>x.MenuText).ToListAsync();
+            return items;
+        }
+
         partial void OnMenuMasterGet(Destination.Models.destinationTest.MenuMaster item);
         partial void OnGetMenuMasterById(ref IQueryable<Destination.Models.destinationTest.MenuMaster> items);
 
@@ -16187,33 +16228,24 @@ namespace Destination
 
         partial void OnPropertiesRead(ref IQueryable<Destination.Models.destinationTest.Property> items);
 
-
-        public async Task<IQueryable<Destination.Models.destinationTest.Property>> GetPropertiesForDropDown(Query query = null)
+        public async Task<IQueryable<AllDropDownValues.PropertyDropDownData>> GetPropertiesForDropDown(Query query = null)
         {
-            var items = Context.Properties.Take(60).AsQueryable();
-
-            if (query != null)
-            {
-                if (!string.IsNullOrEmpty(query.Expand))
+            var items = Context.Properties
+                .Where(x => x.Name != null)
+                .Select(x => new AllDropDownValues.PropertyDropDownData
                 {
-                    var propertiesToExpand = query.Expand.Split(',');
-                    foreach (var p in propertiesToExpand)
-                    {
-                        items = items.Where(x=>x.Name != null).Include(p.Trim());
-                    }
-                }
-
-                ApplyQuery(ref items, query);
-            }
-
-            OnPropertiesRead(ref items);
+                    Propid = x.Propid,
+                    Name = x.Name
+                })
+                .Take(100)
+                .AsQueryable();
 
             return await Task.FromResult(items);
         }
 
         public async Task<IQueryable<Destination.Models.destinationTest.Property>> GetProperties(Query query = null)
         {
-            var items = Context.Properties.AsQueryable();
+            var items = Context.Properties.Where(x=>x.Name != null).AsQueryable();
 
             items = items.Include(i => i.Agent);
             items = items.Include(i => i.PropertyCleaner);
@@ -28021,6 +28053,18 @@ namespace Destination
             }
 
             OnTenantsRead(ref items);
+
+            return await Task.FromResult(items);
+        }
+
+        public async Task<IQueryable<TenantDropDownData>> GetTenantsForDropDown()
+        {
+            var items = Context.Tenants.Where(x => x.Role >= 25).Select
+                (x => new TenantDropDownData
+                {
+                    Tenantid = x.Tenantid,
+                    FirstName = x.Firstname
+                }).AsQueryable();
 
             return await Task.FromResult(items);
         }
