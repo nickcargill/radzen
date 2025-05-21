@@ -1,6 +1,10 @@
 using Radzen;
 using Destination.Components;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
+using Destination.Data;
+using Destination.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -14,8 +18,25 @@ builder.Services.AddRadzenCookieThemeService(options =>
 });
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<Destination.destinationTestService>();
-builder.Services.AddSingleton<ComponentLoaderService>();
+builder.Services.AddScoped<BookingService>();
+
 builder.Services.AddScoped<SharedEvents>();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+builder.Services.AddScoped<CustomAuthStateProvider>();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<ProtectedSessionStorage>();
+
+
+
+builder.Services.AddAuthentication("MyCookieAuth")
+    .AddCookie("MyCookieAuth", options =>
+    {
+        options.LoginPath = "/login";
+    });
+
+builder.Services.AddAuthorization();
+
+
 
 builder.Services.AddServerSideBlazor()
     .AddHubOptions(options =>
@@ -25,10 +46,11 @@ builder.Services.AddServerSideBlazor()
         options.KeepAliveInterval = TimeSpan.FromSeconds(30);
     });
 
-builder.Services.AddDbContext<Destination.Data.destinationTestContext>(options =>
+builder.Services.AddDbContextFactory<destinationTestContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("destinationTestConnection"));
 });
+
 var app = builder.Build();
 var forwardingOptions = new ForwardedHeadersOptions()
 {

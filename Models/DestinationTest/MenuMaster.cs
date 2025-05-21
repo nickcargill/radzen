@@ -24,6 +24,23 @@ namespace Destination.Models.destinationTest
 
         public string UrlTarget { get; set; }
 
+        public string Description { get; set; }
+
+        public string Location { get; set; }
+
+        [Column("querySchema")]
+        public string QuerySchema { get; set; }
+
+        public DateTime? LastUpdated { get; set; }
+
+        public string SchemaText { get; set; }
+
+        public int? Role { get; set; }
+
+        public int? SortOrder { get; set; }
+
+        public string PageTitle { get; set; }
+
         public ICollection<MenuManagement> MenuManagements { get; set; }
     }
 

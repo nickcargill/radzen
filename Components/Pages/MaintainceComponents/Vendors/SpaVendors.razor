@@ -1,0 +1,353 @@
+@page "/spa-vendors"
+
+<PageTitle>PropertyCleaners</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="PropertyCleaners" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenSplitButton Icon="get_app" Text="Export" Click="@ExportClick" Variant="Variant.Flat" Shade="Shade.Lighter">
+                    <RadzenSplitButtonItem Text="Excel" Value="xlsx" />
+                    <RadzenSplitButtonItem Text="CSV" Value="csv" />
+                </RadzenSplitButton>
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenTextBox Placeholder="Search ..." style="display: block; width: 100%" @oninput="@Search" aria-label="Search by all string columns" />
+    <RadzenRow>
+      <RadzenColumn SizeMD=6>
+     <RadzenCard style="height: 100%">
+        <RadzenDataGrid @ref="grid0" ColumnWidth="150px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(propertyCleaners)" TItem="Destination.Models.destinationTest.PropertyCleaner" RowSelect="@EditRow" AllowColumnResize="true" Density="Radzen.Density.Compact">
+            <Columns>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Cleanerid" Title="Cleanerid">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Firstname" Title="Firstname">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Lastname" Title="Lastname">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Email" Title="Email">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Phone" Title="Phone">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Address" Title="Address">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="City" Title="City">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="State" Title="State">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Zip" Title="Zip">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Rate" Title="Rate">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Lastraise" Title="Lastraise">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Ranking" Title="Ranking">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Notes" Title="Notes">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Status" Title="Status">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Occupation" Title="Occupation">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Active" Title="Active">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Lastcontact" Title="Lastcontact">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Resume" Title="Resume">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Nicksranking" Title="Nicksranking">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Sms" Title="Sms">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Login" Title="Login">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Password" Title="Password">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Photo" Title="Photo">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Workunderid" Title="Workunderid">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Live" Title="Live">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Covidcertified" Title="Covidcertified">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="Dbbemployee" Title="Dbbemployee">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="CompanyName" Title="Company Name">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="IsReceivedSms" Title="Is Received Sms">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="BusLic" Title="Bus Lic">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Property="IsActive" Title="Is Active">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyCleaner" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="propertyCleaner">
+
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
+                            Shade="Shade.Lighter" Variant="Variant.Flat"
+                            Click=@(args => GridDeleteButtonClick(args, propertyCleaner)) @onclick:stopPropagation="true" />
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+    </RadzenCard>
+
+    </RadzenColumn>
+        <RadzenColumn SizeMD=6>
+        <RadzenCard style="height: 100%;margin-top:0px;">
+            <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save PropertyCleaner</RadzenAlert>
+            <RadzenTemplateForm TItem="Destination.Models.destinationTest.PropertyCleaner" Data="@(propertyCleaner)" Visible="@(propertyCleaner != null)" Submit="@FormSubmit">
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Firstname" Component="Firstname" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Firstname)" Name="Firstname" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Lastname" Component="Lastname" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Lastname)" Name="Lastname" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Email" Component="Email" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Email)" Name="Email" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Phone" Component="Phone" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Phone)" Name="Phone" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Address" Component="Address" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Address)" Name="Address" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="City" Component="City" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.City)" Name="City" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="State" Component="State" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.State)" Name="State" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Zip" Component="Zip" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Zip)" Name="Zip" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Rate" Component="Rate" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Rate)" Name="Rate" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Lastraise" Component="Lastraise" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Lastraise)" Name="Lastraise" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Ranking" Component="Ranking" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Ranking)" Name="Ranking" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Notes" Component="Notes" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Notes)" Name="Notes" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Status" Component="Status" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Status)" Name="Status" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Occupation" Component="Occupation" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Occupation)" Name="Occupation" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Active" Component="Active" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenCheckBox @bind-Value="@(propertyCleaner.Active)" Name="Active" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Lastcontact" Component="Lastcontact" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Lastcontact)" Name="Lastcontact" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Resume" Component="Resume" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Resume)" Name="Resume" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Nicksranking" Component="Nicksranking" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Nicksranking)" Name="Nicksranking" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Sms" Component="Sms" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Sms)" Name="Sms" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Login" Component="Login" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Login)" Name="Login" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Password" Component="Password" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Password)" Name="Password" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Photo" Component="Photo" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Photo)" Name="Photo" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Workunderid" Component="Workunderid" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(propertyCleaner.Workunderid)" Name="Workunderid" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Live" Component="Live" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenCheckBox @bind-Value="@(propertyCleaner.Live)" Name="Live" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Covidcertified" Component="Covidcertified" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenCheckBox @bind-Value="@(propertyCleaner.Covidcertified)" Name="Covidcertified" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Dbbemployee" Component="Dbbemployee" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenCheckBox @bind-Value="@(propertyCleaner.Dbbemployee)" Name="Dbbemployee" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Company Name" Component="CompanyName" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.CompanyName)" Name="CompanyName" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Is Received Sms" Component="IsReceivedSms" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenCheckBox @bind-Value="@(propertyCleaner.IsReceivedSms)" Name="IsReceivedSms" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Bus Lic" Component="BusLic" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyCleaner.BusLic)" Name="BusLic" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Is Active" Component="IsActive" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenCheckBox @bind-Value="@(propertyCleaner.IsActive)" Name="IsActive" />
+                    </RadzenColumn>
+                </RadzenRow>
+              <RadzenStack  Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                        <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
+                        <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick" Visible=false />
+              </RadzenStack>
+            </RadzenTemplateForm>
+        </RadzenCard>
+        </RadzenColumn>  </RadzenRow>
+</RadzenStack>

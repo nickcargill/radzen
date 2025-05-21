@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 
-namespace Destination.Components.Pages
+namespace Destination.Components.Pages.MaintainceComponents.Vendors
 {
-    public partial class PromoCodes
+    public partial class SpaVendors
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,9 +33,9 @@ namespace Destination.Components.Pages
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
-        protected IEnumerable<Destination.Models.destinationTest.PromoCode> promoCodes;
+        protected IEnumerable<Destination.Models.destinationTest.PropertyCleaner> propertyCleaners;
 
-        protected RadzenDataGrid<Destination.Models.destinationTest.PromoCode> grid0;
+        protected RadzenDataGrid<Destination.Models.destinationTest.PropertyCleaner> grid0;
         protected bool isEdit = true;
 
         protected string search = "";
@@ -46,35 +46,33 @@ namespace Destination.Components.Pages
 
             await grid0.GoToPage(0);
 
-            promoCodes = await destinationTestService.GetPromoCodes(new Query { Filter = $@"i => i.PromoCode1.Contains(@0) || i.DiscountType.Contains(@0)", FilterParameters = new object[] { search }, Expand = "Property" });
+            propertyCleaners = await destinationTestService.GetPropertyCleaners(new Query { Filter = $@"i => i.Firstname.Contains(@0) || i.Lastname.Contains(@0) || i.Email.Contains(@0) || i.Phone.Contains(@0) || i.Address.Contains(@0) || i.City.Contains(@0) || i.State.Contains(@0) || i.Zip.Contains(@0) || i.Notes.Contains(@0) || i.Status.Contains(@0) || i.Occupation.Contains(@0) || i.Resume.Contains(@0) || i.Sms.Contains(@0) || i.Login.Contains(@0) || i.Password.Contains(@0) || i.Photo.Contains(@0) || i.CompanyName.Contains(@0) || i.BusLic.Contains(@0)", FilterParameters = new object[] { search } });
         }
         protected override async Task OnInitializedAsync()
         {
-            promoCodes = await destinationTestService.GetPromoCodes(new Query { Filter = $@"i => i.PromoCode1.Contains(@0) || i.DiscountType.Contains(@0)", FilterParameters = new object[] { search }, Expand = "Property" });
-
-            propertiesForPropId = await destinationTestService.GetProperties();
+            propertyCleaners = await destinationTestService.GetPropertyCleaners(new Radzen.Query { Filter = "i => i.Firstname.Contains(@0) || i.Lastname.Contains(@1) || i.Status == @2", FilterParameters = new object[] { search, search, "spa" } });
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
         {
             await grid0.SelectRow(null);
             isEdit = false;
-            promoCode = new Destination.Models.destinationTest.PromoCode();
+            propertyCleaner = new Destination.Models.destinationTest.PropertyCleaner();
         }
 
-        protected async Task EditRow(Destination.Models.destinationTest.PromoCode args)
+        protected async Task EditRow(Destination.Models.destinationTest.PropertyCleaner args)
         {
             isEdit = true;
-            promoCode = args;
+            propertyCleaner = args;
         }
 
-        protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.PromoCode promoCode)
+        protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.PropertyCleaner propertyCleaner)
         {
             try
             {
                 if (await DialogService.Confirm("Are you sure you want to delete this record?") == true)
                 {
-                    var deleteResult = await destinationTestService.DeletePromoCode(promoCode.Id);
+                    var deleteResult = await destinationTestService.DeletePropertyCleaner(propertyCleaner.Cleanerid);
 
                     if (deleteResult != null)
                     {
@@ -88,7 +86,7 @@ namespace Destination.Components.Pages
                 {
                     Severity = NotificationSeverity.Error,
                     Summary = $"Error",
-                    Detail = $"Unable to delete PromoCode"
+                    Detail = $"Unable to delete PropertyCleaner"
                 });
             }
         }
@@ -97,36 +95,34 @@ namespace Destination.Components.Pages
         {
             if (args?.Value == "csv")
             {
-                await destinationTestService.ExportPromoCodesToCSV(new Query
+                await destinationTestService.ExportPropertyCleanersToCSV(new Query
                 {
                     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
                     OrderBy = $"{grid0.Query.OrderBy}",
-                    Expand = "Property",
+                    Expand = "",
                     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-                }, "PromoCodes");
+                }, "PropertyCleaners");
             }
 
             if (args == null || args.Value == "xlsx")
             {
-                await destinationTestService.ExportPromoCodesToExcel(new Query
+                await destinationTestService.ExportPropertyCleanersToExcel(new Query
                 {
                     Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
                     OrderBy = $"{grid0.Query.OrderBy}",
-                    Expand = "Property",
+                    Expand = "",
                     Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-                }, "PromoCodes");
+                }, "PropertyCleaners");
             }
         }
         protected bool errorVisible;
-        protected Destination.Models.destinationTest.PromoCode promoCode;
-
-        protected IEnumerable<Destination.Models.destinationTest.Property> propertiesForPropId;
+        protected Destination.Models.destinationTest.PropertyCleaner propertyCleaner;
 
         protected async Task FormSubmit()
         {
             try
             {
-                var result = isEdit ? await destinationTestService.UpdatePromoCode(promoCode.Id, promoCode) : await destinationTestService.CreatePromoCode(promoCode);
+                var result = isEdit ? await destinationTestService.UpdatePropertyCleaner(propertyCleaner.Cleanerid, propertyCleaner) : await destinationTestService.CreatePropertyCleaner(propertyCleaner);
 
             }
             catch (Exception ex)

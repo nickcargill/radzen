@@ -16,7 +16,7 @@
     <Folder Include="Components\Pages\BookingComponents\" />
     <Folder Include="Components\Pages\AgentComponents\" />
     <Folder Include="Components\Pages\ChannelComponents\" />
-    <Folder Include="Components\Pages\ParentMenusComponents\" />
+    <Folder Include="Components\Pages\LoginComponents\" />
     <Folder Include="Components\Pages\PropertyComponents\" />
     <Folder Include="Migrations\" />
     <Folder Include="Shared\IndependantComponents\" />

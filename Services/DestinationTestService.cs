@@ -28057,6 +28057,18 @@ namespace Destination
             return await Task.FromResult(items);
         }
 
+        public async Task<int> ValidateUserAndGetRole(string user, string pass)
+        {
+            var item = await Context.Tenants.Where(x => x.Email == user && x.Password == pass).FirstOrDefaultAsync();
+           
+            if(item != null)
+            {
+                return (int)(item.Role);
+            }
+
+            return 0;
+        }
+
         public async Task<IQueryable<TenantDropDownData>> GetTenantsForDropDown()
         {
             var items = Context.Tenants.Where(x => x.Role >= 25).Select

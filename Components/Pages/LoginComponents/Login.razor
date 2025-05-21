@@ -1,0 +1,109 @@
+@page "/"
+@layout EmptyLayout
+
+
+<!-- Bootstrap and your original design below -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/boxicons/2.1.4/css/boxicons.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.bootstrap5.min.css" />
+<link href="styles/Site.css" rel="stylesheet" />
+
+<style>
+    .login-container {
+        min-height: 88vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .login-card {
+        display: flex;
+        width: 900px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .login-left, .login-right {
+        padding: 40px;
+        flex: 1;
+    }
+
+    .login-left {
+        background-color: #f8f9fa;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+        .login-left img {
+            max-width: 80%;
+            height: auto;
+            margin-top: 30px;
+        }
+
+    .copyright {
+        text-align: center;
+        margin-bottom: 20px;
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    .login-right {
+        background-color: #fff;
+    }
+
+    .login-right h3 {
+        margin-bottom: 20px;
+    }
+
+    .btn-secondary{
+        --bs-btn-color: #fff;
+        --bs-btn-bg: green !important;
+        --bs-btn-border-color: green !important;
+        --bs-btn-hover-bg: green !important;
+        --bs-btn-hover-border-color: green !important;
+        --bs-btn-active-bg: green !important;
+        --bs-btn-hover-color: #fff;
+    }
+</style>
+
+<div class="login-container">
+    <div class="login-card">
+        <!-- Left: Logo -->
+        <div class="login-left">
+            <img src="/images/destinationbigbear-1-scaled.jpeg" alt="Logo" />
+            <div class="copyright">
+                &copy; @DateTime.Now.Year Destination Big Bear
+            </div>
+        </div>
+
+        <!-- Right: Form -->
+        <div class="login-right">
+            @if (!string.IsNullOrEmpty(ErrorMessage))
+            {
+                <div class="alert alert-danger">@ErrorMessage</div>
+            }
+
+            <h3 class="text-center">Login</h3>
+            <div class="form-group mb-3">
+                <label for="txtUsername">Username</label>
+                <input @bind="Username" class="form-control" id="txtUsername" placeholder="Enter username" />
+            </div>
+            <div class="form-group mb-3">
+                <label for="txtPassword">Password</label>
+                <input @bind="Password" type="password" class="form-control" id="txtPassword" placeholder="Enter password" />
+            </div>
+            <div class="form-check mb-3">
+                <input @bind="RememberMe" type="checkbox" class="form-check-input" id="chkRememberMe" />
+                <label class="form-check-label" for="chkRememberMe">Remember Me</label>
+            </div>
+            <div class="form-group text-center">
+                <button class="btn btn-secondary w-100" @onclick="LoginUser">Login</button>
+            </div>
+        </div>
+    </div>
+</div>

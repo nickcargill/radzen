@@ -8,14 +8,20 @@
         </RadzenColumn>
         <RadzenColumn Size="12" SizeMD="6">
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenSplitButton Icon="get_app" Text="Export" Click="@ExportClick" Variant="Variant.Flat" Shade="Shade.Lighter">
+                    <RadzenSplitButtonItem Text="Excel" Value="xlsx" />
+                    <RadzenSplitButtonItem Text="CSV" Value="csv" />
+                </RadzenSplitButton>
                 <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
             </RadzenStack>
         </RadzenColumn>
     </RadzenRow>
+    <RadzenTextBox Placeholder="Search ..." style="display: block; width: 100%" @oninput="@Search" aria-label="Search by all string columns" />
     <RadzenRow>
-      <RadzenColumn SizeMD=12>
-        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@(promoCodes)" TItem="Destination.Models.destinationTest.PromoCode" RowSelect="@EditRow">
+      <RadzenColumn SizeMD=6>
+     <RadzenCard style="height: 100%">
+        <RadzenDataGrid @ref="grid0" ColumnWidth="150px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(promoCodes)" TItem="Destination.Models.destinationTest.PromoCode" RowSelect="@EditRow" ShowColumnTitleAsTooltip="true" AllowPickAllColumns="true" AllowColumnResize="true" AllowColumnReorder="true" ColumnsPickerAllowFiltering="true" AllowColumnPicking="true" Density="Radzen.Density.Compact">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PromoCode" Property="Id" Title="Id">
                 </RadzenDataGridColumn>
@@ -29,7 +35,7 @@
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PromoCode" Property="ToDate" Title="To Date">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PromoCode" Property="Property.Address" Title="Property">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PromoCode" Property="Property.AirbnbTitle" Title="Property">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PromoCode" Property="DiscountType" Title="Discount Type">
                 </RadzenDataGridColumn>
@@ -44,7 +50,76 @@
             </Columns>
 
         </RadzenDataGrid>
+    </RadzenCard>
 
     </RadzenColumn>
-  </RadzenRow>
+        <RadzenColumn SizeMD=6>
+        <RadzenCard style="height: 100%;margin-top:0px;">
+            <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save PromoCode</RadzenAlert>
+            <RadzenTemplateForm TItem="Destination.Models.destinationTest.PromoCode" Data="@(promoCode)" Visible="@(promoCode != null)" Submit="@FormSubmit">
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Promo Code1" Component="PromoCode1" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(promoCode.PromoCode1)" Name="PromoCode1" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Percent Off" Component="PercentOff" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(promoCode.PercentOff)" Name="PercentOff" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Is Active" Component="IsActive" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenCheckBox @bind-Value="@(promoCode.IsActive)" Name="IsActive" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="From Date" Component="FromDate" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(promoCode.FromDate)" Name="FromDate" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="To Date" Component="ToDate" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(promoCode.ToDate)" Name="ToDate" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Property" Component="Property" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenDropDownDataGrid Data="@(propertiesForPropId)" TextProperty="AirbnbTitle" ValueProperty="Propid" AllowClear=true
+                             Placeholder="Choose Property" style="display: block; width: 100%" @bind-Value="@(promoCode.PropId)" Name="PropId"
+                               />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Discount Type" Component="DiscountType" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(promoCode.DiscountType)" Name="DiscountType" />
+                    </RadzenColumn>
+                </RadzenRow>
+              <RadzenStack  Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                        <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
+                        <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick" Visible=false />
+              </RadzenStack>
+            </RadzenTemplateForm>
+        </RadzenCard>
+        </RadzenColumn>  </RadzenRow>
 </RadzenStack>
