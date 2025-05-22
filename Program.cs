@@ -19,6 +19,8 @@ builder.Services.AddRadzenCookieThemeService(options =>
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<Destination.destinationTestService>();
 builder.Services.AddScoped<BookingService>();
+builder.Services.AddScoped<PropertyService>();
+
 
 builder.Services.AddScoped<SharedEvents>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();

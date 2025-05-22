@@ -5,6 +5,7 @@ using Radzen;
 using Radzen.Blazor;
 using Destination.Models.destinationTest;
 using Destination.Components.Pages.BookingComponents;
+using Destination.Services;
 
 namespace Destination.Components.Pages.PropertyComponents
 {
@@ -32,6 +33,9 @@ public partial class Properties
     public destinationTestService destinationTestService { get; set; }
 
     [Inject]
+    public PropertyService propertyService { get; set; }
+
+    [Inject]
     public SharedEvents sharedEvents { get; set; }
 
     protected IEnumerable<Property> properties;
@@ -48,6 +52,10 @@ public partial class Properties
     protected bool isPropBookingsTab = false;
     protected bool showleftPanel = false;
 
+    private IEnumerable<Property> pagedProperties;
+    private int totalCount;
+    private bool dataLoaded = false;
+
     private bool isCollapsed = false;
 
     private bool showCollapse = true;
@@ -62,6 +70,26 @@ public partial class Properties
     {
         showCollapse = false;
         showleftPanel = false;
+    }
+
+    private async Task LoadData(LoadDataArgs args)
+    {
+        if (!dataLoaded || args.Skip != 0) // Load only once unless paging happens
+        {
+            dataLoaded = true;
+
+            var query = new Query
+            {
+                Filter = args.Filter,
+                OrderBy = "PropId",
+                Skip = args.Skip,
+                Top = args.Top
+            };
+
+            var result = await propertyService.GetPropertiesPagedAsync(query);
+            pagedProperties = result.Items;
+            totalCount = result.Count;
+        }
     }
 
     void PickedColumnsChanged(DataGridPickedColumnsChangedEventArgs<Destination.Models.destinationTest.Property> args)
@@ -103,7 +131,15 @@ public partial class Properties
 
     protected override async Task OnInitializedAsync()
     {
-        properties = await destinationTestService.GetProperties(new Query { Expand = "Agent,Status1,PropertyCleaner" });
+        var initialArgs = new LoadDataArgs
+        {
+            Skip = 0,
+            Top = 10,
+            OrderBy = "PropId" // Or null, depending on your needs
+        };
+
+        await LoadData(initialArgs);
+        // properties = await destinationTestService.GetProperties(new Query { Expand = "Agent,Status1,PropertyCleaner" });
         sharedEvents.OnBookingIdClicked += HandleBookingEdit;
     }
 

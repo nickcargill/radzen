@@ -1,34 +1,29 @@
 ﻿using Destination.Data;
 using Destination.Models.destinationTest;
-using DocumentFormat.OpenXml.InkML;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Radzen;
-using System.Linq;
 using System.Linq.Dynamic.Core;
 using static Destination.Shared.DTO.MainResponse;
 
 namespace Destination.Services
 {
-    public class BookingService
+    public class PropertyService
     {
         private readonly IDbContextFactory<destinationTestContext> dbContextFactory;
 
-        public BookingService(IDbContextFactory<destinationTestContext> dbContextFactory)
+        public PropertyService(IDbContextFactory<destinationTestContext> dbContextFactory)
         {
             this.dbContextFactory = dbContextFactory;
         }
 
-        public async Task<PagedResult<Booking>> GetBookingsPagedAsync(Query query)
+        public async Task<PagedResult<Property>> GetPropertiesPagedAsync(Query query)
         {
             using var context = dbContextFactory.CreateDbContext();
 
-            var items = context.Bookings
-                .Include(i => i.Property)
-                .Include(i => i.TblService)
-                .Include(i => i.PropertySource)
-                .Include(i => i.BookingStatus)
-                .Include(i => i.Tenant)
+            var items = context.Properties
+                .Include(i => i.Agent)
+                .Include(i => i.PropertyCleaner)
+                .Include(i => i.Status1)
                 .AsQueryable();
 
             // Apply filtering, sorting, skip, and take
@@ -56,9 +51,9 @@ namespace Destination.Services
                 filteredItems = filteredItems.Take(query.Top.Value);
             }
 
-            var data = await filteredItems.ToListAsync();
+            var data = await filteredItems.Where(x => x.Name !=null).ToListAsync();
 
-            return new PagedResult<Booking>
+            return new PagedResult<Property>
             {
                 Items = data,
                 Count = count

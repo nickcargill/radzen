@@ -48,10 +48,20 @@
             <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important"
                 Expand=@(() => Change("Panel expanded")) 
                 Collapse=@(() => Change("Panel collapsed")) >
-                <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-                                Data="@(properties)" AllowColumnPicking="true"
-                                PickedColumnsChanged="@PickedColumnsChanged"
-                                ColumnsPickerAllowFiltering="true" TItem="Destination.Models.destinationTest.Property" Density="Radzen.Density.Compact">
+                    <RadzenDataGrid TItem="Property"
+                                    Data="@pagedProperties"
+                                    Count="@totalCount"
+                                    LoadData="@LoadData"
+                                    AllowPaging="true"
+                                    AllowSorting="true"
+                                    AllowFiltering="true"
+                                    FilterMode="FilterMode.Advanced"
+                                    ShowPagingSummary="true"
+                                    ColumnWidth="150px"
+                                    PageSizeOptions="@(new int[]{10, 20, 30})"
+                                    PageSize="10"
+                                    AllowColumnPicking="true"
+                                    Density="Radzen.Density.Compact">
                     <Columns>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Propid" Title="Propid" Width="70px">
                             <Template Context="item">
@@ -107,7 +117,7 @@
 
         @if (showTabs)
         {
-            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 10px !important;margin-bottom: 0px !important" 
+            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 8px !important;margin-bottom: 0px !important" 
                 Expand=@(() => Change("Panel expanded")) 
                 Collapse=@(() => Change("Panel collapsed"))>
                 <RadzenTabs Change=@OnTabChange>
@@ -115,35 +125,45 @@
                         <RadzenTabsItem Text="Property Details">
                             <PropertyDetails Id="@selectedPropId"></PropertyDetails>
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Property Cost" style="margin-left: 3px;">
+                        <RadzenTabsItem Text="Property Cost" style="margin-left: 2px;">
                             @if (isPropCostTab)
                             {
                                 <PropertyCost></PropertyCost>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Property Description" style="margin-left: 3px;">
+                        <RadzenTabsItem Text="Description" style="margin-left: 2px;">
                             @if (isPropDescTab)
                             {
                                 <PropertyDescription></PropertyDescription>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Home Info" style="margin-left: 3px;">
+                        <RadzenTabsItem Text="Home Info" style="margin-left: 2px;">
                             @if (isPropHomeInfoTab)
                             {
                                 <PropertyHomeInfo></PropertyHomeInfo>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Rates" style="margin-left: 3px;">
+                        <RadzenTabsItem Text="Rates" style="margin-left: 2px;">
                             @if (isPropRatesTab)
                             {
                                 <RatesTest></RatesTest>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="All Bookings" style="margin-left: 3px;">
+                        <RadzenTabsItem Text="Bookings" style="margin-left: 2px;">
                             @if (isPropBookingsTab)
                             {
                                 <Bookings Id="@selectedPropId"></Bookings>
                             }
+                        </RadzenTabsItem>
+                        <RadzenTabsItem Text="Tasks" style="margin-left: 2px;">
+                        </RadzenTabsItem>
+                        <RadzenTabsItem Text="Annual" style="margin-left: 2px;">
+                        </RadzenTabsItem>
+                        <RadzenTabsItem Text="Owner Comm" style="margin-left: 2px;">
+                        </RadzenTabsItem>
+                        <RadzenTabsItem Text="Improvements" style="margin-left: 2px;">
+                        </RadzenTabsItem>
+                        <RadzenTabsItem Text="Home Team" style="margin-left: 2px;">
                         </RadzenTabsItem>
                     </Tabs>
                 </RadzenTabs>
