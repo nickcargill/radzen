@@ -4,19 +4,19 @@ using System.Security.Claims;
 
 public class CustomAuthStateProvider : AuthenticationStateProvider
 {
-    private readonly ProtectedSessionStorage _sessionStorage;
+    private readonly ProtectedLocalStorage _localStorage;
     private ClaimsPrincipal _anonymous = new(new ClaimsIdentity());
 
-    public CustomAuthStateProvider(ProtectedSessionStorage sessionStorage)
+    public CustomAuthStateProvider(ProtectedLocalStorage localStorage)
     {
-        _sessionStorage = sessionStorage;
+        _localStorage = localStorage;
     }
 
     public override async Task<AuthenticationState> GetAuthenticationStateAsync()
     {
         try
         {
-            var result = await _sessionStorage.GetAsync<int>("authUserId");
+            var result = await _localStorage.GetAsync<int>("authUserId");
             if (!result.Success)
                 return new AuthenticationState(_anonymous);
 
@@ -40,7 +40,7 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
 
     public async Task MarkUserAsAuthenticated(int userId)
     {
-        await _sessionStorage.SetAsync("authUserId", userId);
+        await _localStorage.SetAsync("authUserId", userId);
 
         var claims = new[]
         {
@@ -55,7 +55,8 @@ public class CustomAuthStateProvider : AuthenticationStateProvider
 
     public async Task MarkUserAsLoggedOut()
     {
-      //  await _sessionStorage.DeleteAsync("authUserId");
+        await _localStorage.DeleteAsync("authUserId");
+        //  await _sessionStorage.DeleteAsync("authUserId");
         NotifyAuthenticationStateChanged(Task.FromResult(new AuthenticationState(_anonymous)));
     }
 }

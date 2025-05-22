@@ -1,8 +1,6 @@
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Radzen;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Destination.Components.Pages.LoginComponents
 {

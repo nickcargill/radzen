@@ -48,10 +48,20 @@
                 <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important"
                     Expand=@(() => Change("Panel expanded")) 
                     Collapse=@(() => Change("Panel collapsed")) >
-                    <RadzenDataGrid @ref="grid0" ColumnWidth="150" AllowPaging="true" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-                                    Data="@(bookings)" AllowColumnPicking="true"
-                                    PickedColumnsChanged="@PickedColumnsChanged"
-                                    ColumnsPickerAllowFiltering="true" TItem="Destination.Models.destinationTest.Booking" Density="Radzen.Density.Compact">
+                    <RadzenDataGrid TItem="Booking"
+                                    Data="@pagedBookings"
+                                    Count="@totalCount"
+                                    LoadData="@LoadData"
+                                    AllowPaging="true"
+                                    AllowSorting="true"
+                                    AllowFiltering="true"
+                                    FilterMode="FilterMode.Advanced"
+                                    ShowPagingSummary="true"
+                                    ColumnWidth="150px"
+                                    PageSizeOptions="@(new int[]{5, 10, 20, 30})"
+                                    PageSize="10"
+                                    AllowColumnPicking="true"
+                                    Density="Radzen.Density.Compact">
                             <Columns>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Id" Title="Id" Width="60px">
                                     <Template Context="item">
@@ -93,10 +103,20 @@
         else
         {
             <RadzenColumn SizeMD="12">
-                <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowPaging="true" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-                                Data="@(bookings)" AllowColumnPicking="true"
-                                PickedColumnsChanged="@PickedColumnsChanged"
-                                    ColumnsPickerAllowFiltering="true" TItem="Destination.Models.destinationTest.Booking" Density="Radzen.Density.Compact">
+                <RadzenDataGrid TItem="Booking"
+                                Data="@pagedBookings"
+                                Count="@totalCount"
+                                LoadData="@LoadData"
+                                AllowPaging="true"
+                                AllowSorting="true"
+                                AllowFiltering="true"
+                                FilterMode="FilterMode.Advanced"
+                                ShowPagingSummary="true"
+                                ColumnWidth="150px"
+                                PageSizeOptions="@(new int[]{5, 10, 20, 30})"
+                                PageSize="10"
+                                AllowColumnPicking="true"
+                                Density="Radzen.Density.Compact">
                         <Columns>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Id" Title="Id" Width="60px">
                                 <Template Context="item">

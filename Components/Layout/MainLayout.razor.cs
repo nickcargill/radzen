@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.AspNetCore.Components.Routing;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.Web.Virtualization;
 using Microsoft.JSInterop;
@@ -43,25 +44,20 @@ namespace Destination.Components.Layout
         [Inject]
         protected AuthenticationStateProvider AuthenticationStateProvider { get; set; }
 
+        [Inject] 
+        protected ProtectedLocalStorage LocalStorage { get; set; }
+
+        [Inject]
+        protected CustomAuthStateProvider AuthProvider { get; set; }
+
+
 
         protected List<MenuMaster> menuItems;
         protected int userRole = 0;
 
         protected override async Task OnInitializedAsync()
         {
-            //var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            //var user = authState.User;
-
-            //if (user.Identity?.IsAuthenticated ?? false)
-            //{
-            //    var userIdClaim = user.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-            //    if (int.TryParse(userIdClaim, out var id))
-            //    {
-            //        userRole = id;
-            //    }
-            //}
-
-            if(menuItems == null || menuItems.Count() == 0)
+            if (menuItems == null || menuItems.Count() == 0)
             {
                 menuItems = await destinationTestService.GetAllMenus();
             }
@@ -95,7 +91,7 @@ namespace Destination.Components.Layout
         {
             var children = menuItems
                 .Where(c => c.ParentId == item.Id && c.Role <= userRole)
-                .OrderBy(c => c.MenuText)
+                .OrderBy(c => c.SortOrder == null ? int.MaxValue : c.SortOrder)
                 .ToList();
 
             builder.OpenComponent<RadzenPanelMenuItem>(0);

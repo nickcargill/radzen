@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
+using Destination.Services;
+using Destination.Models.destinationTest;
 
 namespace Destination.Components.Pages.BookingComponents
 {
@@ -29,6 +31,9 @@ namespace Destination.Components.Pages.BookingComponents
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
+        [Inject]
+        public BookingService bookingService { get; set; }
+
         protected IEnumerable<Destination.Models.destinationTest.Booking> bookings;
 
         [Inject]
@@ -47,6 +52,10 @@ namespace Destination.Components.Pages.BookingComponents
         private bool isCollapsed = false;
 
         private bool showCollapse = true;
+
+        private IEnumerable<Booking> pagedBookings;
+        private int totalCount;
+        private bool dataLoaded = false;
 
         private void ShowCollapse()
         {
@@ -72,7 +81,34 @@ namespace Destination.Components.Pages.BookingComponents
             }
             else
             {
-                bookings = await destinationTestService.GetBookings(new Query { Expand = "Property,BookingStatus,Tenant,PropertySource,TblService" });
+                var initialArgs = new LoadDataArgs
+                {
+                    Skip = 0,
+                    Top = 10,
+                    OrderBy = "Id" // Or null, depending on your needs
+                };
+
+                await LoadData(initialArgs);
+                // bookings = await bookindService.GetBookings(new Query { Expand = "Property,BookingStatus,Tenant,PropertySource,TblService" });
+            }
+        }
+        private async Task LoadData(LoadDataArgs args)
+        {
+            if (!dataLoaded || args.Skip != 0) // Load only once unless paging happens
+            {
+                dataLoaded = true;
+
+                var query = new Query
+                {
+                    Filter = args.Filter,
+                    OrderBy = "Id",
+                    Skip = args.Skip,
+                    Top = args.Top
+                };
+
+                var result = await bookingService.GetBookingsPagedAsync(query);
+                pagedBookings = result.Items;
+                totalCount = result.Count;
             }
         }
 

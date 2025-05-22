@@ -44,7 +44,7 @@
 
             @if (menuItems != null)
             {
-                @foreach (var item in menuItems.Where(x => x.ParentId == 1 && x.Role <= userRole).OrderBy(x => x.MenuText))
+                @foreach (var item in menuItems.Where(x => x.ParentId == 1 && x.Role <= userRole).OrderBy(c => c.SortOrder == null ? int.MaxValue : c.SortOrder))
                 {
                     @BuildMenuItem(item)
                 }
