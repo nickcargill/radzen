@@ -40,7 +40,7 @@
     }
 
     .login-left img {
-        max-width: 80%;
+        max-width: 90%;
         height: auto;
         margin-top: 30px;
     }
@@ -92,7 +92,7 @@
         </div>
 
         <!-- Right: Form -->
-        <div class="login-right">
+        <form class="login-right" onsubmit="@LoginUser">
             @if (!string.IsNullOrEmpty(ErrorMessage))
             {
                 <div class="alert alert-danger">@ErrorMessage</div>
@@ -100,11 +100,11 @@
 
             <h3 class="text-center">Login</h3>
             <div class="form-group mb-3">
-                <label for="txtUsername">Username</label>
+                <label for="txtUsername" style="font-weight:500">Username</label>
                 <input @bind="Username" class="form-control" id="txtUsername" placeholder="Enter username" />
             </div>
             <div class="form-group mb-3">
-                <label for="txtPassword">Password</label>
+                <label for="txtPassword" style="font-weight:500">Password</label>
                 <input @bind="Password" type="password" class="form-control" id="txtPassword" placeholder="Enter password" />
             </div>
             <div class="form-check mb-3">
@@ -112,8 +112,8 @@
                 <label class="form-check-label" for="chkRememberMe">Remember Me</label>
             </div>
             <div class="form-group text-center">
-                <button class="btn btn-secondary w-100" @onclick="LoginUser">Login</button>
+                <button type="submit" class="btn btn-secondary w-100">Login</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>

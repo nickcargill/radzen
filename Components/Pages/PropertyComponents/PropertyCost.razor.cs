@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
+using Destination.Services;
+using Destination.Models.destinationTest;
 
 namespace Destination.Components.Pages.PropertyComponents
 {
@@ -30,51 +32,38 @@ namespace Destination.Components.Pages.PropertyComponents
         [Inject]
         protected NotificationService NotificationService { get; set; }
 
-            private string errorMessage;
-    private PropertyCostModel propertyCostModel = new PropertyCostModel();
-    
-    private List<DropdownOption> cleanerOptions = new List<DropdownOption>();
-    private List<DropdownOption> ownerLoginOptions = new List<DropdownOption>();
+        private string errorMessage;
 
-    protected override async Task OnInitializedAsync()
-    {
-        // Load dropdown options
-      //  cleanerOptions = await GetCleanerOptions();
-       // ownerLoginOptions = await GetOwnerLoginOptions();
-    }
+        [Inject]
+        public PropertyService propertyService { get; set; }
 
-    private async Task UpdatePropertyCost()
-    {
-        try
+        [Inject]
+        public destinationTestService destinationTestService { get; set; }
+
+        [Parameter]
+        public int Id { get; set; }
+
+        protected Property property;
+
+
+        protected override async Task OnInitializedAsync()
         {
-            // Save logic here
-            errorMessage = string.Empty;
+            property = await destinationTestService.GetPropertyByPropid(Id);
+            //  cleanerOptions = await GetCleanerOptions();
+            // ownerLoginOptions = await GetOwnerLoginOptions();
         }
-        catch (Exception ex)
+
+        private async Task UpdatePropertyCost()
         {
-            errorMessage = ex.Message;
+            try
+            {
+                // Save logic here
+                errorMessage = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                errorMessage = ex.Message;
+            }
         }
-    }
-
-    private class PropertyCostModel
-    {
-        public decimal CleaningFeeId { get; set; }
-        public string OwnerTextId { get; set; }
-        public decimal SupplyCostId { get; set; }
-        public decimal BidId { get; set; }
-        public int CleanerId { get; set; }
-        public int OwnerLoginId { get; set; }
-        public decimal DepositId { get; set; }
-        public DateTime? LastUpdateId { get; set; }
-        public decimal MgtRateId { get; set; }
-        public decimal LatId { get; set; }
-        public decimal LongId { get; set; }
-    }
-
-    private class DropdownOption
-    {
-        public string Text { get; set; }
-        public int Value { get; set; }
-    }
     }
 }

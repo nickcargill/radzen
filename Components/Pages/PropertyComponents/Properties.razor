@@ -11,6 +11,16 @@
  <PageTitle>Properties</PageTitle> 
 
 <RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Properties" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
     <RadzenRow>
         @if (!showCollapse)
         {
@@ -21,14 +31,13 @@
         {
             <RadzenColumn SizeMD="3">
                <div class="custom-sidebar @(isCollapsed ? "collapsed" : "expanded")">
-                    <RadzenCard Style="margin-top: 1px; position: relative;">
+                    <RadzenCard Style="margin-top: 1px; position: relative;padding:4px">
 
                         <!-- Remove/Hide Button inside the panel -->
                         <RadzenButton Icon="remove"
-                                      Click="@HidePanel"
-                                      ButtonStyle="ButtonStyle.Light" 
-                                      Style="position: absolute; top: 0px; right: 0px; padding:0px !important; min-height:18px;min-width:25px" />
-
+                        Click="@HidePanel"
+                        ButtonStyle="ButtonStyle.Light" 
+                        Style="position: absolute; top: 0px; right: 0px; padding:0px !important; min-height:18px;min-width:25px" />
                         <RadzenTabs>
                             <Tabs>
                                 <RadzenTabsItem Text="Edit Info">
@@ -45,7 +54,7 @@
             </RadzenColumn>
         }
         <RadzenColumn SizeMD="@(showleftPanel == false ? 12 : 9)">
-            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important"
+            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important;padding:0px"
                 Expand=@(() => Change("Panel expanded")) 
                 Collapse=@(() => Change("Panel collapsed")) >
                     <RadzenDataGrid TItem="Property"
@@ -58,8 +67,8 @@
                                     FilterMode="FilterMode.Advanced"
                                     ShowPagingSummary="true"
                                     ColumnWidth="150px"
-                                    PageSizeOptions="@(new int[]{10, 20, 30})"
-                                    PageSize="10"
+                                    PageSizeOptions="@(new int[]{10, 15, 20, 30})"
+                                    PageSize="15"
                                     AllowColumnPicking="true"
                                     Density="Radzen.Density.Compact">
                     <Columns>
@@ -125,22 +134,22 @@
                         <RadzenTabsItem Text="Property Details">
                             <PropertyDetails Id="@selectedPropId"></PropertyDetails>
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Property Cost" style="margin-left: 2px;">
-                            @if (isPropCostTab)
-                            {
-                                <PropertyCost></PropertyCost>
-                            }
-                        </RadzenTabsItem>
                         <RadzenTabsItem Text="Description" style="margin-left: 2px;">
                             @if (isPropDescTab)
                             {
-                                <PropertyDescription></PropertyDescription>
+                                <PropertyDescription Id="@selectedPropId"></PropertyDescription>
                             }
                         </RadzenTabsItem>
                         <RadzenTabsItem Text="Home Info" style="margin-left: 2px;">
                             @if (isPropHomeInfoTab)
                             {
-                                <PropertyHomeInfo></PropertyHomeInfo>
+                                <PropertyHomeInfo Id="@selectedPropId"></PropertyHomeInfo>
+                            }
+                        </RadzenTabsItem>
+                        <RadzenTabsItem Text="Property Cost" style="margin-left: 2px;">
+                            @if (isPropCostTab)
+                            {
+                                <PropertyCost Id="@selectedPropId"></PropertyCost>
                             }
                         </RadzenTabsItem>
                         <RadzenTabsItem Text="Rates" style="margin-left: 2px;">

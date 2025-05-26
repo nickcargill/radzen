@@ -1,7 +1,7 @@
 @page "/property-home-info"
 
 <RadzenCard>
-    <RadzenTemplateForm TItem="PropertyInstructionsModel" Data=@propertyInstructionsModel Submit=@UpdateInstructions>
+    <RadzenTemplateForm TItem="Property" Data=@property Submit="@((Property args) => { Submit(args); })">
         <!-- Error Panel -->
         <RadzenAlert Visible="@hasError" 
                     Text="@errorMessage" 
@@ -11,17 +11,17 @@
         <RadzenRow Style="margin-bottom: 20px;">
             <RadzenColumn Size="6" Style="padding-right: 10px;">
                 <RadzenLabel Text="Home Guide" />
-                <RadzenTextArea @bind-Value="@propertyInstructionsModel.HomeGuide" 
-                               Style="width: 100%; height: 200px;"
-                               Rows="10"
-                               Name="HomeGuide" />
+                <RadzenTextArea @bind-Value="@property.HomeGuide"
+                                Style="width: 100%; height: 200px;"
+                                Rows="10"
+                                Name="HomeGuide" />
             </RadzenColumn>
             <RadzenColumn Size="6">
                 <RadzenLabel Text="Closing Instructions" />
-                <RadzenTextArea @bind-Value="@propertyInstructionsModel.ClosingInstructions" 
-                               Style="width: 100%; height: 200px;"
-                               Rows="10"
-                               Name="ClosingInstructions" />
+                <RadzenTextArea @bind-Value="@property.Closinginstructions"
+                                Style="width: 100%; height: 200px;"
+                                Rows="10"
+                                Name="Closinginstructions" />
             </RadzenColumn>
         </RadzenRow>
 
@@ -29,27 +29,26 @@
         <RadzenRow Style="margin-bottom: 20px;">
             <RadzenColumn Size="6" Style="padding-right: 10px;">
                 <RadzenLabel Text="Maintenance and Utility Info" />
-                <RadzenTextArea @bind-Value="@propertyInstructionsModel.MaintenanceInfo" 
-                               Style="width: 100%; height: 100px;"
-                               Rows="5"
-                               Name="MaintenanceInfo" />
+                <RadzenTextArea @bind-Value="@property.InternalNotes"
+                                Style="width: 100%; height: 100px;"
+                                Rows="5"
+                                Name="InternalNotes" />
             </RadzenColumn>
             <RadzenColumn Size="6">
                 <RadzenLabel Text="Private Instructions Or New Home Setup" />
-                <RadzenTextArea @bind-Value="@propertyInstructionsModel.PrivateInstructions" 
-                               Style="width: 100%; height: 100px;"
+                <RadzenTextArea @bind-Value="@property.Private"
+                                Style="width: 100%; height: 100px;"
                                Rows="5"
-                               Name="PrivateInstructions" />
+                                Name="Private" />
             </RadzenColumn>
         </RadzenRow>
 
         <!-- Action Button -->
-        <RadzenRow>
-            <RadzenColumn Size="12" Class="text-right">
-                <RadzenButton ButtonType="ButtonType.Submit" 
-                            Text="Update" 
-                            ButtonStyle="ButtonStyle.Success" />
-            </RadzenColumn>
+        <RadzenRow Style="margin-bottom: 10px;">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start" Gap="0.5rem">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="Update" Text="Save" Variant="Variant.Flat" />
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" />
+            </RadzenStack>
         </RadzenRow>
     </RadzenTemplateForm>
 </RadzenCard>

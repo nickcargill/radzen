@@ -82,6 +82,33 @@ a:focus {
     content: var(--blazor-load-percentage-text, "Loading");
 }
 
+.rz-grid-table td .rz-cell-data {
+    color: var(--rz-grid-cell-color);
+    font-size: 12px !important;
+    line-height: var(--rz-grid-cell-line-height);
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500 !important;
+}
+
+
+.rz-data-grid.rz-density-compact
+{
+    --rz-grid-cell-line-height: 13px !important;
+    --rz-grid-cell-padding: 0px 0px 0px 4px !important;
+    --rz-grid-header-cell-padding: 0.25rem 0;
+    --rz-grid-header-padding: 0.25rem 1rem;
+    --rz-grid-header-title-padding-inline: 0.5rem 0;
+    --rz-grid-filter-padding: 0.25rem 0.5rem;
+    --rz-grid-group-header-padding: 0.25rem;
+    --rz-grid-group-header-gap: 0.25rem;
+    --rz-grid-group-header-item-padding-block: 0.125rem;
+    --rz-grid-group-header-item-padding-inline: 0.5rem 0.25rem;
+    --rz-grid-group-header-item-title-margin-inline: 0 0.25rem;
+    --rz-dialog-close-font-size: 1rem;
+}
 
 
 

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using Destination.Models.destinationTest;
+using Destination.Services;
 
 namespace Destination.Components.Pages.PropertyComponents
 {
@@ -30,6 +31,9 @@ namespace Destination.Components.Pages.PropertyComponents
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
+        [Inject]
+        public PropertyService propertyService { get; set; }
+
         [Parameter]
         public int Id { get; set; }
 
@@ -43,8 +47,7 @@ namespace Destination.Components.Pages.PropertyComponents
 
         private void OpenAirbnbLink()
         {
-            // Open Airbnb link in new tab
-        //   UriHelper.NavigateTo("https://www.airbnb.com/", true);
+           NavigationManager.NavigateTo("https://www.airbnb.com/");
         }
 
         private async Task SyncToAirbnb()
@@ -58,15 +61,14 @@ namespace Destination.Components.Pages.PropertyComponents
             }
         }
 
-        private async Task UpdateDescriptions()
+        protected async Task Submit(Property arg)
         {
-            try
+            var result = await propertyService.Updateproperty(arg);
+            if (result)
             {
-                // Save logic here
-            }
-            catch (Exception ex)
-            {
+                StateHasChanged();
+                NavigationManager.NavigateTo("/properties");
             }
         }
-  }
+    }
 }

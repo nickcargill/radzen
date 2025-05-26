@@ -9,7 +9,17 @@
 
 <PageTitle>Channels</PageTitle>
 
-        <RadzenStack>
+  <RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Channels" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
         <RadzenRow>
         <!-- Always visible Toggle Button (when panel is hidden) -->
         @if (!showCollapse)
@@ -22,14 +32,13 @@
         {
             <RadzenColumn SizeMD="3">
                 <div class="custom-sidebar @(isCollapsed ? "collapsed" : "expanded")">
-                    <RadzenCard Style="margin-top: 1px; position: relative;">
+                    <RadzenCard Style="margin-top: 1px; position: relative;padding:4px">
 
                         <!-- Remove/Hide Button inside the panel -->
                         <RadzenButton Icon="remove"
-                                      Click="@HidePanel"
-                                      ButtonStyle="ButtonStyle.Light"
-                                      Style="position: absolute; top: 0px; right: 0px; padding:0px !important; min-height:18px;min-width:25px" />
-
+                        Click="@HidePanel"
+                        ButtonStyle="ButtonStyle.Light"
+                        Style="position: absolute; top: 0px; right: 0px; padding:0px !important; min-height:18px;min-width:25px" />
                         <RadzenTabs>
                             <Tabs>
                                 <RadzenTabsItem Text="Edit Channel Info">
@@ -43,18 +52,18 @@
         }
 
       <RadzenColumn SizeMD="@(showPanels == false ? 12 : 9)">
-        <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important"
+            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important;padding:0px"
             Expand=@(() => Change("Panel expanded")) 
             Collapse=@(() => Change("Panel collapsed")) >
-        <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@(channels)" TItem="Destination.Models.destinationTest.Channel" Density="Radzen.Density.Compact">
+                <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSize="15" PageSizeOptions=@(new int[]{10, 15, 20, 30})
+            Data="@(channels)" TItem="Destination.Models.destinationTest.Channel" Density="Radzen.Density.Default" AllowFiltering="false">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Id" Title="Id" Width="50px">
                     <Template Context="item">
                         <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: green; text-decoration: none;">@item.Id</span>
                     </Template>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Property.Name" Title="Property" SortOrder="Radzen.SortOrder.Descending" SortProperty="Property" Sortable="true" Width="150px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Property.Name" Title="Property" SortOrder="Radzen.SortOrder.Descending" SortProperty="Property" Sortable="true" Width="150px">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Channel" Property="Airbnb" Title="Airbnb" Width="140px">
                 </RadzenDataGridColumn>

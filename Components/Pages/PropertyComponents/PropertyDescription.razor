@@ -1,7 +1,7 @@
 @page "/property-description"
 
 <RadzenCard>
-    <RadzenTemplateForm TItem="Property" Data=@property Submit=@UpdateDescriptions>
+    <RadzenTemplateForm TItem="Property" Data=@property Submit="@((Property args) => { Submit(args); })">
 
         <RadzenRow Style="margin-bottom: 20px;">
             <RadzenColumn Size="6" Style="padding-right: 10px;">
@@ -66,7 +66,7 @@
                                Rows="2"
                                Name="PropHeadlines" />
             </RadzenColumn>
-            <RadzenColumn Size="6" Style="display: flex; align-items: flex-end;">
+            <RadzenColumn Size="6">
                 <RadzenLabel Text="Airbnb Link" />
                 <RadzenButton Icon="launch" 
                             Click="@(_ => OpenAirbnbLink())"
@@ -76,20 +76,16 @@
         </RadzenRow>
 
         <!-- Action Buttons -->
-        <RadzenRow>
-            <RadzenColumn Size="12" Class="text-right">
-                <RadzenButton ButtonType="ButtonType.Submit" 
-                            Text="Update"
-                            Icon="save" 
-                            Variant="Variant.Flat"
-                            ButtonStyle="ButtonStyle.Primary"
-                            Style="margin-right: 10px;" />
-                <RadzenButton Text="Sync To Airbnb" 
-                            ButtonStyle="ButtonStyle.Primary"
-                            Variant="Variant.Flat"
-                            Icon="launch"
-                            Click="@SyncToAirbnb" />
-            </RadzenColumn>
+
+        <RadzenRow Style="margin-bottom: 10px;">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start" Gap="0.5rem">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="Update" Text="Save" Variant="Variant.Flat" />
+                <RadzenButton Text="Sync To Airbnb"
+                              ButtonStyle="ButtonStyle.Primary"
+                              Variant="Variant.Flat"
+                              Icon="launch"
+                              Click="@SyncToAirbnb" />
+            </RadzenStack>
         </RadzenRow>
     </RadzenTemplateForm>
 </RadzenCard>

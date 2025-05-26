@@ -28,7 +28,7 @@
             <!-- Right side of header -->
             <RadzenColumn Size="6">
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="1rem">
-                    <!-- Add your header right-side content here -->
+                    <RadzenIcon Icon="logout" Style="cursor: pointer;color:green;width:60px;" @onclick="@Logout" />
                 </RadzenStack>
             </RadzenColumn>
         </RadzenRow>
@@ -37,7 +37,7 @@
     <!-- Sidebar - now below header -->
     <RadzenSidebar @bind-Expanded="@sidebarExpanded" style="grid-area: rz-sidebar; z-index: 2;">
         <RadzenStack AlignItems="Radzen.AlignItems.Center" class="rz-py-4 rz-py-lg-6" Style="padding: var(--rz-panel-menu-item-padding); border-bottom: var(--rz-panel-menu-item-border);">
-            <RadzenImage Path="images/logo.png" style="width: 38px; height: 38px;" AlternateText="Application logo"></RadzenImage>
+            <RadzenImage Path="images/menustopimage.webp" style="width: 105px; height: 45px;" AlternateText="Application logo"></RadzenImage>
             <RadzenText Text="Destination" TextStyle="Radzen.Blazor.TextStyle.Subtitle1" class="rz-mb-0" style="color: var(--rz-sidebar-color);" />
         </RadzenStack>
         <RadzenPanelMenu>

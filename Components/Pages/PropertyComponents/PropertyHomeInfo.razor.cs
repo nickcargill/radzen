@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
+using Destination.Services;
+using Destination.Models.destinationTest;
 
 namespace Destination.Components.Pages.PropertyComponents
 {
@@ -30,30 +32,34 @@ namespace Destination.Components.Pages.PropertyComponents
         [Inject]
         protected NotificationService NotificationService { get; set; }
 
-    private bool hasError = false;
-    private string errorMessage = string.Empty;
-    private PropertyInstructionsModel propertyInstructionsModel = new PropertyInstructionsModel();
+        private bool hasError = false;
+        private string errorMessage = string.Empty;
 
-    private async Task UpdateInstructions()
-    {
-        try
-        {
-            // Save logic here
-            hasError = false;
-        }
-        catch (Exception ex)
-        {
-            hasError = true;
-            errorMessage = ex.Message;
-        }
-    }
+        [Inject]
+        public PropertyService propertyService { get; set; }
 
-    private class PropertyInstructionsModel
-    {
-        public string HomeGuide { get; set; }
-        public string ClosingInstructions { get; set; }
-        public string MaintenanceInfo { get; set; }
-        public string PrivateInstructions { get; set; }
-    }
+        [Inject]
+        public destinationTestService destinationTestService { get; set; }
+
+        [Parameter]
+        public int Id { get; set; }
+
+        protected Property property;
+
+
+        protected override async Task OnInitializedAsync()
+        {
+            property = await destinationTestService.GetPropertyByPropid(Id);
+        }
+
+        protected async Task Submit(Property arg)
+        {
+            var result = await propertyService.Updateproperty(arg);
+            if (result)
+            {
+                StateHasChanged();
+                NavigationManager.NavigateTo("/properties");
+            }
+        }
     }
 }

@@ -11,6 +11,16 @@
 <PageTitle>Bookings</PageTitle>
 
 <RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Bookings" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
     <RadzenRow>
         @if (!showCollapse)
         {
@@ -21,7 +31,7 @@
         {
             <RadzenColumn SizeMD="3">
                 <div class="custom-sidebar @(isCollapsed ? "collapsed" : "expanded")">
-                    <RadzenCard Style="margin-top: 1px; position: relative;">
+                    <RadzenCard Style="margin-top: 1px; position: relative;padding:4px">
 
                         <!-- Remove/Hide Button inside the panel -->
                         <RadzenButton Icon="remove"
@@ -45,7 +55,7 @@
         @if (PropParameterId == 0)
         {
             <RadzenColumn SizeMD="@(showPanels == false ? 12 : 9)">
-                <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important"
+                <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important;padding:0px"
                     Expand=@(() => Change("Panel expanded")) 
                     Collapse=@(() => Change("Panel collapsed")) >
                     <RadzenDataGrid TItem="Booking"
@@ -58,8 +68,8 @@
                                     FilterMode="FilterMode.Advanced"
                                     ShowPagingSummary="true"
                                     ColumnWidth="150px"
-                                    PageSizeOptions="@(new int[]{5, 10, 20, 30})"
-                                    PageSize="10"
+                                    PageSizeOptions="@(new int[]{10, 15, 20, 30})"
+                                    PageSize="15"
                                     AllowColumnPicking="true"
                                     Density="Radzen.Density.Compact">
                             <Columns>
@@ -103,7 +113,7 @@
         else
         {
             <RadzenColumn SizeMD="12">
-                <RadzenDataGrid TItem="Booking"
+                <RadzenDataGrid @ref="grid0" TItem="Booking"
                                 Data="@pagedBookings"
                                 Count="@totalCount"
                                 LoadData="@LoadData"

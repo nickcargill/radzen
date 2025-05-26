@@ -1,27 +1,27 @@
 @page "/property-details"
 
 <RadzenCard>
-    <RadzenTemplateForm TItem="Property" Data=@property Submit=@UpdateProperty>
+    <RadzenTemplateForm TItem="Property" Data=@property Submit="@((Property args) => { Submit(args); })">
         <!-- Row 1 -->
         <RadzenRow Style="margin-bottom: 20px;">
             <RadzenColumn Size="3">
-                <RadzenLabel Text="Status (req.)" Component="StatusId" />
+                <RadzenLabel Text="Status (req.)" Component="Status" />
                 <RadzenDropDown @bind-Value="@(property.Status)" 
                                 Data="@(statusesForStatus)" 
-                                ValueProperty="Statusid" 
-                                AllowClear=true
+                                ValueProperty="StatusId"
+                                TextProperty="StatusName"
                                 Placeholder="Choose Status"
                                 Name="Status"
                                 Style="width: 100%" />
-                <RadzenRequiredValidator Component="StatusId" Text="Status is required" />
+                <RadzenRequiredValidator Component="Status" Text="Status is required" />
             </RadzenColumn>
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Owner" Component="Owner" />
                 <RadzenDropDown @bind-Value="@(property.Agentid)" 
                                 Data="@(agentsForAgentid)"
-                                ValueProperty="AgId"
+                                ValueProperty="AgID"
+                                TextProperty="Name"
                                 Placeholder="Choose Agent"
-                                AllowClear=true
                                 Name="Agentid"
                                 Style="width: 100%" />
             </RadzenColumn>
@@ -29,10 +29,10 @@
                 <RadzenLabel Text="Property Type" Component="PropertyType" />
                 <RadzenDropDown @bind-Value="@property.PropertyType" 
                                 Data="@(propertyTypes)" 
-                                ValueProperty="typeid"
+                                ValueProperty="TypeId"
+                                TextProperty="Type"
                                 Placeholder="Choose Property Type"
                                 Name="PropertyType"
-                                AllowClear=true
                                 Style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn Size="3">
@@ -51,7 +51,7 @@
             </RadzenColumn>
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Bedrooms" Component="Bedrooms" />
-                <RadzenNumeric @bind-Value="@property.Bedrooms" 
+                <RadzenTextBox @bind-Value="@property.Bedrooms"
                                Style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn Size="3">
@@ -70,22 +70,22 @@
         <RadzenRow Style="margin-bottom: 20px;">
             <RadzenColumn Size="3">
                 <RadzenLabel Text="New Sleep" Component="SleepNum" />
-                <RadzenNumeric @bind-Value="@property.SleepNum" 
+                <RadzenNumeric @bind-Value="@property.SleepNum" ShowUpDown="false"
                                Style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Baths" Component="Baths" />
-                <RadzenNumeric @bind-Value="@property.Baths" 
+                <RadzenTextBox @bind-Value="@property.Baths" 
                                Style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Sleeps" Component="Sleeps" />
-                <RadzenNumeric @bind-Value="@property.Sleeps" 
+                <RadzenTextBox @bind-Value="@property.Sleeps" 
                                Style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Floors" Component="Floors" />
-                <RadzenNumeric @bind-Value="@property.Floors" 
+                <RadzenTextBox @bind-Value="@property.Floors" 
                                Style="width: 100%" />
             </RadzenColumn>
         </RadzenRow>
@@ -94,22 +94,22 @@
         <RadzenRow Style="margin-bottom: 20px;">
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Door Code" Component="Code" />
-                <RadzenNumeric @bind-Value="@property.Code" 
+                <RadzenTextBox @bind-Value="@property.Code" 
                                Style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Alarm Code" Component="Alarmcode" />
-                <RadzenNumeric @bind-Value="@property.Alarmcode" 
+                <RadzenTextBox @bind-Value="@property.Alarmcode" 
                                Style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Parking" Component="ParkingSpaces" />
-                <RadzenNumeric @bind-Value="@property.ParkingSpaces" 
+                <RadzenTextBox @bind-Value="@property.ParkingSpaces"
                                Style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Garage" Component="GarageSize" />
-                <RadzenNumeric @bind-Value="@property.GarageSize" Style="width: 100%" />
+                <RadzenTextBox @bind-Value="@property.GarageSize" Style="width: 100%" />
             </RadzenColumn>
         </RadzenRow>
 
@@ -117,10 +117,23 @@
         <RadzenRow Style="margin-bottom: 20px;">
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Square foot" Component="SquareFootage" />
-                <RadzenNumeric @bind-Value="@property.SquareFootage" Style="width: 100%" />
+                <RadzenTextBox @bind-Value="@property.SquareFootage" Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="City" Component="BbCity" />
+                <RadzenTextBox @bind-Value="@property.Bbcity" Style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn Size="3"></RadzenColumn>
-            <RadzenColumn Size="3"></RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow Style="margin-bottom: 10px;">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start" Gap="0.5rem">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="Update" Text="Save" Variant="Variant.Flat" />
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat"/>
+            </RadzenStack>
         </RadzenRow>
     </RadzenTemplateForm>
 </RadzenCard>
+
+
+

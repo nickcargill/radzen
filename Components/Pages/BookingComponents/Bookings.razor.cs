@@ -84,7 +84,7 @@ namespace Destination.Components.Pages.BookingComponents
                 var initialArgs = new LoadDataArgs
                 {
                     Skip = 0,
-                    Top = 10,
+                    Top = 15,
                     OrderBy = "Id" // Or null, depending on your needs
                 };
 

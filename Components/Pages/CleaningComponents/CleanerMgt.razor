@@ -14,8 +14,8 @@
     </RadzenRow>
     <RadzenRow>
       <RadzenColumn SizeMD=12>
-        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@(properties)" TItem="Destination.Models.destinationTest.Property" RowSelect="@EditRow">
+        <RadzenDataGrid @ref="grid0" ColumnWidth="150px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(properties)" TItem="Destination.Models.destinationTest.Property" RowSelect="@EditRow" Density="Radzen.Density.Compact" Responsive="false" AllowCompositeDataCells="false" ShowCellDataAsTooltip="true">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Propid" Title="Propid">
                 </RadzenDataGridColumn>

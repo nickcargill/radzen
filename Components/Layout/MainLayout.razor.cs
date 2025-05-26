@@ -87,6 +87,11 @@ namespace Destination.Components.Layout
             sidebarExpanded = !sidebarExpanded;
         }
 
+        protected void Logout()
+        {
+            NavigationManager.NavigateTo("/", forceLoad: true);
+        }
+
         private RenderFragment BuildMenuItem(MenuMaster item) => builder =>
         {
             var children = menuItems
@@ -104,32 +109,38 @@ namespace Destination.Components.Layout
                     templateBuilder.AddAttribute(1, "href", item.MenuUrl);
                     templateBuilder.AddAttribute(2, "target", "_blank");
 
-                    // Match Radzen styling
-                    templateBuilder.AddAttribute(3, "class", "rz-link rz-panel-menu-item");
+                    // Apply Radzen styling to match normal menu items
+                    templateBuilder.AddAttribute(3, "class", "rz-panel-menu-item-link");
+                    templateBuilder.AddAttribute(4, "style", "color: inherit; text-decoration: none;");
 
-                    templateBuilder.AddContent(4, item.MenuText);
-                    templateBuilder.CloseElement();
+                    templateBuilder.OpenElement(5, "span");
+                    templateBuilder.AddAttribute(6, "class", "rz-panel-menu-item-text");
+                    templateBuilder.AddContent(7, item.MenuText);
+                    templateBuilder.CloseElement(); // span
+
+                    templateBuilder.CloseElement(); // a
                 }));
             }
             else
             {
-                builder.AddAttribute(5, "Text", item.MenuText);
-                builder.AddAttribute(6, "Path", item.MenuUrl);
+                builder.AddAttribute(8, "Text", item.MenuText);
+                builder.AddAttribute(9, "Path", item.MenuUrl);
             }
 
             if (children.Any())
             {
-                builder.AddAttribute(7, "ChildContent", (RenderFragment)(childBuilder =>
+                builder.AddAttribute(10, "ChildContent", (RenderFragment)(childBuilder =>
                 {
                     foreach (var child in children)
                     {
-                        childBuilder.AddContent(8, BuildMenuItem(child));
+                        childBuilder.AddContent(11, BuildMenuItem(child));
                     }
                 }));
             }
 
             builder.CloseComponent();
         };
+
 
     }
 }

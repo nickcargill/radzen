@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using Destination.Models.destinationTest;
+using static Destination.Shared.DTO.AllDropDownValues;
+using Destination.Services;
+using DocumentFormat.OpenXml.Drawing.Charts;
 
 
 namespace Destination.Components.Pages.PropertyComponents
@@ -35,6 +38,14 @@ namespace Destination.Components.Pages.PropertyComponents
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
+        [Inject]
+        public PropertyService propertyService { get; set; }
+
+        protected IEnumerable<AgentDropDownValues> agentsForAgentid;
+        protected IEnumerable<AgentStatusDropDownValues> statusesForStatus;
+        protected IEnumerable<PropertyTypeDropDownValues> propertyTypes;
+
+
         [Parameter]
         public int Id { get; set; }
 
@@ -44,29 +55,19 @@ namespace Destination.Components.Pages.PropertyComponents
         protected override async Task OnInitializedAsync()
         {
             property = await destinationTestService.GetPropertyByPropid(Id);
-            //  agentsForAgentid = await destinationTestService.GetAgents();
-            //  statusesForStatus = await destinationTestService.GetStatuses();
-         //   propertyTypes = await destinationTestService.GetPropertyTypes();
+            agentsForAgentid = await propertyService.GetAgentDropDownValues();
+            statusesForStatus = await propertyService.GetAgentStatusDropDownValues();
+            propertyTypes = await propertyService.GetPropertyTypesDropDownValues();
         }
 
-
-        protected IEnumerable<Destination.Models.destinationTest.Agent> agentsForAgentid;
-
-        protected IEnumerable<Status> statusesForStatus;
-
-        protected IEnumerable<PropertyType> propertyTypes;
-
-        private async Task UpdateProperty()
+        protected async Task Submit(Property arg)
         {
-            try
+            var result = await propertyService.Updateproperty(arg);
+            if (result)
             {
-                // Save logic here
-                // await SaveProperty(propertyModel);
+                StateHasChanged();
+                NavigationManager.NavigateTo("/properties");
             }
-            catch (Exception ex)
-            {
-            
         }
     }
-}
 }

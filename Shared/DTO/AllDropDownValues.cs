@@ -19,5 +19,23 @@
             public int Tenantid { get; set; }
             public string FirstName { get; set; }
         }
+
+        public class AgentDropDownValues
+        {
+            public int? AgID { get; set; }
+            public string Name { get; set; }
+        }
+
+        public class AgentStatusDropDownValues
+        {
+            public int? StatusId { get; set; }
+            public string StatusName { get; set; }
+        }
+
+        public class PropertyTypeDropDownValues
+        {
+            public int? TypeId { get; set; }
+            public string Type { get; set; }
+        }
     }
 }

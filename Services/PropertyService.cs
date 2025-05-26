@@ -3,6 +3,7 @@ using Destination.Models.destinationTest;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
 using System.Linq.Dynamic.Core;
+using static Destination.Shared.DTO.AllDropDownValues;
 using static Destination.Shared.DTO.MainResponse;
 
 namespace Destination.Services
@@ -58,6 +59,63 @@ namespace Destination.Services
                 Items = data,
                 Count = count
             };
+        }
+
+        public async Task<List<AgentDropDownValues>> GetAgentDropDownValues()
+        {
+            using var context = dbContextFactory.CreateDbContext();
+
+            var items = context.Agents
+                .Where(x => x.FirstName != null)
+                .Select(x => new AgentDropDownValues
+                {
+                    AgID = x.AgId,
+                    Name = x.FirstName
+                })
+                .ToList();
+
+            return items;
+        }
+
+        public async Task<List<AgentStatusDropDownValues>> GetAgentStatusDropDownValues()
+        {
+            using var context = dbContextFactory.CreateDbContext();
+
+            var items = context.AgentStatuses
+                .Select(x => new AgentStatusDropDownValues
+                {
+                    StatusId = x.Statusid,
+                    StatusName = x.Status
+                })
+                .ToList();
+
+            return items;
+        }
+
+        public async Task<List<PropertyTypeDropDownValues>> GetPropertyTypesDropDownValues()
+        {
+            using var context = dbContextFactory.CreateDbContext();
+            var items = context.PropertyTypes.Select(x => new PropertyTypeDropDownValues
+            {
+                TypeId = x.Typeid,
+                Type = x.Type
+            }).ToList();
+
+            return items;
+        }
+
+        public async Task<bool> Updateproperty(Property prop)
+        {
+            try
+            {
+                using var context = dbContextFactory.CreateDbContext();
+                context.Properties.Update(prop);
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex) {
+                return false;
+            }
         }
     }
 }

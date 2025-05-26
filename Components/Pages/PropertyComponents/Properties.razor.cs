@@ -101,13 +101,13 @@ public partial class Properties
         switch(index)
         {
             case 1:
-                isPropCostTab = true;
-                break;
-            case 2:
                 isPropDescTab = true;
                 break;
-            case 3:
+            case 2:
                 isPropHomeInfoTab = true;
+                break;
+            case 3:
+                isPropCostTab = true;
                 break;
             case 4:
                 isPropRatesTab = true;
@@ -134,7 +134,7 @@ public partial class Properties
         var initialArgs = new LoadDataArgs
         {
             Skip = 0,
-            Top = 10,
+            Top = 15,
             OrderBy = "PropId" // Or null, depending on your needs
         };
 
