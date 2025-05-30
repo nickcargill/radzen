@@ -1,0 +1,61 @@
+@page "/property-tasks"
+
+
+<PageTitle>Tasks</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Tasks" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="130px" AllowFiltering="false" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true"
+            PageSizeOptions="@(new int[]{10, 15, 20, 30})"
+            PageSize="15"
+            Density="Radzen.Density.Compact"
+            Data="@(vwMaintenanceNextDateFroms)" TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom">
+            <Columns>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Id" Title="TaskId" Width="80px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Bookingid" Title="Booking Id">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Dateentered" Title="Opened">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Datecompleted" Title="Last Touched">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Datetocomp" Title="Datetocomp">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Amenity" Title="Amenity">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Hot" Title="Hot">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Neighborhood" Title="Neighborhood">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="PropertyName" Title="Property Name">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Status" Title="Status">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="NextdateFrom" Title="Nextdate From">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Department" Title="Department">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Description" Title="Description" Width="160">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Mgrid" Title="Mgrid">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="PropertyCleanerFirstname" Title="Assigned">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Expense" Title="Expense">
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

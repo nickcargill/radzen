@@ -77,10 +77,22 @@ namespace Destination.Components.Pages.BookingComponents
             if(Id != 0)
             {
                 PropParameterId = Id;
-                bookings = await destinationTestService.GetBookingsByPropId(Id);
+
+
+                var query = new Query
+                {
+                    OrderBy = "Id",
+                    Skip = 0,
+                    Top = 15
+                };
+
+                var result = await bookingService.GetBookingsByPropId(query,Id);
+                pagedBookings = result.Items;
+                totalCount = result.Count;
             }
             else
             {
+                var a = bookingService.GetPaymentsByBookingId(23953);
                 var initialArgs = new LoadDataArgs
                 {
                     Skip = 0,
@@ -89,7 +101,6 @@ namespace Destination.Components.Pages.BookingComponents
                 };
 
                 await LoadData(initialArgs);
-                // bookings = await bookindService.GetBookings(new Query { Expand = "Property,BookingStatus,Tenant,PropertySource,TblService" });
             }
         }
         private async Task LoadData(LoadDataArgs args)
@@ -109,6 +120,7 @@ namespace Destination.Components.Pages.BookingComponents
                 var result = await bookingService.GetBookingsPagedAsync(query);
                 pagedBookings = result.Items;
                 totalCount = result.Count;
+                StateHasChanged();
             }
         }
 

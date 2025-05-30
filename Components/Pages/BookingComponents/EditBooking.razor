@@ -54,7 +54,7 @@
                     <RadzenLabel Text="Nights" Component="Nights" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(booking.Nights)" Name="Nights" />
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(booking.Nights)" Name="Nights" ShowUpDown = "false" />
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -62,7 +62,23 @@
                     <RadzenLabel Text="Tax" Component="Tax" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(booking.Tax)" Name="Tax" />
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(booking.Tax)" Name="Tax" ShowUpDown="false" />
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="3">
+                    <RadzenLabel Text="Guests" Component="Guests" style="width: 100%" />
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(booking.Guests)" Name="Guests" ShowUpDown="false" />
+                </RadzenColumn>
+            </RadzenRow>
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="3">
+                    <RadzenLabel Text="Deposit" Component="Deposit" style="width: 100%" />
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(booking.Deposit)" Name="Deposit" ShowUpDown="false" />
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">

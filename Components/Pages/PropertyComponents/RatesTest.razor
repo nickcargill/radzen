@@ -6,944 +6,424 @@
 }
 else
 {
-    <RadzenTemplateForm Data="@propertyRate">
+    <RadzenTemplateForm Data="@propertyRate" Submit="@((PropertyRate args) => { Submit(args); })">
         <RadzenColumn Size="12">
-            <RadzenFieldset Text="Destination Big Bear Rates">
-                <RadzenStack Gap="8px">
-                    <!-- Row 1 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- Property -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Propid" Component="Propid" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Propid" Name="Propid" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- PreThank -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Pre Thank" Component="PreThank" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.PreThank" Name="PreThank" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- Thanks -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Thanks" Component="Thanks" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Thanks" Name="Thanks" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- WinterWeekday -->
+            <RadzenFieldset Text="Destination Big Bear Rates - Add/Edit" Style="padding: 16px; border-radius: 8px;">
+                <RadzenStack Gap="12px">
+                    <!-- Row 1: Winter Weekday/Weekend + Propid + PreThank -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Winter Weekday" Component="WinterWeekday" />
+                                    <RadzenLabel Text="Propid" Component="Propid" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.WinterWeekday" Name="WinterWeekday" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.Propid" Name="Propid" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
-                        <!-- Prechristmas -->
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Prechristmas" Component="Prechristmas" />
+                                    <RadzenLabel Text="Pre Thank" Component="PreThank" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Prechristmas" Name="Prechristmas" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.PreThank" Name="PreThank" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="MLK" Component="Mlk114" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.Mlk114" Name="Mlk114" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Next July 4th" Component="NextJuly4th" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.NextJuly4th" Name="NextJuly4th" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
                     </RadzenRow>
-                    <!-- Row 2 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- Christmas -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Christmas" Component="Christmas" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Christmas" Name="Christmas" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- NewYears -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="New Years" Component="NewYears" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.NewYears" Name="NewYears" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- PostNewYears -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Post New Years" Component="PostNewYears" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.PostNewYears" Name="PostNewYears" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                     <!-- MayWeekday -->
+                    <!-- Row 2: Spring Weekday/Weekend + Thanks + Prechristmas -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="May Weekday" Component="MayWeekday" />
+                                    <RadzenLabel Text="Spring Weekday" Component="SpringWeekday" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.MayWeekday" Name="MayWeekday" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.SpringWeekday" Name="SpringWeekday" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
-                    <!-- SummerWeekend -->
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Summer Weekend" Component="SummerWeekend" />
+                                    <RadzenLabel Text="Spring Weekend" Component="SpringWeekend" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.SummerWeekend" Name="SummerWeekend" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.SpringWeekend" Name="SpringWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Thanks" Component="Thanks" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.Thanks" Name="Thanks" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Prechristmas" Component="Prechristmas" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.Prechristmas" Name="Prechristmas" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
                     </RadzenRow>
-                    <!-- Row 3 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- MemorialDay -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Memorial" Component="MemorialDay" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.MemorialDay" Name="MemorialDay" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- July4th -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="July 4th" Component="July4th" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.July4th" Name="July4th" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- LaborDay -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Labor" Component="LaborDay" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.LaborDay" Name="LaborDay" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- SpringWeekend -->
+                    <!-- Row 3: Summer Weekday/Weekend + Christmas + NewYears -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Spring Weekend" Component="SpringWeekend" />
+                                    <RadzenLabel Text="Summer Weekday" Component="SummerWeekday" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.SpringWeekend" Name="SpringWeekend" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.SummerWeekday" Name="SummerWeekday" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
-                        <!-- SpringWeekday -->
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Spring Weekday" Component="SpringWeekday" />
+                                    <RadzenLabel Text="Summer Weekend" Component="SummerWeekend" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.SpringWeekday" Name="SpringWeekday" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.SummerWeekend" Name="SummerWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Christmas" Component="Christmas" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.Christmas" Name="Christmas" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="New Years" Component="NewYears" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.NewYears" Name="NewYears" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
                     </RadzenRow>
-                    <!-- Row 4 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Presidents" Component="PresidentsDay" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.PresidentsDay" Name="PresidentsDay" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- UserId -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="User Id" Component="UserId" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.UserId" Name="UserId" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- FallWeekend -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Fall Weekend" Component="FallWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.FallWeekend" Name="FallWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- FallWeekday -->
+                    <!-- Row 4: Fall Weekday/Weekend + PostNewYears + MemorialDay -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Fall Weekday" Component="FallWeekday" />
+                                    <RadzenLabel Text="Fall Weekday" Component="FallWeekday" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.FallWeekday" Name="FallWeekday" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.FallWeekday" Name="FallWeekday" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
-                        <!-- WinterWeekend -->
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Winter Weekend" Component="WinterWeekend" />
+                                    <RadzenLabel Text="Fall Weekend" Component="FallWeekend" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.WinterWeekend" Name="WinterWeekend" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.FallWeekend" Name="FallWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Post New Years" Component="PostNewYears" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.PostNewYears" Name="PostNewYears" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Memorial" Component="MemorialDay" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.MemorialDay" Name="MemorialDay" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
                     </RadzenRow>
-                    <!-- Row 5 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- tw (1222) -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Dec 22" Component="_1222" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate._1222" Name="_1222" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- MarchWeekday -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="March Weekday" Component="MarchWeekday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.MarchWeekday" Name="MarchWeekday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- DecEarlyWeekend -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Dec Early Weekend" Component="DecEarlyWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.DecEarlyWeekend" Name="DecEarlyWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- DecEarlyWeekday -->
+                    <!-- Row 5: March Weekday/Weekend + July4th + LaborDay -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Dec Early Weekday" Component="DecEarlyWeekday" />
+                                    <RadzenLabel Text="March Weekday" Component="MarchWeekday" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.DecEarlyWeekday" Name="DecEarlyWeekday" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.MarchWeekday" Name="MarchWeekday" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
-                    <!-- MarchWeekend -->
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="March Weekend" Component="MarchWeekend" />
+                                    <RadzenLabel Text="March Weekend" Component="MarchWeekend" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.MarchWeekend" Name="MarchWeekend" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.MarchWeekend" Name="MarchWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="July 4th" Component="July4th" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.July4th" Name="July4th" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Labor" Component="LaborDay" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.LaborDay" Name="LaborDay" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
                     </RadzenRow>
-                    <!-- Row 6 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- th (1223) -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Dec 23" Component="_1223" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate._1223" Name="_1223" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- fo (1224) -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Dec 24" Component="_1224" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate._1224" Name="_1224" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- Christmasday -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Christmas" Component="Christmasday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Christmasday" Name="Christmasday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- NewYearsEve -->
+                    <!-- Row 6: April Weekday/Weekend + PresidentsDay + UserId -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="New Years Eve" Component="NewYearsEve" />
+                                    <RadzenLabel Text="April Weekday" Component="AprilWeekday" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.NewYearsEve" Name="NewYearsEve" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.AprilWeekday" Name="AprilWeekday" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
-                        <!-- NewYearsday -->
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="New Years Day" Component="NewYearsday" />
+                                    <RadzenLabel Text="April Weekend" Component="AprilWeekend" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.NewYearsday" Name="NewYearsday" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.AprilWeekend" Name="AprilWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Presidents" Component="PresidentsDay" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.PresidentsDay" Name="PresidentsDay" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="User Id" Component="UserId" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.UserId" Name="UserId" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
                     </RadzenRow>
-                    <!-- Row 7 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- Jan2 -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Jan 2" Component="Jan2" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Jan2" Name="Jan2" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- Jan3 -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Jan 3" Component="Jan3" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Jan3" Name="Jan3" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- AprilWeekend -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="April Weekend" Component="AprilWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.AprilWeekend" Name="AprilWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- AprilWeekday -->
+                    <!-- Row 7: June Weekday/Weekend + DecEarlyWeekday + DecEarlyWeekend -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="April Weekday" Component="AprilWeekday" />
+                                    <RadzenLabel Text="June Weekday" Component="JuneWeekday" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.AprilWeekday" Name="AprilWeekday" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.JuneWeekday" Name="JuneWeekday" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
-                        <!-- MayWeekend -->
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="May Weekend" Component="MayWeekend" />
+                                    <RadzenLabel Text="June Weekend" Component="JuneWeekend" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.MayWeekend" Name="MayWeekend" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.JuneWeekend" Name="JuneWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Dec Early Weekday" Component="DecEarlyWeekday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.DecEarlyWeekday" Name="DecEarlyWeekday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Dec Early Weekend" Component="DecEarlyWeekend" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.DecEarlyWeekend" Name="DecEarlyWeekend" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
                     </RadzenRow>
-                    <!-- Row 8 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- MLK114 -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="MLK" Component="MLK114" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Mlk114" Name="Mlk114" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- JuneWeekend -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="June Weekend" Component="JuneWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.JuneWeekend" Name="JuneWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- JuneWeekday -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="June Weekday" Component="JuneWeekday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.JuneWeekday" Name="JuneWeekday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- NextJuly4th -->
+                    <!-- Row 8: Specific Dates (_1222, _1223, _1224, Christmasday) -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Next July 4th" Component="NextJuly4th" />
+                                    <RadzenLabel Text="Dec 22" Component="_1222" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.NextJuly4th" Name="NextJuly4th" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate._1222" Name="_1222" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
-                    <!-- SummerWeekday -->
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Summer Weekday" Component="SummerWeekday" />
+                                    <RadzenLabel Text="Dec 23" Component="_1223" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.SummerWeekday" Name="SummerWeekday" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate._1223" Name="_1223" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Dec 24" Component="_1224" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate._1224" Name="_1224" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Christmas" Component="Christmasday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.Christmasday" Name="Christmasday" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
                     </RadzenRow>
-                </RadzenStack>
-            </RadzenFieldset>
-        </RadzenColumn>
-    </RadzenTemplateForm>
-
-    <RadzenTemplateForm Data="@propertyRate">
-        <RadzenColumn Size="12">
-            <RadzenFieldset Text="VRBO Property Rates">
-                <RadzenStack Gap="8px">
-                    <!-- Row 1 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- Property -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Propid" Component="Propid" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Propid" Name="Propid" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- PreThank -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Pre Thank" Component="PreThank" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.PreThank" Name="PreThank" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- Thanks -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Thanks" Component="Thanks" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Thanks" Name="Thanks" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- WinterWeekday -->
+                    <!-- Row 9: Holidays and Specific Dates -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Winter Weekday" Component="WinterWeekday" />
+                                    <RadzenLabel Text="New Years Eve" Component="NewYearsEve" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.WinterWeekday" Name="WinterWeekday" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.NewYearsEve" Name="NewYearsEve" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
-                        <!-- Prechristmas -->
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Prechristmas" Component="Prechristmas" />
+                                    <RadzenLabel Text="New Years Day" Component="NewYearsday" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Prechristmas" Name="Prechristmas" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.NewYearsday" Name="NewYearsday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Jan 2" Component="Jan2" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.Jan2" Name="Jan2" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Jan 3" Component="Jan3" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.Jan3" Name="Jan3" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
                     </RadzenRow>
-                    <!-- Row 2 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- Christmas -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Christmas" Component="Christmas" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Christmas" Name="Christmas" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- NewYears -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="New Years" Component="NewYears" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.NewYears" Name="NewYears" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- PostNewYears -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Post New Years" Component="PostNewYears" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.PostNewYears" Name="PostNewYears" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                     <!-- MayWeekday -->
+                    <!-- Row 10: Remaining Fields -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="May Weekday" Component="MayWeekday" />
+                                    <RadzenLabel Text="Winter Weekday" Component="WinterWeekday" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.MayWeekday" Name="MayWeekday" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.WinterWeekday" Name="WinterWeekday" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
-                    <!-- SummerWeekend -->
                         <RadzenColumn Size="12" SizeSM="3">
                             <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
                                 <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Summer Weekend" Component="SummerWeekend" />
+                                    <RadzenLabel Text="Winter Weekend" Component="WinterWeekend" Style="font-size: 12px; font-weight: 700;" />
                                 </RadzenColumn>
                                 <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.SummerWeekend" Name="SummerWeekend" />
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@propertyRate.WinterWeekend" Name="WinterWeekend" />
                                 </RadzenColumn>
                             </RadzenRow>
                         </RadzenColumn>
                     </RadzenRow>
-                    <!-- Row 3 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- MemorialDay -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Memorial" Component="MemorialDay" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.MemorialDay" Name="MemorialDay" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- July4th -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="July 4th" Component="July4th" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.July4th" Name="July4th" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- LaborDay -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Labor" Component="LaborDay" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.LaborDay" Name="LaborDay" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- SpringWeekend -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Spring Weekend" Component="SpringWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.SpringWeekend" Name="SpringWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- SpringWeekday -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Spring Weekday" Component="SpringWeekday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.SpringWeekday" Name="SpringWeekday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                    </RadzenRow>
-                    <!-- Row 4 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Presidents" Component="PresidentsDay" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.PresidentsDay" Name="PresidentsDay" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- UserId -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="User Id" Component="UserId" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.UserId" Name="UserId" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- FallWeekend -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Fall Weekend" Component="FallWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.FallWeekend" Name="FallWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- FallWeekday -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Fall Weekday" Component="FallWeekday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.FallWeekday" Name="FallWeekday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- WinterWeekend -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Winter Weekend" Component="WinterWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.WinterWeekend" Name="WinterWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                    </RadzenRow>
-                    <!-- Row 5 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- tw (1222) -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Dec 22" Component="_1222" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate._1222" Name="_1222" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- MarchWeekday -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="March Weekday" Component="MarchWeekday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.MarchWeekday" Name="MarchWeekday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- DecEarlyWeekend -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Dec Early Weekend" Component="DecEarlyWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.DecEarlyWeekend" Name="DecEarlyWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- DecEarlyWeekday -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Dec Early Weekday" Component="DecEarlyWeekday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.DecEarlyWeekday" Name="DecEarlyWeekday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                    <!-- MarchWeekend -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="March Weekend" Component="MarchWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.MarchWeekend" Name="MarchWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                    </RadzenRow>
-                    <!-- Row 6 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- th (1223) -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Dec 23" Component="_1223" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate._1223" Name="_1223" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- fo (1224) -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Dec 24" Component="_1224" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate._1224" Name="_1224" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- Christmasday -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Christmas" Component="Christmasday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Christmasday" Name="Christmasday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- NewYearsEve -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="New Years Eve" Component="NewYearsEve" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.NewYearsEve" Name="NewYearsEve" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- NewYearsday -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="New Years Day" Component="NewYearsday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.NewYearsday" Name="NewYearsday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                    </RadzenRow>
-                    <!-- Row 7 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- Jan2 -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Jan 2" Component="Jan2" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Jan2" Name="Jan2" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- Jan3 -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Jan 3" Component="Jan3" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Jan3" Name="Jan3" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- AprilWeekend -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="April Weekend" Component="AprilWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.AprilWeekend" Name="AprilWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- AprilWeekday -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="April Weekday" Component="AprilWeekday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.AprilWeekday" Name="AprilWeekday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- MayWeekend -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="May Weekend" Component="MayWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.MayWeekend" Name="MayWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                    </RadzenRow>
-                    <!-- Row 8 -->
-                    <RadzenRow AlignItems="AlignItems.Center">
-                        <!-- MLK114 -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="MLK" Component="MLK114" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.Mlk114" Name="Mlk114" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- JuneWeekend -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="June Weekend" Component="JuneWeekend" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.JuneWeekend" Name="JuneWeekend" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- JuneWeekday -->
-                        <RadzenColumn Size="12" SizeSM="2">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="June Weekday" Component="JuneWeekday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.JuneWeekday" Name="JuneWeekday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                        <!-- NextJuly4th -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Next July 4th" Component="NextJuly4th" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.NextJuly4th" Name="NextJuly4th" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
-                    <!-- SummerWeekday -->
-                        <RadzenColumn Size="12" SizeSM="3">
-                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
-                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
-                                    <RadzenLabel Text="Summer Weekday" Component="SummerWeekday" />
-                                </RadzenColumn>
-                                <RadzenColumn Size="12" SizeSM="7">
-                                    <RadzenNumeric Disabled Style="width: 90%;" @bind-Value="@propertyRate.SummerWeekday" Name="SummerWeekday" />
-                                </RadzenColumn>
-                            </RadzenRow>
-                        </RadzenColumn>
+                    <!-- Buttons -->
+                    <RadzenRow Style="margin-bottom: 6px; margin-top: 20px;align-self: self-end;">
+                        <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Text="Add" Variant="Variant.Flat" Style="margin-right: 8px; padding: 8px 16px;" />
+                        <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Style="padding: 8px 16px;" />
                     </RadzenRow>
                 </RadzenStack>
             </RadzenFieldset>
@@ -951,9 +431,430 @@ else
     </RadzenTemplateForm>
 
 
-
-
-    <RadzenStack>
+    <RadzenTemplateForm Data="@vrboRates" Submit="@((PropertyRatesVrbo args) => { SubmitVRBO(args); })">
+        <RadzenColumn Size="12">
+            <RadzenFieldset Text="VRBO Property Rates - Add/Edit" Style="padding: 16px; border-radius: 8px;">
+                <RadzenStack Gap="12px">
+                    <!-- Row 1: Winter Weekday/Weekend + Propid + PreThank -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Propid" Component="Propid" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.Propid" Name="Propid" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Pre Thank" Component="PreThank" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.PreThank" Name="PreThank" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="MLK" Component="Mlk114" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.Mlk114" Name="Mlk114" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Next July 4th" Component="NextJuly4th" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.NextJuly4th" Name="NextJuly4th" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <!-- Row 2: Spring Weekday/Weekend + Thanks + Prechristmas -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Spring Weekday" Component="SpringWeekday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.SpringWeekday" Name="SpringWeekday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Spring Weekend" Component="SpringWeekend" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.SpringWeekend" Name="SpringWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Thanks" Component="Thanks" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.Thanks" Name="Thanks" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Prechristmas" Component="Prechristmas" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.Prechristmas" Name="Prechristmas" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <!-- Row 3: Summer Weekday/Weekend + Christmas + NewYears -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Summer Weekday" Component="SummerWeekday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.SummerWeekday" Name="SummerWeekday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Summer Weekend" Component="SummerWeekend" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.SummerWeekend" Name="SummerWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Christmas" Component="Christmas" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.Christmas" Name="Christmas" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="New Years" Component="NewYears" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.NewYears" Name="NewYears" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <!-- Row 4: Fall Weekday/Weekend + PostNewYears + MemorialDay -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Fall Weekday" Component="FallWeekday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.FallWeekday" Name="FallWeekday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Fall Weekend" Component="FallWeekend" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.FallWeekend" Name="FallWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Post New Years" Component="PostNewYears" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.PostNewYears" Name="PostNewYears" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Memorial" Component="MemorialDay" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.MemorialDay" Name="MemorialDay" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <!-- Row 5: March Weekday/Weekend + July4th + LaborDay -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="March Weekday" Component="MarchWeekday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.MarchWeekday" Name="MarchWeekday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="March Weekend" Component="MarchWeekend" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.MarchWeekend" Name="MarchWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="July 4th" Component="July4th" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.July4th" Name="July4th" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Labor" Component="LaborDay" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.LaborDay" Name="LaborDay" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <!-- Row 6: April Weekday/Weekend + PresidentsDay + UserId -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="April Weekday" Component="AprilWeekday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.AprilWeekday" Name="AprilWeekday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="April Weekend" Component="AprilWeekend" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.AprilWeekend" Name="AprilWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Presidents" Component="PresidentsDay" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.PresidentsDay" Name="PresidentsDay" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="User Id" Component="UserId" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.UserId" Name="UserId" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <!-- Row 7: June Weekday/Weekend + DecEarlyWeekday + DecEarlyWeekend -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="June Weekday" Component="JuneWeekday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.JuneWeekday" Name="JuneWeekday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="June Weekend" Component="JuneWeekend" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.JuneWeekend" Name="JuneWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Dec Early Weekday" Component="DecEarlyWeekday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.DecEarlyWeekday" Name="DecEarlyWeekday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Dec Early Weekend" Component="DecEarlyWeekend" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.DecEarlyWeekend" Name="DecEarlyWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <!-- Row 8: Specific Dates (_1222, _1223, _1224, Christmasday) -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Dec 22" Component="_1222" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates._1222" Name="_1222" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Dec 23" Component="_1223" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates._1223" Name="_1223" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Dec 24" Component="_1224" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates._1224" Name="_1224" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Christmas" Component="Christmasday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.Christmasday" Name="Christmasday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <!-- Row 9: Holidays and Specific Dates -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="New Years Eve" Component="NewYearsEve" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.NewYearsEve" Name="NewYearsEve" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="New Years Day" Component="NewYearsday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.NewYearsday" Name="NewYearsday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Jan 2" Component="Jan2" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.Jan2" Name="Jan2" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Jan 3" Component="Jan3" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.Jan3" Name="Jan3" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <!-- Row 10: Remaining Fields -->
+                    <RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom: 12px;">
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Winter Weekday" Component="WinterWeekday" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.WinterWeekday" Name="WinterWeekday" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                        <RadzenColumn Size="12" SizeSM="3">
+                            <RadzenRow AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Center">
+                                <RadzenColumn Size="12" SizeSM="5" class="rz-text-align-end">
+                                    <RadzenLabel Text="Winter Weekend" Component="WinterWeekend" Style="font-size: 12px; font-weight: 700;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="12" SizeSM="7">
+                                    <RadzenNumeric ShowUpDown="false" Style="width: 90%; border-radius: 4px;" @bind-Value="@vrboRates.WinterWeekend" Name="WinterWeekend" />
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </RadzenColumn>
+                    </RadzenRow>
+                    <!-- Buttons -->
+                    <RadzenRow Style="margin-bottom: 6px; margin-top: 20px;align-self: self-end;">
+                        <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Text="Add" Variant="Variant.Flat" Style="margin-right: 8px; padding: 8px 16px;" />
+                        <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Style="padding: 8px 16px;" />
+                    </RadzenRow>
+                </RadzenStack>
+            </RadzenFieldset>
+        </RadzenColumn>
+    </RadzenTemplateForm>
+   <RadzenStack>
     <RadzenRow AlignItems="AlignItems.Center">
         <RadzenColumn Size="12" SizeMD="6">
             @* <RadzenText Text="Bookings" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" /> *@
@@ -964,7 +865,7 @@ else
             </RadzenStack>
         </RadzenColumn>
     </RadzenRow>
-    <RadzenRow>
+@*     <RadzenRow>
       <RadzenColumn SizeMD=12>
         <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@(bookings)" TItem="Destination.Models.destinationTest.Booking">
@@ -999,11 +900,11 @@ else
                             Click=@(args => GridDeleteButtonClick(args, booking)) @onclick:stopPropagation="true" />
                     </Template>
                 </RadzenDataGridColumn> *@
-            </Columns>
+@*             </Columns>
 
         </RadzenDataGrid>
 
     </RadzenColumn>
-  </RadzenRow>
+  </RadzenRow> *@
 </RadzenStack>
 }

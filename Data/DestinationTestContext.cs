@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using Destination.Models.destinationTest;
+using Destination.Shared.DTO;
+using System.Reflection.Emit;
 
 namespace Destination.Data
 {
@@ -33,6 +35,10 @@ namespace Destination.Data
             builder.Entity<Destination.Models.destinationTest.AirbnbIcalsUpdateTracking>().HasNoKey();
 
             builder.Entity<Destination.Models.destinationTest.AirbnbMessage>().HasNoKey();
+
+            builder.Entity<PropertyImprovementDto>().HasNoKey().ToView(null);
+
+            builder.Entity<PropertyAnnualLogDto>().HasNoKey().ToView(null);
 
             builder.Entity<Destination.Models.destinationTest.AirbnbUploadedPhoto>().HasNoKey();
 
@@ -2735,6 +2741,9 @@ namespace Destination.Data
         }
 
         public DbSet<Destination.Models.destinationTest.AffiliateBooking> AffiliateBookings { get; set; }
+
+        public DbSet<PropertyImprovementDto> PropertyImprovementResults { get; set; }
+        public DbSet<PropertyAnnualLogDto> PropertyAnnualLogResults { get; set; }
 
         public DbSet<Destination.Models.destinationTest.AffiliateCollaboration> AffiliateCollaborations { get; set; }
 

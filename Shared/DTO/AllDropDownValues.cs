@@ -37,5 +37,17 @@
             public int? TypeId { get; set; }
             public string Type { get; set; }
         }
+
+        public class PropertyCleanerDDValues
+        {
+            public int? CleanerId { get; set; }
+            public string Name { get; set; }
+        }
+
+        public class OwnerLoginDDValues
+        {
+            public int? TenantId { get; set; }
+            public string OwnerName { get; set; }
+        }
     }
 }

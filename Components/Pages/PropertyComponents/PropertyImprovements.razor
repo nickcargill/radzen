@@ -1,0 +1,48 @@
+@page "/property-improvements"
+
+<style>
+    .rz-panel-titlebar {
+        flex-direction: row-reverse;
+        justify-content: right;
+    }
+</style>
+
+<PageTitle>Property Improvements</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Property Improvements" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+            <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowFiltering="true"
+                            FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+                            Data="@(propertyImprovements)" TItem="Destination.Shared.DTO.PropertyImprovementDto" AllowColumnPicking="true"
+                            Density="Radzen.Density.Compact">
+            <Columns>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyImprovementDto" Property="Propimproveid" Title="ImproveId" Width="120px">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyImprovementDto" Property="DateOpen2" Title="Date Open" Width="140px">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyImprovementDto" Property="ResourceName" Title="Resource" Width="140px">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyImprovementDto" Property="Name" Title="Name" Width="140px">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyImprovementDto" Property="ImprovementDesc" Title="Improvement Desc" Width="140px">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyImprovementDto" Property="Completed" Title="Completed" Width="140px">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyImprovementDto" Property="Priority" Title="Priority" Width="140px">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyImprovementDto" Property="Imptype" Title="Type" Width="140px">
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

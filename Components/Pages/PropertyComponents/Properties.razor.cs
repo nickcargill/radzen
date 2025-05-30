@@ -50,6 +50,12 @@ public partial class Properties
     protected bool isPropRatesTab = false;
     protected bool isPropHomeInfoTab = false;
     protected bool isPropBookingsTab = false;
+    protected bool isPropTasksTab = false;
+    protected bool isPropAnnualTab = false;
+    protected bool isPropOwnerTab = false;
+    protected bool isPropImprovementsTab = false;
+    protected bool isPropHomeTeamTab = false;
+
     protected bool showleftPanel = false;
 
     private IEnumerable<Property> pagedProperties;
@@ -115,7 +121,22 @@ public partial class Properties
             case 5:
                 isPropBookingsTab = true;
                 break;
-        }
+            case 6:
+                isPropTasksTab = true;
+                break;
+            case 7:
+                isPropAnnualTab = true;
+                break;
+            case 8:
+                isPropOwnerTab = true;
+                break;
+            case 9:
+                isPropImprovementsTab = true;
+                break;
+            case 10:
+                isPropHomeTeamTab = true;
+                break;
+            }
     }
 
     private void HandleBookingEdit(int bookingId)
@@ -139,7 +160,6 @@ public partial class Properties
         };
 
         await LoadData(initialArgs);
-        // properties = await destinationTestService.GetProperties(new Query { Expand = "Agent,Status1,PropertyCleaner" });
         sharedEvents.OnBookingIdClicked += HandleBookingEdit;
     }
 

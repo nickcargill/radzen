@@ -1,5 +1,6 @@
 ﻿using Destination.Data;
 using Destination.Models.destinationTest;
+using Destination.Shared.DTO;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
 using System.Linq.Dynamic.Core;
@@ -104,6 +105,30 @@ namespace Destination.Services
             return items;
         }
 
+        public async Task<List<OwnerLoginDDValues>> GetOwnerDropDownValues()
+        {
+            using var context = dbContextFactory.CreateDbContext();
+            var items = context.Tenants.Where(x=>x.Role > 23).Select(x => new OwnerLoginDDValues
+            {
+                TenantId = x.Tenantid,
+                OwnerName = x.Firstname
+            }).ToList();
+
+            return items;
+        }
+
+        public async Task<List<PropertyCleanerDDValues>> GetPropertyCleanerDropDownValues()
+        {
+            using var context = dbContextFactory.CreateDbContext();
+            var items = context.PropertyCleaners.Select(x => new PropertyCleanerDDValues
+            {
+                CleanerId = x.Cleanerid,
+                Name = x.Firstname
+            }).ToList();
+
+            return items;
+        }
+
         public async Task<bool> Updateproperty(Property prop)
         {
             try
@@ -116,6 +141,84 @@ namespace Destination.Services
             catch (Exception ex) {
                 return false;
             }
+        }
+
+        public async Task<bool> UpdaterPopertyRates(PropertyRate prop, bool isEdit)
+        {
+            try
+            {
+                using var context = dbContextFactory.CreateDbContext();
+                if (isEdit)
+                {
+                    context.PropertyRates.Update(prop);
+                }
+                else
+                {
+                    context.PropertyRates.Add(prop);
+                }
+
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> UpdateVrboRates(PropertyRatesVrbo prop, bool isEdit)
+        {
+            try
+            {
+                using var context = dbContextFactory.CreateDbContext();
+                if (isEdit)
+                {
+                    context.PropertyRatesVrbos.Update(prop);
+                }
+                else
+                {
+                    context.PropertyRatesVrbos.Add(prop);
+                }
+
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<List<VwMaintenanceNextDateFrom>> GetTasksByPropId(int id)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+            var result = await dbContext.VwMaintenanceNextDateFroms
+                        .FromSqlRaw("EXEC RDZ_proc_getTasksListPerProperty @PropID = {0}", id)
+                            .AsNoTracking()
+                            .ToListAsync();
+            return result;
+        }
+        public async Task<List<PropertyImprovementDto>> GetImprovementsByPropId(int id)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+            var result = await dbContext.PropertyImprovementResults
+                .FromSqlRaw("EXEC RDZ_proc_getImprovementsDataPerProp @propid = {0}", id)
+                    .AsNoTracking()
+                    .ToListAsync();
+            return result;
+        }
+
+        public async Task<List<PropertyAnnualLogDto>> GetPropertyAnnualLogs(int id)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+            var result = await dbContext.PropertyAnnualLogResults
+                .FromSqlRaw("EXEC proc_GetPropertyAnnualLog @PropID = {0}", id)
+                    .AsNoTracking()
+                    .ToListAsync();
+            return result;
         }
     }
 }

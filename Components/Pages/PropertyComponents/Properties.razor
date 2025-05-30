@@ -72,6 +72,8 @@
                                     AllowColumnPicking="true"
                                     Density="Radzen.Density.Compact">
                     <Columns>
+                       <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Name" Title="Name" Width="140px">
+                        </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Propid" Title="Propid" Width="70px">
                             <Template Context="item">
                                 <span Text="Click here" @onclick="() => ShowTabs(item.Propid)" @oncontextmenu=@(e => ShowContextMenuWithItems(e, item)) @oncontextmenu:preventDefault="true"
@@ -108,7 +110,6 @@
     </RadzenRow>
 </RadzenStack>
 
-
 <RadzenRow>
 @*     <RadzenColumn SizeMD="4">
     </RadzenColumn> *@
@@ -131,48 +132,60 @@
                 Collapse=@(() => Change("Panel collapsed"))>
                 <RadzenTabs Change=@OnTabChange>
                     <Tabs>
-                        <RadzenTabsItem Text="Property Details">
+                        <RadzenTabsItem Text="Property Details" Style="color:green;font-weight:600">
                             <PropertyDetails Id="@selectedPropId"></PropertyDetails>
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Description" style="margin-left: 2px;">
+                        <RadzenTabsItem Text="Description" style="margin-left: 2px;color:green;font-weight:600">
                             @if (isPropDescTab)
                             {
                                 <PropertyDescription Id="@selectedPropId"></PropertyDescription>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Home Info" style="margin-left: 2px;">
+                        <RadzenTabsItem Text="Home Info" style="margin-left: 2px;color:green;font-weight:600">
                             @if (isPropHomeInfoTab)
                             {
                                 <PropertyHomeInfo Id="@selectedPropId"></PropertyHomeInfo>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Property Cost" style="margin-left: 2px;">
+                        <RadzenTabsItem Text="Property Cost" style="margin-left: 2px;color:green;font-weight:600">
                             @if (isPropCostTab)
                             {
                                 <PropertyCost Id="@selectedPropId"></PropertyCost>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Rates" style="margin-left: 2px;">
+                        <RadzenTabsItem Text="Rates" style="margin-left: 2px;color:green;font-weight:600">
                             @if (isPropRatesTab)
                             {
-                                <RatesTest></RatesTest>
+                                <RatesTest Id="@selectedPropId"></RatesTest>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Bookings" style="margin-left: 2px;">
+                        <RadzenTabsItem Text="Bookings" style="margin-left: 2px;color:green;font-weight:600">
                             @if (isPropBookingsTab)
                             {
                                 <Bookings Id="@selectedPropId"></Bookings>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Tasks" style="margin-left: 2px;">
+                        <RadzenTabsItem Text="Tasks" style="margin-left: 2px;color:green;font-weight:600">
+                            @if (isPropTasksTab)
+                            {
+                                <PropertyTasks Id="@selectedPropId"></PropertyTasks>
+                            }                            
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Annual" style="margin-left: 2px;">
+                        <RadzenTabsItem Text="Annual" style="margin-left: 2px;color:green;font-weight:600">
+                            @if (isPropAnnualTab)
+                            {
+                                <PropertyAnnualLogs Id="@selectedPropId"></PropertyAnnualLogs>
+                            }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Owner Comm" style="margin-left: 2px;">
+                        <RadzenTabsItem Text="Owner Comm" style="margin-left: 2px;color:green;font-weight:600">
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Improvements" style="margin-left: 2px;">
+                        <RadzenTabsItem Text="Improvements" style="margin-left: 2px;color:green;font-weight:600">
+                            @if (isPropImprovementsTab)
+                            {
+                                <PropertyImprovements Id="@selectedPropId"></PropertyImprovements>
+                            }                            
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Home Team" style="margin-left: 2px;">
+                        <RadzenTabsItem Text="Home Team" style="margin-left: 2px;color:green;font-weight:600">
                         </RadzenTabsItem>
                     </Tabs>
                 </RadzenTabs>

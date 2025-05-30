@@ -1,0 +1,26 @@
+@page "/annuals"
+
+<PageTitle>Annuals</PageTitle>
+<RadzenStack>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(annuals)" TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Density="Radzen.Density.Compact">
+            <Columns>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="Name" Title="Property">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="TypeName" Title="Type Name">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="TaskID" Title="TaskID">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="OpenClosedStatus" Title="Status">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="LastUpdated" Title="Last Updated">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="Notes" Title="Notes">
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

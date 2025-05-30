@@ -1,7 +1,7 @@
 @page "/property-cost"
 
 <RadzenCard>
-    <RadzenTemplateForm TItem="Property" Data=@property>
+    <RadzenTemplateForm TItem="Property" Data=@property Submit="@((Property args) => { Submit(args); })">
         <RadzenAlert Visible="@(!string.IsNullOrEmpty(errorMessage))" 
                      Text="@errorMessage" 
                      Style="color: red; font-weight: bold; font-size: large; margin-bottom: 20px;" />
@@ -15,10 +15,10 @@
                               Style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn Size="3">
-                <RadzenLabel Text="Owner" Component="Owner" />
-                <RadzenNumeric @bind-Value="@property.Owner"
-                               Name="Owner" ShowUpDown="false"
-                              Style="width: 100%" />
+                <RadzenLabel Text="MGT Rate" Component="Mgtrate" />
+                <RadzenNumeric @bind-Value="@property.Mgtrate"
+                               Name="Mgtrate" ShowUpDown="false"
+                               Style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Supply Cost" Component="SupplyCost" />
@@ -38,15 +38,26 @@
         <RadzenRow Style="margin-bottom: 20px;">
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Cleaner" Component="Cleanerassigned" />
-                <RadzenNumeric @bind-Value="@property.Cleanerassigned"
-                               Name="Cleanerassigned" ShowUpDown = "false"
-                              Style="width: 100%" />
+                <RadzenDropDown @bind-Value="@(property.Cleanerassigned)"
+                                Data="@(propertyCleaners)"
+                                ValueProperty="CleanerId"
+                                TextProperty="Name"
+                                Placeholder="Choose Cleaners"
+                                Name="Cleanerassigned"
+                                Style="width: 100%" />
+                <RadzenRequiredValidator Component="Cleanerassigned" Text="Property Cleaner is required" />
             </RadzenColumn>
             <RadzenColumn Size="3">
-                <RadzenLabel Text="Owner Login" Component="OwnerLoginId" />
-                <RadzenNumeric @bind-Value="@property.Owner"
-                               Name="OwnerLoginId" ShowUpDown="false"
-                              Style="width: 100%" />
+                <RadzenLabel Text="Owner Login" Component="Owner" />
+                <RadzenDropDown @bind-Value="@(property.Owner)"
+                                Data="@(ownerLogins)"
+                                ValueProperty="TenantId"
+                                TextProperty="OwnerName"
+                                Placeholder="Choose Owner"
+                                Name="Owner"
+                                Style="width: 100%" />
+                <RadzenRequiredValidator Component="Owner" Text="Owner Login is required" />
+
             </RadzenColumn>
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Deposit" Component="Deposit" />
@@ -64,12 +75,6 @@
 
         <!-- Row 3: MGT Rate, Lat, Long, (Empty for spacing) -->
         <RadzenRow Style="margin-bottom: 20px;">
-            <RadzenColumn Size="3">
-                <RadzenLabel Text="MGT Rate" Component="Mgtrate" />
-                <RadzenNumeric @bind-Value="@property.Mgtrate"
-                               Name="Mgtrate" ShowUpDown="false"
-                              Style="width: 100%" />
-            </RadzenColumn>
             <RadzenColumn Size="3">
                 <RadzenLabel Text="Lat" Component="Lat" />
                 <RadzenNumeric @bind-Value="@property.Lat"

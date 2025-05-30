@@ -4366,17 +4366,17 @@ namespace Destination
             return await Task.FromResult(items);
         }
 
-        public async Task<IQueryable<Destination.Models.destinationTest.Booking>> GetBookingsByPropId(int Id)
+        public async Task<List<Destination.Models.destinationTest.Booking>> GetBookingsByPropId(int Id)
         {
-            var items = Context.Bookings
-                .Where(x => x.Datefrom >= DateTime.Parse("05-05-2024") && x.Propertyid == Id)
+            var items = await Context.Bookings
                 .Include(i => i.Property)
                 .Include(i => i.TblService)
                 .Include(i => i.PropertySource)
                 .Include(i => i.BookingStatus)
                 .Include(i => i.Tenant)
-                .AsQueryable();
-            return await Task.FromResult(items);
+                .Where(x => x.Propertyid == Id)
+                .ToListAsync();
+            return items;
         }
 
         partial void OnBookingGet(Destination.Models.destinationTest.Booking item);
@@ -18350,19 +18350,36 @@ namespace Destination
 
         public async Task<Destination.Models.destinationTest.PropertyRate> GetPropertyRateById(int id)
         {
-            var items = Context.PropertyRates
+            var item = await Context.PropertyRates
                               .AsNoTracking()
-                              .Where(i => i.Id == id);
+                              .Where(i => i.Propid == id).FirstOrDefaultAsync();
 
-            items = items.Include(i => i.Property);
+          //  items = items.Include(i => i.Property);
  
-            OnGetPropertyRateById(ref items);
+           // OnGetPropertyRateById(ref items);
 
-            var itemToReturn = items.FirstOrDefault();
+         //   var itemToReturn = items.FirstOrDefault();
 
-            OnPropertyRateGet(itemToReturn);
+         //   OnPropertyRateGet(itemToReturn);
 
-            return await Task.FromResult(itemToReturn);
+            return item;
+        }
+
+        public async Task<Destination.Models.destinationTest.PropertyRatesVrbo> GetPropertyRateVRBOById(int id)
+        {
+            var item = await Context.PropertyRatesVrbos
+                              .AsNoTracking()
+                              .Where(i => i.Propid == id).FirstOrDefaultAsync();
+
+            //  items = items.Include(i => i.Property);
+
+            // OnGetPropertyRateById(ref items);
+
+            //   var itemToReturn = items.FirstOrDefault();
+
+            //   OnPropertyRateGet(itemToReturn);
+
+            return item;
         }
 
         partial void OnPropertyRateCreated(Destination.Models.destinationTest.PropertyRate item);

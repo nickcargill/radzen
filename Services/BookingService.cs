@@ -1,12 +1,14 @@
 ﻿using Destination.Data;
 using Destination.Models.destinationTest;
 using DocumentFormat.OpenXml.InkML;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Radzen;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using static Destination.Shared.DTO.MainResponse;
+using Query = Radzen.Query;
 
 namespace Destination.Services
 {
@@ -64,5 +66,73 @@ namespace Destination.Services
                 Count = count
             };
         }
+
+        public async Task<PagedResult<Booking>> GetBookingsByPropId(Query query, int Id)
+        {
+            using var context = dbContextFactory.CreateDbContext();
+
+            var items = context.Bookings
+                .Include(i => i.Property)
+                .Include(i => i.TblService)
+                .Include(i => i.PropertySource)
+                .Include(i => i.BookingStatus)
+                .Include(i => i.Tenant)
+                .Where(x => x.Propertyid == Id); // Apply filter early
+
+            var filteredItems = items;
+
+            var count = await filteredItems.CountAsync();
+
+            if (!string.IsNullOrEmpty(query.OrderBy))
+            {
+                filteredItems = filteredItems.OrderBy(query.OrderBy);
+            }
+
+            if (query.Skip.HasValue)
+            {
+                filteredItems = filteredItems.Skip(query.Skip.Value);
+            }
+
+            if (query.Top.HasValue)
+            {
+                filteredItems = filteredItems.Take(query.Top.Value);
+            }
+
+            var data = await filteredItems.ToListAsync();
+
+            return new PagedResult<Booking>
+            {
+                Items = data,
+                Count = count
+            };
+        }
+
+        public async Task<List<Payment>> GetPaymentsByBookingId(int id)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+            var result = await dbContext.Payments.Where(x=>x.IntBookingId == id).ToListAsync();
+            return result;
+        }
+
+
+        // below code works to get data from a Store proc
+
+        //public async Task<List<Payment>> GetPaymentsByBookingId(int id)
+        //{
+        //    using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+        //    try
+        //    {
+        //        var result = await dbContext.Payments
+        //                    .FromSqlRaw("EXEC RDZ_proc_GetPaymentsPerBooking @BookingID = {0}", id)
+        //                        .AsNoTracking()
+        //                        .ToListAsync();
+        //        return result;
+        //    }
+        //    catch (Exception ex) { 
+        //    }
+
+        //    return null;
+        //}
     }
 }

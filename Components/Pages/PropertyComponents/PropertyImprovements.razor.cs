@@ -8,12 +8,11 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using Destination.Services;
-using Destination.Models.destinationTest;
-using static Destination.Shared.DTO.AllDropDownValues;
+using Destination.Shared.DTO;
 
 namespace Destination.Components.Pages.PropertyComponents
 {
-    public partial class PropertyCost
+    public partial class PropertyImprovements
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,37 +32,22 @@ namespace Destination.Components.Pages.PropertyComponents
         [Inject]
         protected NotificationService NotificationService { get; set; }
 
-        private string errorMessage;
+        [Inject]
+        public destinationTestService destinationTestService { get; set; }
 
         [Inject]
         public PropertyService propertyService { get; set; }
 
-        [Inject]
-        public destinationTestService destinationTestService { get; set; }
-
         [Parameter]
         public int Id { get; set; }
 
-        protected Property property;
-
-        protected IEnumerable<PropertyCleanerDDValues> propertyCleaners;
-        protected IEnumerable<OwnerLoginDDValues> ownerLogins;
+        protected IEnumerable<PropertyImprovementDto> propertyImprovements;
+        protected RadzenDataGrid<PropertyImprovementDto> grid0;
 
 
         protected override async Task OnInitializedAsync()
         {
-            property = await destinationTestService.GetPropertyByPropid(Id);
-            propertyCleaners = await propertyService.GetPropertyCleanerDropDownValues();
-            ownerLogins = await propertyService.GetOwnerDropDownValues();
-        }
-        protected async Task Submit(Property arg)
-        {
-            var result = await propertyService.Updateproperty(arg);
-            if (result)
-            {
-                StateHasChanged();
-                NavigationManager.NavigateTo("/properties");
-            }
+            propertyImprovements = await propertyService.GetImprovementsByPropId(415);
         }
     }
 }

@@ -7,10 +7,11 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
+using Destination.Services;
 
 namespace Destination.Components.Pages.PropertyComponents
 {
-    public partial class VwGetPropertyExpenses
+    public partial class PropertyTasks
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,12 +34,18 @@ namespace Destination.Components.Pages.PropertyComponents
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
-        protected IEnumerable<Destination.Models.destinationTest.VwGetPropertyExpense> vwGetPropertyExpenses;
+        [Inject]
+        public PropertyService propertyService { get; set; }
 
-        protected RadzenDataGrid<Destination.Models.destinationTest.VwGetPropertyExpense> grid0;
+        [Parameter]
+        public int Id { get; set; }
+
+        protected IEnumerable<Destination.Models.destinationTest.VwMaintenanceNextDateFrom> vwMaintenanceNextDateFroms;
+
+        protected RadzenDataGrid<Destination.Models.destinationTest.VwMaintenanceNextDateFrom> grid0;
         protected override async Task OnInitializedAsync()
         {
-            vwGetPropertyExpenses = await destinationTestService.GetVwGetPropertyExpenses();
+            vwMaintenanceNextDateFroms  = await propertyService.GetTasksByPropId(Id);
         }
     }
 }
