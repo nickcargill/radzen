@@ -44,7 +44,7 @@ namespace Destination.Components.Pages.PropertyComponents
         [Parameter]
         public int Id { get; set; }
 
-        protected Property property;
+        Property property = new Property();
 
 
         protected override async Task OnInitializedAsync()
@@ -57,8 +57,14 @@ namespace Destination.Components.Pages.PropertyComponents
             var result = await propertyService.Updateproperty(arg);
             if (result)
             {
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Success",
+                    Detail = "Data updated successfully!",
+                    Duration = 4000 // in milliseconds
+                });
                 StateHasChanged();
-                NavigationManager.NavigateTo("/properties");
             }
         }
     }

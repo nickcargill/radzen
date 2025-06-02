@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 
-namespace Destination.Components.Pages.CommunicationComponents
+namespace Destination.Components.Pages.BookingComponents
 {
-    public partial class AddOwnerCommunication
+    public partial class AddBookingPayments
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -34,20 +34,17 @@ namespace Destination.Components.Pages.CommunicationComponents
 
         protected override async Task OnInitializedAsync()
         {
-
-            agentsForOwnerid = await destinationTestService.GetAgents();
+            payment = new Destination.Models.destinationTest.Payment();
         }
         protected bool errorVisible;
-        protected Destination.Models.destinationTest.OwnerCommunication ownerCommunication;
-
-        protected IEnumerable<Destination.Models.destinationTest.Agent> agentsForOwnerid;
+        protected Destination.Models.destinationTest.Payment payment;
 
         protected async Task FormSubmit()
         {
             try
             {
-                await destinationTestService.CreateOwnerCommunication(ownerCommunication);
-                DialogService.Close(ownerCommunication);
+                await destinationTestService.CreatePayment(payment);
+                DialogService.Close(payment);
             }
             catch (Exception ex)
             {
@@ -58,27 +55,6 @@ namespace Destination.Components.Pages.CommunicationComponents
         protected async Task CancelButtonClick(MouseEventArgs args)
         {
             DialogService.Close(null);
-        }
-
-
-
-
-
-        bool hasOwneridValue;
-
-        [Parameter]
-        public int? Ownerid { get; set; }
-        public override async Task SetParametersAsync(ParameterView parameters)
-        {
-            ownerCommunication = new Destination.Models.destinationTest.OwnerCommunication();
-
-            hasOwneridValue = parameters.TryGetValue<int?>("Ownerid", out var hasOwneridResult);
-
-            if (hasOwneridValue)
-            {
-                ownerCommunication.Ownerid = hasOwneridResult;
-            }
-            await base.SetParametersAsync(parameters);
         }
     }
 }

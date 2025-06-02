@@ -69,13 +69,13 @@
                                     ShowPagingSummary="true"
                                     ColumnWidth="150px"
                                     PageSizeOptions="@(new int[]{10, 15, 20, 30})"
-                                    PageSize="15"
+                                    PageSize="20"
                                     AllowColumnPicking="true"
                                     Density="Radzen.Density.Compact">
                             <Columns>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Id" Title="Id" Width="60px">
                                     <Template Context="item">
-                                        <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: green; text-decoration: none;">@item.Id</span>
+                                        <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: green; text-decoration: underline;">@item.Id</span>
                                     </Template>
                                 </RadzenDataGridColumn>
                                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.Name" Title="Property" Width="140px">
@@ -98,13 +98,6 @@
                                 </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="TblService.ServiceName" Title="Tbl Service" Width="140px">
                                 </RadzenDataGridColumn>
-                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
-                                    <Template Context="booking">
-                                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
-                                            Shade="Shade.Lighter" Variant="Variant.Flat"
-                                            Click=@(args => GridDeleteButtonClick(args, booking)) @onclick:stopPropagation="true" />
-                                    </Template>
-                                </RadzenDataGridColumn>
                                 </Columns>
                         </RadzenDataGrid>
                 </RadzenPanel>
@@ -124,13 +117,13 @@
                                 ShowPagingSummary="true"
                                 ColumnWidth="150px"
                                 PageSizeOptions="@(new int[]{5, 10, 20, 30})"
-                                PageSize="15"
+                                PageSize="20"
                                 AllowColumnPicking="true"
                                 Density="Radzen.Density.Compact">
                         <Columns>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Id" Title="Id" Width="60px">
                                 <Template Context="item">
-                                    <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: green; text-decoration: none;">@item.Id</span>
+                                    <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: green; text-decoration: underline;">@item.Id</span>
                                 </Template>
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking"  Property="Property.Name" Title="Property" Width="150px">
@@ -153,13 +146,6 @@
                             </RadzenDataGridColumn>
                                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="TblService.ServiceName" Title="Tbl Service" Width="140px">
                             </RadzenDataGridColumn>
-                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Sortable="false" Width="60px" TextAlign="TextAlign.Center">
-                                <Template Context="booking">
-                                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
-                                        Shade="Shade.Lighter" Variant="Variant.Flat"
-                                        Click=@(args => GridDeleteButtonClick(args, booking)) @onclick:stopPropagation="true" />
-                                </Template>
-                            </RadzenDataGridColumn>
                         </Columns>
                     </RadzenDataGrid>
             </RadzenColumn>
@@ -168,29 +154,31 @@
 </RadzenStack>
 
 
-<RadzenRow>
-        @if(showPanels)
-        {
+    @if(showPanels)
+    {
         <RadzenColumn SizeMD="12">
-            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 7px !important;margin-bottom: 5px !important; padding: 0px !important"
+            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 6px !important;margin-bottom: 5px !important; padding: 0px !important"
                 Expand=@(() => Change("Panel expanded")) 
                 Collapse=@(() => Change("Panel collapsed")) >
-                <RadzenCard style="margin-top: 1rem;">
                     <RadzenTabs>
                         <Tabs>
-                            <RadzenTabsItem Text="Payments">
-                                <EditBooking Id="@selectedBookingId"></EditBooking>
+                            <RadzenTabsItem Text="Payments" Style="color:green;font-weight:600">
+                              <BookingPayments Id="@selectedBookingId"></BookingPayments>
                             </RadzenTabsItem>
-                            <RadzenTabsItem Text="Booking History" style="margin-left: 2px;">
+                            <RadzenTabsItem Text="Booking History" style="margin-left: 2px;color:green;font-weight:600">
                             </RadzenTabsItem>
-                            <RadzenTabsItem Text="Add/Edit Credit Requests" style="margin-left: 2px;">
+                            <RadzenTabsItem Text="Add/Edit Credit Requests" style="margin-left: 2px;color:green;font-weight:600">
                             </RadzenTabsItem>
-                            <RadzenTabsItem Text="Checking in" style="margin-left: 2px;">
+                            <RadzenTabsItem Text="Checking in" style="margin-left: 2px;color:green;font-weight:600">
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Text="Tracked User Detail" style="margin-left: 2px;color:green;font-weight:600">
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Text="Notes" style="margin-left: 2px;color:green;font-weight:600">
+                            </RadzenTabsItem>
+                            <RadzenTabsItem Text="Tasks" style="margin-left: 2px;color:green;font-weight:600">
                             </RadzenTabsItem>
                         </Tabs>
                     </RadzenTabs>
-                </RadzenCard>
             </RadzenPanel>
         </RadzenColumn>
-        }
-</RadzenRow>
+    }

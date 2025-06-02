@@ -68,7 +68,7 @@
                                     ShowPagingSummary="true"
                                     ColumnWidth="150px"
                                     PageSizeOptions="@(new int[]{10, 15, 20, 30})"
-                                    PageSize="15"
+                                    PageSize="20"
                                     AllowColumnPicking="true"
                                     Density="Radzen.Density.Compact">
                     <Columns>
@@ -77,7 +77,7 @@
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Propid" Title="Propid" Width="70px">
                             <Template Context="item">
                                 <span Text="Click here" @onclick="() => ShowTabs(item.Propid)" @oncontextmenu=@(e => ShowContextMenuWithItems(e, item)) @oncontextmenu:preventDefault="true"
-                                    style="cursor: pointer; color: green; text-decoration: none;">@item.Propid</span>
+                                      style="cursor: pointer; color: green; text-decoration: underline;">@item.Propid</span>
                             </Template>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Address" Title="Address" Width="140px">
@@ -95,13 +95,6 @@
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Status1.Status1" Title="Status" Width="140px">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="PropertyCleaner.Firstname" Title="Property Cleaner" Width="140px">
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Sortable="false" Width="60px" TextAlign="TextAlign.Center">
-                            <Template Context="property">
-                                <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
-                                    Shade="Shade.Lighter" Variant="Variant.Flat"
-                                    Click=@(args => GridDeleteButtonClick(args, property)) @onclick:stopPropagation="true" />
-                            </Template>
                         </RadzenDataGridColumn>
                     </Columns>
                 </RadzenDataGrid>
@@ -127,7 +120,7 @@
 
         @if (showTabs)
         {
-            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 8px !important;margin-bottom: 0px !important" 
+            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 5px !important;margin-bottom: 0px !important;padding:0px !important" 
                 Expand=@(() => Change("Panel expanded")) 
                 Collapse=@(() => Change("Panel collapsed"))>
                 <RadzenTabs Change=@OnTabChange>
@@ -178,6 +171,10 @@
                             }
                         </RadzenTabsItem>
                         <RadzenTabsItem Text="Owner Comm" style="margin-left: 2px;color:green;font-weight:600">
+                            @if (isPropOwnerTab)
+                            {
+                                <Destination.Components.Pages.CommunicationComponents.OwnerCommunications></Destination.Components.Pages.CommunicationComponents.OwnerCommunications>
+                            }
                         </RadzenTabsItem>
                         <RadzenTabsItem Text="Improvements" style="margin-left: 2px;color:green;font-weight:600">
                             @if (isPropImprovementsTab)
@@ -186,6 +183,10 @@
                             }                            
                         </RadzenTabsItem>
                         <RadzenTabsItem Text="Home Team" style="margin-left: 2px;color:green;font-weight:600">
+                            @if (isPropHomeTeamTab)
+                            {
+                                <Destination.Components.Pages.HomeTeamComponents.HomeTeamForm Id="@selectedPropId"></Destination.Components.Pages.HomeTeamComponents.HomeTeamForm>
+                            }
                         </RadzenTabsItem>
                     </Tabs>
                 </RadzenTabs>

@@ -1,0 +1,115 @@
+@page "/home-team-form"
+
+<RadzenCard>
+    <RadzenTemplateForm TItem="PropertyMgt" Data="@propertyMgt" Submit="@((PropertyMgt args) => { Submit(args); })">
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="4" Style="padding-right: 10px;">
+                <RadzenLabel Text="Propid" />
+                <RadzenNumeric @bind-Value="@propertyMgt.Propid" Style="width: 100%" ShowUpDown="false" />
+            </RadzenColumn>
+            <RadzenColumn Size="4">
+                <RadzenLabel Text="Revenue Goal" />
+                <RadzenDropDown @bind-Value="@propertyMgt.RevenueGoal" Data="@revenueGoalOptions"
+                                TextProperty="Text" ValueProperty="Value" Style="width: 100%"
+                                Placeholder="Select Value" />
+            </RadzenColumn>
+            <RadzenColumn Size="4" Style="padding-right: 10px;">
+                <RadzenLabel Text="Home Quality" />
+                <RadzenDropDown @bind-Value="@propertyMgt.HomeQuality" Data="@homeQualityOptions"
+                                TextProperty="Text" ValueProperty="Value" Style="width: 100%"
+                                Placeholder="Select Value" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Second Row: Home Quality and Relationship -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="4">
+                <RadzenLabel Text="Relationship" />
+                <RadzenDropDown @bind-Value="@propertyMgt.Relationship" Data="@relationshipOptions"
+                                TextProperty="Text" ValueProperty="Value" Style="width: 100%"
+                                Placeholder="Select Value" />
+            </RadzenColumn>
+            <RadzenColumn Size="4" Style="padding-right: 10px;">
+                <RadzenLabel Text="Assigned Resource" />
+                <RadzenDropDown @bind-Value="@propertyMgt.AssignedResource" Data="@assignedResourceOptions"
+                                TextProperty="Text" ValueProperty="Value" Style="width: 100%"
+                                Placeholder="Select Value" />
+            </RadzenColumn>
+            <RadzenColumn Size="4" Style="padding-right: 10px;">
+                <RadzenLabel Text="Desc Upd" />
+                <RadzenDatePicker @bind-Value="@propertyMgt.DescUpdated" Style="width: 100%" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Fourth Row: Assigned Resource and Similar Homes -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="4">
+                <RadzenLabel Text="Similar Home 1" />
+                <RadzenDropDown @bind-Value="@propertyMgt.Similiarhome" Data="@similarHomeOptions"
+                                TextProperty="Text" ValueProperty="Value" Style="width: 100%"
+                                Placeholder="Select Similar Home" />
+            </RadzenColumn>
+            <RadzenColumn Size="4" Style="padding-right: 10px;">
+                <RadzenLabel Text="Similar Home 2" />
+                <RadzenDropDown @bind-Value="@propertyMgt.SimilarHomes1" Data="@similarHomeOptions"
+                                TextProperty="Text" ValueProperty="Value" Style="width: 100%"
+                                Placeholder="Select Similar Home" />
+            </RadzenColumn>
+            <RadzenColumn Size="4">
+                <RadzenLabel Text="Similar Home 3" />
+                <RadzenDropDown @bind-Value="@propertyMgt.SimilarHomes2" Data="@similarHomeOptions"
+                                TextProperty="Text" ValueProperty="Value" Style="width: 100%"
+                                Placeholder="Select Similar Home" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Third Row: Checkboxes -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="4" Style="padding-right: 10px;">
+                <RadzenCheckBox @bind-Value="@propertyMgt.OpsWatch" Style="margin-right: 5px" />
+                <RadzenLabel Text="OpsWatch" />
+            </RadzenColumn>
+            <RadzenColumn Size="4">
+                <RadzenCheckBox @bind-Value="@propertyMgt.YieldWatch" Style="margin-right: 5px" />
+                <RadzenLabel Text="YieldWatch" />
+            </RadzenColumn>
+        </RadzenRow>
+        <!-- Sixth Row: Notes -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="12">
+                <RadzenLabel Text="Notes" />
+                <RadzenTextArea @bind-Value="@propertyMgt.Notes"
+                                Style="width: 100%; height: 150px;"
+                                Rows="7"
+                                Name="Notes" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Seventh Row: Dates -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="4" Style="padding-right: 10px;">
+                <RadzenLabel Text="Last Reviewed" />
+                <RadzenDatePicker @bind-Value="@propertyMgt.LastReviewed" Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="4">
+                <RadzenLabel Text="Last-Photo Upd" />
+                <RadzenDatePicker @bind-Value="@propertyMgt.LastReviewed" Style="width: 100%" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Action Buttons -->
+        <RadzenRow Style="margin-bottom: 10px;">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start" Gap="0.5rem">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary"
+                              ButtonType="ButtonType.Submit"
+                              Icon="save"
+                              Text="Save"
+                              Variant="Variant.Flat" />
+                <RadzenButton ButtonStyle="ButtonStyle.Primary"
+                              Text="Cancel"
+                              Variant="Variant.Flat"
+                               />
+            </RadzenStack>
+        </RadzenRow>
+    </RadzenTemplateForm>
+</RadzenCard>

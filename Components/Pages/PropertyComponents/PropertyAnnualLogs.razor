@@ -3,13 +3,73 @@
 <PageTitle>Annuals</PageTitle>
 <RadzenStack>
     <RadzenRow>
-      <RadzenColumn SizeMD=12>
-        <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+        <RadzenColumn SizeMD=4>
+            <RadzenTemplateForm TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Data="@(annualLogsById)" Visible="@(annualLogsById != null)" Submit="@FormSubmit">
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Property" Component="Name" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenDropDown Data="@(propertiesForPropid)" TextProperty="Name" ValueProperty="Propid" AllowClear=true
+                                        Placeholder="Choose Property" style="display: block; width: 100%" @bind-Value="@(annualLogsById.PropID)" Name="PropID" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Type" Component="TypeName" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(annualLogsById.TypeName)" Name="TypeName" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="TaskID" Component="TaskID" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(annualLogsById.TaskID)" Name="TaskID" ShowUpDown="false" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Date" Component="LastUpdated" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(annualLogsById.LastUpdated)" Name="LastUpdated" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Closed" Component="OpenClosedStatus" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(annualLogsById.OpenClosedStatus)" Name="OpenClosedStatus" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Notes" Component="Notes" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextArea Rows="5" style="display: block; width: 100%" @bind-Value="@(annualLogsById.Notes)" Name="Notes" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                    <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick" />
+                </RadzenStack>
+            </RadzenTemplateForm>
+        </RadzenColumn>
+      <RadzenColumn SizeMD=8>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="130px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@(annuals)" TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Density="Radzen.Density.Compact">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="Name" Title="Property">
+                    <Template Context="item">
+                            <span @onclick="() => BindAnnualLogs(item.ID)" style="cursor: pointer; color: green; text-decoration: underline;">@item.Name</span>
+                    </Template>
                 </RadzenDataGridColumn>
-                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="TypeName" Title="Type Name">
+               <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="TypeName" Title="Type Name">
                 </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="TaskID" Title="TaskID">
                 </RadzenDataGridColumn>
@@ -17,7 +77,7 @@
                 </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="LastUpdated" Title="Last Updated">
                 </RadzenDataGridColumn>
-                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="Notes" Title="Notes">
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="Notes" Title="Notes" Width="170px">
                 </RadzenDataGridColumn>
             </Columns>
         </RadzenDataGrid>

@@ -94,10 +94,10 @@ a:focus {
 }
 
 
-.rz-data-grid.rz-density-compact
+.rz-density-compact
 {
-    --rz-grid-cell-line-height: 13px !important;
-    --rz-grid-cell-padding: 0px 0px 0px 4px !important;
+    --rz-grid-cell-line-height: 15px !important;
+    --rz-grid-cell-padding: 1px 1px 1px 6px !important;
     --rz-grid-header-cell-padding: 0.25rem 0;
     --rz-grid-header-padding: 0.25rem 1rem;
     --rz-grid-header-title-padding-inline: 0.5rem 0;

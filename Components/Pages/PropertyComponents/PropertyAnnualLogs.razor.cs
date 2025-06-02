@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
@@ -9,6 +5,7 @@ using Radzen;
 using Radzen.Blazor;
 using Destination.Services;
 using Destination.Shared.DTO;
+using static Destination.Shared.DTO.AllDropDownValues;
 
 namespace Destination.Components.Pages.PropertyComponents
 {
@@ -44,9 +41,50 @@ namespace Destination.Components.Pages.PropertyComponents
         protected IEnumerable<PropertyAnnualLogDto> annuals;
 
         protected RadzenDataGrid<PropertyAnnualLogDto> grid0;
+        PropertyAnnualLogDto annualLogsById = new PropertyAnnualLogDto();
+        protected IEnumerable<PropertyDropDownData> propertiesForPropid;
+
+
         protected override async Task OnInitializedAsync()
         {
             annuals = await propertyService.GetPropertyAnnualLogs(Id);
+            propertiesForPropid = await propertyService.GetPropertiesForDropDown();
+        }
+
+        protected async Task BindAnnualLogs(int id)
+        {
+            annualLogsById = annuals.Where(x => x.ID == id).FirstOrDefault();
+            StateHasChanged();
+        }
+
+        protected async Task FormSubmit()
+        {
+            try
+            {
+                await propertyService.UpdatePropertyAnnualLogs(annualLogsById);
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Success",
+                    Detail = "Annual logs updated successfully!",
+                    Duration = 4000 // in milliseconds
+                });
+            }
+            catch (Exception ex)
+            {
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Error,
+                    Summary = "Success",
+                    Detail = "error while saving annual logs!",
+                    Duration = 4000 // in milliseconds
+                });
+            }
+        }
+
+        protected async Task CancelButtonClick(MouseEventArgs args)
+        {
+            DialogService.Close(null);
         }
     }
 }

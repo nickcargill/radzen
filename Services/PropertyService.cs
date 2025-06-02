@@ -1,6 +1,7 @@
 ﻿using Destination.Data;
 using Destination.Models.destinationTest;
 using Destination.Shared.DTO;
+using DocumentFormat.OpenXml.InkML;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
 using System.Linq.Dynamic.Core;
@@ -166,6 +167,20 @@ namespace Destination.Services
             }
         }
 
+        public async Task<List<AllDropDownValues.PropertyDropDownData>> GetPropertiesForDropDown(Query query = null)
+        {
+            using var context = dbContextFactory.CreateDbContext();
+            var items = await context.Properties
+                .Where(x => x.Name != null)
+                .Select(x => new AllDropDownValues.PropertyDropDownData
+                {
+                    Propid = x.Propid,
+                    Name = x.Name
+                }).ToListAsync();
+
+            return items;
+        }
+
         public async Task<bool> UpdateVrboRates(PropertyRatesVrbo prop, bool isEdit)
         {
             try
@@ -199,6 +214,14 @@ namespace Destination.Services
                             .ToListAsync();
             return result;
         }
+
+        public async Task<PropertyMgt> GetPropertyMgtByPropId(int id)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+            var result = await dbContext.PropertyMgts.Where(x => x.Propid == id).FirstOrDefaultAsync();
+            return result;
+        }
         public async Task<List<PropertyImprovementDto>> GetImprovementsByPropId(int id)
         {
             using var dbContext = await dbContextFactory.CreateDbContextAsync();
@@ -219,6 +242,54 @@ namespace Destination.Services
                     .AsNoTracking()
                     .ToListAsync();
             return result;
+        }
+
+        public async Task<bool> UpdatePropertyAnnualLogs(PropertyAnnualLogDto data)
+        {
+            try
+            {
+                using var context = dbContextFactory.CreateDbContext();
+
+                PropertyAnnualLog pal = new PropertyAnnualLog();
+                pal.Id = data.ID;
+                pal.TaskId = data.TaskID;
+                pal.PropId = data.PropID;
+                pal.Notes = data.Notes;
+                pal.OpenClosedStatus = data.OpenClosedStatus == "Open" ? true : false;
+                pal.LastUpdated = DateTime.Now;
+
+                context.PropertyAnnualLogs.Update(pal);
+                await context.SaveChangesAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> CreateUpdaterPopertymgt(PropertyMgt pmgt, bool isEdit)
+        {
+            try
+            {
+                using var context = dbContextFactory.CreateDbContext();
+                if (isEdit)
+                {
+                    context.PropertyMgts.Update(pmgt);
+                }
+                else
+                {
+                    context.PropertyMgts.Add(pmgt);
+                }
+
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

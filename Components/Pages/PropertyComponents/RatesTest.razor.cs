@@ -35,10 +35,8 @@ namespace Destination.Components.Pages.PropertyComponents
         [Inject]
         public PropertyService propertyService { get; set; }
 
-        protected PropertyRate propertyRate;
-        protected PropertyRatesVrbo vrboRates;
-
-        protected IEnumerable<Booking> bookings;
+        PropertyRate propertyRate = new PropertyRate();
+        PropertyRatesVrbo vrboRates = new PropertyRatesVrbo();
 
         protected RadzenDataGrid<Booking> grid0;
         protected Booking booking;
@@ -68,7 +66,6 @@ namespace Destination.Components.Pages.PropertyComponents
             }
 
             StateHasChanged();
-           // bookings = await destinationTestService.GetBookings();
         }
 
         protected async Task Submit(PropertyRate arg)
@@ -76,8 +73,14 @@ namespace Destination.Components.Pages.PropertyComponents
             var result = await propertyService.UpdaterPopertyRates(arg, isPropertyRateEdit);
             if (result)
             {
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Success",
+                    Detail = "Data updated successfully!",
+                    Duration = 4000 // in milliseconds
+                });
                 StateHasChanged();
-                NavigationManager.NavigateTo("/properties");
             }
         }
 
@@ -86,8 +89,14 @@ namespace Destination.Components.Pages.PropertyComponents
             var result = await propertyService.UpdateVrboRates(arg, isVrboRateEdit);
             if (result)
             {
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Success",
+                    Detail = "Data updated successfully!",
+                    Duration = 4000 // in milliseconds
+                });
                 StateHasChanged();
-                NavigationManager.NavigateTo("/properties");
             }
         }
     }

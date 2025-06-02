@@ -113,26 +113,5 @@ namespace Destination.Services
             var result = await dbContext.Payments.Where(x=>x.IntBookingId == id).ToListAsync();
             return result;
         }
-
-
-        // below code works to get data from a Store proc
-
-        //public async Task<List<Payment>> GetPaymentsByBookingId(int id)
-        //{
-        //    using var dbContext = await dbContextFactory.CreateDbContextAsync();
-
-        //    try
-        //    {
-        //        var result = await dbContext.Payments
-        //                    .FromSqlRaw("EXEC RDZ_proc_GetPaymentsPerBooking @BookingID = {0}", id)
-        //                        .AsNoTracking()
-        //                        .ToListAsync();
-        //        return result;
-        //    }
-        //    catch (Exception ex) { 
-        //    }
-
-        //    return null;
-        //}
     }
 }

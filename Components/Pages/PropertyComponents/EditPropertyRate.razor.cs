@@ -51,6 +51,13 @@ namespace Destination.Components.Pages.PropertyComponents
             try
             {
                 await destinationTestService.UpdatePropertyRate(Id, propertyRate);
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Success",
+                    Detail = "Data updated successfully!",
+                    Duration = 4000 // in milliseconds
+                });
                 DialogService.Close(propertyRate);
             }
             catch (Exception ex)

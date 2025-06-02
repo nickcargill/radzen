@@ -10,7 +10,7 @@ using Radzen.Blazor;
 
 namespace Destination.Components.Pages.CommunicationComponents
 {
-    public partial class AddCommunication
+    public partial class OwnerCommunications
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -29,32 +29,16 @@ namespace Destination.Components.Pages.CommunicationComponents
 
         [Inject]
         protected NotificationService NotificationService { get; set; }
+
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
+        protected IEnumerable<Destination.Models.destinationTest.OwnerCommunication> ownerCommunications;
+
+        protected RadzenDataGrid<Destination.Models.destinationTest.OwnerCommunication> grid0;
         protected override async Task OnInitializedAsync()
         {
-            communication = new Destination.Models.destinationTest.Communication();
-        }
-        protected bool errorVisible;
-        protected Destination.Models.destinationTest.Communication communication;
-
-        protected async Task FormSubmit()
-        {
-            try
-            {
-                await destinationTestService.CreateCommunication(communication);
-                DialogService.Close(communication);
-            }
-            catch (Exception ex)
-            {
-                errorVisible = true;
-            }
-        }
-
-        protected async Task CancelButtonClick(MouseEventArgs args)
-        {
-            DialogService.Close(null);
+            ownerCommunications = await destinationTestService.GetOwnerCommunications(new Query { Expand = "Agent1" });
         }
     }
 }

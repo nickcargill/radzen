@@ -1,0 +1,42 @@
+@page "/owner-communications"
+
+<PageTitle>OwnerCommunications</PageTitle>
+<RadzenStack>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(ownerCommunications)" TItem="Destination.Models.destinationTest.OwnerCommunication" Density="Radzen.Density.Compact">
+            <Columns>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Id" Title="Id" Width="40px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Ownercomm" Title="Ownercomm">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Agent1.AgentBathrooms" Title="Agent1">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Type" Title="Type">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Cdate" Title="Cdate">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Agent" Title="Agent">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Emailtemplate" Title="Emailtemplate">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="ActionReq" Title="Action Req">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="AssignedTo" Title="Assigned To">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="Department" Title="Department">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Property="OwnerFlag" Title="Owner Flag">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.OwnerCommunication" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="ownerCommunication">
+                    </Template>
+                </RadzenDataGridColumn>
+            </Columns>
+
+        </RadzenDataGrid>
+
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

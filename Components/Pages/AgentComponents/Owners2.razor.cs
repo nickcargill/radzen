@@ -103,7 +103,7 @@ namespace Destination.Components.Pages.AgentComponents
         protected async Task OwnerCommunicationsAddButtonClick(MouseEventArgs args, Destination.Models.destinationTest.Agent data)
         {
 
-            var dialogResult = await DialogService.OpenAsync<AddOwnerCommunication>("Add OwnerCommunications", new Dictionary<string, object> {  });
+          //  var dialogResult = await DialogService.OpenAsync<AddOwnerCommunication>("Add OwnerCommunications", new Dictionary<string, object> {  });
             await GetChildData(data);
             await OwnerCommunicationsDataGrid.Reload();
 

@@ -155,7 +155,7 @@ public partial class Properties
         var initialArgs = new LoadDataArgs
         {
             Skip = 0,
-            Top = 15,
+            Top = 20,
             OrderBy = "PropId" // Or null, depending on your needs
         };
 

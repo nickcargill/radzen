@@ -1,0 +1,42 @@
+@page "/booking-payments"
+
+<PageTitle>Payments</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Payments" TextStyle="TextStyle.H5" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(payments)" TItem="Destination.Models.destinationTest.Payment" Density="Radzen.Density.Compact">
+            <Columns>
+                    <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Payment" Property="IntBookingId" Title="BookId">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Payment" Property="DecAmount" Title="Amount">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Payment" Property="DtPaymentDate" Title="Pay Date">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Payment" Property="DtCreated" Title="Dt Created">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Payment" Property="StrTransactionId" Title="Transaction Id">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Payment" Property="StrStatus" Title="Str Status">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Payment" Property="DtModified" Title="Dt Modified">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Payment" Property="IntPaymentId" Title="PayId">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Payment" Property="StrPaymentReceipt" Title="E's and B's">
+                    </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

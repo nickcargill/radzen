@@ -14879,7 +14879,7 @@ namespace Destination
 
         public async Task<IQueryable<Destination.Models.destinationTest.OwnerCommunication>> GetOwnerCommunications(Query query = null)
         {
-            var items = Context.OwnerCommunications.AsQueryable();
+            var items = Context.OwnerCommunications.Take(10).AsQueryable();
 
             items = items.Include(i => i.Agent1);
 

@@ -83,7 +83,7 @@ namespace Destination.Components.Pages.BookingComponents
                 {
                     OrderBy = "Id",
                     Skip = 0,
-                    Top = 15
+                    Top = 20
                 };
 
                 var result = await bookingService.GetBookingsByPropId(query,Id);
@@ -96,7 +96,7 @@ namespace Destination.Components.Pages.BookingComponents
                 var initialArgs = new LoadDataArgs
                 {
                     Skip = 0,
-                    Top = 15,
+                    Top = 20,
                     OrderBy = "Id" // Or null, depending on your needs
                 };
 
