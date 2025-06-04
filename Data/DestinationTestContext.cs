@@ -38,6 +38,12 @@ namespace Destination.Data
 
             builder.Entity<PropertyImprovementDto>().HasNoKey().ToView(null);
 
+            builder.Entity<BookingHistoryResultDto>().HasNoKey().ToView(null);
+
+            builder.Entity<UserVisitHistoryDto>().HasNoKey().ToView(null);
+
+            builder.Entity<CommunicationHistoryDto>().HasNoKey().ToView(null);
+
             builder.Entity<PropertyAnnualLogDto>().HasNoKey().ToView(null);
 
             builder.Entity<Destination.Models.destinationTest.AirbnbUploadedPhoto>().HasNoKey();
@@ -2743,6 +2749,12 @@ namespace Destination.Data
         public DbSet<Destination.Models.destinationTest.AffiliateBooking> AffiliateBookings { get; set; }
 
         public DbSet<PropertyImprovementDto> PropertyImprovementResults { get; set; }
+
+        public DbSet<BookingHistoryResultDto> BookingHistoryResult { get; set; }
+
+        public DbSet<UserVisitHistoryDto> UserVisitHistoryResult { get; set; }
+        public DbSet<CommunicationHistoryDto> CommunicationHistoryResult { get; set; }
+
         public DbSet<PropertyAnnualLogDto> PropertyAnnualLogResults { get; set; }
 
         public DbSet<Destination.Models.destinationTest.AffiliateCollaboration> AffiliateCollaborations { get; set; }

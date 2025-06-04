@@ -84,7 +84,7 @@ a:focus {
 
 .rz-grid-table td .rz-cell-data {
     color: var(--rz-grid-cell-color);
-    font-size: 12px !important;
+    font-size: 11px !important;
     line-height: var(--rz-grid-cell-line-height);
     display: block;
     overflow: hidden;
@@ -96,8 +96,8 @@ a:focus {
 
 .rz-density-compact
 {
-    --rz-grid-cell-line-height: 15px !important;
-    --rz-grid-cell-padding: 1px 1px 1px 6px !important;
+    --rz-grid-cell-line-height: 14px !important;
+    --rz-grid-cell-padding: 1px 1px 1px 4px !important;
     --rz-grid-header-cell-padding: 0.25rem 0;
     --rz-grid-header-padding: 0.25rem 1rem;
     --rz-grid-header-title-padding-inline: 0.5rem 0;

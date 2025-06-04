@@ -1,5 +1,7 @@
-﻿using Destination.Data;
+﻿using Destination.Components.Pages;
+using Destination.Data;
 using Destination.Models.destinationTest;
+using Destination.Shared.DTO;
 using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.EntityFrameworkCore;
@@ -67,6 +69,48 @@ namespace Destination.Services
             };
         }
 
+        public async Task<List<UserVisitHistoryDto>> GetVisitHistoryByBookingId(int id)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+            var result = await dbContext.UserVisitHistoryResult
+                .FromSqlRaw("EXEC RDZ_proc_getUserVisitHistoryPerBooking @BookingID = {0}", id)
+                    .AsNoTracking()
+                    .ToListAsync();
+            return result;
+
+        }
+
+        public async Task<List<CommunicationHistoryDto>> GetCommHistoryByBookingId(int id)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+            var result = await dbContext.CommunicationHistoryResult
+                .FromSqlRaw("EXEC RDZ_proc_GetCommunicationPerBooking @BookingID = {0}", id)
+                    .AsNoTracking()
+                    .ToListAsync();
+            return result;
+
+        }
+
+        public async Task<List<CommCode>> GetAllCommCodes()
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+            var result = await dbContext.CommCodes.ToListAsync();
+            return result;
+
+        }
+
+        public async Task<Communication> GetCommunicationById(int id)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+            var result = await dbContext.Communications.Where(x=>x.Commid == id).FirstOrDefaultAsync();
+            return result;
+
+        }
+
         public async Task<PagedResult<Booking>> GetBookingsByPropId(Query query, int Id)
         {
             using var context = dbContextFactory.CreateDbContext();
@@ -112,6 +156,41 @@ namespace Destination.Services
             using var dbContext = await dbContextFactory.CreateDbContextAsync();
             var result = await dbContext.Payments.Where(x=>x.IntBookingId == id).ToListAsync();
             return result;
+        }
+
+        public async Task<List<BookingHistoryResultDto>> GetBookingHistoryByBookingId(int id)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+
+            var result = await dbContext.BookingHistoryResult
+                .FromSqlRaw("EXEC RDZ_proc_GetBookingHistory @BookingID = {0}", id)
+                    .AsNoTracking()
+                    .ToListAsync();
+            return result;
+        }
+
+        public async Task<bool> CraeteOrUpdateCommunication(Communication comm, bool isEdit)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+           try
+            {
+                using var context = dbContextFactory.CreateDbContext();
+                if (isEdit)
+                {
+                    context.Communications.Update(comm);
+                }
+                else
+                {
+                    context.Communications.Add(comm);
+                }
+
+                await context.SaveChangesAsync();
+                return true;
+           }
+           catch (Exception ex)
+           {
+                return false;
+           }
         }
     }
 }

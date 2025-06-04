@@ -47,6 +47,7 @@ namespace Destination.Components.Pages.BookingComponents
         protected RadzenDataGrid<Destination.Models.destinationTest.Booking> grid0;
 
         protected bool showPanels = false;
+        protected bool isBottomPanel = false;
         protected int selectedBookingId = 0;
 
         private bool isCollapsed = false;
@@ -57,10 +58,32 @@ namespace Destination.Components.Pages.BookingComponents
         private int totalCount;
         private bool dataLoaded = false;
 
+        protected bool isBookingHistoryTab = false;
+        protected bool isCommTab = false;
+        protected bool isVisitHistoryTab = false;
+
+
+
         private void ShowCollapse()
         {
             showCollapse = true;
             showPanels = true;
+        }
+
+        private void OnTabChange(int index)
+        {
+            switch (index)
+            {
+                case 1:
+                    isBookingHistoryTab = true;
+                    break;
+                case 2:
+                    isCommTab = true;
+                    break;
+                case 3:
+                    isVisitHistoryTab = true;
+                    break;
+            }
         }
 
         void PickedColumnsChanged(DataGridPickedColumnsChangedEventArgs<Destination.Models.destinationTest.Booking> args)
@@ -139,10 +162,12 @@ namespace Destination.Components.Pages.BookingComponents
         {
             showPanels = false;
             selectedBookingId = bookingId;
+            isBottomPanel = false;
             sharedEvents.NotifyBookingIdClicked(bookingId);
             await Task.Delay(1);
             showPanels = true;
             showCollapse = true;
+            isBottomPanel = true;
             StateHasChanged();
         }
 

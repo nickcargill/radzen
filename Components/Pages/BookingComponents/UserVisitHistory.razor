@@ -1,0 +1,42 @@
+@page "/user-visit-history"
+
+<PageTitle>TrackedUsers</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="User Visit History" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+                            Data="@(trackedUsers)" TItem="Destination.Shared.DTO.UserVisitHistoryDto" Density="Radzen.Density.Compact">
+            <Columns>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.UserVisitHistoryDto" Property="BookingID" Title="Booking ID" Width="70px">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.UserVisitHistoryDto" Property="Name" Title="Name">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.UserVisitHistoryDto" Property="VisitedOn" Title="Visited On">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.UserVisitHistoryDto" Property="FromDate" Title="From Date">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.UserVisitHistoryDto" Property="ToDate" Title="To Date">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.UserVisitHistoryDto" Property="PageUrl" Title="Page Url">
+                        <Template Context="data">
+                            <a href="@data.PageUrl" target="_blank" style="cursor: pointer; color: green; text-decoration: underline;">                            
+                                Visited Page
+                            </a>
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.UserVisitHistoryDto" Property="PageUrl" Title="PageName">
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

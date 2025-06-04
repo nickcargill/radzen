@@ -1,0 +1,63 @@
+@page "/booking-history-result"
+
+<PageTitle>BookingHistoryResult</PageTitle>
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="List Of Booking History" TextStyle="TextStyle.H5" TagName="TagName.H1" style="margin: 0" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow>
+      <RadzenColumn SizeMD=12>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(bookingHistoryResult)" TItem="Destination.Shared.DTO.BookingHistoryResultDto" Density="Radzen.Density.Compact">
+            <Columns>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="IntHistoryId" Title="Hist Id" Width="100px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="IntBookingId" Title="Id" Width="70px">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="DtCreated" Title="Created">
+                </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="FirstName" Title="Agent">
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="Name" Title="Property">
+                    </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="StrTemplateName" Title="Template">
+                </RadzenDataGridColumn>
+
+
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="DateFrom" Title="Datefrom">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="DateTo" Title="Dateto">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="Nights" Title="Nts">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="RentalAmount" Title="Rent">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="ProcessingFee" Title="Proc">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="PetFee" Title="Pet">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="CleaningFee" Title="Clean">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="GrossAmount" Title="Gross">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="Tax" Title="Tax">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="Deposit" Title="Dep">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="PetDeposit" Title="Pet">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="Outstanding" Title="Outstand">
+                </RadzenDataGridColumn>
+                <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="Due" Title="Due">
+                </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>

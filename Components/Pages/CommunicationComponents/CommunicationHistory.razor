@@ -1,0 +1,101 @@
+@page "/communication-history"
+
+<PageTitle>Communication</PageTitle>
+<RadzenStack>
+    <RadzenRow>
+        <RadzenColumn SizeMD=5>
+            <RadzenTemplateForm TItem="Communication" Data="@(commById)" Visible="@(commById != null)" Submit="@FormSubmit">
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="CommId" Component="Commid" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(commById.Commid)" Name="Commid" ShowUpDown="false" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Comm Date" Component="Commdate" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(commById.Commdate)" Name="Commdate" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Comm Codes" Component="Comcode" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenDropDown Data="@(commCodesForCommunication)" TextProperty="Description" ValueProperty="Commcodeid" AllowClear=true
+                                        Placeholder="Choose Comm Codes" style="display: block; width: 100%" @bind-Value="@(commById.Comcode)" Name="Comcode" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Communication" Component="Communication1" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextArea Rows="10" style="display: block; width: 100%" @bind-Value="@(commById.Communication1)" Name="Communication1" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Budget" Component="Budget" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(commById.Budget)" Name="Budget" ShowUpDown="false"/>
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Amount" Component="Amount" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(commById.Amount)" Name="Amount" ShowUpDown="false" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Receipt" Component="Receipt" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(commById.Receipt)" Name="Receipt" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenRow style="margin-bottom: 1rem">
+                    <RadzenColumn SizeMD="3">
+                        <RadzenLabel Text="Action Required" Component="Actionrequired" style="width: 100%" />
+                    </RadzenColumn>
+                    <RadzenColumn SizeMD="9">
+                        <RadzenCheckBox @bind-Value="@(commById.Actionrequired)" Name="Actionrequired" />
+                    </RadzenColumn>
+                </RadzenRow>
+                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                    <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
+                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick" />
+                </RadzenStack>
+            </RadzenTemplateForm>
+        </RadzenColumn>
+      <RadzenColumn SizeMD=7>
+        <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(commHistory)" TItem="Destination.Shared.DTO.CommunicationHistoryDto" Density="Radzen.Density.Compact">
+            <Columns>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.CommunicationHistoryDto" Property="CommDate" Title="Date" Width="50px">
+                    <Template Context="item">
+                            <span @onclick="() => BindCommunicationData(item.Commid)" style="cursor: pointer; color: green; text-decoration: underline;">@item.CommDate</span>
+                    </Template>
+                    </RadzenDataGridColumn>
+
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.CommunicationHistoryDto" Title="Communication" Width="200px">
+                        <Template Context="data">
+                            <RadzenTextArea Rows="7" Value="@($"{data.CommDesc}\n{data.CommText}")"
+                                Style="width: 100%; white-space: pre-wrap;" Disabled
+                                ReadOnly="true" />
+                        </Template>
+                    </RadzenDataGridColumn>
+            </Columns>
+        </RadzenDataGrid>
+    </RadzenColumn>
+  </RadzenRow>
+</RadzenStack>
+

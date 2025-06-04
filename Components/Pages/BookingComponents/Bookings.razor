@@ -13,7 +13,7 @@
 <RadzenStack>
     <RadzenRow AlignItems="AlignItems.Center">
         <RadzenColumn Size="12" SizeMD="6">
-            <RadzenText Text="Bookings" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+            <RadzenText Text="Bookings" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin: 0" />
         </RadzenColumn>
         <RadzenColumn Size="12" SizeMD="6">
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
@@ -25,7 +25,7 @@
         @if (!showCollapse)
         {
             <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Light"
-                          Click="@ShowCollapse" Style="height:24px;padding:0px !important; min-height:18px;min-width:25px" />
+                          Click="@ShowCollapse" Style="height: 24px; padding:0px !important; min-height: 18px; min-width: 25px" />
         }
         @if (showPanels && selectedBookingId != 0 && PropParameterId == 0)
         {
@@ -80,11 +80,18 @@
                                 </RadzenDataGridColumn>
                                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.Name" Title="Property" Width="140px">
                                 </RadzenDataGridColumn>
-                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Datefrom" Title="Datefrom" Width="140px">
-                                </RadzenDataGridColumn>
-                                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Dateto" Title="Dateto" Width="140px">
-                                </RadzenDataGridColumn>
-                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="BookingStatus.Status" Title="Booking Status" Width="140px">
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Datefrom" Title="Datefrom" Width="140px">
+                                <Template Context="data">
+                                    @data.Datefrom?.ToString("yyyy-MM-dd")
+                                </Template>
+                            </RadzenDataGridColumn>
+
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Dateto" Title="Dateto" Width="140px">
+                                <Template Context="data">
+                                    @data.Dateto?.ToString("yyyy-MM-dd")
+                                </Template>
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="BookingStatus.Status" Title="Status" Width="140px">
                                 </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Notes" Title="Notes" Width="140px">
                                 </RadzenDataGridColumn>
@@ -129,10 +136,17 @@
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking"  Property="Property.Name" Title="Property" Width="150px">
                             </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Datefrom" Title="Datefrom" Width="140px">
-                            </RadzenDataGridColumn>
+                            <Template Context="data">
+                                @data.Datefrom?.ToString("yyyy-MM-dd")
+                            </Template>
+                        </RadzenDataGridColumn>
+
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Dateto" Title="Dateto" Width="140px">
-                            </RadzenDataGridColumn>
-                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="BookingStatus.Status" Title="Booking Status" Width="140px">
+                            <Template Context="data">
+                                @data.Dateto?.ToString("yyyy-MM-dd")
+                            </Template>
+                        </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="BookingStatus.Status" Title="Status" Width="140px">
                             </RadzenDataGridColumn>
                                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Notes" Title="Notes" Width="140px">
                             </RadzenDataGridColumn>
@@ -154,24 +168,38 @@
 </RadzenStack>
 
 
-    @if(showPanels)
+   @if (isBottomPanel)
     {
         <RadzenColumn SizeMD="12">
             <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 6px !important;margin-bottom: 5px !important; padding: 0px !important"
                 Expand=@(() => Change("Panel expanded")) 
                 Collapse=@(() => Change("Panel collapsed")) >
-                    <RadzenTabs>
+                        <RadzenTabs Change=@OnTabChange>
                         <Tabs>
                             <RadzenTabsItem Text="Payments" Style="color:green;font-weight:600">
                               <BookingPayments Id="@selectedBookingId"></BookingPayments>
                             </RadzenTabsItem>
                             <RadzenTabsItem Text="Booking History" style="margin-left: 2px;color:green;font-weight:600">
+                                @if (isBookingHistoryTab)
+                                {
+                                  <BookingHistory Id="@selectedBookingId"></BookingHistory>
+                                }
                             </RadzenTabsItem>
-                            <RadzenTabsItem Text="Add/Edit Credit Requests" style="margin-left: 2px;color:green;font-weight:600">
+                            <RadzenTabsItem Text="Communication" style="margin-left: 2px;color:green;font-weight:600">
+                                @if (isCommTab)
+                                {
+                                    <Destination.Components.Pages.CommunicationComponents.CommunicationHistory Id="@selectedBookingId"></Destination.Components.Pages.CommunicationComponents.CommunicationHistory>
+                                }
                             </RadzenTabsItem>
+                            <RadzenTabsItem Text="Visit History" style="margin-left: 2px;color:green;font-weight:600">
+                                @if (isVisitHistoryTab)
+                                {
+                                    <UserVisitHistory Id="@selectedBookingId"></UserVisitHistory>
+                                }
+                            </RadzenTabsItem>                     
+                            <RadzenTabsItem Text="Credit Requests" style="margin-left: 2px;color:green;font-weight:600">                  
+                           </RadzenTabsItem>
                             <RadzenTabsItem Text="Checking in" style="margin-left: 2px;color:green;font-weight:600">
-                            </RadzenTabsItem>
-                            <RadzenTabsItem Text="Tracked User Detail" style="margin-left: 2px;color:green;font-weight:600">
                             </RadzenTabsItem>
                             <RadzenTabsItem Text="Notes" style="margin-left: 2px;color:green;font-weight:600">
                             </RadzenTabsItem>
