@@ -84,7 +84,7 @@ a:focus {
 
 .rz-grid-table td .rz-cell-data {
     color: var(--rz-grid-cell-color);
-    font-size: 11px !important;
+    font-size: 10px !important;
     line-height: var(--rz-grid-cell-line-height);
     display: block;
     overflow: hidden;

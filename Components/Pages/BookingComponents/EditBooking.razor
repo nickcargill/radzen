@@ -5,7 +5,7 @@
     <RadzenColumn SizeMD=12>
         <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save Booking</RadzenAlert>
         <RadzenTemplateForm TItem="Destination.Models.destinationTest.Booking" Data="@(booking)" Visible="@(booking != null)" Submit="@FormSubmit">
-            <RadzenRow style="margin-bottom: 1rem">
+@*             <RadzenRow style="margin-bottom: 1rem">
                 <RadzenColumn SizeMD="3">
                     <RadzenLabel Text="Property" Component="Property" style="width: 100%" />
                 </RadzenColumn>
@@ -14,7 +14,7 @@
                          Placeholder="Choose Property" style="display: block; width: 100%" @bind-Value="@(booking.Propertyid)" Name="propid"
                            />
                 </RadzenColumn>
-            </RadzenRow>
+            </RadzenRow> *@
             <RadzenRow style="margin-bottom: 1rem">
                 <RadzenColumn SizeMD="3">
                     <RadzenLabel Text="Datefrom" Component="Datefrom" style="width: 100%" />

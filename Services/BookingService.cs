@@ -158,6 +158,20 @@ namespace Destination.Services
             return result;
         }
 
+        public async Task<CreditRequest> GetCreditRequestByBookingId(int id)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+            var result = await dbContext.CreditRequests.Where(x => x.BookingId == id).FirstOrDefaultAsync();
+            return result;
+        }
+
+        public async Task<List<CreditRequestType>> GetCreditRequestTypes()
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+            var result = await dbContext.CreditRequestTypes.ToListAsync();
+            return result;
+        }
+
         public async Task<List<BookingHistoryResultDto>> GetBookingHistoryByBookingId(int id)
         {
             using var dbContext = await dbContextFactory.CreateDbContextAsync();
@@ -191,6 +205,30 @@ namespace Destination.Services
            {
                 return false;
            }
+        }
+
+        public async Task<bool> CraeteOrUpdateCreditRequests(CreditRequest cr, bool isEdit)
+        {
+            using var dbContext = await dbContextFactory.CreateDbContextAsync();
+            try
+            {
+                using var context = dbContextFactory.CreateDbContext();
+                if (isEdit)
+                {
+                    context.CreditRequests.Update(cr);
+                }
+                else
+                {
+                    context.CreditRequests.Add(cr);
+                }
+
+                await context.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
     }
 }

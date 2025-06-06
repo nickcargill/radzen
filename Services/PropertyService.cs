@@ -54,7 +54,7 @@ namespace Destination.Services
                 filteredItems = filteredItems.Take(query.Top.Value);
             }
 
-            var data = await filteredItems.Where(x => x.Name !=null).ToListAsync();
+            var data = await filteredItems.ToListAsync();
 
             return new PagedResult<Property>
             {

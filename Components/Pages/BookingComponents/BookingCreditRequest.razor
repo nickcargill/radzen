@@ -1,0 +1,119 @@
+@page "/credit-request"
+
+<PageTitle>Credit Request</PageTitle>
+
+<RadzenCard>
+    <RadzenTemplateForm TItem="CreditRequest" Data=@creditRequest Submit="@((CreditRequest args) => { Submit(args); })">
+        <!-- Row 1 - Top Fields -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Booking ID" Component="BookingId" />
+                <RadzenNumeric @bind-Value="@creditRequest.BookingId" ShowUpDown="false" Style="width: 100%" />
+            </RadzenColumn>
+
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Avoidable" Component="Avoidable" />
+                <RadzenDropDown @bind-Value="@creditRequest.Avoidable"
+                                Data="@avoidableOptions"
+                                TextProperty="Text"
+                                ValueProperty="Value"
+                                Placeholder="Select Value"
+                                Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Type" Component="Type" />
+                <RadzenDropDown @bind-Value="@creditRequest.Type"
+                                Data="@Types"
+                                TextProperty="TypeName"
+                                ValueProperty="TypeId"
+                                Name="Type"
+                                Placeholder="Select Value"
+                                Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Credit Amount" Component="Amount" />
+                <RadzenNumeric @bind-Value="@creditRequest.Amount" ShowUpDown="false" Style="width: 100%" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 2 - Type and Amounts -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Review Date" Component="ReviewedDate" />
+                <RadzenDatePicker @bind-Value="@creditRequest.ReviewedDate" Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Reviewed By" Component="ReviewedBy" />
+                <RadzenNumeric @bind-Value="@creditRequest.ReviewedBy" ShowUpDown="false" Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="Owners Loss" Component="Ownerscut" />
+                <RadzenNumeric @bind-Value="@creditRequest.Ownerscut" ShowUpDown="false" Style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn Size="3">
+                <RadzenLabel Text="DBB Loss" Component="Dbbcut" />
+                <RadzenNumeric @bind-Value="@creditRequest.Dbbcut" ShowUpDown="false" Style="width: 100%" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 4 - Checkboxes -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <RadzenLabel Text="Closed" Component="Closed" />
+                <div style="margin-top: 8px;">
+                    <RadzenCheckBox @bind-Value="@creditRequest.Closed" Style="margin-right: 8px;" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <RadzenLabel Text="Addressed?" Component="SolutionSolved" />
+                <div style="margin-top: 8px;">
+                    <RadzenCheckBox @bind-Value="@creditRequest.SolutionSolved" Style="margin-right: 8px;" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <RadzenLabel Text="Website updated" Component="WebsiteContent" />
+                <div style="margin-top: 8px;">
+                    <RadzenCheckBox @bind-Value="@creditRequest.WebsiteContent" Style="margin-right: 8px;" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <RadzenLabel Text="Accounting" Component="Accounting" />
+                <div style="margin-top: 8px;">
+                    <RadzenCheckBox @bind-Value="@creditRequest.Accounting" Style="margin-right: 8px;" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <RadzenLabel Text="Maintenance" Component="Maintenance" />
+                <div style="margin-top: 8px;">
+                    <RadzenCheckBox @bind-Value="@creditRequest.Maintenance" Style="margin-right: 8px;" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <RadzenLabel Text="Cleaning" Component="Cleaning" />
+                <div style="margin-top: 8px;">
+                    <RadzenCheckBox @bind-Value="@creditRequest.Cleaning" Style="margin-right: 8px;" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 5 - Notes -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="6">
+                <RadzenLabel Text="Notes" Component="Notes" />
+                <RadzenTextArea @bind-Value="@creditRequest.Notes" Style="width: 100%" Rows="4" />
+            </RadzenColumn>
+            <RadzenColumn Size="6">
+                <RadzenLabel Text="SolutionStatus" Component="SolutionStatus" />
+                <RadzenTextArea @bind-Value="@creditRequest.SolutionStatus" Style="width: 100%" Rows="4" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Submit Row -->
+        <RadzenRow Style="margin-bottom: 10px;">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start" Gap="0.5rem">
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
+                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" />
+            </RadzenStack>
+        </RadzenRow>
+    </RadzenTemplateForm>
+</RadzenCard>

@@ -1,9 +1,22 @@
-@page "/bookings"
+﻿@page "/bookings"
 
 <style>
     .rz-panel-titlebar {
         flex-direction: row-reverse;
         justify-content: right;
+    }
+
+    .rz-pager-element, .rz-button-md {
+        padding: 0.5rem 1rem;
+        height: auto;
+        line-height: 0.5rem !important;
+        min-height: 1.50rem !important;
+        min-width: 1.50rem !important;
+        font-size: var(--rz-body-font-size);
+        font-weight: 600;
+    }
+    .rz-form{
+        margin-top: 40px !important;
     }
 </style>
 
@@ -21,7 +34,8 @@
             </RadzenStack>
         </RadzenColumn>
     </RadzenRow>
-    <RadzenRow>
+     <RadzenRow>
+
         @if (!showCollapse)
         {
             <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Light"
@@ -29,29 +43,59 @@
         }
         @if (showPanels && selectedBookingId != 0 && PropParameterId == 0)
         {
-            <RadzenColumn SizeMD="3">
-                <div class="custom-sidebar @(isCollapsed ? "collapsed" : "expanded")">
-                    <RadzenCard Style="margin-top: 1px; position: relative;padding:4px">
 
-                        <!-- Remove/Hide Button inside the panel -->
-                        <RadzenButton Icon="remove"
-                                      Click="@HidePanel"
-                                      ButtonStyle="ButtonStyle.Light"
-                                      Style="position: absolute; top: 0px; right: 0px; padding:0px !important; min-height:18px;min-width:25px" />
+        <RadzenColumn SizeMD="3" Style="position: relative;">
+            <!-- Main Card Container -->
+            <RadzenCard Style="height: 100%; position: relative; padding-top: 10px;">
 
-                        <RadzenTabs>
-                            <Tabs>
-                                <RadzenTabsItem Text="Edit Info" style="align-self:end;">
-                                    <EditBooking Id="@selectedBookingId"></EditBooking>
-                                </RadzenTabsItem>
-                                <RadzenTabsItem Text="Tenant" style="margin-left: 3px; align-self:end;">
-                                </RadzenTabsItem>
-                            </Tabs>
-                        </RadzenTabs>
-                    </RadzenCard>
+                    <RadzenButton Icon="remove"
+                                  Click="@HidePanel"
+                                  ButtonStyle="ButtonStyle.Light"
+                                  Style="position: absolute; top: 0px; right: 0px; padding:0px !important; min-height:18px;min-width:25px" />
+
+                <!-- Menu Toggle Button (Top-left) -->
+                <RadzenButton Icon="menu" 
+                             Click="@ToggleMenu"
+                             ButtonStyle="ButtonStyle.Light"
+                             Style="position: absolute; top: 1px; left: 1px; z-index: 10;padding:0px !important" />
+
+                <!-- Menu Drawer (Now positioned top-left) -->
+                <div style="@menuStyle">
+                    <RadzenStack Orientation="Orientation.Vertical" Gap="8px" Style="padding: 15px 10px; min-width: 160px;">
+                        <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))" 
+                           style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                           Edit Booking
+                        </a>
+                        <a href="javascript:void(0)" @onclick="@(() => LoadForm("Tasks"))" 
+                           style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                           Tasks
+                        </a>
+                        <a href="javascript:void(0)" @onclick="@(() => LoadForm("Notes"))" 
+                           style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                           Notes
+                        </a>
+                    </RadzenStack>
                 </div>
-            </RadzenColumn>
+
+                <!-- Form Container -->
+                <div style="margin-top: 5px; @(menuVisible ? "opacity: 0.3;" : "")">
+                    @if (activeForm == "booking")
+                    {
+                        <EditBooking Id="@selectedBookingId" />
+                    }
+                        else if (activeForm == "Tasks")
+                    {
+                        <h3>Feature coming soon. Stay tuned!</h3>
+                    }
+                        else if (activeForm == "Notes")
+                    {
+                            <h3>Feature coming soon. Stay tuned!</h3>
+                    }
+                </div>
+            </RadzenCard>
+        </RadzenColumn>
         }
+
         @if (PropParameterId == 0)
         {
             <RadzenColumn SizeMD="@(showPanels == false ? 12 : 9)">
@@ -198,7 +242,11 @@
                                 }
                             </RadzenTabsItem>                     
                             <RadzenTabsItem Text="Credit Requests" style="margin-left: 2px;color:green;font-weight:600">                  
-                           </RadzenTabsItem>
+                                @if (isCreditRequest)
+                                {
+                                   <BookingCreditRequest Id="@selectedBookingId"></BookingCreditRequest>
+                                }
+                            </RadzenTabsItem>
                             <RadzenTabsItem Text="Checking in" style="margin-left: 2px;color:green;font-weight:600">
                             </RadzenTabsItem>
                             <RadzenTabsItem Text="Notes" style="margin-left: 2px;color:green;font-weight:600">

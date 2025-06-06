@@ -39,6 +39,9 @@ namespace Destination.Components.Pages.BookingComponents
         [Inject]
         public SharedEvents sharedEvents { get; set; }
 
+        private bool menuVisible = false;
+        private string activeForm = "booking";
+
         [Parameter]
         public int Id { get; set; } = 0;
 
@@ -61,15 +64,29 @@ namespace Destination.Components.Pages.BookingComponents
         protected bool isBookingHistoryTab = false;
         protected bool isCommTab = false;
         protected bool isVisitHistoryTab = false;
+        protected bool isCreditRequest = false;
 
 
+        private string menuStyle => menuVisible ?
+            "position: absolute; top: 40px; left: 5px; background: white; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 4px; border: 1px solid #e0e0e0;" :
+            "display: none;";
+        private void ToggleMenu()
+        {
+            menuVisible = !menuVisible;
+            StateHasChanged();
+        }
+        private void LoadForm(string formName)
+        {
+            activeForm = formName;
+            menuVisible = false;
+            StateHasChanged();
+        }
 
         private void ShowCollapse()
         {
             showCollapse = true;
             showPanels = true;
         }
-
         private void OnTabChange(int index)
         {
             switch (index)
@@ -82,6 +99,9 @@ namespace Destination.Components.Pages.BookingComponents
                     break;
                 case 3:
                     isVisitHistoryTab = true;
+                    break;
+                case 4:
+                    isCreditRequest = true;
                     break;
             }
         }
@@ -97,54 +117,37 @@ namespace Destination.Components.Pages.BookingComponents
 
         protected override async Task OnInitializedAsync()
         {
-            if(Id != 0)
+            if (Id != 0)
             {
                 PropParameterId = Id;
-
-
                 var query = new Query
                 {
                     OrderBy = "Id",
                     Skip = 0,
                     Top = 20
                 };
-
-                var result = await bookingService.GetBookingsByPropId(query,Id);
+                var result = await bookingService.GetBookingsByPropId(query, Id);
                 pagedBookings = result.Items;
                 totalCount = result.Count;
-            }
-            else
-            {
-                var a = bookingService.GetPaymentsByBookingId(23953);
-                var initialArgs = new LoadDataArgs
-                {
-                    Skip = 0,
-                    Top = 20,
-                    OrderBy = "Id" // Or null, depending on your needs
-                };
-
-                await LoadData(initialArgs);
             }
         }
+
         private async Task LoadData(LoadDataArgs args)
         {
-            if (!dataLoaded || args.Skip != 0) // Load only once unless paging happens
+            var query = new Query
             {
-                dataLoaded = true;
+                Filter = args.Filter,
+                OrderBy = string.IsNullOrEmpty(args.OrderBy) ? "Id desc" : args.OrderBy,
+                Skip = args.Skip,
+                Top = args.Top
+            };
 
-                var query = new Query
-                {
-                    Filter = args.Filter,
-                    OrderBy = "Id",
-                    Skip = args.Skip,
-                    Top = args.Top
-                };
+            var result = Id != 0
+                ? await bookingService.GetBookingsByPropId(query, Id)
+                : await bookingService.GetBookingsPagedAsync(query);
 
-                var result = await bookingService.GetBookingsPagedAsync(query);
-                pagedBookings = result.Items;
-                totalCount = result.Count;
-                StateHasChanged();
-            }
+            pagedBookings = result.Items;
+            totalCount = result.Count;
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)

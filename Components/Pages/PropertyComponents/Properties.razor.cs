@@ -60,8 +60,6 @@ public partial class Properties
 
     private IEnumerable<Property> pagedProperties;
     private int totalCount;
-    private bool dataLoaded = false;
-
     private bool isCollapsed = false;
 
     private bool showCollapse = true;
@@ -80,22 +78,17 @@ public partial class Properties
 
     private async Task LoadData(LoadDataArgs args)
     {
-        if (!dataLoaded || args.Skip != 0) // Load only once unless paging happens
+        var query = new Query
         {
-            dataLoaded = true;
+            Filter = args.Filter,
+            OrderBy = string.IsNullOrEmpty(args.OrderBy) ? "PropId desc" : args.OrderBy,
+            Skip = args.Skip,
+            Top = args.Top
+        };
 
-            var query = new Query
-            {
-                Filter = args.Filter,
-                OrderBy = "PropId",
-                Skip = args.Skip,
-                Top = args.Top
-            };
-
-            var result = await propertyService.GetPropertiesPagedAsync(query);
-            pagedProperties = result.Items;
-            totalCount = result.Count;
-        }
+        var result = await propertyService.GetPropertiesPagedAsync(query);
+        pagedProperties = result.Items;
+        totalCount = result.Count;
     }
 
     void PickedColumnsChanged(DataGridPickedColumnsChangedEventArgs<Destination.Models.destinationTest.Property> args)
@@ -152,14 +145,14 @@ public partial class Properties
 
     protected override async Task OnInitializedAsync()
     {
-        var initialArgs = new LoadDataArgs
-        {
-            Skip = 0,
-            Top = 20,
-            OrderBy = "PropId" // Or null, depending on your needs
-        };
+        //var initialArgs = new LoadDataArgs
+        //{
+        //    Skip = 0,
+        //    Top = 20,
+        //    OrderBy = "PropId" // Or null, depending on your needs
+        //};
 
-        await LoadData(initialArgs);
+        //await LoadData(initialArgs);
         sharedEvents.OnBookingIdClicked += HandleBookingEdit;
     }
 
