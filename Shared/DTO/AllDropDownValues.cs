@@ -4,7 +4,7 @@
     {
         public class PropertyDropDownData
         {
-            public int Propid { get; set; }
+            public int? Propid { get; set; }
             public string Name { get; set; }
         }
 

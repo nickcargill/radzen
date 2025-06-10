@@ -52,6 +52,8 @@ namespace Destination.Components.Pages.BookingComponents
         protected bool showPanels = false;
         protected bool isBottomPanel = false;
         protected int selectedBookingId = 0;
+        protected int selectedPropertyId = 0;
+
 
         private bool isCollapsed = false;
 
@@ -59,7 +61,6 @@ namespace Destination.Components.Pages.BookingComponents
 
         private IEnumerable<Booking> pagedBookings;
         private int totalCount;
-        private bool dataLoaded = false;
 
         protected bool isBookingHistoryTab = false;
         protected bool isCommTab = false;
@@ -171,9 +172,19 @@ namespace Destination.Components.Pages.BookingComponents
             showPanels = true;
             showCollapse = true;
             isBottomPanel = true;
+            selectedPropertyId = 0;
             StateHasChanged();
         }
 
+        protected async Task ShowPropertyTabs(int? propId, int bookingId)
+        {
+            selectedPropertyId = 0;
+            await Task.Delay(1);
+            selectedPropertyId = propId.Value;
+            selectedBookingId=bookingId;
+            isBottomPanel = false;
+            StateHasChanged();
+        }
         void Change(string text)
         {
         }

@@ -57,6 +57,13 @@ namespace Destination.Components.Pages.BookingComponents
             try
             {
                 await destinationTestService.UpdateBooking(Id, booking);
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Success",
+                    Detail = "Data updated successfully!",
+                    Duration = 4000 // in milliseconds
+                });
                 StateHasChanged();
             }
             catch (Exception ex)

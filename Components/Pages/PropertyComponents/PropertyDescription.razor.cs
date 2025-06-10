@@ -5,6 +5,7 @@ using Radzen;
 using Radzen.Blazor;
 using Destination.Models.destinationTest;
 using Destination.Services;
+using System;
 
 namespace Destination.Components.Pages.PropertyComponents
 {
@@ -38,6 +39,26 @@ namespace Destination.Components.Pages.PropertyComponents
         public int Id { get; set; }
 
         Property property = new Property();
+
+        void OnPaste(HtmlEditorPasteEventArgs args)
+        {
+        }
+
+        void OnChange(string html)
+        {
+        }
+
+        void OnInput(string html)
+        {
+        }
+
+        void OnExecute(HtmlEditorExecuteEventArgs args)
+        {
+        }
+
+        void OnUploadComplete(UploadCompleteEventArgs args)
+        {
+        }
 
 
         protected override async Task OnInitializedAsync()

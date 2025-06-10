@@ -21,13 +21,17 @@
     <RadzenRow>
       <RadzenColumn SizeMD=12>
             <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowFiltering="true"
-                            FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-                            Data="@(propertyImprovements)" TItem="Destination.Shared.DTO.PropertyImprovementDto" AllowColumnPicking="true"
-                            Density="Radzen.Density.Compact">
+                AllowColumnResize="true"
+                FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+                Data="@(propertyImprovements)" TItem="Destination.Shared.DTO.PropertyImprovementDto" AllowColumnPicking="true"
+                Density="Radzen.Density.Compact">
             <Columns>
                     <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyImprovementDto" Property="Propimproveid" Title="ImproveId" Width="120px">
                     </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyImprovementDto" Property="DateOpen2" Title="Date Open" Width="140px">
+                        <Template Context="data">
+                            @data.DateOpen2?.ToString("yyyy-MM-dd")
+                        </Template>
                     </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyImprovementDto" Property="ResourceName" Title="Resource" Width="140px">
                     </RadzenDataGridColumn>

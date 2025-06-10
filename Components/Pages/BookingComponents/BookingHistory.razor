@@ -14,7 +14,8 @@
     <RadzenRow>
       <RadzenColumn SizeMD=12>
         <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@(bookingHistoryResult)" TItem="Destination.Shared.DTO.BookingHistoryResultDto" Density="Radzen.Density.Compact">
+            Data="@(bookingHistoryResult)" AllowColumnResize="true"
+            TItem="Destination.Shared.DTO.BookingHistoryResultDto" Density="Radzen.Density.Compact">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Shared.DTO.BookingHistoryResultDto" Property="IntHistoryId" Title="Hist Id" Width="100px">
                 </RadzenDataGridColumn>

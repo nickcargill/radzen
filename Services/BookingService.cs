@@ -185,7 +185,6 @@ namespace Destination.Services
 
         public async Task<bool> CraeteOrUpdateCommunication(Communication comm, bool isEdit)
         {
-            using var dbContext = await dbContextFactory.CreateDbContextAsync();
            try
             {
                 using var context = dbContextFactory.CreateDbContext();

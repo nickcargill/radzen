@@ -14,7 +14,8 @@
     </RadzenRow>
     <RadzenRow>
       <RadzenColumn SizeMD=12>
-        <RadzenDataGrid @ref="grid0" ColumnWidth="130px" AllowFiltering="false" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true"
+            <RadzenDataGrid @ref="grid0" AllowColumnResize="true"
+            ColumnWidth="130px" AllowFiltering="false" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true"
             PageSizeOptions="@(new int[]{10, 15, 20, 30})"
             PageSize="15"
             Density="Radzen.Density.Compact"
@@ -25,14 +26,20 @@
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Bookingid" Title="Booking Id">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Dateentered" Title="Opened">
+                    <Template Context="data">
+                       @data.Dateentered?.ToString("yyyy-MM-dd")
+                    </Template>
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Datecompleted" Title="Last Touched">
+                    <Template Context="data">
+                        @data.Datecompleted?.ToString("yyyy-MM-dd")
+                    </Template>
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Datetocomp" Title="Datetocomp">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Datetocomp" Title="Deadline">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Amenity" Title="Amenity">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Hot" Title="Hot">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Hot" Title="Priority">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Neighborhood" Title="Neighborhood">
                 </RadzenDataGridColumn>
@@ -40,7 +47,7 @@
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Status" Title="Status">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="NextdateFrom" Title="Nextdate From">
+                    <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="NextdateFrom" Title="Next Check-in">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Department" Title="Department">
                 </RadzenDataGridColumn>
@@ -53,9 +60,7 @@
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Expense" Title="Expense">
                 </RadzenDataGridColumn>
             </Columns>
-
         </RadzenDataGrid>
-
     </RadzenColumn>
   </RadzenRow>
 </RadzenStack>

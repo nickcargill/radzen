@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 
-namespace Destination.Components.Pages.BookingComponents
+namespace Destination.Components.Pages.UtilitiesComponents.Settings
 {
     public partial class BookingStatuses
     {
@@ -37,9 +37,20 @@ namespace Destination.Components.Pages.BookingComponents
 
         protected RadzenDataGrid<Destination.Models.destinationTest.BookingStatus> grid0;
         protected bool isEdit = true;
+
+        protected string search = "";
+
+        protected async Task Search(ChangeEventArgs args)
+        {
+            search = $"{args.Value}";
+
+            await grid0.GoToPage(0);
+
+            bookingStatuses = await destinationTestService.GetBookingStatuses(new Query { Filter = $@"i => i.Status.Contains(@0) || i.Color.Contains(@0)", FilterParameters = new object[] { search } });
+        }
         protected override async Task OnInitializedAsync()
         {
-            bookingStatuses = await destinationTestService.GetBookingStatuses();
+            bookingStatuses = await destinationTestService.GetBookingStatuses(new Query { Filter = $@"i => i.Status.Contains(@0) || i.Color.Contains(@0)", FilterParameters = new object[] { search } });
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
@@ -77,6 +88,31 @@ namespace Destination.Components.Pages.BookingComponents
                     Summary = $"Error",
                     Detail = $"Unable to delete BookingStatus"
                 });
+            }
+        }
+
+        protected async Task ExportClick(RadzenSplitButtonItem args)
+        {
+            if (args?.Value == "csv")
+            {
+                await destinationTestService.ExportBookingStatusesToCSV(new Query
+                {
+                    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
+                    OrderBy = $"{grid0.Query.OrderBy}",
+                    Expand = "",
+                    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
+                }, "BookingStatuses");
+            }
+
+            if (args == null || args.Value == "xlsx")
+            {
+                await destinationTestService.ExportBookingStatusesToExcel(new Query
+                {
+                    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
+                    OrderBy = $"{grid0.Query.OrderBy}",
+                    Expand = "",
+                    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
+                }, "BookingStatuses");
             }
         }
         protected bool errorVisible;

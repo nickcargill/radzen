@@ -8,11 +8,10 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using Destination.Services;
-using Destination.Shared.DTO;
 
-namespace Destination.Components.Pages.PropertyComponents
+namespace Destination.Components.Pages.TenantComponents
 {
-    public partial class PropertyImprovements
+    public partial class TenantInfoByBooking
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,21 +32,22 @@ namespace Destination.Components.Pages.PropertyComponents
         protected NotificationService NotificationService { get; set; }
 
         [Inject]
-        public destinationTestService destinationTestService { get; set; }
+        public TenantService tenantService { get; set; }
 
-        [Inject]
-        public PropertyService propertyService { get; set; }
+        protected bool errorVisible;
+        protected Destination.Models.destinationTest.Tenant tenant;
 
         [Parameter]
         public int Id { get; set; }
 
-        protected IEnumerable<PropertyImprovementDto> propertyImprovements;
-        protected RadzenDataGrid<PropertyImprovementDto> grid0;
-
+        protected string Name { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            propertyImprovements = await propertyService.GetImprovementsByPropId(Id);
+            tenant = await tenantService.GetTenantInfoByBookingId(Id);
+            if (tenant != null) { 
+                Name = tenant.Firstname +" "+ tenant.Lastname;
+            }
         }
     }
 }

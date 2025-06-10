@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Destination.Data;
 using Destination.Services;
+using Destination;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -17,9 +18,10 @@ builder.Services.AddRadzenCookieThemeService(options =>
     options.Duration = TimeSpan.FromDays(365);
 });
 builder.Services.AddHttpClient();
-builder.Services.AddScoped<Destination.destinationTestService>();
+builder.Services.AddScoped<destinationTestService>();
 builder.Services.AddScoped<BookingService>();
 builder.Services.AddScoped<PropertyService>();
+builder.Services.AddScoped<TenantService>();
 
 
 builder.Services.AddScoped<SharedEvents>();
@@ -29,7 +31,6 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ProtectedLocalStorage>();
 
 
-
 builder.Services.AddAuthentication("MyCookieAuth")
     .AddCookie("MyCookieAuth", options =>
     {
@@ -37,8 +38,6 @@ builder.Services.AddAuthentication("MyCookieAuth")
     });
 
 builder.Services.AddAuthorization();
-
-
 
 builder.Services.AddServerSideBlazor()
     .AddHubOptions(options =>
@@ -65,7 +64,6 @@ app.UseForwardedHeaders(forwardingOptions);
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 

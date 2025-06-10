@@ -1,35 +1,38 @@
-@page "/booking-statuses"
+@page "/property-types"
 
-<PageTitle>BookingStatuses</PageTitle>
+<PageTitle>PropertyTypes</PageTitle>
 <RadzenStack>
     <RadzenRow AlignItems="AlignItems.Center">
         <RadzenColumn Size="12" SizeMD="6">
-            <RadzenText Text="BookingStatuses" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+            <RadzenText Text="PropertyTypes" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
         </RadzenColumn>
         <RadzenColumn Size="12" SizeMD="6">
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenSplitButton Icon="get_app" Text="Export" Click="@ExportClick" Variant="Variant.Flat" Shade="Shade.Lighter">
+                    <RadzenSplitButtonItem Text="Excel" Value="xlsx" />
+                    <RadzenSplitButtonItem Text="CSV" Value="csv" />
+                </RadzenSplitButton>
                 <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
             </RadzenStack>
         </RadzenColumn>
     </RadzenRow>
+    <RadzenTextBox Placeholder="Search ..." style="display: block; width: 100%" @oninput="@Search" aria-label="Search by all string columns" />
     <RadzenRow>
       <RadzenColumn SizeMD=6>
      <RadzenCard style="height: 100%">
         <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@(bookingStatuses)" TItem="Destination.Models.destinationTest.BookingStatus" RowSelect="@EditRow">
+            Data="@(propertyTypes)" TItem="Destination.Models.destinationTest.PropertyType" RowSelect="@EditRow">
             <Columns>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.BookingStatus" Property="Id" Title="Id">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyType" Property="Typeid" Title="Typeid">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.BookingStatus" Property="Status" Title="Status">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyType" Property="Type" Title="Type">
                 </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.BookingStatus" Property="Color" Title="Color">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.BookingStatus" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
-                    <Template Context="bookingStatus">
+                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.PropertyType" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                    <Template Context="propertyType">
 
                         <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
                             Shade="Shade.Lighter" Variant="Variant.Flat"
-                            Click=@(args => GridDeleteButtonClick(args, bookingStatus)) @onclick:stopPropagation="true" />
+                            Click=@(args => GridDeleteButtonClick(args, propertyType)) @onclick:stopPropagation="true" />
                     </Template>
                 </RadzenDataGridColumn>
             </Columns>
@@ -40,22 +43,14 @@
     </RadzenColumn>
         <RadzenColumn SizeMD=6>
         <RadzenCard style="height: 100%;margin-top:0px;">
-            <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save BookingStatus</RadzenAlert>
-            <RadzenTemplateForm TItem="Destination.Models.destinationTest.BookingStatus" Data="@(bookingStatus)" Visible="@(bookingStatus != null)" Submit="@FormSubmit">
+            <RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Cannot save PropertyType</RadzenAlert>
+            <RadzenTemplateForm TItem="Destination.Models.destinationTest.PropertyType" Data="@(propertyType)" Visible="@(propertyType != null)" Submit="@FormSubmit">
                 <RadzenRow style="margin-bottom: 1rem">
                     <RadzenColumn SizeMD="3">
-                        <RadzenLabel Text="Status" Component="Status" style="width: 100%" />
+                        <RadzenLabel Text="Type" Component="Type" style="width: 100%" />
                     </RadzenColumn>
                     <RadzenColumn SizeMD="9">
-                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(bookingStatus.Status)" Name="Status" />
-                    </RadzenColumn>
-                </RadzenRow>
-                <RadzenRow style="margin-bottom: 1rem">
-                    <RadzenColumn SizeMD="3">
-                        <RadzenLabel Text="Color" Component="Color" style="width: 100%" />
-                    </RadzenColumn>
-                    <RadzenColumn SizeMD="9">
-                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(bookingStatus.Color)" Name="Color" />
+                        <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(propertyType.Type)" Name="Type" />
                     </RadzenColumn>
                 </RadzenRow>
               <RadzenStack  Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">

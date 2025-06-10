@@ -18,7 +18,7 @@
     </RadzenRow>
     <RadzenRow>
       <RadzenColumn SizeMD=12>
-        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+        <RadzenDataGrid @ref="grid0" ColumnWidth="200px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@(bookingsLogics)" TItem="Destination.Models.destinationTest.BookingsLogic" RowSelect="@EditRow" AllowColumnReorder="true" AllowColumnResize="true">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.BookingsLogic" Property="IntLogicId" Title="Int Logic Id">

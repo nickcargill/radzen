@@ -6,10 +6,8 @@
         <RadzenRow Style="margin-bottom: 20px;">
             <RadzenColumn Size="6" Style="padding-right: 10px;">
                 <RadzenLabel Text="Description on website" />
-                <RadzenTextArea @bind-Value="@property.Description" 
-                               Style="width: 100%; height: 200px;"
-                               Rows="10"
-                               Name="Description" />
+                <RadzenHtmlEditor @bind-Value=@property.Description style="height: 200px;" Input=@OnInput Change=@OnChange Paste=@OnPaste UploadComplete=@OnUploadComplete Execute=@OnExecute UploadUrl="upload/image" />
+
             </RadzenColumn>
             <RadzenColumn Size="6">
                 <RadzenLabel Text="Airbnb Space (Copy of Description)" />
@@ -23,10 +21,8 @@
         <RadzenRow Style="margin-bottom: 20px;">
             <RadzenColumn Size="6" Style="padding-right: 10px;">
                 <RadzenLabel Text="Sleeping" />
-                <RadzenTextArea @bind-Value="@property.Sleeping" 
-                               Style="width: 100%; height: 100px;"
-                               Rows="5"
-                               Name="Sleeping" />
+             <RadzenHtmlEditor @bind-Value=@property.Sleeping style="height: 200px;" Input=@OnInput Change=@OnChange Paste=@OnPaste UploadComplete=@OnUploadComplete Execute=@OnExecute UploadUrl="upload/image" />
+
             </RadzenColumn>
             <RadzenColumn Size="6">
                 <RadzenLabel Text="Airbnb Summary (max 500 chars)" />

@@ -61,7 +61,8 @@
             </RadzenTemplateForm>
         </RadzenColumn>
       <RadzenColumn SizeMD=8>
-        <RadzenDataGrid @ref="grid0" ColumnWidth="130px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            <RadzenDataGrid @ref="grid0" AllowColumnResize="true"
+            ColumnWidth="130px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
             Data="@(annuals)" TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Density="Radzen.Density.Compact">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Property="Name" Title="Property">

@@ -15,7 +15,8 @@
     <RadzenRow>
       <RadzenColumn SizeMD=12>
         <RadzenDataGrid @ref="grid0" ColumnWidth="150px" AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@(payments)" TItem="Destination.Models.destinationTest.Payment" Density="Radzen.Density.Compact">
+            Data="@(payments)" TItem="Destination.Models.destinationTest.Payment" AllowColumnResize="true"
+            Density="Radzen.Density.Compact">
             <Columns>
                     <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Payment" Property="IntBookingId" Title="BookId">
                     </RadzenDataGridColumn>
