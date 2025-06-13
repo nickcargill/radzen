@@ -5,6 +5,9 @@ using Radzen;
 using Radzen.Blazor;
 using Destination.Services;
 using Destination.Models.destinationTest;
+using DocumentFormat.OpenXml.Bibliography;
+using static Destination.Shared.DTO.AllDropDownValues;
+using Destination.Shared.DTO;
 
 namespace Destination.Components.Pages.BookingComponents
 {
@@ -44,6 +47,10 @@ namespace Destination.Components.Pages.BookingComponents
 
         [Parameter]
         public int Id { get; set; } = 0;
+
+        [Parameter]
+        [SupplyParameterFromQuery]
+        public string? status { get; set; }
 
         public int PropParameterId = 0;
 
@@ -145,7 +152,7 @@ namespace Destination.Components.Pages.BookingComponents
 
             var result = Id != 0
                 ? await bookingService.GetBookingsByPropId(query, Id)
-                : await bookingService.GetBookingsPagedAsync(query);
+                : await bookingService.GetBookingsPagedAsync(query, status);
 
             pagedBookings = result.Items;
             totalCount = result.Count;
@@ -213,5 +220,68 @@ namespace Destination.Components.Pages.BookingComponents
                 });
             }
         }
+
+        private BookingFilterModel filterModel = new();
+        private List<PropertyDropDownData> filterProperties = new();
+        private List<BookingStatusDropDownData> statusList = new();
+        private List<string> rrOptions = new() { "All", "Yes", "No" };
+        private List<string> coOptions = new() { "All", "Yes", "No" };
+        private List<string> cleaningOptions = new() { "All", "Cleaned", "Not Cleaned" };
+        private List<string> backToBackOptions = new() { "All", "Yes", "No" };
+        private List<PropertySource> sources = new();
+        private List<string> cities = new()
+        {
+            "Big Bear","Big Bear City","Big Bear Lake","Frawnskin"
+        };
+
+        private bool isFirstRender = true;
+
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender && isFirstRender)
+            {
+                isFirstRender = false;
+
+                // Load dropdowns after render
+                await LoadDropdownsAsync();
+
+                StateHasChanged(); // Update UI after loading
+            }
+        }
+
+        protected async Task LoadDropdownsAsync()
+        {
+            filterProperties = await destinationTestService.GetPropertiesForDropDown();
+            statusList = await destinationTestService.GetBookingStatusesForDropDown();
+            sources = await destinationTestService.GetPropertySources();
+        }
+
+        private async Task OnSearch()
+        {
+            var query = new Query
+            {
+                OrderBy = "Id",
+                Skip = 0,
+                Top = 20
+            };
+            var result = await bookingService.GetBookingsPagedAsync(query, status, filterModel);
+            pagedBookings = result.Items;
+            totalCount = result.Count;
+            StateHasChanged();
+        }
+
+        private void OnReset()
+        {
+            filterModel = new BookingFilterModel(); // reset all values
+        }
+
+        
+
+
+
+
+
+
+
     }
 }

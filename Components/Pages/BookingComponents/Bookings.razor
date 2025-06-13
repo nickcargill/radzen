@@ -14,20 +14,145 @@
     min-width: 1.50rem !important;
     font-size: var(--rz-body-font-size);
     font-weight: 600;
-    }
+}
     .rz-form{
-    margin-top: 40px !important;
+         margin-top: 40px !important;
     }
     .rz-card{
-    padding:6px !important;
+       padding:6px !important;
+    }
+
+    .compact-form .rz-input,
+    .compact-form .rz-dropdown,
+    .compact-form .rz-calendar,
+    .rz-textbox, .rz-numeric,
+    .rz-datepicker > .rz-inputtext,
+    .rz-dropdown {
+        min-height: 24px !important;
+        height: 24px !important;
+        line-height: 16px !important;
+        font-size: 11px;
+        padding: 4px 4px;
+    }
+
+    label {
+        white-space: nowrap;
+        font-size: 11px;
+    }
+
+    .rz-button-box, .rz-button{
+        line-height:9px !important;
     }
 </style>
 
 
 <PageTitle>Bookings</PageTitle>
 
+
+<RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto"
+             style="margin-top: 0px !important; margin-bottom: 7px !important; padding: 0px"
+             Expand=@(() => Change("Panel expanded"))
+             Collapse=@(() => Change("Panel collapsed"))>
+
+    <RadzenRow>
+        <RadzenTemplateForm TItem="Destination.Shared.DTO.BookingFilterModel" Data="@filterModel" Submit="@OnSearch" Style="margin-top: 0px !important">
+            <div class="filter-container rz-p-3" Style="padding-top:0px !important">
+
+                <!-- Row 1 -->
+                <RadzenRow>
+                    <RadzenColumn Size="2">
+                        <label>Id</label>
+                        <RadzenNumeric @bind-Value="filterModel.FilterModelId" Style="width: 100%;" ShowUpDown="false"/>
+                    </RadzenColumn>
+                    <RadzenColumn Size="2">
+                        <label>Date From</label>
+                        <div style="display: flex; gap: 4px;">
+                            <RadzenDatePicker @bind-Value="filterModel.DateFrom1" Style="width: 48%;" />
+                            <RadzenDatePicker @bind-Value="filterModel.DateFrom2" Style="width: 48%;" />
+                        </div>
+                    </RadzenColumn>
+                    <RadzenColumn Size="2">
+                        <label>Date To</label>
+                        <div style="display: flex; gap: 4px;">
+                            <RadzenDatePicker @bind-Value="filterModel.DateTo1" Style="width: 48%;" />
+                            <RadzenDatePicker @bind-Value="filterModel.DateTo2" Style="width: 48%;" />
+                        </div>
+                    </RadzenColumn>
+                    <RadzenColumn Size="2">
+                        <label>Property</label>
+                        <RadzenDropDown @bind-Value="filterModel.PropertyId" Data="@filterProperties" TextProperty="Name" ValueProperty="Propid" Placeholder="Select Property"
+                                        Style="width: 100%;" />
+                    </RadzenColumn>
+                    <RadzenColumn Size="2">
+                        <label>Status</label>
+                        <RadzenDropDown @bind-Value="filterModel.Status" Data="@statusList" TextProperty="Status" ValueProperty="Id"
+                                        Placeholder="Select Status" Style="width: 100%;" />
+                    </RadzenColumn>
+                    <RadzenColumn Size="2">
+                        <label>First Name</label>
+                        <RadzenTextBox @bind-Value="filterModel.FirstName" Style="width: 100%;" />
+                    </RadzenColumn>
+                </RadzenRow>
+
+                <!-- Row 2 -->
+                <RadzenRow class="rz-mt-3">
+                    <RadzenColumn Size="2">
+                        <label>Last Name</label>
+                        <RadzenTextBox @bind-Value="filterModel.LastName" Style="width: 100%;" />
+                    </RadzenColumn>
+                    <RadzenColumn Size="2">
+                        <label>Cleaning</label>
+                        <RadzenDropDown @bind-Value="filterModel.Cleaning" Data="@cleaningOptions" Placeholder="Select Cleaning" Style="width: 100%;" />
+                    </RadzenColumn>
+                    <RadzenColumn Size="2">
+                        <label>Booked b/w</label>
+                        <div style="display: flex; gap: 4px;">
+                            <RadzenDatePicker @bind-Value="filterModel.BookedFrom1" Style="width: 48%;" />
+                            <RadzenDatePicker @bind-Value="filterModel.BookedFrom2" Style="width: 48%;" />
+                        </div>
+                    </RadzenColumn>
+                    <RadzenColumn Size="2">
+                        <label>Sleeps b/w</label>
+                        <div style="display: flex; gap: 4px;">
+                            <RadzenNumeric @bind-Value="filterModel.Sleeps1" Style="width: 48%;" ShowUpDown="false" />
+                            <RadzenNumeric @bind-Value="filterModel.Sleeps2" Style="width: 48%;" ShowUpDown="false" />
+                        </div>
+                    </RadzenColumn>
+                    <RadzenColumn Size="2">
+                        <label>Phone</label>
+                        <RadzenTextBox @bind-Value="filterModel.Phone" Style="width: 100%;" />
+                    </RadzenColumn>
+                    <RadzenColumn Size="2">
+                        <label>Source</label>
+                        <RadzenDropDown @bind-Value="filterModel.Source" Data="@sources" TextProperty="Source" ValueProperty="Id"
+                                        Placeholder="Select Source" Style="width: 100%;" />
+                    </RadzenColumn>
+                </RadzenRow>
+
+                <!-- Row 3 -->
+                <RadzenRow class="rz-mt-3">
+                    <RadzenColumn Size="2">
+                        <label>Email</label>
+                        <RadzenTextBox @bind-Value="filterModel.Email" Style="width: 100%;" />
+                    </RadzenColumn>
+                    <RadzenColumn Size="2">
+                        <label>City</label>
+                        <RadzenDropDown @bind-Value="filterModel.City" Data="@cities" Placeholder="Select City" Style="width: 100%;" />
+                    </RadzenColumn>
+                    <RadzenColumn Size="4" class="rz-d-flex rz-align-items-end" Style="margin-top:20px">
+                        <RadzenButton Text="Search" ButtonStyle="ButtonStyle.Primary" Type="Submit" class="rz-mr-2" Style="height:24px;" />
+                        <RadzenButton Text="Reset" Click="@OnReset" Style="height:24px;" />
+                    </RadzenColumn>
+                </RadzenRow>
+
+            </div>
+        </RadzenTemplateForm>
+    </RadzenRow>
+</RadzenPanel>
+
+
 <RadzenStack>
-    <RadzenRow AlignItems="AlignItems.Center">
+@*     <RadzenRow AlignItems="AlignItems.Center">
         <RadzenColumn Size="12" SizeMD="6">
             <RadzenText Text="Bookings" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin: 0" />
         </RadzenColumn>
@@ -36,9 +161,9 @@
                 <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
             </RadzenStack>
         </RadzenColumn>
-    </RadzenRow>
-    <RadzenRow>
+    </RadzenRow> *@
 
+    <RadzenRow>
         @if (!showCollapse)
         {
             <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Light"
@@ -67,7 +192,27 @@
                         <RadzenStack Orientation="Orientation.Vertical" Gap="8px" Style="padding: 15px 10px; min-width: 160px;">
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))"
                             style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
-                                Edit Booking
+                                Booking Info
+                            </a>
+                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))"
+                            style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               Clean
+                            </a>                            
+                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))"
+                            style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                                Deposit Return
+                            </a>                            
+                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))"
+                            style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                                Inquiry
+                            </a>                            
+                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))"
+                            style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                                History
+                            </a>                            
+                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))"
+                            style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                                Reviews
                             </a>
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("Tasks"))"
                             style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
@@ -86,10 +231,10 @@
 
                     <!-- Form Container with scrollable content -->
                     <div style="margin-top: 5px; @(menuVisible ? "opacity: 0.3;" : "");
-                    height: calc(100% - 30px);
-                    overflow-y: auto;
-                    max-height: 497px; /* or whatever max height you prefer */
-                    padding-right: 5px;">
+                        height: calc(100% - 30px);
+                        overflow-y: auto;
+                        max-height: 497px; /* or whatever max height you prefer */
+                        padding-right: 5px;">
                         @if (activeForm == "booking")
                         {
                             <EditBooking Id="@selectedBookingId" />
@@ -156,17 +301,34 @@
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="BookingStatus.Status" Title="Status" Width="140px">
                             </RadzenDataGridColumn>
+@*                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.IsCleaned" Title="Cleaned" Width="140px">
+                                <Template Context="data">
+                                    @(data.Property.IsCleaned.Value ? "YES" : "NO")
+                                </Template>
+                            </RadzenDataGridColumn> *@
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Notes" Title="Notes" Width="140px">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Property.Bbcity" Title="City" Width="140px">
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Nights" Title="Nights" Width="140px">
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tax" Title="Tax" Width="140px">
                             </RadzenDataGridColumn>
-                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tenant.Firstname" Title="Tenant" Width="140px">
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Property.SleepNum" Title="Sleeps" Width="140px">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tenant.Firstname" Title="FirstName" Width="140px">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tenant.Firstname" Title="LastName" Width="140px">
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="PropertySource.Source" Title="Property Source" Width="140px">
                             </RadzenDataGridColumn>
-                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="TblService.ServiceName" Title="Tbl Service" Width="140px">
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Petfee" Title="Pet" Width="140px">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Property.Bedrooms" Title="Room" Width="140px">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tenant.Email" Title="Email" Width="140px">
+                            </RadzenDataGridColumn>
+                            <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tenant.Cell" Title="Cell" Width="140px">
                             </RadzenDataGridColumn>
                         </Columns>
                     </RadzenDataGrid>
@@ -212,17 +374,34 @@
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="BookingStatus.Status" Title="Status" Width="140px">
                         </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.IsCleaned" Title="Cleaned" Width="140px">
+                            <Template Context="data">
+                                @(data.Property.IsCleaned.Value ? "YES" : "NO")
+                            </Template>
+                        </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Notes" Title="Notes" Width="140px">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Property.Bbcity" Title="City" Width="140px">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Nights" Title="Nights" Width="140px">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tax" Title="Tax" Width="140px">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tenant.Firstname" Title="Tenant" Width="140px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Property.SleepNum" Title="Sleeps" Width="140px">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="PropertySource.Notes" Title="Property Source" Width="140px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tenant.Firstname" Title="FirstName" Width="140px">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="TblService.ServiceName" Title="Tbl Service" Width="140px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tenant.Firstname" Title="LastName" Width="140px">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="PropertySource.Source" Title="Property Source" Width="140px">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Petfee" Title="Pet" Width="140px">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Property.Bedrooms" Title="Room" Width="140px">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tenant.Email" Title="Email" Width="140px">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Tenant.Cell" Title="Cell" Width="140px">
                         </RadzenDataGridColumn>
                     </Columns>
                 </RadzenDataGrid>

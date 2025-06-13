@@ -4,6 +4,7 @@ using Destination.Models.destinationTest;
 using Destination.Shared.DTO;
 using DocumentFormat.OpenXml.InkML;
 using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Radzen;
@@ -23,7 +24,7 @@ namespace Destination.Services
             this.dbContextFactory = dbContextFactory;
         }
 
-        public async Task<PagedResult<Booking>> GetBookingsPagedAsync(Query query)
+        public async Task<PagedResult<Booking>> GetBookingsPagedAsync(Query query, string type, BookingFilterModel? filterModel = null)
         {
             using var context = dbContextFactory.CreateDbContext();
 
@@ -41,6 +42,86 @@ namespace Destination.Services
             if (!string.IsNullOrEmpty(query.Filter))
             {
                 filteredItems = filteredItems.Where(query.Filter, query.FilterParameters);
+            }
+
+            if (filterModel != null) 
+            {
+                if (filterModel.FilterModelId != 0)
+                {
+                    filteredItems = filteredItems.Where(b => b.Id == filterModel.FilterModelId);
+                }
+
+                if (filterModel.PropertyId.HasValue)
+                {
+                    filteredItems = filteredItems.Where(b => b.Propertyid == filterModel.PropertyId.Value);
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.FirstName))
+                {
+                    filteredItems = filteredItems.Where(b => b.Tenant.Firstname.Contains(filterModel.FirstName));
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.LastName))
+                {
+                    filteredItems = filteredItems.Where(b => b.Tenant.Lastname.Contains(filterModel.LastName));
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.Phone))
+                {
+                    filteredItems = filteredItems.Where(b => b.Tenant.Phone.Contains(filterModel.Phone));
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.Email))
+                {
+                    filteredItems = filteredItems.Where(b => b.Tenant.Email.Contains(filterModel.Email));
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.City))
+                {
+                    filteredItems = filteredItems.Where(b => b.Property.Bbcity.ToLower() == filterModel.City.ToLower());
+                }
+
+                if (filterModel.Status != null && filterModel.Status > 0)
+                {
+                    filteredItems = filteredItems.Where(b => b.Statusid == filterModel.Status);
+                }
+
+                if (filterModel.Sleeps1 != 0 && filterModel.Sleeps2 != 0)
+                {
+                    filteredItems = filteredItems.Where(b => b.Property.SleepNum > filterModel.Sleeps1 && b.Property.SleepNum < filterModel.Sleeps2);
+                }
+
+                if (filterModel.DateFrom1.HasValue && filterModel.DateFrom2.HasValue)
+                {
+                    filteredItems = filteredItems.Where(b => b.Datefrom >= filterModel.DateFrom1.Value && b.Datefrom <= filterModel.DateFrom2.Value);
+                }
+
+                if (filterModel.DateTo1.HasValue && filterModel.DateTo2.HasValue)
+                {
+                    filteredItems = filteredItems.Where(b => b.Dateto >= filterModel.DateTo1.Value && b.Dateto <= filterModel.DateTo2.Value);
+                }
+
+                if (filterModel.BookedFrom1.HasValue && filterModel.BookedFrom2.HasValue)
+                {
+                    filteredItems = filteredItems.Where(b => b.Bookingdate >= filterModel.BookedFrom1.Value && b.Bookingdate <= filterModel.BookedFrom2.Value);
+                }
+
+                if (filterModel.Source != 0)
+                {
+                    filteredItems = filteredItems.Where(b => b.Sourceid == filterModel.Source);
+                }
+
+                // Example: Cleaning filter
+                if (!string.IsNullOrWhiteSpace(filterModel.Cleaning) && filterModel.Cleaning != "All")
+                {
+                    bool cleaningBool = filterModel.Cleaning?.Equals("Cleaned", StringComparison.OrdinalIgnoreCase) == true;
+                    filteredItems = filteredItems.Where(b => b.Property.IsCleaned == cleaningBool);
+                }
+            }
+
+            if (!string.IsNullOrEmpty(type))
+            {
+                filteredItems = filteredItems.Where(x => x.BookingStatus.Status == type);
             }
 
             var count = await filteredItems.CountAsync();

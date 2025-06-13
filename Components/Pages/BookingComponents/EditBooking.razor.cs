@@ -24,6 +24,7 @@ namespace Destination.Components.Pages.BookingComponents
 
         [Inject]
         protected NotificationService NotificationService { get; set; }
+
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
