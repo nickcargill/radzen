@@ -1,0 +1,127 @@
+@page "/bookings-clean"
+
+<PageTitle>Bookings Clean</PageTitle>
+
+<RadzenColumn SizeMD=12>
+    <RadzenTemplateForm TItem="Destination.Models.destinationTest.Booking" Data="@(booking)" Visible="@(booking != null)">
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="Cleaner" Component="CleanerId" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="9">
+                <RadzenDropDown Data="@cleaners" TextProperty="Firstname" ValueProperty="Cleanerid"
+                                Placeholder="Select Cleaner" style="display: block; width: 100%" @bind-Value="@(booking.Cleaner)" Name="Cleaner" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="Clean Date" Component="Cleandate" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="9">
+                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(booking.Cleandate)" Name="Cleandate" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="Hours" Component="CleanerAmount" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="9">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(booking.Cleaneramount)" Name="CleanerAmount" ShowUpDown="false" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="4">
+                <RadzenLabel Text="Cleaningcomp" Component="Cleaningcomp" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="2">
+                <RadzenCheckBox @bind-Value="@(booking.Cleaningcomp)" Name="Cleaningcomp" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="4">
+                <RadzenLabel Text="Back to Back" Component="Backtoback" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="2">
+                <RadzenCheckBox @bind-Value="@(booking.Backtoback)" Name="Backtoback" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="Cleaning Notes" Component="CleaningNotes" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="9">
+                <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(booking.CleaningNotes)" Name="CleaningNotes" Rows="3" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="Inspected" Component="Inspected" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="9">
+                <RadzenCheckBox @bind-Value="@(booking.Inspected)" Name="Inspected" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="Inspect Date" Component="Inspectdate" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="9">
+                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(booking.Inspectdate)" Name="Inspectdate" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="Inspected by" Component="InspectedBy" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="9">
+                <RadzenDropDown Data="@cleaners" TextProperty="Firstname" ValueProperty="CleanerId"
+                                Placeholder="Select Cleaner" style="display: block; width: 100%" @bind-Value="@(booking.Inspectedby)" Name="Inspectedby" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="4">
+                <RadzenLabel Text="Inspection Notes" Component="Inspectionnotes" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="8">
+                <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(booking.Inspectionnotes)" Name="Inspectionnotes" Rows="3" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="4">
+                <RadzenLabel Text="Post Booking Notes" Component="PostbookingNotes" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="8">
+                <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(booking.PostbookingNotes)" Name="PostbookingNotes" Rows="3" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="4">
+                <RadzenLabel Text="Security Notes" Component="SecurityNotes" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="8">
+                <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(booking.SecurityNotes)" Name="SecurityNotes" Rows="3" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="4">
+                <RadzenLabel Text="Receipt Info" Component="Receiptinfo" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="8">
+                <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(booking.Receiptinfo)" Name="Receiptinfo" Rows="3" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Text="Submit" Variant="Variant.Flat" />
+        </RadzenStack>
+    </RadzenTemplateForm>
+</RadzenColumn>

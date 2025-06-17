@@ -25,6 +25,7 @@ builder.Services.AddScoped<TenantService>();
 
 
 builder.Services.AddScoped<SharedEvents>();
+//builder.Services.AddScoped<SendGridEmailService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddScoped<CustomAuthStateProvider>();
 builder.Services.AddHttpContextAccessor();
