@@ -322,6 +322,12 @@ namespace Destination.Services
             return await context.Bookings.Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
+        public async Task<Review> GetReviewsByBookingId(int id)
+        {
+            using var context = dbContextFactory.CreateDbContext();
+            return await context.Reviews.Where(x => x.Bookingid == id).FirstOrDefaultAsync();
+        }
+
         public async Task<List<PropertyCleaner>> GetBookingsCleanersAsync()
         {
             using var context = dbContextFactory.CreateDbContext();

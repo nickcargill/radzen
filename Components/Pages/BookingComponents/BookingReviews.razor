@@ -1,0 +1,29 @@
+@page "/booking-reviews"
+
+
+<PageTitle>Booking Reviews</PageTitle>
+
+<RadzenColumn SizeMD=12>
+    <RadzenTemplateForm TItem="Destination.Models.destinationTest.Review" Data="@(review)" Visible="@(review != null)" Submit="@FormSubmit">
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="Booking Id" Component="Bookingid" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="9">
+                <RadzenNumeric Disabled style="display: block; width: 100%" @bind-Value="@(review.Bookingid)" Name="Bookingid" ShowUpDown="false" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="12">
+            <RadzenLabel Text="Reviews" Component="Reviews" style="width: 100%" />
+                <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(review.Reviews)" Name="Reviews" Rows="20" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Text="Submit" Variant="Variant.Flat" />
+        </RadzenStack>
+    </RadzenTemplateForm>
+</RadzenColumn>

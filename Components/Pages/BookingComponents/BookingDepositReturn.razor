@@ -1,6 +1,8 @@
-@page "/bookings-clean"
+@page "/booking-deposit-return"
 
-<PageTitle>Bookings Clean</PageTitle>
+
+
+<PageTitle>Deposit Return</PageTitle>
 
 <RadzenColumn SizeMD=12>
     <RadzenTemplateForm TItem="Destination.Models.destinationTest.Booking" Data="@(booking)" Visible="@(booking != null)" Submit="@FormSubmit">
@@ -51,6 +53,25 @@
             </RadzenColumn>
         </RadzenRow>
 
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="Deposit Paid" Component="Deposit" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="9">
+                <RadzenNumeric Disabled style="display: block; width: 100%" @bind-Value="@(booking.Deposit)" Name="Deposit" ShowUpDown="false" />
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="3">
+                <RadzenLabel Text="Pet Dep Paid" Component="Petdeposit" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="9">
+                <RadzenNumeric Disabled style="display: block; width: 100%" @bind-Value="@(booking.Petdeposit)" Name="Petdeposit" ShowUpDown="false" />
+            </RadzenColumn>
+        </RadzenRow>
+
         <RadzenRow style="margin-bottom: 1rem">
             <RadzenColumn SizeMD="4">
                 <RadzenLabel Text="Cleaningcomp" Component="Cleaningcomp" style="width: 100%" />
@@ -66,6 +87,22 @@
             </RadzenColumn>
         </RadzenRow>
 
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="4">
+                <RadzenLabel Text="Deposit Hold" Component="HoldDeposit" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="2">
+                <RadzenCheckBox @bind-Value="@(booking.HoldDeposit)" Name="HoldDeposit" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="4">
+                <RadzenLabel Text="Deposit Returned" Component="Depositreturned" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="2">
+                <RadzenCheckBox @bind-Value="@(booking.Depositreturned)" Name="Depositreturned" />
+            </RadzenColumn>
+        </RadzenRow>
+
         <RadzenRow style="margin-bottom: 1rem">
             <RadzenColumn SizeMD="4">
                 <RadzenLabel Text="Inspected" Component="Inspected" style="width: 100%" />
@@ -77,10 +114,20 @@
 
         <RadzenRow style="margin-bottom: 1rem">
             <RadzenColumn SizeMD="4">
-                <RadzenLabel Text="Cleaning Notes" Component="CleaningNotes" style="width: 100%" />
+                <RadzenLabel Text="Deposit Date" Component="Depositdate" style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn SizeMD="8">
-                <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(booking.CleaningNotes)" Name="CleaningNotes" Rows="2" />
+                <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(booking.Depositdate)" Name="Depositdate" />
+            </RadzenColumn>
+        </RadzenRow>
+
+
+        <RadzenRow style="margin-bottom: 1rem">
+            <RadzenColumn SizeMD="4">
+                <RadzenLabel Text="Returned Amount" Component="Returnedamount" style="width: 100%" />
+            </RadzenColumn>
+            <RadzenColumn SizeMD="8">
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(booking.Returnedamount)" Name="Returnedamount" ShowUpDown="false" />
             </RadzenColumn>
         </RadzenRow>
 
@@ -95,30 +142,24 @@
 
         <RadzenRow style="margin-bottom: 1rem">
             <RadzenColumn SizeMD="4">
-                <RadzenLabel Text="Post Booking Notes" Component="PostbookingNotes" style="width: 100%" />
+                <RadzenLabel Text="Cleaning Notes" Component="CleaningNotes" style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn SizeMD="8">
-                <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(booking.PostbookingNotes)" Name="PostbookingNotes" Rows="2" />
+                <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(booking.CleaningNotes)" Name="CleaningNotes" Rows="2" />
             </RadzenColumn>
         </RadzenRow>
 
+
         <RadzenRow style="margin-bottom: 1rem">
             <RadzenColumn SizeMD="4">
-                <RadzenLabel Text="Security Notes" Component="SecurityNotes" style="width: 100%" />
+                <RadzenLabel Text="DepositReturn Notes" Component="SecurityNotes" style="width: 100%" />
             </RadzenColumn>
             <RadzenColumn SizeMD="8">
                 <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(booking.SecurityNotes)" Name="SecurityNotes" Rows="2" />
             </RadzenColumn>
         </RadzenRow>
 
-        <RadzenRow style="margin-bottom: 1rem">
-            <RadzenColumn SizeMD="4">
-                <RadzenLabel Text="Receipt Info" Component="Receiptinfo" style="width: 100%" />
-            </RadzenColumn>
-            <RadzenColumn SizeMD="8">
-                <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(booking.Receiptinfo)" Name="Receiptinfo" Rows="2" />
-            </RadzenColumn>
-        </RadzenRow>
+
 
         <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
             <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Text="Submit" Variant="Variant.Flat" />

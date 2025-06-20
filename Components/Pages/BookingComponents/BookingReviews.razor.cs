@@ -9,10 +9,12 @@ using Radzen;
 using Radzen.Blazor;
 using Destination.Models.destinationTest;
 using Destination.Services;
+using DocumentFormat.OpenXml.Spreadsheet;
+using Microsoft.EntityFrameworkCore.SqlServer.Update.Internal;
 
-namespace Destination.Components.Pages.CleaningComponents
+namespace Destination.Components.Pages.BookingComponents
 {
-    public partial class BookingsClean
+    public partial class BookingReviews
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -38,16 +40,22 @@ namespace Destination.Components.Pages.CleaningComponents
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public int Id { get; set; }
 
-        protected Destination.Models.destinationTest.Booking booking;
-        private List<PropertyCleaner> cleaners = new();
+        protected Destination.Models.destinationTest.Review review;
+
+        private bool isupdate = true;
 
         protected override async Task OnInitializedAsync()
         {
-            booking = await bookingService.GetBookingsCleanerById(Id);
-            cleaners = await bookingService.GetBookingsCleanersAsync();
+            review = await bookingService.GetReviewsByBookingId(Id);
+
+            if (review == null) {
+                isupdate = false;
+                review = new Review();
+                review.Bookingid = Id;
+            }
         }
 
         protected bool errorVisible;
@@ -56,7 +64,12 @@ namespace Destination.Components.Pages.CleaningComponents
         {
             try
             {
-                await destinationTestService.UpdateBooking(Id, booking);
+                if (isupdate) {
+                    await destinationTestService.UpdateReview(review.Id, review);
+                }
+                else{
+                    await destinationTestService.CreateReview(review);
+                }
                 NotificationService.Notify(new NotificationMessage
                 {
                     Severity = NotificationSeverity.Success,

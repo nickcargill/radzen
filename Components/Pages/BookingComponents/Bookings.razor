@@ -98,26 +98,14 @@
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("cleans"))"
                             style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                Clean
-                            </a>                            
-                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))"
+                            </a>
+                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("DepositReturn"))"
                             style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 Deposit Return
-                            </a>                            
-                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))"
-                            style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
-                                Inquiry
-                            </a>                            
-                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))"
-                            style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
-                                History
-                            </a>                            
-                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))"
+                            </a>                                                     
+                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("Reviews"))"
                             style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 Reviews
-                            </a>
-                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("Tasks"))"
-                            style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
-                                Tasks
                             </a>
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("Notes"))"
                             style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
@@ -134,7 +122,7 @@
                     <div style="margin-top: 5px; @(menuVisible ? "opacity: 0.3;" : "");
                         height: calc(100% - 30px);
                         overflow-y: auto;
-                        max-height: 643px; /* or whatever max height you prefer */
+                        max-height: 625px; /* or whatever max height you prefer */
                         padding-right: 5px;">
                         @if (activeForm == "booking")
                         {
@@ -144,13 +132,21 @@
                         {
                             <Destination.Components.Pages.CleaningComponents.BookingsClean Id="@selectedBookingId" />
                         }
+                        else if (activeForm == "DepositReturn")
+                        {
+                            <BookingDepositReturn Id="@selectedBookingId" />
+                        }
                         else if (activeForm == "Notes")
                         {
-                            <h3>Feature coming soon. Stay tuned!</h3>
+                            <BookingNotes Id="@selectedBookingId" />
                         }
                         else if (activeForm == "Tenant")
                         {
                             <Destination.Components.Pages.TenantComponents.TenantInfoByBooking Id="@selectedBookingId" />
+                        }
+                        else if (activeForm == "Reviews")
+                        {
+                            <BookingReviews Id="@selectedBookingId" />
                         }
                     </div>
                 </RadzenCard>
@@ -250,9 +246,9 @@
                                             <label>City</label>
                                             <RadzenDropDown @bind-Value="filterModel.City" Data="@cities" Placeholder="Select City" Style="width: 100%;" />
                                         </RadzenColumn>
-                                        <RadzenColumn Size="4" class="rz-d-flex rz-align-items-end" Style="margin-top:20px">
+                                        <RadzenColumn Size="6" class="rz-d-flex rz-align-items-end" Style="margin-top:20px">
                                             <div class="custom-toolbar">
-                                                <RadzenButton Text="Search" ButtonStyle="ButtonStyle.Primary" Type="Submit" class="rz-mr-2" Style="height:24px;" />
+                                                <RadzenButton Text="Search" ButtonStyle="ButtonStyle.Primary" Type="Submit" Style="height:24px;" />
                                                 <RadzenButton Text="Reset" Click="@OnReset" Style="height:24px;" />
                                             </div>
                                         </RadzenColumn>

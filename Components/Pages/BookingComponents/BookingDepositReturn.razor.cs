@@ -10,9 +10,9 @@ using Radzen.Blazor;
 using Destination.Models.destinationTest;
 using Destination.Services;
 
-namespace Destination.Components.Pages.CleaningComponents
+namespace Destination.Components.Pages.BookingComponents
 {
-    public partial class BookingsClean
+    public partial class BookingDepositReturn
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -38,7 +38,7 @@ namespace Destination.Components.Pages.CleaningComponents
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
-        [Parameter] 
+        [Parameter]
         public int Id { get; set; }
 
         protected Destination.Models.destinationTest.Booking booking;
