@@ -36,6 +36,9 @@
                     </Template>
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Datetocomp" Title="Deadline">
+                        <Template Context="data">
+                            @data.Datetocomp?.ToString("yyyy-MM-dd")
+                        </Template>
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Amenity" Title="Amenity">
                 </RadzenDataGridColumn>
@@ -48,7 +51,10 @@
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Status" Title="Status">
                 </RadzenDataGridColumn>
                     <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="NextdateFrom" Title="Next Check-in">
-                </RadzenDataGridColumn>
+                        <Template Context="data">
+                            @data.NextdateFrom?.ToString("yyyy-MM-dd")
+                        </Template>
+                    </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Department" Title="Department">
                 </RadzenDataGridColumn>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.VwMaintenanceNextDateFrom" Property="Description" Title="Description" Width="160">

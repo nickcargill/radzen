@@ -201,7 +201,7 @@ public partial class Properties
 
     protected async Task EditRow(Destination.Models.destinationTest.Property args)
     {
-        await DialogService.OpenAsync<EditProperty>("Edit Property", new Dictionary<string, object> { { "Propid", args.Propid } });
+      //  await DialogService.OpenAsync<EditProperty>("Edit Property", new Dictionary<string, object> { { "Propid", args.Propid } });
     }
 
     void Change(string text)

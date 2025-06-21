@@ -20,6 +20,7 @@ builder.Services.AddRadzenCookieThemeService(options =>
 builder.Services.AddHttpClient();
 builder.Services.AddScoped<destinationTestService>();
 builder.Services.AddScoped<BookingService>();
+builder.Services.AddScoped<OwnerService>();
 builder.Services.AddScoped<PropertyService>();
 builder.Services.AddScoped<TenantService>();
 

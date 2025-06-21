@@ -23,6 +23,15 @@
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
                 <RadzenColumn SizeMD="3">
+                    <RadzenLabel Text="New Status" Component="Newstatus" style="width: 100%" />
+                </RadzenColumn>
+                <RadzenColumn SizeMD="9">
+                <RadzenDropDown @bind-Value="@(agent.Newstatus)" Data="@statusList" TextProperty="StatusName" ValueProperty="StatusId"
+                                Placeholder="Select Status" Style="width: 100%;" />
+            </RadzenColumn>
+            </RadzenRow>
+            <RadzenRow style="margin-bottom: 1rem">
+                <RadzenColumn SizeMD="3">
                     <RadzenLabel Text="Office Number" Component="OfficeNumber" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
@@ -74,15 +83,7 @@
                     <RadzenLabel Text="Brokerid" Component="Brokerid" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(agent.Brokerid)" Name="Brokerid" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Password" Component="Password" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(agent.Password)" Name="Password" />
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(agent.Brokerid)" Name="Brokerid" ShowUpDown="false" />
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -91,14 +92,6 @@
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
                     <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(agent.Bio)" Name="Bio" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Photo" Component="Photo" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(agent.Photo)" Name="Photo" />
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -138,7 +131,7 @@
                     <RadzenLabel Text="Zip" Component="Zip" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(agent.Zip)" Name="Zip" />
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(agent.Zip)" Name="Zip" ShowUpDown="false" />
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -159,15 +152,7 @@
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
                 <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Property Address" Component="PropertyAddress" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(agent.PropertyAddress)" Name="PropertyAddress" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Lasttouched" Component="Lasttouched" style="width: 100%" />
+                    <RadzenLabel Text="Last Touched" Component="Lasttouched" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
                     <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(agent.Lasttouched)" Name="Lasttouched" />
@@ -186,7 +171,7 @@
                     <RadzenLabel Text="Homerate" Component="Homerate" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(agent.Homerate)" Name="Homerate" />
+                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(agent.Homerate)" Name="Homerate" ShowUpDown="false" />
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -194,15 +179,7 @@
                     <RadzenLabel Text="Rate" Component="Rate" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(agent.Rate)" Name="Rate" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Familyphoto" Component="Familyphoto" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(agent.Familyphoto)" Name="Familyphoto" />
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(agent.Rate)" Name="Rate" ShowUpDown="false" />
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -210,7 +187,7 @@
                     <RadzenLabel Text="Entered By" Component="EnteredBy" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(agent.EnteredBy)" Name="EnteredBy" />
+                <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(agent.EnteredBy)" Name="EnteredBy" ShowUpDown="false" />
                 </RadzenColumn>
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
@@ -223,7 +200,7 @@
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
                 <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Agent Bedrooms" Component="AgentBedrooms" style="width: 100%" />
+                    <RadzenLabel Text="Bedrooms" Component="AgentBedrooms" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
                     <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(agent.AgentBedrooms)" Name="AgentBedrooms" />
@@ -231,7 +208,7 @@
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
                 <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Agent Bathrooms" Component="AgentBathrooms" style="width: 100%" />
+                    <RadzenLabel Text="Bathrooms" Component="AgentBathrooms" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
                     <RadzenTextBox style="display: block; width: 100%" @bind-Value="@(agent.AgentBathrooms)" Name="AgentBathrooms" />
@@ -239,15 +216,7 @@
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
                 <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Newstatus" Component="Newstatus" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenNumeric style="display: block; width: 100%" @bind-Value="@(agent.Newstatus)" Name="Newstatus" />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Actionrequired" Component="Actionrequired" style="width: 100%" />
+                    <RadzenLabel Text="Action Req." Component="Actionrequired" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">
                     <RadzenCheckBox @bind-Value="@(agent.Actionrequired)" Name="Actionrequired" />
@@ -261,10 +230,9 @@
                     <RadzenDatePicker DateFormat="MM/dd/yyyy" style="display: block; width: 100%" @bind-Value="@(agent.DateCreated)" Name="DateCreated" />
                 </RadzenColumn>
             </RadzenRow>
-          <RadzenStack  Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
-                    <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
-                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick"  />
-          </RadzenStack>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Text="Submit" Variant="Variant.Flat" />
+        </RadzenStack>
         </RadzenTemplateForm>
     </RadzenColumn>
 

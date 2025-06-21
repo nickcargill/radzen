@@ -274,14 +274,5 @@ namespace Destination.Components.Pages.BookingComponents
         {
             filterModel = new BookingFilterModel(); // reset all values
         }
-
-        
-
-
-
-
-
-
-
     }
 }

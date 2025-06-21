@@ -1358,7 +1358,7 @@ return await items.ToListAsync();
 
             OnAgentsRead(ref items);
 
-return await items.ToListAsync();
+            return await items.ToListAsync();
         }
 
         partial void OnAgentGet(Destination.Models.destinationTest.Agent item);

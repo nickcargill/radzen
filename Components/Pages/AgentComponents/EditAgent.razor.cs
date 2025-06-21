@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
+using static Destination.Shared.DTO.AllDropDownValues;
+using Destination.Services;
 
 namespace Destination.Components.Pages.AgentComponents
 {
@@ -29,25 +31,39 @@ namespace Destination.Components.Pages.AgentComponents
 
         [Inject]
         protected NotificationService NotificationService { get; set; }
+
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
+        [Inject]
+        public PropertyService propertyService { get; set; }
+
         [Parameter]
-        public int AgId { get; set; }
+        public int Id { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            agent = await destinationTestService.GetAgentByAgId(AgId);
+            agent = await destinationTestService.GetAgentByAgId(Id);
+            statusList = await propertyService.GetAgentStatusDropDownValues();
         }
         protected bool errorVisible;
         protected Destination.Models.destinationTest.Agent agent;
+        private List<AgentStatusDropDownValues> statusList = new();
+
 
         protected async Task FormSubmit()
         {
             try
             {
-                await destinationTestService.UpdateAgent(AgId, agent);
-                DialogService.Close(agent);
+                await destinationTestService.UpdateAgent(Id, agent);
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Success",
+                    Detail = "Data updated successfully!",
+                    Duration = 4000 // in milliseconds
+                });
+                StateHasChanged();
             }
             catch (Exception ex)
             {
