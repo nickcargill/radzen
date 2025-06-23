@@ -19,7 +19,7 @@ namespace Destination.Services
             this.dbContextFactory = dbContextFactory;
         }
 
-        public async Task<PagedResult<Property>> GetPropertiesPagedAsync(Query query)
+        public async Task<PagedResult<Property>> GetPropertiesPagedAsync(Query query, PropertyFiltersModel? filterModel = null)
         {
             using var context = dbContextFactory.CreateDbContext();
 
@@ -35,6 +35,50 @@ namespace Destination.Services
             if (!string.IsNullOrEmpty(query.Filter))
             {
                 filteredItems = filteredItems.Where(query.Filter, query.FilterParameters);
+            }
+
+            if (filterModel != null)
+            {
+
+                if (filterModel.StatusId > 0)
+                {
+                    filteredItems = filteredItems.Where(b => b.Status == filterModel.StatusId);
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.OwnerLastName))
+                {
+                    filteredItems = filteredItems.Where(b => b.Agent.FirstName.Contains(filterModel.OwnerLastName) );
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.Address))
+                {
+                    filteredItems = filteredItems.Where(b => b.Address.Contains(filterModel.Address));
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.Sleeps))
+                {
+                    filteredItems = filteredItems.Where(b => b.Sleeps.Contains(filterModel.Sleeps));
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.BedRooms))
+                {
+                    filteredItems = filteredItems.Where(b => b.Bedrooms.Contains(filterModel.BedRooms));
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.Baths))
+                {
+                    filteredItems = filteredItems.Where(b => b.Baths.Contains(filterModel.Baths));
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.OwnerEmail))
+                {
+                    filteredItems = filteredItems.Where(b => b.Agent.Email.Contains(filterModel.OwnerEmail));
+                }
+
+                if (!string.IsNullOrWhiteSpace(filterModel.PropertyName))
+                {
+                    filteredItems = filteredItems.Where(b => b.Name.Contains(filterModel.PropertyName));
+                }
             }
 
             var count = await filteredItems.CountAsync();
@@ -74,6 +118,7 @@ namespace Destination.Services
                     AgID = x.AgId,
                     Name = x.FirstName
                 })
+                .OrderBy(x=>x.Name)
                 .ToList();
 
             return items;
@@ -83,11 +128,27 @@ namespace Destination.Services
         {
             using var context = dbContextFactory.CreateDbContext();
 
-            var items = context.AgentStatuses
+            var items = context.Statuses
                 .Select(x => new AgentStatusDropDownValues
                 {
                     StatusId = x.Statusid,
-                    StatusName = x.Status
+                    StatusName = x.Status1
+                })
+                .OrderBy(x=>x.StatusName)
+                .ToList();
+
+            return items;
+        }
+
+        public async Task<List<AgentStatusDropDownValues>> GetStatusDropDownValues()
+        {
+            using var context = dbContextFactory.CreateDbContext();
+
+            var items = context.Statuses
+                .Select(x => new AgentStatusDropDownValues
+                {
+                    StatusId = x.Statusid,
+                    StatusName = x.Status1
                 })
                 .ToList();
 
@@ -101,7 +162,7 @@ namespace Destination.Services
             {
                 TypeId = x.Typeid,
                 Type = x.Type
-            }).ToList();
+            }).OrderBy(x=>x.Type).ToList();
 
             return items;
         }
@@ -112,8 +173,8 @@ namespace Destination.Services
             var items = context.Tenants.Where(x=>x.Role > 23).Select(x => new OwnerLoginDDValues
             {
                 TenantId = x.Tenantid,
-                OwnerName = x.Firstname
-            }).ToList();
+                OwnerName = x.Firstname +" "+ x.Lastname
+            }).OrderBy(x=>x.OwnerName).ToList();
 
             return items;
         }
@@ -121,11 +182,11 @@ namespace Destination.Services
         public async Task<List<PropertyCleanerDDValues>> GetPropertyCleanerDropDownValues()
         {
             using var context = dbContextFactory.CreateDbContext();
-            var items = context.PropertyCleaners.Select(x => new PropertyCleanerDDValues
+            var items = context.PropertyCleaners.Where(x=>x.Firstname != null || x.Lastname != null).Select(x => new PropertyCleanerDDValues
             {
                 CleanerId = x.Cleanerid,
-                Name = x.Firstname
-            }).ToList();
+                Name = x.Firstname + " " + x.Lastname
+            }).OrderBy(x=>x.Name).ToList();
 
             return items;
         }

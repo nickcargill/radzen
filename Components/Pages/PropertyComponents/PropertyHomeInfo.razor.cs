@@ -52,6 +52,27 @@ namespace Destination.Components.Pages.PropertyComponents
             property = await destinationTestService.GetPropertyByPropid(Id);
         }
 
+
+        void OnPaste(HtmlEditorPasteEventArgs args)
+        {
+        }
+
+        void OnChange(string html)
+        {
+        }
+
+        void OnInput(string html)
+        {
+        }
+
+        void OnExecute(HtmlEditorExecuteEventArgs args)
+        {
+        }
+
+        void OnUploadComplete(UploadCompleteEventArgs args)
+        {
+        }
+
         protected async Task Submit(Property arg)
         {
             var result = await propertyService.Updateproperty(arg);

@@ -52,6 +52,10 @@
         padding: 2px !important;
     }
 
+    .rz-tabview-nav li a, .rz-tabview-nav li a:not([href]):not([class]) {
+        font-size: 11px !important;
+    }
+
 </style>
 
 
@@ -240,15 +244,15 @@
                      Collapse=@(() => Change("Panel collapsed"))>
             <RadzenTabs Change=@OnTabChange>
                 <Tabs>
-                    <RadzenTabsItem Text="Owner Communication List" Style="color:green;font-weight:600">
+                    <RadzenTabsItem Text="Owner Communication List" Style="color:black;font-weight:600">
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Send SMS" style="margin-left: 2px;color:green;font-weight:600">
+                    <RadzenTabsItem Text="Send SMS" style="margin-left: 2px;color:black;font-weight:600">
                         @if (isCommTab)
                         {
                             <Destination.Components.Pages.CommunicationComponents.CommunicationHistory Id="@selectedAgentId"></Destination.Components.Pages.CommunicationComponents.CommunicationHistory>
                         }
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Send Email" style="margin-left: 2px;color:green;font-weight:600">
+                    <RadzenTabsItem Text="Send Email" style="margin-left: 2px;color:black;font-weight:600">
                         @if (isVisitHistoryTab)
                         {
                             <UserVisitHistory Id="@selectedAgentId"></UserVisitHistory>

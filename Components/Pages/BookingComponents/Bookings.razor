@@ -51,6 +51,10 @@
         padding: 2px !important;
     }
 
+    .rz-tabview-nav li a, .rz-tabview-nav li a:not([href]):not([class]) {
+        font-size: 11px !important;
+    }
+
 </style>
 
 
@@ -414,7 +418,7 @@
 </RadzenStack>
 
 
-@if (isBottomPanel)
+@if (isBottomPanel && PropParameterId == 0)
 {
     <RadzenColumn SizeMD="12">
         <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 6px !important;margin-bottom: 5px !important; padding: 0px !important"
@@ -422,38 +426,38 @@
                      Collapse=@(() => Change("Panel collapsed"))>
             <RadzenTabs Change=@OnTabChange>
                 <Tabs>
-                    <RadzenTabsItem Text="Payments" Style="color:green;font-weight:600">
+                    <RadzenTabsItem Text="Payments" Style="color:black;font-weight:600">
                         <BookingPayments Id="@selectedBookingId"></BookingPayments>
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Booking History" style="margin-left: 2px;color:green;font-weight:600">
+                    <RadzenTabsItem Text="Booking History" style="margin-left: 2px;color:black;font-weight:600">
                         @if (isBookingHistoryTab)
                         {
                             <BookingHistory Id="@selectedBookingId"></BookingHistory>
                         }
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Communication" style="margin-left: 2px;color:green;font-weight:600">
+                    <RadzenTabsItem Text="Communication" style="margin-left: 2px;color:black;font-weight:600">
                         @if (isCommTab)
                         {
                             <Destination.Components.Pages.CommunicationComponents.CommunicationHistory Id="@selectedBookingId"></Destination.Components.Pages.CommunicationComponents.CommunicationHistory>
                         }
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Visit History" style="margin-left: 2px;color:green;font-weight:600">
+                    <RadzenTabsItem Text="Visit History" style="margin-left: 2px;color:black;font-weight:600">
                         @if (isVisitHistoryTab)
                         {
                             <UserVisitHistory Id="@selectedBookingId"></UserVisitHistory>
                         }
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Credit Requests" style="margin-left: 2px;color:green;font-weight:600">
+                    <RadzenTabsItem Text="Credit Requests" style="margin-left: 2px;color:black;font-weight:600">
                         @if (isCreditRequest)
                         {
                             <BookingCreditRequest Id="@selectedBookingId"></BookingCreditRequest>
                         }
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Checking in" style="margin-left: 2px;color:green;font-weight:600">
+                    <RadzenTabsItem Text="Checking in" style="margin-left: 2px;color:black;font-weight:600">
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Notes" style="margin-left: 2px;color:green;font-weight:600">
+                    <RadzenTabsItem Text="Notes" style="margin-left: 2px;color:black;font-weight:600">
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Tasks" style="margin-left: 2px;color:green;font-weight:600">
+                    <RadzenTabsItem Text="Tasks" style="margin-left: 2px;color:black;font-weight:600">
                     </RadzenTabsItem>
                 </Tabs>
             </RadzenTabs>
@@ -467,37 +471,37 @@
                  Collapse=@(() => Change("Panel collapsed"))>
         <RadzenTabs Change=@OnTabChange>
             <Tabs>
-                <RadzenTabsItem Text="Property Details" Style="color:green;font-weight:600">
+                <RadzenTabsItem Text="Property Details" Style="color:black;font-weight:600">
                     <PropertyDetails Id="@selectedPropertyId"></PropertyDetails>
                 </RadzenTabsItem>
-                <RadzenTabsItem Text="Description" style="margin-left: 2px;color:green;font-weight:600">
+                <RadzenTabsItem Text="Description" style="margin-left: 2px;color:black;font-weight:600">
                     <PropertyDescription Id="@selectedPropertyId"></PropertyDescription>
                 </RadzenTabsItem>
-                <RadzenTabsItem Text="Home Info" style="margin-left: 2px;color:green;font-weight:600">
+                <RadzenTabsItem Text="Home Info" style="margin-left: 2px;color:black;font-weight:600">
                     <PropertyHomeInfo Id="@selectedPropertyId"></PropertyHomeInfo>
                 </RadzenTabsItem>
-                <RadzenTabsItem Text="Property Cost" style="margin-left: 2px;color:green;font-weight:600">
+                <RadzenTabsItem Text="Property Cost" style="margin-left: 2px;color:black;font-weight:600">
                     <PropertyCost Id="@selectedPropertyId"></PropertyCost>
                 </RadzenTabsItem>
-                <RadzenTabsItem Text="Rates" style="margin-left: 2px;color:green;font-weight:600">
+                <RadzenTabsItem Text="Rates" style="margin-left: 2px;color:black;font-weight:600">
                     <RatesTest Id="@selectedPropertyId"></RatesTest>
                 </RadzenTabsItem>
-                <RadzenTabsItem Text="Bookings" style="margin-left: 2px;color:green;font-weight:600">
+                <RadzenTabsItem Text="Bookings" style="margin-left: 2px;color:black;font-weight:600">
                     <Bookings Id="@selectedPropertyId"></Bookings>
                 </RadzenTabsItem>
-                <RadzenTabsItem Text="Tasks" style="margin-left: 2px;color:green;font-weight:600">
+                <RadzenTabsItem Text="Tasks" style="margin-left: 2px;color:black;font-weight:600">
                     <PropertyTasks Id="@selectedPropertyId"></PropertyTasks>
                 </RadzenTabsItem>
-                <RadzenTabsItem Text="Annual" style="margin-left: 2px;color:green;font-weight:600">
+                <RadzenTabsItem Text="Annual" style="margin-left: 2px;color:black;font-weight:600">
                     <PropertyAnnualLogs Id="@selectedPropertyId"></PropertyAnnualLogs>
                 </RadzenTabsItem>
-                <RadzenTabsItem Text="Owner Comm" style="margin-left: 2px;color:green;font-weight:600">
+                <RadzenTabsItem Text="Owner Comm" style="margin-left: 2px;color:black;font-weight:600">
                     <Destination.Components.Pages.CommunicationComponents.OwnerCommunications></Destination.Components.Pages.CommunicationComponents.OwnerCommunications>
                 </RadzenTabsItem>
-                <RadzenTabsItem Text="Improvements" style="margin-left: 2px;color:green;font-weight:600">
+                <RadzenTabsItem Text="Improvements" style="margin-left: 2px;color:black;font-weight:600">
                     <PropertyImprovements Id="@selectedPropertyId"></PropertyImprovements>
                 </RadzenTabsItem>
-                <RadzenTabsItem Text="Home Team" style="margin-left: 2px;color:green;font-weight:600">
+                <RadzenTabsItem Text="Home Team" style="margin-left: 2px;color:black;font-weight:600">
                     <Destination.Components.Pages.HomeTeamComponents.HomeTeamForm Id="@selectedPropertyId"></Destination.Components.Pages.HomeTeamComponents.HomeTeamForm>
                 </RadzenTabsItem>
             </Tabs>

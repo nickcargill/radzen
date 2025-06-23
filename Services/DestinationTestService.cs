@@ -17409,7 +17409,6 @@ return await items.ToListAsync();
                     Propid = x.Propid,
                     Name = x.Name
                 })
-                .Take(500)
                 .OrderBy(x=>x.Name)
                 .AsQueryable();
 

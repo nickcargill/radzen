@@ -5,97 +5,213 @@
         flex-direction: row-reverse;
         justify-content: right;
     }
-</style>
+
+    .compact-form .rz-input,
+    .compact-form .rz-dropdown,
+    .compact-form .rz-calendar,
+    .rz-textbox, .rz-numeric,
+    .rz-datepicker > .rz-inputtext,
+    .rz-dropdown {
+        min-height: 24px !important;
+        height: 24px !important;
+        line-height: 16px !important;
+        font-size: 11px;
+        padding: 4px 4px;
+    }
+
+    label {
+        white-space: nowrap;
+        font-size: 11px;
+    }
+
+    .rz-button-box, .rz-button {
+        line-height: 9px !important;
+    }
+
+    .rz-autocomplete-items li, .rz-dropdown-items li, .rz-multiselect-items li, .rz-dropdown-item {
+        font-size: 11px !important;
+        padding: 2px !important;
+    }
+
+    .custom-toolbar .rz-button-md {
+        padding: 0.5rem 1rem;
+        height: auto;
+        line-height: 0.5rem !important;
+        min-height: 1.50rem !important;
+        min-width: 1.50rem !important;
+        font-size: var(--rz-body-font-size);
+        font-weight: 600;
+    }
+
+    .rz-tabview-nav li a, .rz-tabview-nav li a:not([href]):not([class]){
+        font-size:11px !important;
+    }
+    </style>
 
 
- <PageTitle>Properties</PageTitle> 
+<PageTitle>Properties</PageTitle>
 
 <RadzenStack>
-    <RadzenRow AlignItems="AlignItems.Center">
+    @*     <RadzenRow AlignItems="AlignItems.Center">
         <RadzenColumn Size="12" SizeMD="6">
-            <RadzenText Text="Properties" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+            <RadzenText Text="Properties" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin: 0" />
         </RadzenColumn>
         <RadzenColumn Size="12" SizeMD="6">
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
                 <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
             </RadzenStack>
         </RadzenColumn>
-    </RadzenRow>
+    </RadzenRow> *@
     <RadzenRow>
+
         @if (!showCollapse)
         {
             <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Light"
-                      Click="@ShowCollapse" Style="height:24px;padding:0px !important; min-height:18px;min-width:25px"  />
+                          Click="@ShowCollapse" Style="height: 24px; padding:0px !important; min-height: 18px; min-width: 25px" />
         }
         @if (showleftPanel && selectedBookingId != 0)
         {
-            <RadzenColumn SizeMD="3">
-               <div class="custom-sidebar @(isCollapsed ? "collapsed" : "expanded")">
-                    <RadzenCard Style="margin-top: 1px; position: relative;padding:4px">
+            <RadzenColumn SizeMD="3" Style="position: relative;">
+                <!-- Main Card Container -->
+                <RadzenCard Style="height: 100%; position: relative; padding-top: 10px; overflow: hidden;">
 
-                        <!-- Remove/Hide Button inside the panel -->
-                        <RadzenButton Icon="remove"
-                        Click="@HidePanel"
-                        ButtonStyle="ButtonStyle.Light" 
-                        Style="position: absolute; top: 0px; right: 0px; padding:0px !important; min-height:18px;min-width:25px" />
-                        <RadzenTabs>
-                            <Tabs>
-                                <RadzenTabsItem Text="Edit Info">
-                                    <EditBooking Id="@selectedBookingId"></EditBooking>
-                                </RadzenTabsItem>
-                                <RadzenTabsItem Text="Tenant" style="margin-left: 3px;">
-                                </RadzenTabsItem>
-                                <RadzenTabsItem Text="Notes" style="margin-left: 3px;">
-                                </RadzenTabsItem>
-                            </Tabs>
-                        </RadzenTabs>
-                    </RadzenCard>
-                </div>
+                    <RadzenButton Icon="remove"
+                                  Click="@HidePanel"
+                                  ButtonStyle="ButtonStyle.Light"
+                                  Style="position: absolute; top: 0px; right: 0px; padding:0px !important; min-height:18px;min-width:25px" />
+
+                    <!-- Menu Toggle Button (Top-left) -->
+                    <RadzenButton Icon="menu"
+                                  Click="@ToggleMenu"
+                                  ButtonStyle="ButtonStyle.Light"
+                                  Style="position: absolute; top: 1px; left: 1px; z-index: 10;padding:0px !important" />
+
+                    <!-- Menu Drawer (Now positioned top-left) -->
+                    <div style="@menuStyle">
+                        <RadzenStack Orientation="Orientation.Vertical" Gap="8px" Style="padding: 15px 10px; min-width: 160px;">
+                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("EditBookings"))"
+                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                                TBD
+                            </a>
+                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("cleans"))"
+                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                                TBD
+                            </a>
+                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("DepositReturn"))"
+                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                                TBD
+                            </a>
+                        </RadzenStack>
+                    </div>
+
+                    <!-- Form Container with scrollable content -->
+                    <div style="margin-top: 5px; @(menuVisible ? "opacity: 0.3;" : "");
+                        height: calc(100% - 30px);
+                        overflow-y: auto;
+                        max-height: 580px; /* or whatever max height you prefer */
+                        padding-right: 5px;">
+                        @if (activeForm == "EditBookings")
+                        {
+                            <EditBooking Id="@selectedBookingId"></EditBooking>
+                        }
+                    </div>
+                </RadzenCard>
             </RadzenColumn>
         }
         <RadzenColumn SizeMD="@(showleftPanel == false ? 12 : 9)">
+            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto"
+                         style="margin-top: 0px !important; margin-bottom: 7px !important; padding: 0px"
+                         Expand=@(() => Change("Panel expanded"))
+                         Collapse=@(() => Change("Panel collapsed"))>
+
+                <RadzenRow>
+                    <RadzenTemplateForm TItem="Destination.Shared.DTO.PropertyFiltersModel" Data="@filterModel" Submit="@OnSearch" Style="margin-top: 0px !important">
+                        <div class="filter-container rz-p-3" Style="padding-top:0px !important">
+
+                            <!-- Row 1 -->
+                            <RadzenRow>
+                                <RadzenColumn Size="2">
+                                    <label>Status</label>
+                                    <RadzenDropDown @bind-Value="filterModel.StatusId" Data="@statusList" TextProperty="StatusName" ValueProperty="StatusId"
+                                                    Placeholder="Select Status" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="2">
+                                    <label>Property</label>
+                                    <RadzenTextBox @bind-Value="filterModel.PropertyName" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="2">
+                                    <label>Owner Name</label>
+                                    <RadzenTextBox @bind-Value="filterModel.OwnerLastName" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="2">
+                                    <label>Owner Email</label>
+                                    <RadzenTextBox @bind-Value="filterModel.OwnerEmail" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="2">
+                                    <label>Address</label>
+                                    <RadzenTextBox @bind-Value="filterModel.Address" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="2">
+                                    <label>Sleeps</label>
+                                    <RadzenTextBox @bind-Value="filterModel.Sleeps" Style="width: 100%;" />
+                                </RadzenColumn>
+                            </RadzenRow>
+
+                            <!-- Row 2 -->
+                            <RadzenRow class="rz-mt-3">
+                                <RadzenColumn Size="2">
+                                    <label>Bedrooms</label>
+                                    <RadzenTextBox @bind-Value="filterModel.BedRooms" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="2">
+                                    <label>Baths</label>
+                                    <RadzenTextBox @bind-Value="filterModel.Baths" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn Size="6" class="rz-d-flex rz-align-items-end" Style="margin-top:20px">
+                                    <div class="custom-toolbar">
+                                        <RadzenButton Text="Search" ButtonStyle="ButtonStyle.Primary" Type="Submit" Style="height:24px;" />
+                                        <RadzenButton Text="Reset" Click="@OnReset" Style="height:24px;" />
+                                    </div>
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </div>
+                    </RadzenTemplateForm>
+                </RadzenRow>
+            </RadzenPanel>
             <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important;padding:0px"
-                Expand=@(() => Change("Panel expanded")) 
-                Collapse=@(() => Change("Panel collapsed")) >
-                    <RadzenDataGrid TItem="Property"
-                                    Data="@pagedProperties"
-                                    Count="@totalCount"
-                                    LoadData="@LoadData"
-                                    AllowColumnResize="true"
-                                    AllowPaging="true"
-                                    AllowSorting="true"
-                                    RowSelect="@EditRow"
-                                    AllowFiltering="true"
-                                    FilterMode="FilterMode.Advanced"
-                                    ShowPagingSummary="true"
-                                    ColumnWidth="150px"
-                                    PageSizeOptions="@(new int[]{10, 15, 20, 30})"
-                                    PageSize="20"
-                                    AllowColumnPicking="true"
-                                    Density="Radzen.Density.Compact">
+                         Expand=@(() => Change("Panel expanded"))
+                         Collapse=@(() => Change("Panel collapsed"))>
+                <RadzenDataGrid TItem="Property"
+                                Data="@pagedProperties"
+                                Count="@totalCount"
+                                LoadData="@LoadData"
+                                AllowColumnResize="true"
+                                AllowPaging="true"
+                                AllowSorting="true"
+                                RowSelect="@EditRow"
+                                AllowFiltering="true"
+                                FilterMode="FilterMode.Advanced"
+                                ShowPagingSummary="true"
+                                ColumnWidth="150px"
+                                PageSizeOptions="@(new int[]{10, 15, 20, 30})"
+                                PageSize="20"
+                                AllowColumnPicking="true"
+                                Density="Radzen.Density.Compact">
                     <Columns>
-                       <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Name" Title="Name" Width="140px">
-                        </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Propid" Title="Propid" Width="70px">
                             <Template Context="item">
-                                <span Text="Click here" @onclick="() => ShowTabs(item.Propid)" @oncontextmenu=@(e => ShowContextMenuWithItems(e, item)) @oncontextmenu:preventDefault="true"
+                                <span Text="Click here" @onclick="() => ShowTabs(item.Propid, item.Name)"
                                       style="cursor: pointer; color: green; text-decoration: underline;">@item.Propid</span>
                             </Template>
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Address" Title="Address" Width="140px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Name" Title="Name" Width="140px">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="City" Title="City" Width="140px">
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Address" Title="Address" Width="140px">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Zip" Title="Zip" Width="140px">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Agent.FirstName" Title="Owner" Width="140px">
                         </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Agent.Cell" Title="Phone" Width="140px">
-                        </RadzenDataGridColumn>                      
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Code" Title="Code" Width="140px">
-                        </RadzenDataGridColumn>
-                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Alarmcode" Title="Alarm" Width="140px">
-                        </RadzenDataGridColumn>                        
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Sleeps" Title="Sleeps" Width="140px">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Bedrooms" Title="Bedrooms" Width="140px">
@@ -103,6 +219,12 @@
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Baths" Title="Baths" Width="140px">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Status1.Status1" Title="Status" Width="140px">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Agent.Cell" Title="Phone" Width="140px">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Code" Title="Code" Width="140px">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Alarmcode" Title="Alarm" Width="140px">
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="PropertyCleaner.Firstname" Title="Property Cleaner" Width="140px">
                         </RadzenDataGridColumn>
@@ -114,85 +236,77 @@
 </RadzenStack>
 
 <RadzenRow>
-@*     <RadzenColumn SizeMD="4">
-    </RadzenColumn> *@
     <RadzenColumn SizeMD="12">
-        @* @if (isRates)
-        {
-        <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" 
-            Expand=@(() => Change("Panel expanded")) 
-            Collapse=@(() => Change("Panel collapsed")) >
-            <RadzenCard style="margin-top: 1rem;">
-              <RatesTest></RatesTest>
-            </RadzenCard>
-        </RadzenPanel>
-        } *@
-
         @if (showTabs)
         {
-            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 5px !important;margin-bottom: 0px !important;padding:0px !important" 
-                Expand=@(() => Change("Panel expanded")) 
-                Collapse=@(() => Change("Panel collapsed"))>
+            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 5px !important;margin-bottom: 0px !important;padding:0px !important"
+                         Expand=@(() => Change("Panel expanded"))
+                         Collapse=@(() => Change("Panel collapsed"))>
                 <RadzenTabs Change=@OnTabChange>
                     <Tabs>
-                        <RadzenTabsItem Text="Property Details" Style="color:green;font-weight:600">
-                            <PropertyDetails Id="@selectedPropId"></PropertyDetails>
+                        <RadzenTabsItem Text="@propName" Style="color:black;font-size:10px">
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Description" style="margin-left: 2px;color:green;font-weight:600">
+                        <RadzenTabsItem Text="Property Details" Style="margin-left: 2px;color:black;font-size:10px">
+                            @if (isPropDetailsTab)
+                            {
+                                <PropertyDetails Id="@selectedPropId"></PropertyDetails>
+                            }
+                        </RadzenTabsItem>
+                        <RadzenTabsItem Text="Description" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropDescTab)
                             {
                                 <PropertyDescription Id="@selectedPropId"></PropertyDescription>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Home Info" style="margin-left: 2px;color:green;font-weight:600">
+                        <RadzenTabsItem Text="Home Info" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropHomeInfoTab)
                             {
                                 <PropertyHomeInfo Id="@selectedPropId"></PropertyHomeInfo>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Property Cost" style="margin-left: 2px;color:green;font-weight:600">
+                        <RadzenTabsItem Text="Property Cost" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropCostTab)
                             {
                                 <PropertyCost Id="@selectedPropId"></PropertyCost>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Rates" style="margin-left: 2px;color:green;font-weight:600">
+                        <RadzenTabsItem Text="Rates" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropRatesTab)
                             {
                                 <RatesTest Id="@selectedPropId"></RatesTest>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Bookings" style="margin-left: 2px;color:green;font-weight:600">
+                        <RadzenTabsItem Text="Bookings" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropBookingsTab)
                             {
                                 <Bookings Id="@selectedPropId"></Bookings>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Tasks" style="margin-left: 2px;color:green;font-weight:600">
+                        <RadzenTabsItem Text="Tasks" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropTasksTab)
                             {
                                 <PropertyTasks Id="@selectedPropId"></PropertyTasks>
-                            }                            
+                            }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Annual" style="margin-left: 2px;color:green;font-weight:600">
+                        <RadzenTabsItem Text="Annual" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropAnnualTab)
                             {
                                 <PropertyAnnualLogs Id="@selectedPropId"></PropertyAnnualLogs>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Owner Comm" style="margin-left: 2px;color:green;font-weight:600">
+                        <RadzenTabsItem Text="Owner Comm" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropOwnerTab)
                             {
                                 <Destination.Components.Pages.CommunicationComponents.OwnerCommunications></Destination.Components.Pages.CommunicationComponents.OwnerCommunications>
                             }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Improvements" style="margin-left: 2px;color:green;font-weight:600">
+                        <RadzenTabsItem Text="Improvements" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropImprovementsTab)
                             {
                                 <PropertyImprovements Id="@selectedPropId"></PropertyImprovements>
-                            }                            
+                            }
                         </RadzenTabsItem>
-                        <RadzenTabsItem Text="Home Team" style="margin-left: 2px;color:green;font-weight:600">
+                        <RadzenTabsItem Text="Home Team" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropHomeTeamTab)
                             {
                                 <Destination.Components.Pages.HomeTeamComponents.HomeTeamForm Id="@selectedPropId"></Destination.Components.Pages.HomeTeamComponents.HomeTeamForm>
