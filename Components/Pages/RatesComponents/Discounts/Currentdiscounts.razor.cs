@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 
-namespace Destination.Components.Pages
+namespace Destination.Components.Pages.RatesComponents.Discounts
 {
     public partial class Currentdiscounts
     {
@@ -37,9 +37,20 @@ namespace Destination.Components.Pages
 
         protected RadzenDataGrid<Destination.Models.destinationTest.Currentdiscount> grid0;
         protected bool isEdit = true;
+
+        protected string search = "";
+
+        protected async Task Search(ChangeEventArgs args)
+        {
+            search = $"{args.Value}";
+
+            await grid0.GoToPage(0);
+
+            currentdiscounts = await destinationTestService.GetCurrentdiscounts(new Query { Filter = $@"i => i.Title.Contains(@0) || i.Specialdesc.Contains(@0) || i.Status.Contains(@0)", FilterParameters = new object[] { search }, Expand = "Property" });
+        }
         protected override async Task OnInitializedAsync()
         {
-            currentdiscounts = await destinationTestService.GetCurrentdiscounts(new Query { Expand = "Property" });
+            currentdiscounts = await destinationTestService.GetCurrentdiscounts(new Query { Filter = $@"i => i.Title.Contains(@0) || i.Specialdesc.Contains(@0) || i.Status.Contains(@0)", FilterParameters = new object[] { search }, Expand = "Property" });
 
             propertiesForPropid = await destinationTestService.GetProperties();
         }
@@ -79,6 +90,31 @@ namespace Destination.Components.Pages
                     Summary = $"Error",
                     Detail = $"Unable to delete Currentdiscount"
                 });
+            }
+        }
+
+        protected async Task ExportClick(RadzenSplitButtonItem args)
+        {
+            if (args?.Value == "csv")
+            {
+                await destinationTestService.ExportCurrentdiscountsToCSV(new Query
+                {
+                    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
+                    OrderBy = $"{grid0.Query.OrderBy}",
+                    Expand = "Property",
+                    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
+                }, "Currentdiscounts");
+            }
+
+            if (args == null || args.Value == "xlsx")
+            {
+                await destinationTestService.ExportCurrentdiscountsToExcel(new Query
+                {
+                    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
+                    OrderBy = $"{grid0.Query.OrderBy}",
+                    Expand = "Property",
+                    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
+                }, "Currentdiscounts");
             }
         }
         protected bool errorVisible;

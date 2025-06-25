@@ -49,10 +49,23 @@ namespace Destination.Components.Pages.PropertyComponents
         protected IEnumerable<PropertyCleanerDDValues> propertyCleaners;
         protected IEnumerable<OwnerLoginDDValues> ownerLogins;
 
+        string propName = string.Empty;
+
+
 
         protected override async Task OnInitializedAsync()
         {
             property = await destinationTestService.GetPropertyByPropid(Id);
+
+            if (property != null && !string.IsNullOrEmpty(property.Name))
+            {
+                propName = property.Name + " - " + "Property Cost";
+            }
+            else
+            {
+                propName = "Property Cost";
+            }
+
             propertyCleaners = await propertyService.GetPropertyCleanerDropDownValues();
             ownerLogins = await propertyService.GetOwnerDropDownValues();
         }

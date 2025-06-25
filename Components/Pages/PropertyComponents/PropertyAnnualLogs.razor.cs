@@ -6,6 +6,7 @@ using Radzen.Blazor;
 using Destination.Services;
 using Destination.Shared.DTO;
 using static Destination.Shared.DTO.AllDropDownValues;
+using Destination.Models.destinationTest;
 
 namespace Destination.Components.Pages.PropertyComponents
 {
@@ -38,6 +39,10 @@ namespace Destination.Components.Pages.PropertyComponents
         [Parameter]
         public int Id { get; set; }
 
+        Property property = new Property();
+
+        string propName = string.Empty;
+
         protected IEnumerable<PropertyAnnualLogDto> annuals;
 
         protected RadzenDataGrid<PropertyAnnualLogDto> grid0;
@@ -49,6 +54,17 @@ namespace Destination.Components.Pages.PropertyComponents
         {
             annuals = await propertyService.GetPropertyAnnualLogs(Id);
             propertiesForPropid = await propertyService.GetPropertiesForDropDown();
+
+            property = await destinationTestService.GetPropertyByPropid(Id);
+
+            if (property != null && !string.IsNullOrEmpty(property.Name))
+            {
+                propName = property.Name + " - " + "Annual Logs";
+            }
+            else
+            {
+                propName = "Annual Logs";
+            }
         }
 
         protected async Task BindAnnualLogs(int id)

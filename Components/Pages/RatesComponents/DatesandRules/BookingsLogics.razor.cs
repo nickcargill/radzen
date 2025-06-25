@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 
-namespace Destination.Components.Pages
+namespace Destination.Components.Pages.RatesComponents.DatesandRules
 {
-    public partial class Affiliates
+    public partial class BookingsLogics
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -33,35 +33,37 @@ namespace Destination.Components.Pages
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
-        protected IEnumerable<Destination.Models.destinationTest.Affiliate> affiliates;
+        protected IEnumerable<Destination.Models.destinationTest.BookingsLogic> bookingsLogics;
 
-        protected RadzenDataGrid<Destination.Models.destinationTest.Affiliate> grid0;
+        protected RadzenDataGrid<Destination.Models.destinationTest.BookingsLogic> grid0;
         protected bool isEdit = true;
         protected override async Task OnInitializedAsync()
         {
-            affiliates = await destinationTestService.GetAffiliates();
+            bookingsLogics = await destinationTestService.GetBookingsLogics(new Query { Expand = "Property" });
+
+            propertiesForIntPropId = await destinationTestService.GetProperties();
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
         {
             await grid0.SelectRow(null);
             isEdit = false;
-            affiliate = new Destination.Models.destinationTest.Affiliate();
+            bookingsLogic = new Destination.Models.destinationTest.BookingsLogic();
         }
 
-        protected async Task EditRow(Destination.Models.destinationTest.Affiliate args)
+        protected async Task EditRow(Destination.Models.destinationTest.BookingsLogic args)
         {
             isEdit = true;
-            affiliate = args;
+            bookingsLogic = args;
         }
 
-        protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.Affiliate affiliate)
+        protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.BookingsLogic bookingsLogic)
         {
             try
             {
                 if (await DialogService.Confirm("Are you sure you want to delete this record?") == true)
                 {
-                    var deleteResult = await destinationTestService.DeleteAffiliate(affiliate.AffiliateId);
+                    var deleteResult = await destinationTestService.DeleteBookingsLogic(bookingsLogic.IntLogicId);
 
                     if (deleteResult != null)
                     {
@@ -75,18 +77,20 @@ namespace Destination.Components.Pages
                 {
                     Severity = NotificationSeverity.Error,
                     Summary = $"Error",
-                    Detail = $"Unable to delete Affiliate"
+                    Detail = $"Unable to delete BookingsLogic"
                 });
             }
         }
         protected bool errorVisible;
-        protected Destination.Models.destinationTest.Affiliate affiliate;
+        protected Destination.Models.destinationTest.BookingsLogic bookingsLogic;
+
+        protected IEnumerable<Destination.Models.destinationTest.Property> propertiesForIntPropId;
 
         protected async Task FormSubmit()
         {
             try
             {
-                var result = isEdit ? await destinationTestService.UpdateAffiliate(affiliate.AffiliateId, affiliate) : await destinationTestService.CreateAffiliate(affiliate);
+                var result = isEdit ? await destinationTestService.UpdateBookingsLogic(bookingsLogic.IntLogicId, bookingsLogic) : await destinationTestService.CreateBookingsLogic(bookingsLogic);
 
             }
             catch (Exception ex)

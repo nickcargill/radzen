@@ -1,5 +1,15 @@
 @page "/rates-test"
 
+
+<RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom:10px">
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenText Text="@propName" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin:0; font-size:13px" />
+    </RadzenColumn>
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+        </RadzenStack>
+    </RadzenColumn>
+</RadzenRow>
 @if (propertyRate == null)
 {
     <p><em>Loading...</em></p>
@@ -423,7 +433,7 @@ else
                     <!-- Buttons -->
                     <RadzenRow Style="margin-bottom: 6px; margin-top: 20px;align-self: self-end;">
                         <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Text="Save" Variant="Variant.Flat" Style="margin-right: 8px; padding: 8px 16px;" />
-                        <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Style="padding: 8px 16px;" />
+                        <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Cancel" Variant="Variant.Flat" Style="padding: 8px 16px;" />
                     </RadzenRow>
                 </RadzenStack>
             </RadzenFieldset>
@@ -848,7 +858,7 @@ else
                     <!-- Buttons -->
                     <RadzenRow Style="margin-bottom: 6px; margin-top: 20px;align-self: self-end;">
                         <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Text="Save" Variant="Variant.Flat" Style="margin-right: 8px; padding: 8px 16px;" />
-                        <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Style="padding: 8px 16px;" />
+                        <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Cancel" Variant="Variant.Flat" Style="padding: 8px 16px;" />
                     </RadzenRow>
                 </RadzenStack>
             </RadzenFieldset>

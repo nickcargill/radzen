@@ -39,6 +39,8 @@ namespace Destination.Components.Pages.PropertyComponents
         public int Id { get; set; }
 
         Property property = new Property();
+        string propName = string.Empty;
+
 
         void OnPaste(HtmlEditorPasteEventArgs args)
         {
@@ -64,6 +66,15 @@ namespace Destination.Components.Pages.PropertyComponents
         protected override async Task OnInitializedAsync()
         {
             property = await destinationTestService.GetPropertyByPropid(Id);
+
+            if (property != null && !string.IsNullOrEmpty(property.Name))
+            {
+                propName = property.Name + " - " + "Description";
+            }
+            else
+            {
+                propName = "Description";
+            }
         }
 
         private void OpenAirbnbLink()

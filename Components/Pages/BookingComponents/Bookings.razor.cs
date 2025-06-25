@@ -49,12 +49,15 @@ namespace Destination.Components.Pages.BookingComponents
         public int Id { get; set; } = 0;
 
         [Parameter]
-        [SupplyParameterFromQuery]
-        public string? status { get; set; }
+        public EventCallback<int> OnBookingIdClicked { get; set; }
 
         public int PropParameterId = 0;
 
         protected RadzenDataGrid<Destination.Models.destinationTest.Booking> grid0;
+
+        Property property = new Property();
+
+        string propName = string.Empty;
 
         protected bool showPanels = false;
         protected bool isBottomPanel = false;
@@ -123,10 +126,38 @@ namespace Destination.Components.Pages.BookingComponents
             showPanels = false;
         }
 
+        private QueryParamFilterModel queryParamFilters = new();
+
         protected override async Task OnInitializedAsync()
         {
+
+            var uri = new Uri(NavigationManager.Uri);
+            var queryParam = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+
+            if (queryParam.TryGetValue("source", out var sourceValue))
+            {
+                queryParamFilters.Source = sourceValue.FirstOrDefault();
+            }
+
+            // Multi-value parameter
+            if (queryParam.TryGetValue("status", out var statusValues))
+            {
+                queryParamFilters.queryParamStatuses = statusValues.ToList();
+            }
+
             if (Id != 0)
             {
+                property = await destinationTestService.GetPropertyByPropid(Id);
+
+                if (property != null && !string.IsNullOrEmpty(property.Name))
+                {
+                    propName = property.Name + " - " + "Bookings";
+                }
+                else
+                {
+                    propName = "Bookings";
+                }
+
                 PropParameterId = Id;
                 var query = new Query
                 {
@@ -152,10 +183,11 @@ namespace Destination.Components.Pages.BookingComponents
 
             var result = Id != 0
                 ? await bookingService.GetBookingsByPropId(query, Id)
-                : await bookingService.GetBookingsPagedAsync(query, status);
+                : await bookingService.GetBookingsPagedAsync(query, queryParamFilters);
 
             pagedBookings = result.Items;
             totalCount = result.Count;
+            StateHasChanged();
         }
 
         protected async Task AddButtonClick(MouseEventArgs args)
@@ -166,29 +198,47 @@ namespace Destination.Components.Pages.BookingComponents
 
         protected async Task EditRow(Destination.Models.destinationTest.Booking args)
         {
-          //  await DialogService.OpenAsync<EditBooking>("Edit Booking", new Dictionary<string, object> { {"Id", args.Id} });
+            //  await DialogService.OpenAsync<EditBooking>("Edit Booking", new Dictionary<string, object> { {"Id", args.Id} });
         }
 
         protected async Task ShowPanels(int bookingId)
         {
+            if (PropParameterId != 0)
+            {
+                await OnBookingIdClicked.InvokeAsync(bookingId);
+                sharedEvents.NotifyBookingIdClicked(bookingId);
+                return;
+            }
+            showPanels = false;
+            selectedBookingId = bookingId;
+            await Task.Delay(1);
+            showPanels = true;
+            showCollapse = true;
+            isBottomPanel = false;
+            StateHasChanged();
+        }
+
+        protected async Task ShowleftPanel(int bookingId)
+        {
+            PropParameterId = 0;
+            selectedPropertyId = 0;
             showPanels = false;
             selectedBookingId = bookingId;
             isBottomPanel = false;
-            sharedEvents.NotifyBookingIdClicked(bookingId);
             await Task.Delay(1);
             showPanels = true;
             showCollapse = true;
             isBottomPanel = true;
-            selectedPropertyId = 0;
             StateHasChanged();
         }
 
         protected async Task ShowPropertyTabs(int? propId, int bookingId)
         {
+            showPanels = false;
             selectedPropertyId = 0;
             await Task.Delay(1);
             selectedPropertyId = propId.Value;
-            selectedBookingId=bookingId;
+            selectedBookingId = bookingId;
             isBottomPanel = false;
             StateHasChanged();
         }
@@ -264,7 +314,7 @@ namespace Destination.Components.Pages.BookingComponents
                 Skip = 0,
                 Top = 20
             };
-            var result = await bookingService.GetBookingsPagedAsync(query, status, filterModel);
+            var result = await bookingService.GetBookingsPagedAsync(query, null, filterModel);
             pagedBookings = result.Items;
             totalCount = result.Count;
             StateHasChanged();

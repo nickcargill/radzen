@@ -8,15 +8,20 @@
         </RadzenColumn>
         <RadzenColumn Size="12" SizeMD="6">
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <RadzenSplitButton Icon="get_app" Text="Export" Click="@ExportClick" Variant="Variant.Flat" Shade="Shade.Lighter">
+                    <RadzenSplitButtonItem Text="Excel" Value="xlsx" />
+                    <RadzenSplitButtonItem Text="CSV" Value="csv" />
+                </RadzenSplitButton>
                 <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
             </RadzenStack>
         </RadzenColumn>
     </RadzenRow>
+    <RadzenTextBox Placeholder="Search ..." style="display: block; width: 100%" @oninput="@Search" aria-label="Search by all string columns" />
     <RadzenRow>
       <RadzenColumn SizeMD=6>
      <RadzenCard style="height: 100%">
-        <RadzenDataGrid @ref="grid0" ColumnWidth="200px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@(currentdiscounts)" TItem="Destination.Models.destinationTest.Currentdiscount" RowSelect="@EditRow" AllowColumnReorder="true" ColumnsPickerAllowFiltering="true" AllowColumnPicking="true" Density="Radzen.Density.Compact" GridLines="Radzen.DataGridGridLines.Both">
+        <RadzenDataGrid @ref="grid0" ColumnWidth="150px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
+            Data="@(currentdiscounts)" TItem="Destination.Models.destinationTest.Currentdiscount" RowSelect="@EditRow" AllowColumnReorder="true" Density="Radzen.Density.Compact" PageSize="15">
             <Columns>
                 <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Currentdiscount" Property="Specialsid" Title="Specialsid">
                 </RadzenDataGridColumn>
@@ -73,7 +78,7 @@
                         <RadzenLabel Text="Property" Component="Property" style="width: 100%" />
                     </RadzenColumn>
                     <RadzenColumn SizeMD="9">
-                        <RadzenDropDown Data="@(propertiesForPropid)" TextProperty="Name" ValueProperty="Propid" AllowClear=true
+                        <RadzenDropDownDataGrid Data="@(propertiesForPropid)" TextProperty="Name" ValueProperty="Propid" AllowClear=true
                              Placeholder="Choose Property" style="display: block; width: 100%" @bind-Value="@(currentdiscount.Propid)" Name="Propid"
                                />
                     </RadzenColumn>

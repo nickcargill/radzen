@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using Destination.Models.destinationTest;
 
 namespace Destination.Components.Pages.CommunicationComponents
 {
@@ -36,9 +38,28 @@ namespace Destination.Components.Pages.CommunicationComponents
         protected IEnumerable<Destination.Models.destinationTest.OwnerCommunication> ownerCommunications;
 
         protected RadzenDataGrid<Destination.Models.destinationTest.OwnerCommunication> grid0;
+
+        [Parameter]
+        public int Id { get; set; }
+
+        Property property = new Property();
+
+        string propName = string.Empty;
+
         protected override async Task OnInitializedAsync()
         {
             ownerCommunications = await destinationTestService.GetOwnerCommunications(new Query { Expand = "Agent1" });
+
+            property = await destinationTestService.GetPropertyByPropid(Id);
+
+            if (property != null && !string.IsNullOrEmpty(property.Name))
+            {
+                propName = property.Name + " - " + "Owner Comm";
+            }
+            else
+            {
+                propName = "Owner Comm";
+            }
         }
     }
 }

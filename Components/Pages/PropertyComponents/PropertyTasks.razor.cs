@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using Destination.Services;
+using Destination.Models.destinationTest;
 
 namespace Destination.Components.Pages.PropertyComponents
 {
@@ -37,6 +38,10 @@ namespace Destination.Components.Pages.PropertyComponents
         [Inject]
         public PropertyService propertyService { get; set; }
 
+        Property property = new Property();
+
+        string propName = string.Empty;
+
         [Parameter]
         public int Id { get; set; }
 
@@ -45,6 +50,17 @@ namespace Destination.Components.Pages.PropertyComponents
         protected RadzenDataGrid<Destination.Models.destinationTest.VwMaintenanceNextDateFrom> grid0;
         protected override async Task OnInitializedAsync()
         {
+            property = await destinationTestService.GetPropertyByPropid(Id);
+
+            if (property != null && !string.IsNullOrEmpty(property.Name))
+            {
+                propName = property.Name + " - " + "Tasks";
+            }
+            else
+            {
+                propName = "Tasks";
+            }
+
             vwMaintenanceNextDateFroms  = await propertyService.GetTasksByPropId(Id);
         }
     }

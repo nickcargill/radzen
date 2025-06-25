@@ -27,4 +27,9 @@
         public string Email { get; set; }
         public string City { get; set; }
     }
+    public class QueryParamFilterModel
+    {
+        public string Source { get; set; }
+        public List<string> queryParamStatuses { get; set; }
+    }
 }

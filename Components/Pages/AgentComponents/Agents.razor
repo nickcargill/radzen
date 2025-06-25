@@ -90,15 +90,15 @@
                     <div style="@menuStyle">
                         <RadzenStack Orientation="Orientation.Vertical" Gap="8px" Style="padding: 15px 10px; min-width: 160px;">
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("agent"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 Edit Owner
                             </a>
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("cleans"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 TBD
                             </a>
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("DepositReturn"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 TBD
                             </a>
                         </RadzenStack>
@@ -206,7 +206,7 @@
                     <Columns>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="AgId" Title="Ag Id" Width="110px">
                             <Template Context="item">
-                                <span Text="Click here" @onclick="() => ShowPanels(item.AgId)" style="cursor: pointer; color: green; text-decoration: underline;">@item.AgId</span>
+                                <span Text="Click here" @onclick="() => ShowPanels(item.AgId)" style="cursor: pointer; color: #35a0d7; text-decoration: underline;">@item.AgId</span>
                             </Template>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Agent" Property="Actionrequired" Title="Action Req.">

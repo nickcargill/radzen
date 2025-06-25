@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 
-namespace Destination.Components.Pages
+namespace Destination.Components.Pages.MarketingComponents.AffiliatesComponents
 {
-    public partial class AddEventDate
+    public partial class AffiliatesData
     {
         [Inject]
         protected IJSRuntime JSRuntime { get; set; }
@@ -29,22 +29,26 @@ namespace Destination.Components.Pages
 
         [Inject]
         protected NotificationService NotificationService { get; set; }
+
         [Inject]
         public destinationTestService destinationTestService { get; set; }
 
+        protected IEnumerable<Destination.Models.destinationTest.AffiliatesDatum> affiliatesData;
+
+        protected RadzenDataGrid<Destination.Models.destinationTest.AffiliatesDatum> grid0;
+        protected bool isEdit = true;
         protected override async Task OnInitializedAsync()
         {
-            eventDate = new Destination.Models.destinationTest.EventDate();
+            affiliatesData = await destinationTestService.GetAffiliatesData();
         }
         protected bool errorVisible;
-        protected Destination.Models.destinationTest.EventDate eventDate;
+        protected Destination.Models.destinationTest.AffiliatesDatum affiliatesDatum;
 
         protected async Task FormSubmit()
         {
             try
             {
-                await destinationTestService.CreateEventDate(eventDate);
-                DialogService.Close(eventDate);
+
             }
             catch (Exception ex)
             {
@@ -54,7 +58,7 @@ namespace Destination.Components.Pages
 
         protected async Task CancelButtonClick(MouseEventArgs args)
         {
-            DialogService.Close(null);
+
         }
     }
 }

@@ -48,7 +48,6 @@ namespace Destination.Components.Pages.PropertyComponents
 
         protected bool isPropCostTab = false;
         protected bool isPropDescTab = false;
-        protected bool isPropDetailsTab = false;
         protected bool isPropRatesTab = false;
         protected bool isPropHomeInfoTab = false;
         protected bool isPropBookingsTab = false;
@@ -120,36 +119,33 @@ namespace Destination.Components.Pages.PropertyComponents
             switch (index)
             {
                 case 1:
-                    isPropDetailsTab = true;
-                    break;
-                case 2:
                     isPropDescTab = true;
                     break;
-                case 3:
+                case 2:
                     isPropHomeInfoTab = true;
                     break;
-                case 4:
+                case 3:
                     isPropCostTab = true;
                     break;
-                case 5:
+                case 4:
                     isPropRatesTab = true;
                     break;
-                case 6:
+                case 5:
                     isPropBookingsTab = true;
                     break;
-                case 7:
+                case 6:
                     isPropTasksTab = true;
                     break;
-                case 8:
+                case 7:
                     isPropAnnualTab = true;
                     break;
-                case 9:
+                case 8:
                     isPropOwnerTab = true;
                     break;
-                case 10:
+                case 9:
                     isPropImprovementsTab = true;
                     break;
-                case 11:
+                case 10:
                     isPropHomeTeamTab = true;
                     break;
             }

@@ -24,7 +24,7 @@
         <!-- Always visible Toggle Button (when panel is hidden) -->
         @if (!showCollapse)
         {
-            <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Light"
+            <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Primary"
                           Click="@ShowCollapse" Style="height:24px;padding:0px !important; min-height:18px;min-width:25px" />
         }
 
@@ -37,7 +37,7 @@
                         <!-- Remove/Hide Button inside the panel -->
                         <RadzenButton Icon="remove"
                         Click="@HidePanel"
-                        ButtonStyle="ButtonStyle.Light"
+                        ButtonStyle="ButtonStyle.Primary"
                         Style="position: absolute; top: 0px; right: 0px; padding:0px !important; min-height:18px;min-width:25px" />
                         <RadzenTabs>
                             <Tabs>

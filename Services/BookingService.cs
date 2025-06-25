@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.IdentityModel.Tokens;
 using Radzen;
+using System;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using static Destination.Shared.DTO.MainResponse;
@@ -29,7 +30,7 @@ namespace Destination.Services
             //   this.emailService = emailService;
         }
 
-        public async Task<PagedResult<Booking>> GetBookingsPagedAsync(Query query, string type, BookingFilterModel? filterModel = null)
+        public async Task<PagedResult<Booking>> GetBookingsPagedAsync(Query query, QueryParamFilterModel? queryParamFilters = null , BookingFilterModel? filterModel = null)
         {
             using var context = dbContextFactory.CreateDbContext();
 
@@ -122,11 +123,37 @@ namespace Destination.Services
                     bool cleaningBool = filterModel.Cleaning?.Equals("Cleaned", StringComparison.OrdinalIgnoreCase) == true;
                     filteredItems = filteredItems.Where(b => b.Property.IsCleaned == cleaningBool);
                 }
-            }
+            }     
 
-            if (!string.IsNullOrEmpty(type))
+            if (queryParamFilters != null)
             {
-                filteredItems = filteredItems.Where(x => x.BookingStatus.Status == type);
+                if (!string.IsNullOrEmpty(queryParamFilters.Source))
+                {
+                    filteredItems = filteredItems.Where(b => b.PropertySource.Source == queryParamFilters.Source);
+                }
+                if (queryParamFilters.queryParamStatuses?.Count > 0)
+                {
+                    if (queryParamFilters.queryParamStatuses.Contains("Crusties"))
+                    {
+                        var now = DateTime.Now.Date; // Truncate time to midnight (e.g., 2025-06-26 00:00:00.000)
+                        var sevenDaysAgo = now.AddDays(-7); // Midnight 7 days ago (e.g., 2025-06-19 00:00:00.000)
+                        filteredItems = filteredItems.Where(x => x.BookingStatus != null
+                            && x.BookingStatus.Status.ToLower() == "pending"
+                            && x.Datefrom >= sevenDaysAgo
+                            && x.Datefrom < now);
+                    }
+                    else
+                    {
+                        var tempFilteredItems = filteredItems.Take(0); // Empty starting point
+                        foreach (var status in queryParamFilters.queryParamStatuses.Where(s => s != null))
+                        {
+                            var currentStatus = status; // Avoid modified closure
+                            tempFilteredItems = tempFilteredItems.Union(
+                                filteredItems.Where(b => b.BookingStatus.Status == currentStatus));
+                        }
+                        filteredItems = tempFilteredItems;
+                    }
+                }
             }
 
             var count = await filteredItems.CountAsync();

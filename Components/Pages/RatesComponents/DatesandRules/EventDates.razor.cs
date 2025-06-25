@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 
-namespace Destination.Components.Pages
+namespace Destination.Components.Pages.RatesComponents.DatesandRules
 {
     public partial class EventDates
     {
@@ -36,6 +36,7 @@ namespace Destination.Components.Pages
         protected IEnumerable<Destination.Models.destinationTest.EventDate> eventDates;
 
         protected RadzenDataGrid<Destination.Models.destinationTest.EventDate> grid0;
+        protected bool isEdit = true;
         protected override async Task OnInitializedAsync()
         {
             eventDates = await destinationTestService.GetEventDates();
@@ -43,13 +44,15 @@ namespace Destination.Components.Pages
 
         protected async Task AddButtonClick(MouseEventArgs args)
         {
-            await DialogService.OpenAsync<AddEventDate>("Add EventDate", null);
-            await grid0.Reload();
+            await grid0.SelectRow(null);
+            isEdit = false;
+            eventDate = new Destination.Models.destinationTest.EventDate();
         }
 
         protected async Task EditRow(Destination.Models.destinationTest.EventDate args)
         {
-            await DialogService.OpenAsync<EditEventDate>("Edit EventDate", new Dictionary<string, object> { {"Id", args.Id} });
+            isEdit = true;
+            eventDate = args;
         }
 
         protected async Task GridDeleteButtonClick(MouseEventArgs args, Destination.Models.destinationTest.EventDate eventDate)
@@ -76,30 +79,25 @@ namespace Destination.Components.Pages
                 });
             }
         }
+        protected bool errorVisible;
+        protected Destination.Models.destinationTest.EventDate eventDate;
 
-        protected async Task ExportClick(RadzenSplitButtonItem args)
+        protected async Task FormSubmit()
         {
-            if (args?.Value == "csv")
+            try
             {
-                await destinationTestService.ExportEventDatesToCSV(new Query
-                {
-                    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
-                    OrderBy = $"{grid0.Query.OrderBy}",
-                    Expand = "",
-                    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-                }, "EventDates");
-            }
+                var result = isEdit ? await destinationTestService.UpdateEventDate(eventDate.Id, eventDate) : await destinationTestService.CreateEventDate(eventDate);
 
-            if (args == null || args.Value == "xlsx")
-            {
-                await destinationTestService.ExportEventDatesToExcel(new Query
-                {
-                    Filter = $@"{(string.IsNullOrEmpty(grid0.Query.Filter)? "true" : grid0.Query.Filter)}",
-                    OrderBy = $"{grid0.Query.OrderBy}",
-                    Expand = "",
-                    Select = string.Join(",", grid0.ColumnsCollection.Where(c => c.GetVisible() && !string.IsNullOrEmpty(c.Property)).Select(c => c.Property.Contains(".") ? c.Property + " as " + c.Property.Replace(".", "") : c.Property))
-                }, "EventDates");
             }
+            catch (Exception ex)
+            {
+                errorVisible = true;
+            }
+        }
+
+        protected async Task CancelButtonClick(MouseEventArgs args)
+        {
+
         }
     }
 }

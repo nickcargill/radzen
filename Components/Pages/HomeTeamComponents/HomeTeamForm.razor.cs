@@ -30,16 +30,35 @@ namespace Destination.Components.Pages.HomeTeamComponents
         [Inject]
         protected PropertyService propertyService { get; set; }
 
+        [Inject]
+        public destinationTestService destinationTestService { get; set; }
+
         [Parameter]
         public int Id { get; set; }
 
         protected PropertyMgt propertyMgt = new PropertyMgt();
 
         protected bool isPropertyEdit = true;
+
+        Property property = new Property();
+
+        string propName = string.Empty;
         protected override async Task OnInitializedAsync()
         {
             try
             {
+
+                property = await destinationTestService.GetPropertyByPropid(Id);
+
+                if (property != null && !string.IsNullOrEmpty(property.Name))
+                {
+                    propName = property.Name + " - " + "Home Team";
+                }
+                else
+                {
+                    propName = "Home Team";
+                }
+
                 propertyMgt = await propertyService.GetPropertyMgtByPropId(Id);
                   
                 if (propertyMgt == null)

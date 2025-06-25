@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Radzen;
 using Radzen.Blazor;
 using Destination.Services;
+using Destination.Models.destinationTest;
 
 namespace Destination.Components.Pages.TenantComponents
 {
@@ -34,6 +35,9 @@ namespace Destination.Components.Pages.TenantComponents
         [Inject]
         public TenantService tenantService { get; set; }
 
+        [Inject]
+        public destinationTestService destinationTestService { get; set; }
+
         protected bool errorVisible;
         protected Destination.Models.destinationTest.Tenant tenant;
 
@@ -47,6 +51,29 @@ namespace Destination.Components.Pages.TenantComponents
             tenant = await tenantService.GetTenantInfoByBookingId(Id);
             if (tenant != null) { 
                 Name = tenant.Firstname +" "+ tenant.Lastname;
+            }
+        }
+
+        protected async Task FormSubmit()
+        {
+            try
+            {
+                var result = await destinationTestService.UpdateTenant(tenant.Tenantid, tenant);
+                if (result != null)
+                {
+                    NotificationService.Notify(new NotificationMessage
+                    {
+                        Severity = NotificationSeverity.Success,
+                        Summary = "Success",
+                        Detail = "Data updated successfully!",
+                        Duration = 4000 // in milliseconds
+                    });
+                    StateHasChanged();
+                }
+            }
+            catch (Exception ex)
+            {
+                errorVisible = true;
             }
         }
     }

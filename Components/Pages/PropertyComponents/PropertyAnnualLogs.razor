@@ -2,6 +2,15 @@
 
 <PageTitle>Annuals</PageTitle>
 <RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="@propName" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin:0; font-size:13px" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
     <RadzenRow>
         <RadzenColumn SizeMD=4>
             <RadzenTemplateForm TItem="Destination.Shared.DTO.PropertyAnnualLogDto" Data="@(annualLogsById)" Visible="@(annualLogsById != null)" Submit="@FormSubmit">
@@ -56,7 +65,7 @@
                 </RadzenRow>
                 <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
                     <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="save" Text="Save" Variant="Variant.Flat" />
-                    <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick" />
+                    <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Cancel" Variant="Variant.Flat" Click="@CancelButtonClick" />
                 </RadzenStack>
             </RadzenTemplateForm>
         </RadzenColumn>

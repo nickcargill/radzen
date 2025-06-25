@@ -82,16 +82,6 @@
             </RadzenRow>
             <RadzenRow style="margin-bottom: 1rem">
                 <RadzenColumn SizeMD="3">
-                    <RadzenLabel Text="Tenant" Component="Tenant" style="width: 100%" />
-                </RadzenColumn>
-                <RadzenColumn SizeMD="9">
-                    <RadzenDropDown Disabled Data="@(tenantsForTenantid)" TextProperty="FirstName" ValueProperty="Tenantid"
-                         Placeholder="Choose Tenant" style="display: block; width: 100%" @bind-Value="@(booking.Tenantid)" Name="Tenantid"
-                           />
-                </RadzenColumn>
-            </RadzenRow>
-            <RadzenRow style="margin-bottom: 1rem">
-                <RadzenColumn SizeMD="3">
                     <RadzenLabel Text="Checkin" Component="Checkin" style="width: 100%" />
                 </RadzenColumn>
                 <RadzenColumn SizeMD="9">

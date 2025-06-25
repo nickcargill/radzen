@@ -1,5 +1,15 @@
 @page "/property-cost"
 
+
+<RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom:10px">
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenText Text="@propName" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin:0; font-size:13px" />
+    </RadzenColumn>
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+        </RadzenStack>
+    </RadzenColumn>
+</RadzenRow>
 <RadzenCard>
     <RadzenTemplateForm TItem="Property" Data=@property Submit="@((Property args) => { Submit(args); })">
         <RadzenAlert Visible="@(!string.IsNullOrEmpty(errorMessage))" 
@@ -95,7 +105,7 @@
         <RadzenRow Style="margin-bottom: 10px;">
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start" Gap="0.5rem">
                 <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Icon="Update" Text="Save" Variant="Variant.Flat" />
-                <RadzenButton ButtonStyle="ButtonStyle.Light" Text="Cancel" Variant="Variant.Flat" />
+                <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Cancel" Variant="Variant.Flat" />
             </RadzenStack>
         </RadzenRow>
     </RadzenTemplateForm>

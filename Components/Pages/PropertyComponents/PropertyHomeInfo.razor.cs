@@ -46,10 +46,22 @@ namespace Destination.Components.Pages.PropertyComponents
 
         Property property = new Property();
 
+        string propName = string.Empty;
+
+
 
         protected override async Task OnInitializedAsync()
         {
             property = await destinationTestService.GetPropertyByPropid(Id);
+
+            if (property != null && !string.IsNullOrEmpty(property.Name))
+            {
+                propName = property.Name + " - " + "Home Info";
+            }
+            else
+            {
+                propName = "Home Info";
+            }
         }
 
 

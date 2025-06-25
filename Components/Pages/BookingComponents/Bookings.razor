@@ -2,26 +2,26 @@
 
 <style>
     .rz-panel-titlebar {
-        flex-direction: row-reverse;
-        justify-content: right;
+    flex-direction: row-reverse;
+    justify-content: right;
     }
 
     .custom-toolbar .rz-button-md {
-        padding: 0.5rem 1rem;
-        height: auto;
-        line-height: 0.5rem !important;
-        min-height: 1.50rem !important;
-        min-width: 1.50rem !important;
-        font-size: var(--rz-body-font-size);
-        font-weight: 600;
+    padding: 0.5rem 1rem;
+    height: auto;
+    line-height: 0.5rem !important;
+    min-height: 1.50rem !important;
+    min-width: 1.50rem !important;
+    font-size: var(--rz-body-font-size);
+    font-weight: 600;
     }
 
     .rz-form {
-        margin-top: 40px !important;
+    margin-top: 40px !important;
     }
 
     .rz-card {
-        padding: 6px !important;
+    padding: 6px !important;
     }
 
     .compact-form .rz-input,
@@ -30,29 +30,29 @@
     .rz-textbox, .rz-numeric,
     .rz-datepicker > .rz-inputtext,
     .rz-dropdown {
-        min-height: 24px !important;
-        height: 24px !important;
-        line-height: 16px !important;
-        font-size: 11px;
-        padding: 4px 4px;
+    min-height: 24px !important;
+    height: 24px !important;
+    line-height: 16px !important;
+    font-size: 11px;
+    padding: 4px 4px;
     }
 
     label {
-        white-space: nowrap;
-        font-size: 11px;
+    white-space: nowrap;
+    font-size: 11px;
     }
 
     .rz-button-box, .rz-button {
-        line-height: 9px !important;
+    line-height: 9px !important;
     }
 
     .rz-autocomplete-items li, .rz-dropdown-items li, .rz-multiselect-items li, .rz-dropdown-item {
-        font-size: 11px !important;
-        padding: 2px !important;
+    font-size: 11px !important;
+    padding: 2px !important;
     }
 
     .rz-tabview-nav li a, .rz-tabview-nav li a:not([href]):not([class]) {
-        font-size: 11px !important;
+    font-size: 11px !important;
     }
 
 </style>
@@ -60,16 +60,23 @@
 
 <PageTitle>Bookings</PageTitle>
 
-@* 
-@if (PropParameterId == 0)
-{
-
-} *@
-
-
-
 
 <RadzenStack>
+
+    @if(PropParameterId > 0)
+    {
+        <RadzenRow AlignItems="AlignItems.Center">
+            <RadzenColumn Size="12" SizeMD="6">
+                <RadzenText Text="@propName" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin:0; font-size:13px" />
+            </RadzenColumn>
+            <RadzenColumn Size="12" SizeMD="6">
+                <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                </RadzenStack>
+            </RadzenColumn>
+        </RadzenRow>
+    }
+
+
     <RadzenRow>
         @if (!showCollapse)
         {
@@ -98,27 +105,27 @@
                     <div style="@menuStyle">
                         <RadzenStack Orientation="Orientation.Vertical" Gap="8px" Style="padding: 15px 10px; min-width: 160px;">
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("booking"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 Booking Info
                             </a>
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("cleans"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 Clean
                             </a>
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("DepositReturn"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 Deposit Return
                             </a>
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("Reviews"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 Reviews
                             </a>
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("Notes"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 Notes
                             </a>
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("Tenant"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 Tenant
                             </a>
                         </RadzenStack>
@@ -267,7 +274,7 @@
                 <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important;padding:0px"
                              Expand=@(() => Change("Panel expanded"))
                              Collapse=@(() => Change("Panel collapsed"))>
-                    <RadzenDataGrid TItem="Booking"
+                    <RadzenDataGrid @ref="grid0" TItem="Booking"
                                     Data="@pagedBookings"
                                     AllowColumnResize="true"
                                     Count="@totalCount"
@@ -286,12 +293,12 @@
                         <Columns>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Id" Title="Id" Width="60px">
                                 <Template Context="item">
-                                    <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: green; text-decoration: underline;">@item.Id</span>
+                                    <span Text="Click here" @onclick="() => ShowleftPanel(item.Id)" style="cursor: pointer; color: #35a0d7; text-decoration: underline;">@item.Id</span>
                                 </Template>
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.Name" Title="Property" Width="140px">
                                 <Template Context="item">
-                                    <span Text="Click here" @onclick="() => ShowPropertyTabs(item.Propertyid,item.Id)" style="cursor: pointer; color: green; text-decoration: underline;">@item?.Property?.Name</span>
+                                    <span Text="Click here" @onclick="() => ShowPropertyTabs(item.Propertyid,item.Id)" style="cursor: pointer; color: #35a0d7; text-decoration: underline;">@item?.Property?.Name</span>
                                 </Template>
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Datefrom" Title="Datefrom" Width="140px">
@@ -363,7 +370,7 @@
                     <Columns>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Id" Title="Id" Width="60px">
                             <Template Context="item">
-                                <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: green; text-decoration: underline;">@item.Id</span>
+                                <span Text="Click here" @onclick="() => ShowPanels(item.Id)" style="cursor: pointer; color: #35a0d7; text-decoration: underline;">@item.Id</span>
                             </Template>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.Name" Title="Property" Width="150px">
@@ -464,6 +471,7 @@
         </RadzenPanel>
     </RadzenColumn>
 }
+
 @if (selectedPropertyId > 0)
 {
     <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 5px !important;margin-bottom: 0px !important;padding:0px !important"
@@ -487,7 +495,7 @@
                     <RatesTest Id="@selectedPropertyId"></RatesTest>
                 </RadzenTabsItem>
                 <RadzenTabsItem Text="Bookings" style="margin-left: 2px;color:black;font-weight:600">
-                    <Bookings Id="@selectedPropertyId"></Bookings>
+                    <Bookings Id="@selectedPropertyId" OnBookingIdClicked="@ShowPanels"></Bookings>
                 </RadzenTabsItem>
                 <RadzenTabsItem Text="Tasks" style="margin-left: 2px;color:black;font-weight:600">
                     <PropertyTasks Id="@selectedPropertyId"></PropertyTasks>

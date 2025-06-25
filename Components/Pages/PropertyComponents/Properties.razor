@@ -46,7 +46,8 @@
     .rz-tabview-nav li a, .rz-tabview-nav li a:not([href]):not([class]){
         font-size:11px !important;
     }
-    </style>
+
+   </style>
 
 
 <PageTitle>Properties</PageTitle>
@@ -90,15 +91,15 @@
                     <div style="@menuStyle">
                         <RadzenStack Orientation="Orientation.Vertical" Gap="8px" Style="padding: 15px 10px; min-width: 160px;">
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("EditBookings"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 TBD
                             </a>
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("cleans"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 TBD
                             </a>
                             <a href="javascript:void(0)" @onclick="@(() => LoadForm("DepositReturn"))"
-                               style="color: #2e7d32; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
                                 TBD
                             </a>
                         </RadzenStack>
@@ -201,7 +202,7 @@
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Filterable="false" Property="Propid" Title="Propid" Width="70px">
                             <Template Context="item">
                                 <span Text="Click here" @onclick="() => ShowTabs(item.Propid, item.Name)"
-                                      style="cursor: pointer; color: green; text-decoration: underline;">@item.Propid</span>
+                                      style="cursor: pointer; color: #35a0d7; text-decoration: underline;">@item.Propid</span>
                             </Template>
                         </RadzenDataGridColumn>
                         <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Property" Property="Name" Title="Name" Width="140px">
@@ -244,13 +245,8 @@
                          Collapse=@(() => Change("Panel collapsed"))>
                 <RadzenTabs Change=@OnTabChange>
                     <Tabs>
-                        <RadzenTabsItem Text="@propName" Style="color:black;font-size:10px">
-                        </RadzenTabsItem>
-                        <RadzenTabsItem Text="Property Details" Style="margin-left: 2px;color:black;font-size:10px">
-                            @if (isPropDetailsTab)
-                            {
-                                <PropertyDetails Id="@selectedPropId"></PropertyDetails>
-                            }
+                        <RadzenTabsItem Text="Property Details" Style="color:black;font-size:10px">
+                            <PropertyDetails Id="@selectedPropId"></PropertyDetails>
                         </RadzenTabsItem>
                         <RadzenTabsItem Text="Description" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropDescTab)
@@ -297,7 +293,7 @@
                         <RadzenTabsItem Text="Owner Comm" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropOwnerTab)
                             {
-                                <Destination.Components.Pages.CommunicationComponents.OwnerCommunications></Destination.Components.Pages.CommunicationComponents.OwnerCommunications>
+                                <Destination.Components.Pages.CommunicationComponents.OwnerCommunications Id="@selectedPropId"></Destination.Components.Pages.CommunicationComponents.OwnerCommunications>
                             }
                         </RadzenTabsItem>
                         <RadzenTabsItem Text="Improvements" style="margin-left: 2px;color:black;font-weight:300">

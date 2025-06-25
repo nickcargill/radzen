@@ -35,6 +35,9 @@ namespace Destination.Components.Pages.PropertyComponents
         [Inject]
         public PropertyService propertyService { get; set; }
 
+        string propName = string.Empty;
+
+
         PropertyRate propertyRate = new PropertyRate();
         PropertyRatesVrbo vrboRates = new PropertyRatesVrbo();
 
@@ -46,11 +49,24 @@ namespace Destination.Components.Pages.PropertyComponents
 
         protected bool isVrboRateEdit = true;
         protected bool isPropertyRateEdit = true;
+        Destination.Models.destinationTest.Property property = new ();
+
 
         protected override async Task OnInitializedAsync()
         {
             propertyRate = await destinationTestService.GetPropertyRateById(Id);
             vrboRates = await destinationTestService.GetPropertyRateVRBOById(Id);
+            property = await destinationTestService.GetPropertyByPropid(Id);
+
+
+            if (property != null && !string.IsNullOrEmpty(property.Name))
+            {
+                propName = property.Name + " - " + "Property Rates";
+            }
+            else
+            {
+                propName = "Property Rates";
+            }
 
             if (propertyRate == null)
             {
