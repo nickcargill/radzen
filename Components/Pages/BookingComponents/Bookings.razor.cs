@@ -8,6 +8,7 @@ using Destination.Models.destinationTest;
 using DocumentFormat.OpenXml.Bibliography;
 using static Destination.Shared.DTO.AllDropDownValues;
 using Destination.Shared.DTO;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace Destination.Components.Pages.BookingComponents
 {
@@ -126,24 +127,24 @@ namespace Destination.Components.Pages.BookingComponents
             showPanels = false;
         }
 
-        private QueryParamFilterModel queryParamFilters = new();
+        //private QueryParamFilterModel queryParamFilters = new();
 
         protected override async Task OnInitializedAsync()
         {
 
-            var uri = new Uri(NavigationManager.Uri);
-            var queryParam = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
+            //var uri = new Uri(NavigationManager.Uri);
+            //var queryParam = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
 
-            if (queryParam.TryGetValue("source", out var sourceValue))
-            {
-                queryParamFilters.Source = sourceValue.FirstOrDefault();
-            }
+            //if (queryParam.TryGetValue("source", out var sourceValue))
+            //{
+            //    queryParamFilters.Source = sourceValue.FirstOrDefault();
+            //}
 
-            // Multi-value parameter
-            if (queryParam.TryGetValue("status", out var statusValues))
-            {
-                queryParamFilters.queryParamStatuses = statusValues.ToList();
-            }
+            //// Multi-value parameter
+            //if (queryParam.TryGetValue("status", out var statusValues))
+            //{
+            //    queryParamFilters.queryParamStatuses = statusValues.ToList();
+            //}
 
             if (Id != 0)
             {
@@ -183,7 +184,7 @@ namespace Destination.Components.Pages.BookingComponents
 
             var result = Id != 0
                 ? await bookingService.GetBookingsByPropId(query, Id)
-                : await bookingService.GetBookingsPagedAsync(query, queryParamFilters);
+                : await bookingService.GetBookingsPagedAsync(query, null, filterModel);
 
             pagedBookings = result.Items;
             totalCount = result.Count;
@@ -275,24 +276,20 @@ namespace Destination.Components.Pages.BookingComponents
         private List<PropertyDropDownData> filterProperties = new();
         private List<BookingStatusDropDownData> statusList = new();
         private List<string> cleaningOptions = new() { "All", "Cleaned", "Not Cleaned" };
-        private List<PropertySource> sources = new();
+        private List<PropertySource> sources = new ();
         private List<string> cities = new()
         {
-            "Big Bear","Big Bear City","Big Bear Lake","Frawnskin"
+            "Big Bear", "Big Bear City", "Big Bear Lake", "Frawnskin"
         };
-
         private bool isFirstRender = true;
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender && isFirstRender)
             {
                 isFirstRender = false;
-
-                // Load dropdowns after render
                 await LoadDropdownsAsync();
-
-                StateHasChanged(); // Update UI after loading
+                await ParseQueryParametersAsync();
+                StateHasChanged();
             }
         }
 
@@ -303,8 +300,167 @@ namespace Destination.Components.Pages.BookingComponents
             sources = await destinationTestService.GetPropertySources();
         }
 
+        private async Task ParseQueryParametersAsync()
+        {
+            var uri = new Uri(NavigationManager.Uri);
+            var queryParams = QueryHelpers.ParseQuery(uri.Query);
+
+            if (queryParams.TryGetValue("id", out var idValue) && int.TryParse(idValue.FirstOrDefault(), out var id))
+            {
+                filterModel.FilterModelId = id;
+            }
+            if (queryParams.TryGetValue("dateFrom1", out var dateFrom1) && DateTime.TryParse(dateFrom1.FirstOrDefault(), out var dateFrom1Value))
+            {
+                filterModel.DateFrom1 = dateFrom1Value;
+            }
+            if (queryParams.TryGetValue("dateFrom2", out var dateFrom2) && DateTime.TryParse(dateFrom2.FirstOrDefault(), out var dateFrom2Value))
+            {
+                filterModel.DateFrom2 = dateFrom2Value;
+            }
+            if (queryParams.TryGetValue("dateTo1", out var dateTo1) && DateTime.TryParse(dateTo1.FirstOrDefault(), out var dateTo1Value))
+            {
+                filterModel.DateTo1 = dateTo1Value;
+            }
+            if (queryParams.TryGetValue("dateTo2", out var dateTo2) && DateTime.TryParse(dateTo2.FirstOrDefault(), out var dateTo2Value))
+            {
+                filterModel.DateTo2 = dateTo2Value;
+            }
+            if (queryParams.TryGetValue("bookedFrom1", out var bookedFrom1) && DateTime.TryParse(bookedFrom1.FirstOrDefault(), out var bookedFrom1Value))
+            {
+                filterModel.BookedFrom1 = bookedFrom1Value;
+            }
+            if (queryParams.TryGetValue("bookedFrom2", out var bookedFrom2) && DateTime.TryParse(bookedFrom2.FirstOrDefault(), out var bookedFrom2Value))
+            {
+                filterModel.BookedFrom2 = bookedFrom2Value;
+            }
+            if (queryParams.TryGetValue("propertyName", out var propertyName))
+            {
+                var name = propertyName.FirstOrDefault();
+                var property = filterProperties.FirstOrDefault(p => p.Name.ToLower() == name.ToLower());
+                filterModel.PropertyId = property?.Propid;
+            }
+            if (queryParams.TryGetValue("firstName", out var firstName))
+            {
+                filterModel.FirstName = firstName.FirstOrDefault();
+            }
+            if (queryParams.TryGetValue("lastName", out var lastName))
+            {
+                filterModel.LastName = lastName.FirstOrDefault();
+            }
+            if (queryParams.TryGetValue("status", out var status))
+            {
+                var statusText = status.FirstOrDefault();
+                var statusItem = statusList.FirstOrDefault(s => s.Status.ToLower() == statusText.ToLower());
+                filterModel.Status = statusItem?.Id;
+            }
+            if (queryParams.TryGetValue("phone", out var phone))
+            {
+                filterModel.Phone = phone.FirstOrDefault();
+            }
+            if (queryParams.TryGetValue("cleaning", out var cleaning))
+            {
+                var cleaningValue = cleaning.FirstOrDefault();
+                if (cleaningOptions.Contains(cleaningValue))
+                {
+                    filterModel.Cleaning = cleaningValue;
+                }
+            }
+            if (queryParams.TryGetValue("sleeps1", out var sleeps1) && int.TryParse(sleeps1.FirstOrDefault(), out var sleeps1Value))
+            {
+                filterModel.Sleeps1 = sleeps1Value;
+            }
+            if (queryParams.TryGetValue("sleeps2", out var sleeps2) && int.TryParse(sleeps2.FirstOrDefault(), out var sleeps2Value))
+            {
+                filterModel.Sleeps2 = sleeps2Value;
+            }
+            if (queryParams.TryGetValue("source", out var source))
+            {
+                var sourceText = source.FirstOrDefault();
+                var sourceItem = sources.FirstOrDefault(s => s.Source == sourceText);
+                filterModel.Source = sourceItem?.Id ?? 0;
+            }
+            if (queryParams.TryGetValue("email", out var email))
+            {
+                filterModel.Email = email.FirstOrDefault();
+            }
+            if (queryParams.TryGetValue("city", out var city))
+            {
+                var cityValue = city.FirstOrDefault();
+                if (cities.Contains(cityValue))
+                {
+                    filterModel.City = cityValue;
+                }
+            }
+
+            // Trigger search if query parameters exist
+            if (queryParams.Count > 0)
+            {
+                await OnSearch();
+            }
+        }
+
+        private async Task UpdateQueryParameters()
+        {
+            var queryParams = new Dictionary<string, string>();
+
+            if (filterModel.FilterModelId != 0)
+                queryParams.Add("id", filterModel.FilterModelId.ToString());
+            if (filterModel.DateFrom1.HasValue)
+                queryParams.Add("dateFrom1", filterModel.DateFrom1.Value.ToString("yyyy-MM-dd"));
+            if (filterModel.DateFrom2.HasValue)
+                queryParams.Add("dateFrom2", filterModel.DateFrom2.Value.ToString("yyyy-MM-dd"));
+            if (filterModel.DateTo1.HasValue)
+                queryParams.Add("dateTo1", filterModel.DateTo1.Value.ToString("yyyy-MM-dd"));
+            if (filterModel.DateTo2.HasValue)
+                queryParams.Add("dateTo2", filterModel.DateTo2.Value.ToString("yyyy-MM-dd"));
+            if (filterModel.BookedFrom1.HasValue)
+                queryParams.Add("bookedFrom1", filterModel.BookedFrom1.Value.ToString("yyyy-MM-dd"));
+            if (filterModel.BookedFrom2.HasValue)
+                queryParams.Add("bookedFrom2", filterModel.BookedFrom2.Value.ToString("yyyy-MM-dd"));
+            if (filterModel.PropertyId.HasValue)
+            {
+                var property = filterProperties.FirstOrDefault(p => p.Propid == filterModel.PropertyId);
+                if (property != null)
+                    queryParams.Add("propertyName", property.Name);
+            }
+            if (!string.IsNullOrWhiteSpace(filterModel.FirstName))
+                queryParams.Add("firstName", filterModel.FirstName);
+            if (!string.IsNullOrWhiteSpace(filterModel.LastName))
+                queryParams.Add("lastName", filterModel.LastName);
+            if (filterModel.Status.HasValue)
+            {
+                var status = statusList.FirstOrDefault(s => s.Id == filterModel.Status);
+                if (status != null)
+                    queryParams.Add("status", status.Status);
+            }
+            if (!string.IsNullOrWhiteSpace(filterModel.Phone))
+                queryParams.Add("phone", filterModel.Phone);
+            if (!string.IsNullOrWhiteSpace(filterModel.Cleaning))
+                queryParams.Add("cleaning", filterModel.Cleaning);
+            if (filterModel.Sleeps1 != 0)
+                queryParams.Add("sleeps1", filterModel.Sleeps1.ToString());
+            if (filterModel.Sleeps2 != 0)
+                queryParams.Add("sleeps2", filterModel.Sleeps2.ToString());
+            if (filterModel.Source != 0)
+            {
+                var source = sources.FirstOrDefault(s => s.Id == filterModel.Source);
+                if (source != null)
+                    queryParams.Add("source", source.Source);
+            }
+            if (!string.IsNullOrWhiteSpace(filterModel.Email))
+                queryParams.Add("email", filterModel.Email);
+            if (!string.IsNullOrWhiteSpace(filterModel.City))
+                queryParams.Add("city", filterModel.City);
+
+            var uri = NavigationManager.Uri;
+            var baseUri = uri.Contains("?") ? uri.Substring(0, uri.IndexOf("?")) : uri;
+            var newQueryString = QueryString.Create(queryParams);
+            NavigationManager.NavigateTo($"{baseUri}{newQueryString}", forceLoad: false);
+        }
+
         private async Task OnSearch()
         {
+            await UpdateQueryParameters(); // Update URL before searching
             var query = new Query
             {
                 OrderBy = "Id",
@@ -317,9 +473,12 @@ namespace Destination.Components.Pages.BookingComponents
             StateHasChanged();
         }
 
-        private void OnReset()
+        private async Task OnReset()
         {
-            filterModel = new BookingFilterModel(); // reset all values
+            filterModel = new BookingFilterModel(); // Reset all values
+            await UpdateQueryParameters(); // Clear query parameters
+            StateHasChanged();
         }
+
     }
 }

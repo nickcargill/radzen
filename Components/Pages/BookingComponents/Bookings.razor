@@ -177,40 +177,39 @@
                     <RadzenRow>
                         <RadzenTemplateForm TItem="Destination.Shared.DTO.BookingFilterModel" Data="@filterModel" Submit="@OnSearch" Style="margin-top: 0px !important">
                             <div class="filter-container rz-p-3" Style="padding-top:0px !important">
-
                                 <!-- Row 1 -->
                                 <RadzenRow>
                                     <RadzenColumn Size="2">
                                         <label>Id</label>
-                                        <RadzenNumeric @bind-Value="filterModel.FilterModelId" Style="width: 100%;" ShowUpDown="false" />
+                                        <RadzenNumeric @bind-Value="filterModel.FilterModelId" Style="width: 100%;" ShowUpDown="false" Change="@(async (int args) => await UpdateQueryParameters())" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="2">
                                         <label>Date From</label>
                                         <div style="display: flex; gap: 4px;">
-                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.DateFrom1" Style="width: 48%;" ShowTime="false" />
-                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.DateFrom2" Style="width: 48%;" ShowTime="false" />
+                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.DateFrom1" Style="width: 48%;" ShowTime="false" Change="@(async (DateTime? args) => await UpdateQueryParameters())" />
+                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.DateFrom2" Style="width: 48%;" ShowTime="false" Change="@(async (DateTime? args) => await UpdateQueryParameters())" />
                                         </div>
                                     </RadzenColumn>
                                     <RadzenColumn Size="2">
                                         <label>Date To</label>
                                         <div style="display: flex; gap: 4px;">
-                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.DateTo1" Style="width: 48%;" ShowTime="false" />
-                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.DateTo2" Style="width: 48%;" ShowTime="false" />
+                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.DateTo1" Style="width: 48%;" ShowTime="false" Change="@(async (DateTime? args) => await UpdateQueryParameters())" />
+                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.DateTo2" Style="width: 48%;" ShowTime="false" Change="@(async (DateTime? args) => await UpdateQueryParameters())" />
                                         </div>
                                     </RadzenColumn>
                                     <RadzenColumn Size="2">
                                         <label>Property</label>
                                         <RadzenDropDown @bind-Value="filterModel.PropertyId" Data="@filterProperties" TextProperty="Name" ValueProperty="Propid" Placeholder="Select Property"
-                                                        Style="width: 100%;" />
+                                                        Style="width: 100%;" Change="@(args => UpdateQueryParameters())" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="2">
                                         <label>Status</label>
                                         <RadzenDropDown @bind-Value="filterModel.Status" Data="@statusList" TextProperty="Status" ValueProperty="Id"
-                                                        Placeholder="Select Status" Style="width: 100%;" />
+                                                        Placeholder="Select Status" Style="width: 100%;" Change="@(args => UpdateQueryParameters())" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="2">
                                         <label>First Name</label>
-                                        <RadzenTextBox @bind-Value="filterModel.FirstName" Style="width: 100%;" />
+                                        <RadzenTextBox @bind-Value="filterModel.FirstName" Style="width: 100%;" Change="@(async (string args) => await UpdateQueryParameters())" />
                                     </RadzenColumn>
                                 </RadzenRow>
 
@@ -218,34 +217,34 @@
                                 <RadzenRow class="rz-mt-3">
                                     <RadzenColumn Size="2">
                                         <label>Last Name</label>
-                                        <RadzenTextBox @bind-Value="filterModel.LastName" Style="width: 100%;" />
+                                        <RadzenTextBox @bind-Value="filterModel.LastName" Style="width: 100%;" Change="@(async (string args) => await UpdateQueryParameters())" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="2">
                                         <label>Cleaning</label>
-                                        <RadzenDropDown @bind-Value="filterModel.Cleaning" Data="@cleaningOptions" Placeholder="Select Cleaning" Style="width: 100%;" />
+                                        <RadzenDropDown @bind-Value="filterModel.Cleaning" Data="@cleaningOptions" Placeholder="Select Cleaning" Style="width: 100%;" Change="@(args => UpdateQueryParameters())" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="2">
                                         <label>Booked b/w</label>
                                         <div style="display: flex; gap: 4px;">
-                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.BookedFrom1" Style="width: 48%;" ShowTime="false" />
-                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.BookedFrom2" Style="width: 48%;" ShowTime="false" />
+                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.BookedFrom1" Style="width: 48%;" ShowTime="false" Change="@(async (DateTime? args) => await UpdateQueryParameters())" />
+                                            <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.BookedFrom2" Style="width: 48%;" ShowTime="false" Change="@(async (DateTime? args) => await UpdateQueryParameters())" />
                                         </div>
                                     </RadzenColumn>
                                     <RadzenColumn Size="2">
                                         <label>Sleeps b/w</label>
                                         <div style="display: flex; gap: 4px;">
-                                            <RadzenNumeric @bind-Value="filterModel.Sleeps1" Style="width: 48%;" ShowUpDown="false" />
-                                            <RadzenNumeric @bind-Value="filterModel.Sleeps2" Style="width: 48%;" ShowUpDown="false" />
+                                            <RadzenNumeric @bind-Value="filterModel.Sleeps1" Style="width: 48%;" ShowUpDown="false" Change="@(async (int args) => await UpdateQueryParameters())" />
+                                            <RadzenNumeric @bind-Value="filterModel.Sleeps2" Style="width: 48%;" ShowUpDown="false" Change="@(async (int args) => await UpdateQueryParameters())" />
                                         </div>
                                     </RadzenColumn>
                                     <RadzenColumn Size="2">
                                         <label>Phone</label>
-                                        <RadzenTextBox @bind-Value="filterModel.Phone" Style="width: 100%;" />
+                                        <RadzenTextBox @bind-Value="filterModel.Phone" Style="width: 100%;" Change="@(async (string args) => await UpdateQueryParameters())" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="2">
                                         <label>Source</label>
                                         <RadzenDropDown @bind-Value="filterModel.Source" Data="@sources" TextProperty="Source" ValueProperty="Id"
-                                                        Placeholder="Select Source" Style="width: 100%;" />
+                                                        Placeholder="Select Source" Style="width: 100%;" Change="@(args => UpdateQueryParameters())" />
                                     </RadzenColumn>
                                 </RadzenRow>
 
@@ -253,11 +252,11 @@
                                 <RadzenRow class="rz-mt-3">
                                     <RadzenColumn Size="2">
                                         <label>Email</label>
-                                        <RadzenTextBox @bind-Value="filterModel.Email" Style="width: 100%;" />
+                                        <RadzenTextBox @bind-Value="filterModel.Email" Style="width: 100%;" Change="@(async (string args) => await UpdateQueryParameters())" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="2">
                                         <label>City</label>
-                                        <RadzenDropDown @bind-Value="filterModel.City" Data="@cities" Placeholder="Select City" Style="width: 100%;" />
+                                        <RadzenDropDown @bind-Value="filterModel.City" Data="@cities" Placeholder="Select City" Style="width: 100%;" Change="@(args => UpdateQueryParameters())" />
                                     </RadzenColumn>
                                     <RadzenColumn Size="6" class="rz-d-flex rz-align-items-end" Style="margin-top:20px">
                                         <div class="custom-toolbar">
@@ -266,7 +265,6 @@
                                         </div>
                                     </RadzenColumn>
                                 </RadzenRow>
-
                             </div>
                         </RadzenTemplateForm>
                     </RadzenRow>
