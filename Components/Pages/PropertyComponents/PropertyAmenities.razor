@@ -1,0 +1,1277 @@
+@page "/property-amenities"
+
+<style>
+    .amenity-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+    .amenity-label {
+        width: 150px; /* Fixed width for consistent alignment */
+        font-size: 11px;
+    }
+    .amenity-checkbox {
+        margin-left: 0px; /* Small distance between label and checkbox */
+    }
+</style>
+
+
+<RadzenRow AlignItems="AlignItems.Center" Style="margin-bottom:10px">
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenText Text="@propName" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin:0; font-size:13px" />
+    </RadzenColumn>
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+        </RadzenStack>
+    </RadzenColumn>
+</RadzenRow>
+
+<RadzenCard>
+    <RadzenTemplateForm TItem="Property" Data="@property" Submit="@((Property args) => { Submit(args); })">
+        <!-- Row 1 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Air Hockey" Component="AmntHockeyRink" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntHockeyRink" Name="AmntHockeyRink" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Baby Monitor" Component="AmntBabyMonitor" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBabyMonitor" Name="AmntBabyMonitor" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Baby Safety Gates" Component="AmntBabySafetyGates" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBabySafetyGates" Name="AmntBabySafetyGates" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Babysitter Recommendations" Component="AmntBabysitterRecommendations" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBabysitterRecommendations" Name="AmntBabysitterRecommendations" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Baby Bath" Component="AmntBabyBath" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBabyBath" Name="AmntBabyBath" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Backyard" Component="AmntBackyard" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBackyard" Name="AmntBackyard" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 2 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Baking Sheet" Component="AmntBakingSheet" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBakingSheet" Name="AmntBakingSheet" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Bath Tub" Component="AmntBathTub" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBathTub" Name="AmntBathTub" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Barbecue Utensils" Component="AmntBarbecueUtensils" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBarbecueUtensils" Name="AmntBarbecueUtensils" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Beach Access" Component="AmntBeachAccess" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBeachAccess" Name="AmntBeachAccess" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Bed Linens" Component="AmntBedLinens" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBedLinens" Name="AmntBedLinens" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Bicycles" Component="Bicycles" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Bicycles" Name="Bicycles" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 3 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Bidet" Component="AmntBidet" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBidet" Name="AmntBidet" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Blender" Component="AmntBelnder" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBelnder" Name="AmntBelnder" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Boat" Component="Boat" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Boat" Name="Boat" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Body Soap" Component="AmntBodySoap" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBodySoap" Name="AmntBodySoap" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Books" Component="Books" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Books" Name="Books" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Bread Maker" Component="AmntBreadMaker" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBreadMaker" Name="AmntBreadMaker" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 4 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Carbon Monoxide Alarm" Component="AmntCarbonMonoxideAlram" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntCarbonMonoxideAlram" Name="AmntCarbonMonoxideAlram" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Carpeted Floors" Component="CarpetedFloors" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CarpetedFloors" Name="CarpetedFloors" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Ceiling Fan" Component="AmntCeilingFan" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntCeilingFan" Name="AmntCeilingFan" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Central AC" Component="CentralAc" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CentralAc" Name="CentralAc" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Changing Table" Component="AmntChangingTable" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntChangingTable" Name="AmntChangingTable" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Children Dinnerware" Component="AmntChildrenDinnerware" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntChildrenDinnerware" Name="AmntChildrenDinnerware" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 5 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Cleaning Products" Component="AmntCleaningProducts" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntCleaningProducts" Name="AmntCleaningProducts" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Clothes Drying Rack" Component="AmntClotheDryingRack" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntClotheDryingRack" Name="AmntClotheDryingRack" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Clothing Storage" Component="AmntClothingStorage" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntClothingStorage" Name="AmntClothingStorage" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Coffee" Component="AmntCoffee" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntCoffee" Name="AmntCoffee" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Coffee Maker" Component="CoffeeMaker" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CoffeeMaker" Name="CoffeeMaker" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Communal Pool" Component="CommunalPool" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CommunalPool" Name="CommunalPool" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 6 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Cooking Basics" Component="CookingBasics" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CookingBasics" Name="CookingBasics" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Crib" Component="Crib" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Crib" Name="Crib" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Room Darkening Shades" Component="AmntRoomDarkeningShades" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntRoomDarkeningShades" Name="AmntRoomDarkeningShades" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Dedicated Workspace" Component="DedicatedWorkspace" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.DedicatedWorkspace" Name="DedicatedWorkspace" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Public Transportation" Component="PublicTransportation" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.PublicTransportation" Name="PublicTransportation" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Dining Area" Component="DiningArea" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.DiningArea" Name="DiningArea" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 7 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Dining High Chair" Component="DiningHighChair" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.DiningHighChair" Name="DiningHighChair" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Dining Room" Component="DiningRoom" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.DiningRoom" Name="DiningRoom" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Dishes and Utensils" Component="DishesAndUtensils" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.DishesAndUtensils" Name="DishesAndUtensils" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Dishwasher" Component="Dishwasher" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Dishwasher" Name="Dishwasher" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Dock" Component="Dock" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Dock" Name="Dock" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="DVD Player" Component="Dvdplayer" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Dvdplayer" Name="Dvdplayer" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 8 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Elevator" Component="AmntElevator" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntElevator" Name="AmntElevator" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Ethernet" Component="AmntEthernet" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntEthernet" Name="AmntEthernet" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="EV Charger" Component="Evcharger" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Evcharger" Name="Evcharger" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Exercise Equipment" Component="AmntExerciseEquipment" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntExerciseEquipment" Name="AmntExerciseEquipment" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Extra Pillows/Blankets" Component="AmntExtraPillowsBlankets" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntExtraPillowsBlankets" Name="AmntExtraPillowsBlankets" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Courtyard" Component="Courtyard" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Courtyard" Name="Courtyard" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 9 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Fire" Component="Fire" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Fire" Name="Fire" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Fire Extinguisher" Component="AmntFireExtinguisher" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntFireExtinguisher" Name="AmntFireExtinguisher" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Fire Pit" Component="AmntFirePit" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntFirePit" Name="AmntFirePit" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Fireplace Guards" Component="AmntFireplaceGuards" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntFireplaceGuards" Name="AmntFireplaceGuards" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Fireplace" Component="Fireplace" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Fireplace" Name="Fireplace" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="First Aid Kit" Component="AmntFirstAidKit" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntFirstAidKit" Name="AmntFirstAidKit" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 10 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Fitness Center" Component="FitnessCenter" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.FitnessCenter" Name="FitnessCenter" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Foosball" Component="FoosBall" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.FoosBall" Name="FoosBall" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Free Parking" Component="AmntFreeParking" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntFreeParking" Name="AmntFreeParking" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Freezer" Component="AmntFreezer" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntFreezer" Name="AmntFreezer" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Games" Component="Games" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Games" Name="Games" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Game Table" Component="Gametable" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Gametable" Name="Gametable" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 11 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Garage Parking" Component="GarageParking" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.GarageParking" Name="GarageParking" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Garden" Component="Garden" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Garden" Name="Garden" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Gas Range" Component="GasRange" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.GasRange" Name="GasRange" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Gas Grill" Component="Grill" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Grill" Name="Grill" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Golf" Component="Golf" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Golf" Name="Golf" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Grill" Component="Grill" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Grill" Name="Grill" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 12 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Gym" Component="Gym" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Gym" Name="Gym" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Hair Dryer" Component="AmntHairDryer" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntHairDryer" Name="AmntHairDryer" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Hangers" Component="AmntHangers" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntHangers" Name="AmntHangers" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Heating" Component="AmntHeating" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntHeating" Name="AmntHeating" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Spa Jacuzzi" Component="SpaJucuzzi" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.SpaJucuzzi" Name="SpaJucuzzi" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Hot Water" Component="AmntHotWater" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntHotWater" Name="AmntHotWater" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 13 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Hot Water Kettle" Component="AmntHotWaterKettle" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntHotWaterKettle" Name="AmntHotWaterKettle" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Internet" Component="Internet" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Internet" Name="Internet" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Iron" Component="AmntIron" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntIron" Name="AmntIron" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Keurig" Component="AmntIron" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntIron" Name="AmntIron" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Kitchen" Component="Kitchen" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Kitchen" Name="Kitchen" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Lake Access" Component="AmntLakeAccess" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntLakeAccess" Name="AmntLakeAccess" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 14 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Water Front" Component="WaterFront" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.WaterFront" Name="WaterFront" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Lakeview" Component="Lakeview" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Lakeview" Name="Lakeview" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Laundromat Nearby" Component="AmntLaundromatNearby" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntLaundromatNearby" Name="AmntLaundromatNearby" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Controlled Access" Component="ControlledAccess" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.ControlledAccess" Name="ControlledAccess" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Microwave" Component="Microwave" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Microwave" Name="Microwave" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Mini Fridge" Component="AmntMiniFridge" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntMiniFridge" Name="AmntMiniFridge" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 15 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Mosquito Net" Component="AmntMosquitoNet" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntMosquitoNet" Name="AmntMosquitoNet" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Mountain View" Component="MountainView" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.MountainView" Name="MountainView" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Music Library" Component="MusicLibrary" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.MusicLibrary" Name="MusicLibrary" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Nature Bike Paths" Component="NatureBikePaths" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.NatureBikePaths" Name="NatureBikePaths" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Near Bear Mountain" Component="Nearbearmtn" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Nearbearmtn" Name="Nearbearmtn" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Near Lake" Component="Nearlake" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Nearlake" Name="Nearlake" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 16 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Near Snow Summit" Component="Nearsnowsummit" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Nearsnowsummit" Name="Nearsnowsummit" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Near Village" Component="Nearvillage" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Nearvillage" Name="Nearvillage" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Outdoor Dining Area" Component="AmntOutdoorDiningArea" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntOutdoorDiningArea" Name="AmntOutdoorDiningArea" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Outdoor Kitchen" Component="AmntOutdoorKitchen" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntOutdoorKitchen" Name="AmntOutdoorKitchen" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Outlet Covers" Component="AmntOutletCovers" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntOutletCovers" Name="AmntOutletCovers" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Oven" Component="Oven" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Oven" Name="Oven" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 17 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Playground Park" Component="PlaygroundPark" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.PlaygroundPark" Name="PlaygroundPark" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Patio" Component="Patio" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Patio" Name="Patio" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Piano" Component="AmntPiano" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntPiano" Name="AmntPiano" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Ping Pong Table" Component="PingPongTable" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.PingPongTable" Name="PingPongTable" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Pocket Wifi" Component="AmntPocketWifi" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntPocketWifi" Name="AmntPocketWifi" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Pool Table" Component="PoolTable" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.PoolTable" Name="PoolTable" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 18 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Portable Fans" Component="AmntPortableFans" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntPortableFans" Name="AmntPortableFans" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Private Entrance" Component="AmntPrivateEntrance" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntPrivateEntrance" Name="AmntPrivateEntrance" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Record Player" Component="AmntRecordPlayer" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntRecordPlayer" Name="AmntRecordPlayer" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Refrigerator" Component="Refrigerator" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Refrigerator" Name="Refrigerator" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Resort Access" Component="AmntResortAccess" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntResortAccess" Name="AmntResortAccess" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Rice Maker" Component="AmntRiceMaker" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntRiceMaker" Name="AmntRiceMaker" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 19 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Rural" Component="Rural" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Rural" Name="Rural" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Safe" Component="AmntSafe" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntSafe" Name="AmntSafe" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Satellite Cable" Component="SatelliteCable" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.SatelliteCable" Name="SatelliteCable" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Sauna" Component="Sauna" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Sauna" Name="Sauna" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Shampoo" Component="AmntShampoo" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntShampoo" Name="AmntShampoo" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Shower Gel" Component="AmntShowerGel" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntShowerGel" Name="AmntShowerGel" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 20 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Shuffle Board" Component="AmntShowerGel" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntShowerGel" Name="AmntShowerGel" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Single Level Home" Component="AmntSingleLevelHome" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntSingleLevelHome" Name="AmntSingleLevelHome" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Ski In/Ski Out" Component="SkiInSkiOut" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.SkiInSkiOut" Name="SkiInSkiOut" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Smart TV" Component="Television" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Television" Name="Television" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Smoke Alarm" Component="AmntSmokeAlarm" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntSmokeAlarm" Name="AmntSmokeAlarm" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Stereo" Component="Stereo" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Stereo" Name="Stereo" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 21 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Stove" Component="AmntStove" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntStove" Name="AmntStove" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Pool" Component="Pool" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Pool" Name="Pool" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Table Corner Guards" Component="AmntTableCornerGuards" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntTableCornerGuards" Name="AmntTableCornerGuards" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Television" Component="Television" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Television" Name="Television" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Tennis Courts" Component="TennisCourts" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.TennisCourts" Name="TennisCourts" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Theater" Component="AmntTheater" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntTheater" Name="AmntTheater" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 22 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Toaster" Component="Toaster" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Toaster" Name="Toaster" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Town" Component="Town" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Town" Name="Town" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Toys" Component="Toys" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Toys" Name="Toys" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Trash Compactor" Component="AmntTrashCompactor" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntTrashCompactor" Name="AmntTrashCompactor" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Travel Crib" Component="AmntTravelCrib" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntTravelCrib" Name="AmntTravelCrib" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Video Games" Component="VideoGames" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.VideoGames" Name="VideoGames" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 23 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Video Library" Component="VideoLibrary" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.VideoLibrary" Name="VideoLibrary" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Window Guards" Component="AmntWindowGuards" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntWindowGuards" Name="AmntWindowGuards" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Wine Glass" Component="AmntWineGlass" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntWineGlass" Name="AmntWineGlass" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Wood Floors" Component="WoodFloors" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.WoodFloors" Name="WoodFloors" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Waterfront" Component="AmntWaterfront" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntWaterfront" Name="AmntWaterfront" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Alarm" Component="Alarm" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Alarm" Name="Alarm" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 24 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Assisted Living" Component="AssistedLiving" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AssistedLiving" Name="AssistedLiving" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Club House" Component="ClubHouse" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.ClubHouse" Name="ClubHouse" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Retirement Community" Component="RetirementCommunity" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.RetirementCommunity" Name="RetirementCommunity" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Sports Complex" Component="SportsComplex" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.SportsComplex" Name="SportsComplex" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Wheelchair Accessible" Component="WheelChairAccessible" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.WheelChairAccessible" Name="WheelChairAccessible" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Views" Component="Views" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Views" Name="Views" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 25 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Furnished" Component="Furnished" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Furnished" Name="Furnished" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Vacation Rental" Component="VacationRental" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.VacationRental" Name="VacationRental" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Top Property" Component="TopProperty" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.TopProperty" Name="TopProperty" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Unfurnished" Component="UnFurnished" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.UnFurnished" Name="UnFurnished" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Shopping Center" Component="CShoppingCenter" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CShoppingCenter" Name="CShoppingCenter" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Office Building" Component="COfficeBuilding" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.COfficeBuilding" Name="COfficeBuilding" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 26 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Neighborhood" Component="CNeighborhood" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CNeighborhood" Name="CNeighborhood" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Stand Alone" Component="CStandAlone" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CStandAlone" Name="CStandAlone" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="NNN Lease" Component="CNnnLease" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CNnnLease" Name="CNnnLease" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Modified Gross" Component="CModifiedGross" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CModifiedGross" Name="CModifiedGross" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Full Service" Component="CFullService" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CFullService" Name="CFullService" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Conference Room" Component="CConferenceRoom" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CConferenceRoom" Name="CConferenceRoom" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 27 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Air Conditioning" Component="CAirConditioning" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CAirConditioning" Name="CAirConditioning" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Carpeted" Component="CCarpeted" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CCarpeted" Name="CCarpeted" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Storage" Component="CStorage" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CStorage" Name="CStorage" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Security" Component="CSecurity" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CSecurity" Name="CSecurity" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Parking" Component="CParking" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CParking" Name="CParking" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Concrete Floors" Component="CConcreteFloors" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CConcreteFloors" Name="CConcreteFloors" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 28 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Private Restroom" Component="CPrivateRestroom" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CPrivateRestroom" Name="CPrivateRestroom" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Community Restroom" Component="CCommunityRestroom" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CCommunityRestroom" Name="CCommunityRestroom" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Pay Utilities" Component="CPayUtilities" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CPayUtilities" Name="CPayUtilities" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Utilities Included" Component="CUtiliesIncluded" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CUtiliesIncluded" Name="CUtiliesIncluded" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Property Management" Component="CPropertyManagement" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CPropertyManagement" Name="CPropertyManagement" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Sub Lease" Component="CSubLease" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.CSubLease" Name="CSubLease" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 29 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Near Hiking Trail" Component="NearHikingTrail" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.NearHikingTrail" Name="NearHikingTrail" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Spa" Component="Spa" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Spa" Name="Spa" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Football" Component="Football" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Football" Name="Football" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Sledding Hill" Component="SleddingHill" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.SleddingHill" Name="SleddingHill" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Pets OK" Component="PetsOk" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.PetsOk" Name="PetsOk" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Inspected By" Component="Inspectedby" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Inspectedby" Name="Inspectedby" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 30 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Luxury" Component="Luxury" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Luxury" Name="Luxury" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Boat Parking" Component="Boatparking" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Boatparking" Name="Boatparking" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Default Cleaner" Component="Defaultcleaner" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Defaultcleaner" Name="Defaultcleaner" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Wedding" Component="Wedding" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.Wedding" Name="Wedding" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Outdoor Shower" Component="AmntOutdoorShower" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntOutdoorShower" Name="AmntOutdoorShower" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Children Playroom" Component="AmntChildrenPlayroom" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntChildrenPlayroom" Name="AmntChildrenPlayroom" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <!-- Row 31 -->
+        <RadzenRow Style="margin-bottom: 20px;">
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Outdoor Playground" Component="AmntOutdoorPlayground" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntOutdoorPlayground" Name="AmntOutdoorPlayground" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Arcade Games" Component="AmntArcadeGames" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntArcadeGames" Name="AmntArcadeGames" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Bowling Alley" Component="AmntBowlingAlley" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntBowlingAlley" Name="AmntBowlingAlley" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Climbing Wall" Component="AmntClimbingWall" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntClimbingWall" Name="AmntClimbingWall" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Laser Tag" Component="AmntLazerTag" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntLazerTag" Name="AmntLazerTag" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+            <RadzenColumn Size="2">
+                <div class="amenity-container">
+                    <RadzenLabel Text="Life Size Games" Component="AmntLifeSizeGames" Class="amenity-label" />
+                    <RadzenCheckBox @bind-Value="@property.AmntLifeSizeGames" Name="AmntLifeSizeGames" Class="amenity-checkbox" />
+                </div>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenRow Style="margin-bottom: 6px; margin-top: 25px;align-self: self-end;">
+            <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Text="Save" Variant="Variant.Flat" Style="margin-right: 8px; padding: 8px 16px;" />
+            <RadzenButton ButtonStyle="ButtonStyle.Primary" Text="Cancel" Variant="Variant.Flat" Style="padding: 8px 16px;" />
+        </RadzenRow>
+
+       </RadzenTemplateForm>
+       </RadzenCard>

@@ -266,6 +266,12 @@
                                 <PropertyCost Id="@selectedPropId"></PropertyCost>
                             }
                         </RadzenTabsItem>
+                        <RadzenTabsItem Text="Amenities" style="margin-left: 2px;color:black;font-weight:300">
+                            @if (isPropAmenitiesTab)
+                            {
+                                <PropertyAmenities Id="@selectedPropId"></PropertyAmenities>
+                            }
+                        </RadzenTabsItem>
                         <RadzenTabsItem Text="Rates" style="margin-left: 2px;color:black;font-weight:300">
                             @if (isPropRatesTab)
                             {

@@ -56,6 +56,8 @@ namespace Destination.Components.Pages.PropertyComponents
         protected bool isPropOwnerTab = false;
         protected bool isPropImprovementsTab = false;
         protected bool isPropHomeTeamTab = false;
+        protected bool isPropAmenitiesTab = false;
+
         private bool menuVisible = false;
         private string activeForm = "EditBookings";
 
@@ -128,24 +130,27 @@ namespace Destination.Components.Pages.PropertyComponents
                     isPropCostTab = true;
                     break;
                 case 4:
+                    isPropAmenitiesTab = true;
+                    break;            
+                case 5:
                     isPropRatesTab = true;
                     break;
-                case 5:
+                case 6:
                     isPropBookingsTab = true;
                     break;
-                case 6:
+                case 7:
                     isPropTasksTab = true;
                     break;
-                case 7:
+                case 8:
                     isPropAnnualTab = true;
                     break;
-                case 8:
+                case 9:
                     isPropOwnerTab = true;
                     break;
-                case 9:
+                case 10:
                     isPropImprovementsTab = true;
                     break;
-                case 10:
+                case 11:
                     isPropHomeTeamTab = true;
                     break;
             }

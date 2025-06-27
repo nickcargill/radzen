@@ -314,11 +314,6 @@
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="BookingStatus.Status" Title="Status" Width="140px">
                             </RadzenDataGridColumn>
-                            @*                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.IsCleaned" Title="Cleaned" Width="140px">
-                                <Template Context="data">
-                                    @(data.Property.IsCleaned.Value ? "YES" : "NO")
-                                </Template>
-                            </RadzenDataGridColumn> *@
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Notes" Title="Notes" Width="140px">
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Property.Bbcity" Title="City" Width="140px">
@@ -490,6 +485,9 @@
                 </RadzenTabsItem>
                 <RadzenTabsItem Text="Property Cost" style="margin-left: 2px;color:black;font-weight:600">
                     <PropertyCost Id="@selectedPropertyId"></PropertyCost>
+                </RadzenTabsItem>
+                <RadzenTabsItem Text="Amenities" style="margin-left: 2px;color:black;font-weight:600">
+                    <PropertyAmenities Id="@selectedPropertyId"></PropertyAmenities>
                 </RadzenTabsItem>
                 <RadzenTabsItem Text="Rates" style="margin-left: 2px;color:black;font-weight:600">
                     <RatesTest Id="@selectedPropertyId"></RatesTest>

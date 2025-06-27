@@ -274,10 +274,7 @@ namespace Destination.Components.Pages.BookingComponents
         private BookingFilterModel filterModel = new();
         private List<PropertyDropDownData> filterProperties = new();
         private List<BookingStatusDropDownData> statusList = new();
-        private List<string> rrOptions = new() { "All", "Yes", "No" };
-        private List<string> coOptions = new() { "All", "Yes", "No" };
         private List<string> cleaningOptions = new() { "All", "Cleaned", "Not Cleaned" };
-        private List<string> backToBackOptions = new() { "All", "Yes", "No" };
         private List<PropertySource> sources = new();
         private List<string> cities = new()
         {
