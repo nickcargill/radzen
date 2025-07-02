@@ -61,11 +61,6 @@ namespace Destination.Components.Pages.AgentComponents
         private IEnumerable<Agent> pagedOwners;
         private int totalCount;
 
-        protected bool isBookingHistoryTab = false;
-        protected bool isCommTab = false;
-        protected bool isVisitHistoryTab = false;
-        protected bool isCreditRequest = false;
-
 
         private string menuStyle => menuVisible ?
             "position: absolute; top: 40px; left: 5px; background: white; z-index: 10; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-radius: 4px; border: 1px solid #e0e0e0;" :
@@ -86,24 +81,6 @@ namespace Destination.Components.Pages.AgentComponents
         {
             showCollapse = true;
             showPanels = true;
-        }
-        private void OnTabChange(int index)
-        {
-            switch (index)
-            {
-                case 1:
-                    isBookingHistoryTab = true;
-                    break;
-                case 2:
-                    isCommTab = true;
-                    break;
-                case 3:
-                    isVisitHistoryTab = true;
-                    break;
-                case 4:
-                    isCreditRequest = true;
-                    break;
-            }
         }
 
         void PickedColumnsChanged(DataGridPickedColumnsChangedEventArgs<Destination.Models.destinationTest.Booking> args)

@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 using Destination.Data;
 using Destination.Services;
 using Destination;
+using Destination.Shared.DTO;
+using Destination.Shared.ExternalServices;
 
 var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
@@ -24,9 +26,15 @@ builder.Services.AddScoped<OwnerService>();
 builder.Services.AddScoped<PropertyService>();
 builder.Services.AddScoped<TenantService>();
 
+//builder.Services.Configure<TwilioSmsOptions>(
+//    builder.Configuration.GetSection("Twilio"));
+//builder.Services.AddSingleton<TwilioSmsService>();
+
+builder.Services.Configure<SendGridEmailOptions>(builder.Configuration.GetSection("SendGrid"));
+
 
 builder.Services.AddScoped<SharedEvents>();
-//builder.Services.AddScoped<SendGridEmailService>();
+builder.Services.AddScoped<SendGridEmailService>();
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 builder.Services.AddScoped<CustomAuthStateProvider>();
 builder.Services.AddHttpContextAccessor();

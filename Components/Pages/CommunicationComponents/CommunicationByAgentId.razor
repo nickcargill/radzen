@@ -1,0 +1,50 @@
+@page "/communication-by-agent-id"
+
+<PageTitle>CommunicationByAgentId</PageTitle>
+
+<RadzenStack>
+    <RadzenRow AlignItems="AlignItems.Center">
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenText Text="Communication By Agent" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin:0; font-size:13px" />
+        </RadzenColumn>
+        <RadzenColumn Size="12" SizeMD="6">
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
+                <!-- You can add buttons or filters here -->
+            </RadzenStack>
+        </RadzenColumn>
+    </RadzenRow>
+
+    <RadzenRow>
+        <RadzenColumn SizeMD="12">
+            <RadzenDataGrid
+                            Data="@OwnerList"
+                            TItem="Destination.Shared.DTO.OwnerCommunicationByAgentDTO"
+                            ColumnWidth="150px"
+                            AllowFiltering="true"
+                            FilterMode="FilterMode.Advanced"
+                            AllowPaging="true"
+                            PageSizeOptions=@(new int[]{20,25,30})
+                            AllowSorting="true"
+                            ShowPagingSummary="true"
+                            Density="Radzen.Density.Compact"
+                            AllowColumnResize="true">
+
+                <Columns>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.OwnerCommunicationByAgentDTO" Filterable="false" Property="Id" Title="ID" Width="80px" />
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.OwnerCommunicationByAgentDTO" Filterable="false" Property="Cdate" Title="Touches">
+                        <Template Context="data">
+                            @data.Cdate?.ToString("MM/dd/yyyy")
+                        </Template>
+                    </RadzenDataGridColumn>
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.OwnerCommunicationByAgentDTO" Property="PropertyName" Title="Property" />
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.OwnerCommunicationByAgentDTO" Filterable="false" Property="Initials" Title="Emp" />
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.OwnerCommunicationByAgentDTO" Filterable="false" Property="Type" Title="Type" />
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.OwnerCommunicationByAgentDTO" Filterable="false" Property="Ownercomm" Title="Owner Communication" Width="300px" />
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.OwnerCommunicationByAgentDTO" Property="Department" Title="Department" />
+                    <RadzenDataGridColumn TItem="Destination.Shared.DTO.OwnerCommunicationByAgentDTO" Property="ActionReq" Title="Action Required" />
+                </Columns>
+            </RadzenDataGrid>
+        </RadzenColumn>
+    </RadzenRow>
+</RadzenStack>
+

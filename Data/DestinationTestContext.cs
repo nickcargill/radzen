@@ -38,6 +38,10 @@ namespace Destination.Data
 
             builder.Entity<PropertyImprovementDto>().HasNoKey().ToView(null);
 
+            builder.Entity<SmsOwnerRecordDto>().HasNoKey().ToView(null);
+
+            builder.Entity<AgentDetailsForEmailDto>().HasNoKey().ToView(null);
+
             builder.Entity<BookingHistoryResultDto>().HasNoKey().ToView(null);
 
             builder.Entity<UserVisitHistoryDto>().HasNoKey().ToView(null);
@@ -2749,6 +2753,9 @@ namespace Destination.Data
         public DbSet<Destination.Models.destinationTest.AffiliateBooking> AffiliateBookings { get; set; }
 
         public DbSet<PropertyImprovementDto> PropertyImprovementResults { get; set; }
+
+        public DbSet<SmsOwnerRecordDto> SmsOwnerRecords { get; set; }
+        public DbSet<AgentDetailsForEmailDto> AgentEmailDetails { get; set; }
 
         public DbSet<BookingHistoryResultDto> BookingHistoryResult { get; set; }
 

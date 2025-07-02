@@ -119,7 +119,7 @@
             </RadzenColumn>
         }
 
-        <RadzenColumn SizeMD="@(showPanels == false ? 12 : 9)">
+        <RadzenColumn SizeXS="12" SizeSM="12"  SizeMD="@(showPanels == false ? 12 : 9)">
             <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto"
                          style="margin-top: 0px !important; margin-bottom: 7px !important; padding: 0px"
                          Expand=@(() => Change("Panel expanded"))
@@ -130,50 +130,50 @@
                         <div class="filter-container rz-p-3" Style="padding-top:0px !important">
 
                             <!-- Row 1 -->
-                            <RadzenRow>
-                                <RadzenColumn Size="2">
+                            <RadzenRow Gap="0.5rem">
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="4">
                                     <label>Touch</label>
                                     <div style="display: flex; gap: 4px;">
-                                        <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.Touched" Style="width: 48%;" ShowTime="false" />
-                                        <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.Lasttouched" Style="width: 48%;" ShowTime="false" />
+                                        <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.Touched" Style="width: 50%; flex: 1;" ShowTime="false" />
+                                        <RadzenDatePicker DateFormat="MM/dd/yyyy" @bind-Value="filterModel.Lasttouched" Style="width: 50%; flex: 1;" ShowTime="false" />
                                     </div>
                                 </RadzenColumn>
-                                <RadzenColumn Size="2">
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
                                     <label>Cell</label>
                                     <RadzenNumeric @bind-Value="filterModel.Cell" Style="width: 100%;" ShowUpDown="false" />
                                 </RadzenColumn>
-                                <RadzenColumn Size="2">
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
                                     <label>Status</label>
                                     <RadzenDropDown @bind-Value="filterModel.Newstatus" Data="@statusList" TextProperty="StatusName" ValueProperty="StatusId"
                                                     Placeholder="Select Status" Style="width: 100%;" />
                                 </RadzenColumn>
-                                <RadzenColumn Size="2">
-                                    <label>Address</label>
-                                    <RadzenTextBox @bind-Value="filterModel.Address" Style="width: 100%;" />
-                                </RadzenColumn>
 
-                                <RadzenColumn Size="2">
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
                                     <label>First Name</label>
                                     <RadzenTextBox @bind-Value="filterModel.FirstName" Style="width: 100%;" />
                                 </RadzenColumn>
 
-                                <RadzenColumn Size="2">
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
                                     <label>Last Name</label>
                                     <RadzenTextBox @bind-Value="filterModel.LastName" Style="width: 100%;" />
                                 </RadzenColumn>
                             </RadzenRow>
 
                             <!-- Row 2 -->
-                            <RadzenRow class="rz-mt-3">
-                                <RadzenColumn Size="2">
+                            <RadzenRow class="rz-mt-3" Gap="0.5rem">
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
+                                    <label>Address</label>
+                                    <RadzenTextBox @bind-Value="filterModel.Address" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
                                     <label>Email</label>
                                     <RadzenTextBox @bind-Value="filterModel.Email" Style="width: 100%;" />
                                 </RadzenColumn>
-                                <RadzenColumn Size="2">
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
                                     <label>Source</label>
                                     <RadzenTextBox @bind-Value="filterModel.Source" Style="width: 100%;" />
                                 </RadzenColumn>
-                                <RadzenColumn Size="6" class="rz-d-flex rz-align-items-end" Style="margin-top:20px">
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="4" class="rz-d-flex rz-align-items-end" Style="margin-top:20px">
                                     <div class="custom-toolbar">
                                         <RadzenButton Text="Search" ButtonStyle="ButtonStyle.Primary" Type="Submit" Style="height:24px;" />
                                         <RadzenButton Text="Reset" Click="@OnReset" Style="height:24px;" />
@@ -242,21 +242,16 @@
         <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 6px !important;margin-bottom: 5px !important; padding: 0px !important"
                      Expand=@(() => Change("Panel expanded"))
                      Collapse=@(() => Change("Panel collapsed"))>
-            <RadzenTabs Change=@OnTabChange>
+            <RadzenTabs>
                 <Tabs>
                     <RadzenTabsItem Text="Owner Communication List" Style="color:black;font-weight:600">
+                        <Destination.Components.Pages.CommunicationComponents.CommunicationByAgentId Id="@selectedAgentId"></Destination.Components.Pages.CommunicationComponents.CommunicationByAgentId>
                     </RadzenTabsItem>
                     <RadzenTabsItem Text="Send SMS" style="margin-left: 2px;color:black;font-weight:600">
-                        @if (isCommTab)
-                        {
-                            <Destination.Components.Pages.CommunicationComponents.CommunicationHistory Id="@selectedAgentId"></Destination.Components.Pages.CommunicationComponents.CommunicationHistory>
-                        }
+                    <Destination.Components.Pages.CommunicationComponents.SendSMS Id="selectedAgentId"></Destination.Components.Pages.CommunicationComponents.SendSMS>
                     </RadzenTabsItem>
                     <RadzenTabsItem Text="Send Email" style="margin-left: 2px;color:black;font-weight:600">
-                        @if (isVisitHistoryTab)
-                        {
-                            <UserVisitHistory Id="@selectedAgentId"></UserVisitHistory>
-                        }
+                        <Destination.Components.Pages.CommunicationComponents.SendEmail Id="@selectedAgentId"></Destination.Components.Pages.CommunicationComponents.SendEmail>
                     </RadzenTabsItem>
                 </Tabs>
             </RadzenTabs>

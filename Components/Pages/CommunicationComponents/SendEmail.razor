@@ -1,0 +1,28 @@
+@page "/send-email"
+
+<PageTitle>Send_Email</PageTitle>
+<RadzenRow AlignItems="AlignItems.Center">
+    <RadzenColumn Size="12" SizeMD="6">
+        <RadzenText Text="Send Email" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin:0; font-size:13px" />
+    </RadzenColumn>
+</RadzenRow>
+
+<RadzenAlert Shade="Shade.Lighter" Variant="Variant.Flat" Size="AlertSize.Small" AlertStyle="AlertStyle.Danger" Visible="@errorVisible">Error while sending sms</RadzenAlert>
+<RadzenTemplateForm TItem="Destination.Models.destinationTest.Template" Data="@(emailTemplate)" Visible="@(emailTemplate != null)" Submit="@FormSubmit" Style="margin-top:10px !important">
+    <RadzenRow style="margin-bottom: 1rem">
+        <RadzenColumn SizeMD="6">
+            <RadzenLabel Text="Action" Component="CleanerId" style="width: 100%;font-weight:bold" />
+            <RadzenDropDown Data="@emailTemplates" TextProperty="StrTemplateName" ValueProperty="IntTemplateId"
+                            Placeholder="Select Template" style="display: block; width: 100%" @bind-Value="@(emailTemplate.IntTemplateId)" Name="IntTemplateId" />
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenRow style="margin-bottom: 1rem">
+        <RadzenColumn SizeMD="6">
+            <RadzenLabel Text="Custom Message to Send:" Component="StrTemplateContent" style="width: 100%;font-weight:bold" />
+            <RadzenTextArea style="display: block; width: 100%" @bind-Value="@(emailTemplate.StrTemplateContent)" Name="StrTemplateContent" Rows="10" />
+        </RadzenColumn>
+    </RadzenRow>
+    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Start" Gap="0.5rem">
+        <RadzenButton ButtonStyle="ButtonStyle.Primary" ButtonType="ButtonType.Submit" Text="Send SMS" Variant="Variant.Flat" />
+    </RadzenStack>
+</RadzenTemplateForm>
