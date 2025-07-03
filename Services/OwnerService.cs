@@ -2,7 +2,6 @@
 using Destination.Data;
 using Destination.Models.destinationTest;
 using Destination.Shared.DTO;
-using Destination.Shared.ExternalServices;
 using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +18,11 @@ namespace Destination.Services
     public class OwnerService
     {
         private readonly IDbContextFactory<destinationTestContext> dbContextFactory;
-        private readonly SendGridEmailService _sendGridEmailService;
-        public OwnerService(IDbContextFactory<destinationTestContext> dbContextFactory,SendGridEmailService sendGridEmailService)
+        //private readonly SendGridEmailService _sendGridEmailService;
+        public OwnerService(IDbContextFactory<destinationTestContext> dbContextFactory/*,SendGridEmailService sendGridEmailService*/)
         {
             this.dbContextFactory = dbContextFactory;
-            _sendGridEmailService = sendGridEmailService;
+            //_sendGridEmailService = sendGridEmailService;
         }
 
         public async Task<PagedResult<Agent>> GetownersPagedAsync(Query query, OwnerDto? filterModel = null)
@@ -242,7 +241,7 @@ namespace Destination.Services
             string subject = agentData.StrSubject?.Replace("[AgID]", agentData.AgID.ToString());
             string body = PopulateTemplate(agentData, customMessage);
 
-            await _sendGridEmailService.SendViaSendGridAsync(agentData.Email, subject, body);
+            //await _sendGridEmailService.SendViaSendGridAsync(agentData.Email, subject, body);
 
             OwnerCommunication ownerCommunication = new()
             {
