@@ -182,6 +182,54 @@ namespace Destination.Services
             };
         }
 
+        public async Task<PagedResult<Booking>> GetBookingsByTenantIdAsync(Query query, int Id)
+        {
+            using var context = dbContextFactory.CreateDbContext();
+
+            var items = context.Bookings
+                .Include(i => i.Property)
+                .Include(i => i.TblService)
+                .Include(i => i.PropertySource)
+                .Include(i => i.BookingStatus)
+                .Include(i => i.Tenant)
+                .AsQueryable();
+
+            // Apply filtering, sorting, skip, and take
+            var filteredItems = items;
+
+            if (!string.IsNullOrEmpty(query.Filter))
+            {
+                filteredItems = filteredItems.Where(query.Filter, query.FilterParameters);
+            }
+
+            filteredItems = filteredItems.Where(x => x.Tenantid == Id);
+
+            var count = await filteredItems.CountAsync();
+
+            if (!string.IsNullOrEmpty(query.OrderBy))
+            {
+                filteredItems = filteredItems.OrderBy(query.OrderBy);
+            }
+
+            if (query.Skip.HasValue)
+            {
+                filteredItems = filteredItems.Skip(query.Skip.Value);
+            }
+
+            if (query.Top.HasValue)
+            {
+                filteredItems = filteredItems.Take(query.Top.Value);
+            }
+
+            var data = await filteredItems.ToListAsync();
+
+            return new PagedResult<Booking>
+            {
+                Items = data,
+                Count = count
+            };
+        }
+
         public async Task<List<UserVisitHistoryDto>> GetVisitHistoryByBookingId(int id)
         {
             using var dbContext = await dbContextFactory.CreateDbContextAsync();

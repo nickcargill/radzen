@@ -1,134 +1,215 @@
 @page "/tenants"
 
-<PageTitle>Tenants</PageTitle>
+<PageTitle>Guests</PageTitle>
+
+<style>
+    .rz-panel-titlebar {
+        flex-direction: row-reverse;
+        justify-content: right;
+    }
+
+    .custom-toolbar .rz-button-md {
+        padding: 0.5rem 1rem;
+        height: auto;
+        line-height: 0.5rem !important;
+        min-height: 1.50rem !important;
+        min-width: 1.50rem !important;
+        font-size: var(--rz-body-font-size);
+        font-weight: 600;
+    }
+
+    .rz-form {
+        margin-top: 40px !important;
+    }
+
+    .rz-card {
+        padding: 6px !important;
+    }
+
+    .compact-form .rz-input,
+    .compact-form .rz-dropdown,
+    .compact-form .rz-calendar,
+    .rz-textbox, .rz-numeric,
+    .rz-datepicker > .rz-inputtext,
+    .rz-dropdown {
+        min-height: 24px !important;
+        height: 24px !important;
+        line-height: 16px !important;
+        font-size: 11px;
+        padding: 4px 4px;
+    }
+
+    label {
+        white-space: nowrap;
+        font-size: 11px;
+    }
+
+    .rz-button-box, .rz-button {
+        line-height: 9px !important;
+    }
+
+    .rz-autocomplete-items li, .rz-dropdown-items li, .rz-multiselect-items li, .rz-dropdown-item {
+        font-size: 11px !important;
+        padding: 2px !important;
+    }
+
+    .rz-tabview-nav li a, .rz-tabview-nav li a:not([href]):not([class]) {
+        font-size: 11px !important;
+    }
+
+</style>
+
 <RadzenStack>
     <RadzenRow AlignItems="AlignItems.Center">
         <RadzenColumn Size="12" SizeMD="6">
-            <RadzenText Text="Tenants" TextStyle="TextStyle.H3" TagName="TagName.H1" style="margin: 0" />
+            <RadzenText Text="Tenants" TextStyle="TextStyle.H6" TagName="TagName.H1" style="margin: 0" />
         </RadzenColumn>
         <RadzenColumn Size="12" SizeMD="6">
             <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.End" Gap="0.5rem">
-                <RadzenSplitButton Icon="get_app" Text="Export" Click="@ExportClick" Variant="Variant.Flat" Shade="Shade.Lighter">
-                    <RadzenSplitButtonItem Text="Excel" Value="xlsx" />
-                    <RadzenSplitButtonItem Text="CSV" Value="csv" />
-                </RadzenSplitButton>
-                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" />
+                <RadzenButton Icon="add_circle_outline" Text="Add" Click="@AddButtonClick" Variant="Variant.Flat" Style="height:24px !important" />
             </RadzenStack>
         </RadzenColumn>
     </RadzenRow>
     <RadzenRow>
-      <RadzenColumn SizeMD=12>
-        <RadzenDataGrid @ref="grid0" ColumnWidth="150px"   AllowFiltering="true" FilterMode="FilterMode.Advanced" AllowPaging="true" AllowSorting="true" ShowPagingSummary="true" PageSizeOptions=@(new int[]{5, 10, 20, 30})
-            Data="@(tenants)" TItem="Destination.Models.destinationTest.Tenant" RowSelect="@EditRow" AllowColumnPicking="true" ColumnsPickerAllowFiltering="true" Density="Radzen.Density.Compact" Responsive="true">
-            <Columns>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Firstname" Title="Firstname">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Lastname" Title="Lastname">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Phone" Title="Phone">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Cell" Title="Cell">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Email" Title="Email">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Address" Title="Address">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="City" Title="City">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="State" Title="State">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Zip" Title="Zip">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Source" Title="Source">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Notes" Title="Notes">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Propertyid" Title="Propertyid">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Datefrom" Title="Datefrom">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Dateto" Title="Dateto">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Begdate" Title="Begdate">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Remarks" Title="Remarks">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Prebooknotes" Title="Prebooknotes">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Status" Title="Status">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Role" Title="Role">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="IsDeleted" Title="Is Deleted">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Password" Title="Password">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Initials" Title="Initials">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="TotalBookings" Title="Total Bookings">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="ColorValue" Title="Color Value">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="TenantRating" Title="Tenant Rating">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="AirbnbVerifications" Title="Airbnb Verifications">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="AirbnbReviews" Title="Airbnb Reviews">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="AirbnbEmail" Title="Airbnb Email">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="DoNotRent" Title="Do Not Rent">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Dnrwhy" Title="Dnrwhy">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="BedsRequested" Title="Beds Requested">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="FetchedEmail" Title="Fetched Email">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Tenantid" Title="Tenantid">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="ThreadId" Title="Thread Id">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="BookingCount" Title="Booking Count">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="DoNotRentType" Title="Do Not Rent Type">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="PastBookings" Title="Past Bookings">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="PastDollars" Title="Past Dollars">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="PlusOneRemovedFromCell" Title="Plus One Removed From Cell">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="FromPage" Title="From Page">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="GuestPrimaryAddress" Title="Guest Primary Address">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="GuestCity" Title="Guest City">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="GuestState" Title="Guest State">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="GuestZip" Title="Guest Zip">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="LastVisited" Title="Last Visited">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="VisitCount" Title="Visit Count">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="LastPageVisited" Title="Last Page Visited">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="LastVisitedProp" Title="Last Visited Prop">
-                </RadzenDataGridColumn>
-                <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
-                    <Template Context="tenant">
+        @if (!showCollapse)
+        {
+            <RadzenButton Icon="add" ButtonStyle="ButtonStyle.Light"
+                          Click="@ShowCollapse" Style="height: 24px; padding:0px !important; min-height: 18px; min-width: 25px" />
+        }
+        @if (showPanels && selectedTenantId != 0)
+        {
+            <RadzenColumn SizeMD="3" Style="position: relative;">
+                <!-- Main Card Container -->
+                <RadzenCard Style="height: 100%; position: relative; padding-top: 10px; overflow: hidden;">
 
-                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete" Size="ButtonSize.Medium"
-                            Shade="Shade.Lighter" Variant="Variant.Flat"
-                            Click=@(args => GridDeleteButtonClick(args, tenant)) @onclick:stopPropagation="true" />
-                    </Template>
-                </RadzenDataGridColumn>
-            </Columns>
+                    <RadzenButton Icon="remove"
+                                  Click="@HidePanel"
+                                  ButtonStyle="ButtonStyle.Light"
+                                  Style="position: absolute; top: 0px; right: 0px; padding:0px !important; min-height:18px;min-width:25px" />
 
-        </RadzenDataGrid>
+                    <!-- Menu Toggle Button (Top-left) -->
+                    <RadzenButton Icon="menu"
+                                  Click="@ToggleMenu"
+                                  ButtonStyle="ButtonStyle.Light"
+                                  Style="position: absolute; top: 1px; left: 1px; z-index: 10;padding:0px !important" />
 
-    </RadzenColumn>
-  </RadzenRow>
+                    <!-- Menu Drawer (Now positioned top-left) -->
+                    <div style="@menuStyle">
+                        <RadzenStack Orientation="Orientation.Vertical" Gap="8px" Style="padding: 15px 10px; min-width: 160px;">
+                            <a href="javascript:void(0)" @onclick="@(() => LoadForm("tenant"))"
+                               style="color: #35a0d7; text-decoration: none; font-weight: 500; font-size: 0.9rem;">
+                                Edit Owner
+                            </a>
+                        </RadzenStack>
+                    </div>
+
+                    <!-- Form Container with scrollable content -->
+                    <div style="margin-top: 5px; @(menuVisible ? "opacity: 0.3;" : "");
+                        height: calc(100% - 30px);
+                        overflow-y: auto;
+                        max-height: 580px; /* or whatever max height you prefer */
+                        padding-right: 5px;">
+                        @if (activeForm == "tenant")
+                        {
+                            <EditTenant Id="@selectedTenantId" />
+                        }
+                    </div>
+                </RadzenCard>
+            </RadzenColumn>
+        }
+
+        <RadzenColumn SizeXS="12" SizeSM="12" SizeMD="@(showPanels == false ? 12 : 9)">
+            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto"
+                         style="margin-top: 0px !important; margin-bottom: 7px !important; padding: 0px"
+                         Expand=@(() => Change("Panel expanded"))
+                         Collapse=@(() => Change("Panel collapsed"))>
+                <RadzenRow>
+                    <RadzenTemplateForm TItem="Destination.Shared.DTO.TenantFilterModel" Data="@filterModel" Submit="@OnSearch" Style="margin-top: 0px !important">
+                        <div class="filter-container rz-p-3" Style="padding-top:0px !important">
+                            <!-- Row 1 -->
+                            <RadzenRow Gap="0.5rem">
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
+                                    <label>First Name</label>
+                                    <RadzenTextBox @bind-Value="filterModel.FirstName" Style="width: 100%;" />
+                                </RadzenColumn>
+
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
+                                    <label>Last Name</label>
+                                    <RadzenTextBox @bind-Value="filterModel.LastName" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
+                                    <label>Email</label>
+                                    <RadzenTextBox @bind-Value="filterModel.Email" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
+                                    <label>Phone</label>
+                                    <RadzenTextBox @bind-Value="filterModel.Phone" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2">
+                                    <label>Role</label>
+                                    <RadzenDropDown @bind-Value="filterModel.Role" Data="@roles"
+                                                    Placeholder="Select Role" Style="width: 100%;" />
+                                </RadzenColumn>
+                                <RadzenColumn SizeXS="12" SizeSM="6" SizeMD="2" class="rz-d-flex rz-align-items-end" Style="margin-top:20px">
+                                    <div class="custom-toolbar">
+                                        <RadzenButton Text="Search" ButtonStyle="ButtonStyle.Primary" Type="Submit" Style="height:24px;" />
+                                        <RadzenButton Text="Reset" Click="@OnReset" Style="height:24px;" />
+                                    </div>
+                                </RadzenColumn>
+                            </RadzenRow>
+                        </div>
+                    </RadzenTemplateForm>
+                </RadzenRow>
+            </RadzenPanel>
+            <RadzenPanel AllowCollapse="true" class="rz-my-10 rz-mx-auto" style="margin-top: 0px !important;margin-bottom: 5px !important;padding:0px"
+                         Expand=@(() => Change("Panel expanded"))
+                         Collapse=@(() => Change("Panel collapsed"))>
+                <RadzenDataGrid TItem="Tenant"
+                                Data="@pagedGuests"
+                                @ref="grid0"
+                                AllowColumnResize="true"
+                                Count="@totalCount"
+                                LoadData="@LoadData"
+                                AllowPaging="true"
+                                AllowSorting="true"
+                                RowSelect="@EditRow"
+                                AllowFiltering="true"
+                                FilterMode="FilterMode.Advanced"
+                                ShowPagingSummary="true"
+                                ColumnWidth="150px"
+                                PageSizeOptions="@(new int[]{10, 15, 20, 30})"
+                                PageSize="20"
+                                AllowColumnPicking="true"
+                                Density="Radzen.Density.Compact">
+                    <Columns>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Tenantid" Title="Id" Width="100px">
+                            <Template Context="item">
+                                <span Text="Click here" @onclick="() => ShowPanels(item.Tenantid)" style="cursor: pointer; color: #35a0d7; text-decoration: underline;">@item.Tenantid</span>
+                            </Template>
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Firstname" Title="Firstname">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Lastname" Title="Lastname">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Phone" Title="Phone">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Cell" Title="Cell">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Email" Title="Email">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Address" Title="Address">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="City" Title="City">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="State" Title="State">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Zip" Title="Zip">
+                        </RadzenDataGridColumn>
+                        <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Tenant" Property="Role" Title="Role">
+                        </RadzenDataGridColumn>             
+                    </Columns>
+                </RadzenDataGrid>
+            </RadzenPanel>
+        </RadzenColumn>
+    </RadzenRow>
 </RadzenStack>

@@ -179,6 +179,7 @@ namespace Destination.Components.Pages.PropertyComponents
             await Task.Delay(1);
             showTabs = true;
             propName = Name;
+            showleftPanel = false;
             StateHasChanged();
         }
 

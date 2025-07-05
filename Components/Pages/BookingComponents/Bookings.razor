@@ -139,7 +139,7 @@
                         padding-right: 5px;">
                         @if (activeForm == "booking")
                         {
-                            <EditBooking Id="@selectedBookingId" />
+                            <EditBooking Id="@selectedBookingId" @key="selectedBookingId" />
                         }
                         else if (activeForm == "cleans")
                         {
@@ -291,7 +291,7 @@
                         <Columns>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Filterable="false" Property="Id" Title="Id" Width="60px">
                                 <Template Context="item">
-                                    <span Text="Click here" @onclick="() => ShowleftPanel(item.Id)" style="cursor: pointer; color: #35a0d7; text-decoration: underline;">@item.Id</span>
+                                    <span Text="Click here" @onclick="() => ShowleftPanel(item.Id, item.Tenantid)" style="cursor: pointer; color: #35a0d7; text-decoration: underline;">@item.Id</span>
                                 </Template>
                             </RadzenDataGridColumn>
                             <RadzenDataGridColumn TItem="Destination.Models.destinationTest.Booking" Property="Property.Name" Title="Property" Width="140px">
@@ -453,11 +453,11 @@
                             <BookingCreditRequest Id="@selectedBookingId"></BookingCreditRequest>
                         }
                     </RadzenTabsItem>
-                    <RadzenTabsItem Text="Checking in" style="margin-left: 2px;color:black;font-weight:600">
-                    </RadzenTabsItem>
-                    <RadzenTabsItem Text="Notes" style="margin-left: 2px;color:black;font-weight:600">
-                    </RadzenTabsItem>
-                    <RadzenTabsItem Text="Tasks" style="margin-left: 2px;color:black;font-weight:600">
+                    <RadzenTabsItem Text="Tenant History" style="margin-left: 2px;color:black;font-weight:600">
+                        @if (isTenantHistoryTab)
+                        {
+                            <Destination.Components.Pages.TenantComponents.BookingsHistoryByTenant Id="@selectedTenantId.Value"></Destination.Components.Pages.TenantComponents.BookingsHistoryByTenant>
+                        }
                     </RadzenTabsItem>
                 </Tabs>
             </RadzenTabs>

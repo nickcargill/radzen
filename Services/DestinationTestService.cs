@@ -30103,7 +30103,7 @@ return await items.ToListAsync();
 
             OnTenantsRead(ref items);
 
-return await items.ToListAsync();
+            return await items.ToListAsync();
         }
 
         public async Task<int> ValidateUserAndGetRole(string user, string pass)

@@ -33,11 +33,11 @@ namespace Destination.Components.Pages.TenantComponents
         public destinationTestService destinationTestService { get; set; }
 
         [Parameter]
-        public int Tenantid { get; set; }
+        public int Id { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            tenant = await destinationTestService.GetTenantByTenantid(Tenantid);
+            tenant = await destinationTestService.GetTenantByTenantid(Id);
         }
         protected bool errorVisible;
         protected Destination.Models.destinationTest.Tenant tenant;
@@ -46,8 +46,15 @@ namespace Destination.Components.Pages.TenantComponents
         {
             try
             {
-                await destinationTestService.UpdateTenant(Tenantid, tenant);
-                DialogService.Close(tenant);
+                await destinationTestService.UpdateTenant(Id, tenant);
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Success",
+                    Detail = "Data updated successfully!",
+                    Duration = 4000 // in milliseconds
+                });
+                StateHasChanged();
             }
             catch (Exception ex)
             {

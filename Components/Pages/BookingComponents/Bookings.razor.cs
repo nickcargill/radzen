@@ -64,6 +64,7 @@ namespace Destination.Components.Pages.BookingComponents
         protected bool isBottomPanel = false;
         protected int selectedBookingId = 0;
         protected int selectedPropertyId = 0;
+        protected int? selectedTenantId = 0;
 
 
         private bool isCollapsed = false;
@@ -77,6 +78,8 @@ namespace Destination.Components.Pages.BookingComponents
         protected bool isCommTab = false;
         protected bool isVisitHistoryTab = false;
         protected bool isCreditRequest = false;
+        protected bool isTenantHistoryTab = false;
+
 
 
         private string menuStyle => menuVisible ?
@@ -115,6 +118,9 @@ namespace Destination.Components.Pages.BookingComponents
                 case 4:
                     isCreditRequest = true;
                     break;
+                case 5:
+                    isTenantHistoryTab = true;
+                    break;
             }
         }
 
@@ -131,20 +137,7 @@ namespace Destination.Components.Pages.BookingComponents
 
         protected override async Task OnInitializedAsync()
         {
-
-            //var uri = new Uri(NavigationManager.Uri);
-            //var queryParam = Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query);
-
-            //if (queryParam.TryGetValue("source", out var sourceValue))
-            //{
-            //    queryParamFilters.Source = sourceValue.FirstOrDefault();
-            //}
-
-            //// Multi-value parameter
-            //if (queryParam.TryGetValue("status", out var statusValues))
-            //{
-            //    queryParamFilters.queryParamStatuses = statusValues.ToList();
-            //}
+            sharedEvents.OnIdClickedFromTenantHist += HandleBookingEdit;
 
             if (Id != 0)
             {
@@ -202,6 +195,14 @@ namespace Destination.Components.Pages.BookingComponents
             //  await DialogService.OpenAsync<EditBooking>("Edit Booking", new Dictionary<string, object> { {"Id", args.Id} });
         }
 
+        private void HandleBookingEdit(int Id)
+        {
+            selectedBookingId = Id;
+            PropParameterId = 0;
+            showPanels = true;
+            showCollapse = true;
+            StateHasChanged();
+        }
         protected async Task ShowPanels(int bookingId)
         {
             if (PropParameterId != 0)
@@ -219,12 +220,13 @@ namespace Destination.Components.Pages.BookingComponents
             StateHasChanged();
         }
 
-        protected async Task ShowleftPanel(int bookingId)
+        protected async Task ShowleftPanel(int bookingId, int? tenantId)
         {
             PropParameterId = 0;
             selectedPropertyId = 0;
             showPanels = false;
             selectedBookingId = bookingId;
+            selectedTenantId = tenantId;
             isBottomPanel = false;
             await Task.Delay(1);
             showPanels = true;
@@ -479,6 +481,5 @@ namespace Destination.Components.Pages.BookingComponents
             await UpdateQueryParameters(); // Clear query parameters
             StateHasChanged();
         }
-
     }
 }
